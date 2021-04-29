@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+fetch('https://drugbank.vn/services/drugbank/api/public/thuoc?size=2000')
+    .then(response => response.json())
+    .then(json => {
+        var userInput =""
+        for (var index = 0; index < 1999; index++) {
+            userInput += json[index].tenThuoc + ";" + json[index].baoChe +";"+ json[index].dongGoi +";" + json[index].nhomThuoc +";" + json[index].nongDo +";" + json[index].phanLoai +";" + json[index].taDuoc +";" + json[index].congTySx +";" + json[index].nuocSx +"\n";            
+        }
+        var file = new Blob([userInput], { type: "text/plain;charset=utf-8" });
+        if (window.navigator.msSaveOrOpenBlob) // IE10+
+            window.navigator.msSaveOrOpenBlob(file, "message.txt");
+        else { // Others
+            var a = document.createElement("a"),
+                    url = URL.createObjectURL(file);
+            a.href = url;
+            a.download = "message.txt";
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function() {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);  
+            }, 0); 
+    }
+        
+    });
+
+</script>
+
+</html>
