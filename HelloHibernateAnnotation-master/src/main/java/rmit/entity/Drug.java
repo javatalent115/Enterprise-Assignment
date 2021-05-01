@@ -43,16 +43,53 @@ public class Drug {
     public Drug(String id, String name, String preparation, String packaging, String drugGroup, String dosage, String type, String ingredients, Producers producers, String country){
         this.id = id;
         this.name = name;
-        this.preparation = preparation;
-        this.packaging = packaging;
-        this.drugGroup = drugGroup;
-        this.dosage = dosage;
-        this.type = type;
-        this.ingredients = ingredients;
+        if (preparation.equals("null") || preparation.equals("")){
+            this.preparation = "Undefined";
+        }
+        else {
+            this.preparation = preparation;
+        }
+        if (packaging.equals("null") || packaging.equals("")) {
+            this.packaging = "Undefined";
+        }
+        else {
+            this.packaging = packaging;
+        }
+        if (drugGroup.equals("null") || drugGroup.equals("")) {
+            this.drugGroup = "Undefined";
+        }
+        else {
+            this.drugGroup = drugGroup;
+        }
+        if (dosage.equals("null") || dosage.equals("--") || dosage.equals(" ")) {
+            this.dosage = "Undefined";
+        }
+        else {
+            this.dosage = dosage;
+        }
+        if (type.equals("null") || type.equals("")) {
+            this.type = "Undefined";
+        }
+        else {
+            this.type = type;
+        }
+        if (ingredients.equals("null") || ingredients.equals("")) {
+            this.ingredients = "Undefined";
+        }
+        else {
+            this.ingredients = ingredients;
+        }
         this.producers = producers;
+        if (country.equals("null") || country.equals("")) {
+            this.country = "Undefined";
+        }
+        else {
+            this.country = country;
+        }
         this.country = country;
         this.money = new Random().nextInt(50)+8;
     }
+
 
     public String getId() {
         return id;

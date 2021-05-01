@@ -27,7 +27,7 @@ public class Main {
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                String[] split = data.split("&");
+                String[] split = data.split("&&");
                 boolean isExist = false;
                 for (Producers value : producers) {
                     if (value.getId().equals(split[9])) {
@@ -45,7 +45,7 @@ public class Main {
             myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                String[] split = data.split("&");
+                String[] split = data.split("&&");
                 for (Producers producer : producers) {
                     if (producer.getId().equals(split[9])) {
                         Drug drug = new Drug(split[0], split[1], split[2], split[3], split[4], split[5], split[6], split[7], producer, split[10]);
@@ -58,10 +58,15 @@ public class Main {
         } catch (FileNotFoundException ignored) {}
 
         for (Producers producer: producers) {
-            service.saveProducer(producer);
+            try {
+                service.saveProducer(producer);
+            }
+            catch (Exception ignored){}
         }
         for (Drug drug: drugs) {
-            service.saveDrug(drug);
+            try {
+                service.saveDrug(drug);
+            }catch (Exception ignored){}
         }
 
     }
