@@ -20,7 +20,7 @@ fetch('https://drugbank.vn/services/drugbank/api/public/thuoc?size=2000')
             && json[index].phanLoai != "" && json[index].phanLoai != "null" && json[index].taDuoc != "" && json[index].taDuoc != "null" && json[index].congTySx != "" && json[index].congTySx != "null" && json[index].congTySxCode != "" && json[index].congTySxCode != "null" 
             &&json[index].nuocSx != "" && json[index].nuocSx != "null"){
                 count ++;
-                userInput += json[index].id +"&" + json[index].tenThuoc + "&" + json[index].baoChe +"&"+ json[index].dongGoi +"&" + json[index].nhomThuoc +"&" + json[index].nongDo +"&" + json[index].phanLoai +"&" + json[index].taDuoc +"&" + json[index].congTySx +"&" + json[index].congTySxCode+"&" + json[index].nuocSx +"\n";       
+                userInput += json[index].id +"&&" + json[index].tenThuoc + "&&" + json[index].baoChe +"&&"+ json[index].dongGoi +"&&" + json[index].nhomThuoc +"&&" + json[index].nongDo +"&&" + json[index].phanLoai +"&&" + json[index].taDuoc +"&&" + json[index].congTySx +"&&" + json[index].congTySxCode+"&&" + json[index].nuocSx +"\n";       
             }     
         }
         console.log(count)
