@@ -37,10 +37,15 @@ public class AppConfig {
 
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
+
+        //Change the port-number (9999) to your port-number, also change username and password if there is a difference
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:9999/postgres");
         dataSource.setUsername("postgres");
         dataSource.setPassword("baobao");
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
         LocalSessionFactoryBean sessionFactoryBean = new LocalSessionFactoryBean();
         sessionFactoryBean.setDataSource(dataSource);

@@ -3,25 +3,18 @@ import main.java.config.AppConfig;
 import main.java.entity.Drug;
 import main.java.entity.Producers;
 import main.java.service.Service;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by CoT on 10/13/17.
  */
 public class Handler {
     private static Service service = (Service) new AnnotationConfigApplicationContext(AppConfig.class).getBean("service");
-    public static void saveDatabase(){
+    public static void setupDatabase(){
         ArrayList<Drug> drugs = new ArrayList<>();
         ArrayList<Producers> producers = new ArrayList<>();
         try {
@@ -60,43 +53,72 @@ public class Handler {
         } catch (FileNotFoundException ignored) {}
 
         for (Producers producer: producers) {
-            try {
-                service.saveProducer(producer);
-            }
-            catch (Exception ignored){}
+            service.saveProducers(producer);
         }
         for (Drug drug: drugs) {
-            try {
-                service.saveDrug(drug);
-            }catch (Exception ignored){}
+            service.saveDrugs(drug);
         }
+    }
+
+    static Map deleteDrug(String id){
+        return service.deleteDrug(id);
+
+    }
+
+    static Map saveDrug(Drug drug){
+        return service.saveDrug(drug);
+    }
+
+    static Map saveDrug(Producers producer){
+        return service.saveProducer(producer);
+    }
+
+    static Map deleteProducer(String id){
+        return service.deleteProducer(id);
+    }
+
+    static Map updateDrugMoney(String id, int money){
+        return service.updateDrugMoney(id, money);
+    }
+
+    static List getAllProducers(){
+        return service.getProducers();
     }
 
     static List getAllDrugs(){
-        ArrayList<Producers> producers = new ArrayList<>();
-        try {
-            File myObj = new File("message.txt");
-            Scanner myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                String[] split = data.split("&&");
-                boolean isExist = false;
-                for (Producers value : producers) {
-                    if (value.getId().equals(split[9])) {
-                        isExist = true;
-                        break;
-                    }
-                }
-                if (!isExist) {
-                    Producers producer = new Producers();
-                    producer.setId(split[9]);
-                    producer.setName(split[8]);
-                    producers.add(producer);
-                }
-            }
-            myReader.close();
-        } catch (FileNotFoundException ignored) {}
-        return producers;
+        return service.getDrugs();
     }
 
+    static Map getAllGroups(){
+        return service.getAllGroups();
+    }
+
+    static Map getAllTypes(){
+        return service.getAllTypes();
+    }
+
+    static List getDrugSortAsc(){
+        List<Drug> list = (List<Drug>) getAllDrugs();
+        Collections.sort(list);
+        return list;
+    }
+
+    static List getDrugSortDes(){
+        List<Drug> list = (List<Drug>) getAllDrugs();
+        Collections.sort(list);
+        Collections.reverse(list);
+        return list;
+    }
+
+    static List searchDrugsById(String id){
+        return service.searchDrugsById(id);
+    }
+
+    static List searchDrugsByName(String name){
+        return service.searchDrugsByName(name);
+    }
+
+    static Map getNOP (String producerID){
+        return service.getNOP(producerID);
+    }
 }

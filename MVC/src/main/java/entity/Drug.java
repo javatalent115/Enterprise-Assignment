@@ -5,7 +5,7 @@ import java.util.Random;
 
 @Entity
 @Table(name = "Drugs")
-public class Drug {
+public class Drug implements Comparable {
     @Id
     @Column
     private String id;
@@ -39,7 +39,7 @@ public class Drug {
     @JoinColumn(name="producer", nullable=false)
     private Producers producers;
 
-
+    public Drug(){}
     public Drug(String id, String name, String preparation, String packaging, String drugGroup, String dosage, String type, String ingredients, Producers producers, String country){
         this.id = id;
         this.name = name;
@@ -92,7 +92,19 @@ public class Drug {
 
     @Override
     public String toString() {
-        return id +" -- " + name + " -- " + money;
+        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ producers.getId();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDrugGroup() {
+        return drugGroup;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getId() {
@@ -101,5 +113,19 @@ public class Drug {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+    @Override
+    public int compareTo(Object drug) {
+        int compareMoney=((Drug)drug).getMoney();
+        return this.money-compareMoney;
+    }
+
+    public Producers getProducers() {
+        return producers;
+    }
+
+    private int getMoney() {
+        return money;
     }
 }
