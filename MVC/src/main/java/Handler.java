@@ -14,6 +14,8 @@ import java.util.*;
  */
 public class Handler {
     private static Service service = (Service) new AnnotationConfigApplicationContext(AppConfig.class).getBean("service");
+    public static List drugs = service.getDrugsList();
+    public static List producers = service.getProducersList();
     public static void setupDatabase(){
         ArrayList<Drug> drugs = new ArrayList<>();
         ArrayList<Producers> producers = new ArrayList<>();
@@ -60,24 +62,24 @@ public class Handler {
         }
     }
 
-    static Map deleteDrug(String id){
+    static List deleteDrug(String id){
         return service.deleteDrug(id);
 
     }
 
-    static Map saveDrug(Drug drug){
+    static List saveDrug(Drug drug){
         return service.saveDrug(drug);
     }
 
-    static Map saveDrug(Producers producer){
+    static List saveProducer(Producers producer){
         return service.saveProducer(producer);
     }
 
-    static Map deleteProducer(String id){
+    static List deleteProducer(String id){
         return service.deleteProducer(id);
     }
 
-    static Map updateDrugMoney(String id, int money){
+    static List updateDrugMoney(String id, int money){
         return service.updateDrugMoney(id, money);
     }
 
@@ -89,11 +91,11 @@ public class Handler {
         return service.getDrugs();
     }
 
-    static Map getAllGroups(){
+    static List getAllGroups(){
         return service.getAllGroups();
     }
 
-    static Map getAllTypes(){
+    static List getAllTypes(){
         return service.getAllTypes();
     }
 
@@ -118,7 +120,7 @@ public class Handler {
         return service.searchDrugsByName(name);
     }
 
-    static Map getNOP (String producerID){
+    static List getNOP (String producerID){
         return service.getNOP(producerID);
     }
 }
