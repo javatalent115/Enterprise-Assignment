@@ -35,6 +35,9 @@ public class Drug implements Comparable {
     private String country;
     @Column
     private int money;
+
+    @Column
+    private int stock;
     @ManyToOne
     @JoinColumn(name="producer", nullable=false)
     private Producers producers;
@@ -88,11 +91,12 @@ public class Drug implements Comparable {
         }
         this.country = country;
         this.money = new Random().nextInt(50)+8;
+        this.stock = new Random().nextInt(50)+3;
     }
 
     @Override
     public String toString() {
-        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ producers.getId();
+        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ stock + " -- "+ producers.getId();
     }
 
     public String getName() {
