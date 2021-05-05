@@ -132,13 +132,14 @@
         background:#8ee9fd;
         height: auto;
         position: relative;
-        padding: 80px 140px;
+        padding: 10px 140px;
         word-wrap: break-word;
-        top: -62px;
+        top: 75px;
         z-index: -1;
-        margin: 0 8px;
+        margin: 0 20px;
         border-radius: 15px;
         box-shadow: 5px 10px 10px #aaa;
+        padding-bottom: 70px;
     }
     .information-medicine-wrapper{
         background:white;
@@ -155,6 +156,7 @@
         top: -22px;
         left: 98px;
         border:1px solid white;
+        margin-top: 45px;
     }
     .medicine-detail-wrapper{
         display: flex;
@@ -185,6 +187,24 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+    .cart{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 52px;
+        gap: 22px;
+        background-color: #18bff3;
+        width: fit-content;
+        border-radius: 20px;
+        position: relative;
+        top: -56px;
+        color: white;
+        border: 1px solid white;
+        font-weight: bold;
+    }
+    .cart img{
+        width: 24%;
+    }
     .medicine-detail-wrapper:last-child{
         text-align: center;
     }
@@ -193,6 +213,7 @@
     }
     .medicine-detail-wrapper ul li img{
         max-width: 28.66px;
+        min-width: 28.66px;
         width: 40%;
     }
 
@@ -208,7 +229,7 @@
                     <a href="">Medicine</a> 
                 </li>
                 <li class="nav-item">
-                    <a href="cart.html"> Cart</a>
+                    <a href=""> Cart</a>
                 </li>
                 <li class="nav-item">
                     <a href="login_page.html">Sign-in</a>
@@ -218,92 +239,85 @@
         <div class="header">
             Welcome to <br> Medicine <br> Online
         </div>
-        <div class="search-wrapper">
-                <div class="search-input">
-                    <div style="padding-left:3px;font-size:20px">Search Medicine</div>
-                    <div style="display: flex; align-items: center; gap: 20px;"><input type="text" name="medicine" id="medicine">
-                        <div >
-                            <button>
-                            </button>
-                        </div>
-                    </div> 
-                </div>
+    </div>
+    <div class="information-medicine-container">
+        <div class="cart">
+            <span>Cart</span> 
+            <img src="./images/cart.png">
         </div>
-        <div class="information-medicine-container">
-            <div class="information-medicine-wrapper">
-                <div class="information-medicine-header">
-                     <span>Infomation of medicine</span> 
-                </div>
-                <div class="medicine-detail-wrapper">
-                    <ul class="medicine-detail" style="width:12%">
-                        <li> 
-                            ID
-                        </li>
-                        <li>
-                            1
-                        </li>
-                        <li>
-                            2
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail" style="width:18%">
-                        <li>
-                            Name
-                        </li>
-                        <li> 
-                            Panadol
-                        </li>
-                        <li> 
-                            Alphachoay
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail" style="width:34%;text-align:center;  ">
-                        <li>
-                            Ingridient
-                        </li>
-                        <li> 
-                            500 mg Paracetamol.
-                            – 65 mg Caffein
-                        </li>
-                        <li> 
-                            Chymotrypsin 21
-                            microkatals.
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail"style="width:18%; text-align:center">
-                        <li>
-                            Amount
-                        </li>
-                        <li> 
-                            1 pack
-                        </li>
-                        <li> 
-                            1 pack
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail"style="width:12%;text-align:center">
-                        <li>
-                            Price
-                        </li>
-                        <li> 
-                            1$
-                        </li>
-                        <li> 
-                            1$
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail" style="width: 5%;">
-                        <li>
-                            <img src="./images/cart.png" alt="">
-                        </li>
-                        <li>
-                            <img src="./images/cart.png" alt="">
-                        </li>
-                        <li>
-                            <img src="./images/cart.png" alt="">
-                        </li>
-                    </ul>
-                </div>
+        <div class="information-medicine-wrapper">
+            <div class="information-medicine-header">
+                 <span>Infomation of medicine</span> 
+            </div>
+            <div class="medicine-detail-wrapper">
+                <ul class="medicine-detail" style="width:12%">
+                    <li> 
+                        ID
+                    </li>
+                    <li>
+                        1
+                    </li>
+                    <li>
+                        2
+                    </li>
+                </ul>
+                <ul class="medicine-detail" style="width:18%">
+                    <li>
+                        Name
+                    </li>
+                    <li> 
+                        Panadol
+                    </li>
+                    <li> 
+                        Alphachoay
+                    </li>
+                </ul>
+                <ul class="medicine-detail" style="width:34%;text-align:center;  ">
+                    <li>
+                        Ingridient
+                    </li>
+                    <li> 
+                        500 mg Paracetamol.
+                        – 65 mg Caffein
+                    </li>
+                    <li> 
+                        Chymotrypsin 21
+                        microkatals.
+                    </li>
+                </ul>
+                <ul class="medicine-detail"style="width:18%; text-align:center">
+                    <li>
+                        Amount
+                    </li>
+                    <li> 
+                        1 pack
+                    </li>
+                    <li> 
+                        1 pack
+                    </li>
+                </ul>
+                <ul class="medicine-detail"style="width:12%;text-align:center">
+                    <li>
+                        Price
+                    </li>
+                    <li> 
+                        1$
+                    </li>
+                    <li> 
+                        1$
+                    </li>
+                </ul>
+                <ul class="medicine-detail" style="width: 5%;">
+                    <li>
+                        <img src="./images/cart.png" alt="">
+                    </li>
+                    <li>
+                        <img src="./images/cart.png" alt="">
+                    </li>
+                    <li>
+                        <img src="./images/cart.png" alt="">
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
