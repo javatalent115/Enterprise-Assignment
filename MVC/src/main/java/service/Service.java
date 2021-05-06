@@ -202,21 +202,6 @@ public class Service {
         return result;
     }
 
-
-    public List deleteProducer(String id){
-        List<String> result = new ArrayList<>();
-        for (Object o : Handler.producers) {
-            Producers producer = (Producers) o;
-            if (producer.getId().equals(id)) {
-                sessionFactory.getCurrentSession().delete(producer);
-                result.add("success");
-                return result;
-            }
-        }
-        result.add("failed");
-        return result;
-    }
-    //
     public List deleteDrug(String id){
         List<String> result = new ArrayList<>();
         for (Object o : Handler.drugs) {

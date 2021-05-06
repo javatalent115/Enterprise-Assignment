@@ -30,12 +30,6 @@ public class ServerController {
         return map;
     }
 
-    @PostMapping(value = "/api/deleteProducer")
-    public Map<String, String> deleteProducer(@RequestBody String id){
-        Map<String, String> map = new HashMap<>();
-        map.put("0", (String) Handler.deleteProducer(id).get(0));
-        return map;
-    }
 
     @PostMapping(value = "/api/updateDrug")
     public Map<String, String> updateDrug(@RequestBody String id, @RequestBody int money){

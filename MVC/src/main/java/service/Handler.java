@@ -14,6 +14,8 @@ public class Handler {
     static List drugs = service.getDrugsList();
     static List producers = service.getProducersList();
 
+    public static void setupDatabase(){ service.setupDatabase(); }
+
     public static List deleteDrug(String id){
         return service.deleteDrug(id);
     }
@@ -24,10 +26,6 @@ public class Handler {
 
     public static List saveProducer(Producers producer){
         return service.saveProducer(producer);
-    }
-
-    public static List deleteProducer(String id){
-        return service.deleteProducer(id);
     }
 
     public static List updateDrugMoney(String id, int money){
