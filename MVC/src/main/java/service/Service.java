@@ -1,5 +1,4 @@
 package main.java.service;
-import main.java.Handler;
 import main.java.entity.Drug;
 import main.java.entity.Producers;
 import org.hibernate.SessionFactory;
