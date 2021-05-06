@@ -64,7 +64,6 @@ public class Handler {
 
     static List deleteDrug(String id){
         return service.deleteDrug(id);
-
     }
 
     static List saveDrug(Drug drug){

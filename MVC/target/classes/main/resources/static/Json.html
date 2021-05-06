@@ -20,31 +20,43 @@
 <script>
     async function getDrugs(){
         try {
-            let res = await fetch('http://localhost:8080/api/getDrugs', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                if (sessionStorage.getItem("changeDrug") !== "no" || sessionStorage.getItem("changeDrug") == null ) {
+                    let res = await fetch('http://localhost:8080/api/getDrugs', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        }
+                    })
+                    if (res.ok) {
+                        let data = await res.json();
+                        let drugTable;
+                        document.querySelector('#wait').innerHTML = "";
+                        document.querySelector('#table').innerHTML += "<th colspan=\"11\" style=\"background-color: cornflowerblue\">Drugs Table</th>";
+                        document.querySelector("#table").innerHTML += "<tbody><tr><td>ID</td><td>Name</td><td>Preparation</td><td>Packaging</td><td>drugGroup</td><td>Dosage</td><td>Type</td><td>Ingredients</td><td>Country</td><td>Stock</td><td>ProducerID</td></tr>"
+                        let result = Object.values(data);
+                        for (let i = 0; i < result.length; i++) {
+                            let split = result[i].split(" -- ");
+                            document.querySelector("#table").innerHTML += "<tr><td>" + split[0] + "</td><td>" + split[1] + "</td><td>" + split[2] + "</td><td>" + split[3] + "</td><td>" + split[4]
+                                + "</td><td>" + split[5] + "</td><td>" + split[6] + "</td><td>" + split[7] + "</td><td>" + split[8] + "</td><td>" + split[9] + "</td><td>" + split[10] + "</td></tr></tbody>"
+                        }
+                        drugTable = document.querySelector("#table").innerHTML;
+                        sessionStorage.setItem("drugTable", drugTable);
+                        sessionStorage.setItem("changeDrug", "no");
+                    }
                 }
-            })
-            if (res.ok) {
-                let data = await res.json();
-                document.querySelector('#wait').innerHTML = "";
-                document.querySelector('#table').innerHTML += "<th colspan=\"11\" style=\"background-color: cornflowerblue\">Drugs Table</th>";
-                document.querySelector("#table tbody").innerHTML += "<tr><td>ID</td><td>Name</td><td>Preparation</td><td>Packaging</td><td>drugGroup</td><td>Dosage</td><td>Type</td><td>Ingredients</td><td>Country</td><td>Stock</td><td>ProducerID</td></tr>"
-                let result = Object.values(data);
-                for (let i = 0; i < result.length; i++){
-                    let split = result[i].split(" -- ");
-                    document.querySelector("#table tbody").innerHTML += "<tr><td>"+ split[0] +"</td><td>" + split[1] +"</td><td>" + split[2] + "</td><td>"+ split[3] + "</td><td>"+ split[4]
-                        + "</td><td>"+ split[5] + "</td><td>"+ split[6] + "</td><td>"+ split[7] + "</td><td>"+ split[8] + "</td><td>"+ split[9] + "</td><td>"+ split[10] + " </td></tr>"
+                else {
+                    console.log(sessionStorage.getItem("drugTable"))
+                    document.querySelector('#wait').innerHTML = "";
+                    document.querySelector("#table").innerHTML = sessionStorage.getItem("drugTable");
                 }
-                return data;
+            } catch (e) {
             }
-        }catch (e) {}
-        return 404;
+
     }
+
     async function deleteDrug(){
-        let id = "VD-10414-10";
+        let id = "GC-223-14";
         try {
             let res = await fetch('http://localhost:8080/api/deleteDrug', {
                 method: 'POST',
@@ -57,7 +69,10 @@
             if (res.ok) {
                 let data = await res.json();
                 let result = Object.values(data);
-                console.log(result);
+                console.log(result[0]);
+                if (result[0] !=="failed"){
+                    sessionStorage.setItem("changeDrug", "yes");
+                }
                 return data;
             }
         }catch (e) {}

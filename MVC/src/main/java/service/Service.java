@@ -45,7 +45,6 @@ public class Service {
     }
 
     public List getDrugsList(){
-        assert sessionFactory != null;
         CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Drug> query = builder.createQuery(Drug.class);
         Root<Drug> root = query.from(Drug.class);
@@ -54,7 +53,6 @@ public class Service {
         return q.getResultList();
     }
     public List getProducersList(){
-        assert sessionFactory != null;
         CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Producers> query = builder.createQuery(Producers.class);
         Root<Producers> root = query.from(Producers.class);
@@ -64,10 +62,12 @@ public class Service {
     }
 
     public List getDrugs(){
+        Handler.drugs = getDrugsList();
         return Handler.drugs;
     }
 
     public List getProducers(){
+        Handler.producers = getDrugsList();
         return Handler.producers;
     }
 
