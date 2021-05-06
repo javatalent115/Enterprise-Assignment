@@ -10,4 +10,4 @@
 
 -Chill! <--- Go to Json.html in directory scr/main/resources/static/ and edit what you like
 
-*Default url is: http://localhost:8080/Json.html
+*Default website url is: http://localhost:8080/Json.html
