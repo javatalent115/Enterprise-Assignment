@@ -20,7 +20,7 @@
 <script>
     async function getDrugs(){
         try {
-                if (sessionStorage.getItem("changeDrug") !== "no" || sessionStorage.getItem("changeDrug") == null ) {
+                if (localStorage.getItem("changeDrug") !== "no" || localStorage.getItem("changeDrug") == null ) {
                     let res = await fetch('http://localhost:8080/api/getDrugs', {
                         method: 'POST',
                         headers: {
@@ -41,14 +41,14 @@
                                 + "</td><td>" + split[5] + "</td><td>" + split[6] + "</td><td>" + split[7] + "</td><td>" + split[8] + "</td><td>" + split[9] + "</td><td>" + split[10] + "</td></tr></tbody>"
                         }
                         drugTable = document.querySelector("#table").innerHTML;
-                        sessionStorage.setItem("drugTable", drugTable);
-                        sessionStorage.setItem("changeDrug", "no");
+                        localStorage.setItem("drugTable", drugTable);
+                        localStorage.setItem("changeDrug", "no");
                     }
                 }
                 else {
-                    console.log(sessionStorage.getItem("drugTable"))
+                    console.log(localStorage.getItem("drugTable"))
                     document.querySelector('#wait').innerHTML = "";
-                    document.querySelector("#table").innerHTML = sessionStorage.getItem("drugTable");
+                    document.querySelector("#table").innerHTML = localStorage.getItem("drugTable");
                 }
             } catch (e) {
             }
@@ -56,7 +56,7 @@
     }
 
     async function deleteDrug(){
-        let id = "GC-223-14";
+        let id = "GC-237-15";
         try {
             let res = await fetch('http://localhost:8080/api/deleteDrug', {
                 method: 'POST',
@@ -71,7 +71,7 @@
                 let result = Object.values(data);
                 console.log(result[0]);
                 if (result[0] !=="failed"){
-                    sessionStorage.setItem("changeDrug", "yes");
+                    localStorage.setItem("changeDrug", "yes");
                 }
                 return data;
             }
