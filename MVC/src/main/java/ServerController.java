@@ -133,13 +133,13 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/authUser")
-    public Map<String, String> isValid(@RequestBody String username,@RequestBody String password){
+    public Map<String, String> isValid(@RequestBody Map<String, String> user){
         Map<String, String> map = new HashMap<>();
-        if (username.equals("user123") && password.equals("user123")){
-            map.put("0", "valid");
+        if (user.get("username").equals("user123") && user.get("password").equals("user123")){
+            map.put("0", "customer");
         }
-        else if (username.equals("admin321") && password.equals("admin321")){
-            map.put("0", "valid");
+        else if (user.get("username").equals("admin321") && user.get("password").equals("admin321")){
+            map.put("0", "admin");
         }
         else map.put("0", "invalid");
         return map;
