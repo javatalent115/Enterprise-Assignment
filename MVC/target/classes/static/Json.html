@@ -13,6 +13,8 @@
 </head>
 <body>
     <h1 id="wait">Please wait!!!</h1>
+    <input type="text" id="delete">
+    <button onclick="deleteDrug()">Delete</button>
     <div>
         <table id="table"></table>
     </div>
@@ -56,7 +58,7 @@
     }
 
     async function deleteDrug(){
-        let id = "GC-237-15";
+        let id = document.getElementById("delete").value;
         try {
             let res = await fetch('http://localhost:8080/api/deleteDrug', {
                 method: 'POST',
@@ -78,7 +80,6 @@
         }catch (e) {}
         return 404;
     }
-    deleteDrug()
     getDrugs()
 </script>
 </html>

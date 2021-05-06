@@ -13,6 +13,8 @@
 </head>
 <body>
     <h1 id="wait">Please wait!!!</h1>
+    <input type="text" id="delete">
+    <button onclick="deleteDrug()   ">Delete</button>
     <div>
         <table id="table"></table>
     </div>
@@ -27,13 +29,13 @@
                             'Accept': 'application/json',
                             'Content-Type': 'application/json'
                         }
-                    })
+                    });
                     if (res.ok) {
                         let data = await res.json();
                         let drugTable;
                         document.querySelector('#wait').innerHTML = "";
                         document.querySelector('#table').innerHTML += "<th colspan=\"11\" style=\"background-color: cornflowerblue\">Drugs Table</th>";
-                        document.querySelector("#table").innerHTML += "<tbody><tr><td>ID</td><td>Name</td><td>Preparation</td><td>Packaging</td><td>drugGroup</td><td>Dosage</td><td>Type</td><td>Ingredients</td><td>Country</td><td>Stock</td><td>ProducerID</td></tr>"
+                        document.querySelector("#table").innerHTML += "<tbody><tr><td>ID</td><td>Name</td><td>Preparation</td><td>Packaging</td><td>drugGroup</td><td>Dosage</td><td>Type</td><td>Ingredients</td><td>Country</td><td>Stock</td><td>ProducerID</td></tr>";
                         let result = Object.values(data);
                         for (let i = 0; i < result.length; i++) {
                             let split = result[i].split(" -- ");
@@ -46,7 +48,7 @@
                     }
                 }
                 else {
-                    console.log(localStorage.getItem("drugTable"))
+                    console.log(localStorage.getItem("drugTable"));
                     document.querySelector('#wait').innerHTML = "";
                     document.querySelector("#table").innerHTML = localStorage.getItem("drugTable");
                 }
@@ -56,7 +58,7 @@
     }
 
     async function deleteDrug(){
-        let id = "GC-237-15";
+        let id = document.getElementById("delete").value;
         try {
             let res = await fetch('http://localhost:8080/api/deleteDrug', {
                 method: 'POST',
@@ -65,7 +67,7 @@
                     'Content-Type': 'application/json'
                 },
                 body: id
-            })
+            });
             if (res.ok) {
                 let data = await res.json();
                 let result = Object.values(data);
@@ -78,7 +80,6 @@
         }catch (e) {}
         return 404;
     }
-    deleteDrug()
     getDrugs()
 </script>
 </html>
