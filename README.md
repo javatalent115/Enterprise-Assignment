@@ -8,6 +8,8 @@
 
 -Go to file Main.java and follow the "green" comments
 
--Chill! <--- Go to Json.html in directory scr/main/resources/static/ and edit what you like
+-Go to Json.html in directory scr/main/resources/static/ and edit the file what you like
+
+-Chill!
 
 *Default website url is: http://localhost:8080/Json.html
