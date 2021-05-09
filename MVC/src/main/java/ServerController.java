@@ -1,6 +1,7 @@
 package main.java;
 import main.java.entity.Drug;
 import main.java.entity.Producers;
+import main.java.service.Handler;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -23,18 +24,18 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/deleteDrug")
-    public Map deleteDrug(@RequestBody String id){
-        return Handler.deleteDrug(id);
+    public Map<String, String> deleteDrug(@RequestBody String id){
+        Map<String, String> map = new HashMap<>();
+        map.put("0", (String) Handler.deleteDrug(id).get(0));
+        return map;
     }
 
-    @PostMapping(value = "/api/deleteProducer")
-    public Map deleteProducer(@RequestBody String id){
-        return Handler.deleteProducer(id);
-    }
 
     @PostMapping(value = "/api/updateDrug")
-    public Map updateDrug(@RequestBody String id, @RequestBody int money){
-        return Handler.updateDrugMoney(id, money);
+    public Map<String, String> updateDrug(@RequestBody String id, @RequestBody int money){
+        Map<String, String> map = new HashMap<>();
+        map.put("0", (String) Handler.updateDrugMoney(id, money).get(0));
+        return map;
     }
 
     @PostMapping(value = "/api/getProducers")
@@ -49,27 +50,41 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/addDrug")
-    public Map addDrug(@RequestBody Drug drug){
-        return Handler.saveDrug(drug);
+    public Map<String, String> addDrug(@RequestBody Drug drug) {
+        Map<String, String> map = new HashMap<>();
+        map.put("0", (String) Handler.saveDrug(drug).get(0));
+        return map;
     }
 
     @PostMapping(value = "/api/addProducer")
-    public Map addProducer(@RequestBody Producers producer){
-        return Handler.saveDrug(producer);
+    public Map<String, String> addProducer(@RequestBody Producers producer){
+        Map<String, String> map = new HashMap<>();
+        map.put("0", (String) Handler.saveProducer(producer).get(0));
+        return map;
     }
 
     @PostMapping(value = "/api/getTypes")
-    public Map getAllTypes(){
-        return Handler.getAllTypes();
+    public Map<String, String> getAllTypes(){
+        List list = Handler.getAllTypes();
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i< list.size(); i++){
+            map.put(Integer.toString(i), (String) list.get(i));
+        }
+        return map;
     }
 
     @PostMapping(value = "/api/getGroups")
-    public Map getAllGroups(){
-        return Handler.getAllGroups();
+    public Map<String, String> getAllGroups(){
+        List list = Handler.getAllGroups();
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i< list.size(); i++){
+            map.put(Integer.toString(i), (String) list.get(i));
+        }
+        return map;
     }
 
     @PostMapping(value = "/api/sortDrugAsc")
-    public Map getDrugsSortAsc(){
+    public Map<String, String> getDrugsSortAsc(){
         HashMap<String,String> map = new HashMap<>();
         List list =  Handler.getDrugSortAsc();
         for (int i = 0; i< list.size(); i++){
@@ -80,7 +95,7 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/sortDrugDes")
-    public Map getDrugsSortDes(){
+    public Map<String, String> getDrugsSortDes(){
         HashMap<String,String> map = new HashMap<>();
         List list =  Handler.getDrugSortDes();
         for (int i = 0; i< list.size(); i++){
@@ -91,7 +106,7 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/searchDrugsById")
-    public Map searchDrugsById(@RequestBody String id){
+    public Map<String, String> searchDrugsById(@RequestBody String id){
         HashMap<String,String> map = new HashMap<>();
         List list =  Handler.searchDrugsById(id);
         for (int i = 0; i< list.size(); i++){
@@ -101,7 +116,7 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/searchDrugsByName")
-    public Map searchDrugsByName(@RequestBody String name){
+    public Map<String, String> searchDrugsByName(@RequestBody String name){
         HashMap<String,String> map = new HashMap<>();
         List list =  Handler.searchDrugsByName(name);
         for (int i = 0; i< list.size(); i++){
@@ -111,18 +126,22 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/getNOP")
-    public Map getNOP (@RequestBody String producerID){
-        return Handler.getNOP(producerID);
+    public Map<String, String> getNOP (@RequestBody String producerID){
+        Map<String, String> map = new HashMap<>();
+        map.put("0", (String) Handler.getNOP(producerID).get(0));
+        return map;
     }
 
     @PostMapping(value = "/api/authUser")
-    public Map isValid(@RequestBody String username,@RequestBody String password){
-        if (username.equals("user123") && password.equals("user123")){
-            return (Map) new HashMap<>().put("response", "valid");
+    public Map<String, String> isValid(@RequestBody Map<String, String> user){
+        Map<String, String> map = new HashMap<>();
+        if (user.get("username").equals("user123") && user.get("password").equals("user123")){
+            map.put("0", "customer");
         }
-        else if (username.equals("admin321") && password.equals("admin321")){
-            return (Map) new HashMap<>().put("response", "valid");
+        else if (user.get("username").equals("admin321") && user.get("password").equals("admin321")){
+            map.put("0", "admin");
         }
-        else return (Map) new HashMap<>().put("response", "invalid");
+        else map.put("0", "invalid");
+        return map;
     }
 }

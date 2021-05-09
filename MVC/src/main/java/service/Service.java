@@ -9,10 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Scanner;
 
 /**
  * Created by CoT on 10/13/17.
@@ -24,28 +25,69 @@ public class Service {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public void setupDatabase(){
+        ArrayList<Drug> drugs = new ArrayList<>();
+        ArrayList<Producers> producers = new ArrayList<>();
+        try {
+            File myObj = new File("message.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] split = data.split("&&");
+                boolean isExist = false;
+                for (Producers value : producers) {
+                    if (value.getId().equals(split[9])) {
+                        isExist = true;
+                        break;
+                    }
+                }
+                if (!isExist) {
+                    Producers producer = new Producers();
+                    producer.setId(split[9]);
+                    producer.setName(split[8]);
+                    producers.add(producer);
+                }
+            }
+            myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                String[] split = data.split("&&");
+                for (Producers producer : producers) {
+                    if (producer.getId().equals(split[9])) {
+                        Drug drug = new Drug(split[0], split[1], split[2], split[3], split[4], split[5], split[6], split[7], producer, split[10]);
+                        drugs.add(drug);
+                        break;
+                    }
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException ignored) {}
+
+        for (Producers producer: producers) {
+            sessionFactory.getCurrentSession().save(producer);
+        }
+        for (Drug drug: drugs) {
+            sessionFactory.getCurrentSession().save(drug);
+        }
     }
 
-    public Map saveDrug(Drug drug){
-        List list = getDrugs();
-        for (Object o : list) {
+    public List saveDrug(Drug drug){
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.drugs) {
             Drug drug1 = (Drug) o;
             if (drug1.getId().equals(drug.getId())) {
-                return (Map) new HashMap<>().put("response", "failed");
+                result.add("failed");
+                return result;
 
             }
         }
         sessionFactory.getCurrentSession().save(drug);
-        return (Map) new HashMap<>().put("response","success");
+        result.add("success");
+        return result;
     }
 
-    public void saveDrugs(Drug drug){
-        sessionFactory.getCurrentSession().save(drug);
-    }
 
-    public List getDrugs(){
+    public List getDrugsList(){
         CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Drug> query = builder.createQuery(Drug.class);
         Root<Drug> root = query.from(Drug.class);
@@ -53,7 +95,7 @@ public class Service {
         Query<Drug> q = sessionFactory.getCurrentSession().createQuery(query);
         return q.getResultList();
     }
-    public List getProducers(){
+    public List getProducersList(){
         CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Producers> query = builder.createQuery(Producers.class);
         Root<Producers> root = query.from(Producers.class);
@@ -62,23 +104,35 @@ public class Service {
         return q.getResultList();
     }
 
-    public Map updateDrugMoney(String id, int money){
-        List list = getDrugs();
-        for (Object o : list) {
+    public List getDrugs(){
+        Handler.drugs = getDrugsList();
+        return Handler.drugs;
+    }
+
+    public List getProducers(){
+        Handler.producers = getDrugsList();
+        return Handler.producers;
+    }
+
+    public List updateDrugMoney(String id, int money){
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.drugs) {
             Drug drug = (Drug) o;
             if (drug.getId().equals(id)) {
                 drug.setMoney(money);
                 sessionFactory.getCurrentSession().update(drug);
-                return (Map) new HashMap<>().put("response", "success");
+                Handler.drugs = getDrugs();
+                result.add("success");
+                return result;
             }
         }
-        return (Map) new HashMap<>().put("response","failed");
+        result.add("failed");
+        return result;
     }
 
     public List searchDrugsById(String id){
-        List list = getDrugs();
         List<String> l = new ArrayList<>();
-        for (Object o : list) {
+        for (Object o : Handler.drugs) {
             Drug drug = (Drug) o;
             if (drug.getId().contains(id)) {
                 l.add(drug.toString());
@@ -88,89 +142,78 @@ public class Service {
     }
 
     public List searchDrugsByName(String name){
-        List list = getDrugs();
-        List<String> l = new ArrayList<>();
-        for (Object o : list) {
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.drugs) {
             Drug drug = (Drug) o;
             if (drug.getName().contains(name)) {
-                l.add(drug.toString());
+                result.add(drug.toString());
             }
         }
-        return l;
+        return result;
     }
 
-    public Map getNOP (String producerID){
-        List list = getDrugs();
+    public List getNOP (String producerID){
+        List<String> result = new ArrayList<>();
         int count = 0;
-        for (Object o : list) {
+        for (Object o : Handler.producers) {
             Drug drug = (Drug) o;
             if (drug.getProducers().getId().equals(producerID)) {
                 count++;
             }
         }
-        return (Map) new HashMap<>().put("response", Integer.toString(count));
+        result.add(Integer.toString(count));
+        return result;
     }
 
-    public Map getAllGroups(){
-        List list = getDrugs();
-        HashMap<String, String> groups = new HashMap<>();
-        for (int i = 0 ; i < list.size(); i++) {
-            Drug drug = (Drug) list.get(i);
-            if (!groups.containsValue(drug.getDrugGroup())) {
-                groups.put(Integer.toString(i),drug.getDrugGroup());
+    public List getAllGroups(){
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < Handler.drugs.size(); i++) {
+            Drug drug = (Drug) Handler.drugs.get(i);
+            if (!result.contains(drug.getDrugGroup())) {
+                result.add(drug.getDrugGroup());
             }
         }
-        return groups;
+        return result;
     }
 
-    public Map getAllTypes(){
-        List list = getDrugs();
-        HashMap<String, String> groups = new HashMap<>();
-        for (int i = 0 ; i < list.size(); i++) {
-            Drug drug = (Drug) list.get(i);
-            if (!groups.containsValue(drug.getType()) && !drug.getType().equals(" ") && !drug.getType().equals("--")) {
-                groups.put(Integer.toString(i),drug.getDrugGroup());
+    public List getAllTypes(){
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < Handler.drugs.size(); i++) {
+            Drug drug = (Drug) Handler.drugs.get(i);
+            if (!result.contains(drug.getType()) && !drug.getType().equals(" ") && !drug.getType().equals("--")) {
+                result.add(drug.getDrugGroup());
             }
         }
-        groups.put(Integer.toString(list.size()),"Undefined");
-        return groups;
+        result.add("Undefined");
+        return result;
     }
 
-    public Map saveProducer(Producers producers){
-        List list = getProducers();
-        for (Object o : list) {
+    public List saveProducer(Producers newProducer){
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.producers) {
             Producers producer = (Producers) o;
-            if (producer.getId().equals(producers.getId())) {
-                return (Map) new HashMap<>().put("response", "failed");
+            if (producer.getId().equals(newProducer.getId())) {
+                result.add("failed");
+                return result;
             }
         }
-        sessionFactory.getCurrentSession().save(producers);
-        return (Map) new HashMap<>().put("response","success");
+        sessionFactory.getCurrentSession().save(newProducer);
+        result.add("success");
+        return result;
     }
-    public void saveProducers(Producers producers){
-        sessionFactory.getCurrentSession().save(producers);
-    }
-    public Map deleteProducer(String id){
-        List list = getProducers();
-        for (Object o : list) {
-            Producers producers = (Producers) o;
-            if (producers.getId().equals(id)) {
-                sessionFactory.getCurrentSession().delete(producers);
-                return (Map) new HashMap<>().put("response", "success");
-            }
-        }
-        return (Map) new HashMap<>().put("response","failed");
-    }
-    //
-    public Map deleteDrug(String id){
-        List list = getDrugs();
-        for (Object o : list) {
+
+    public List deleteDrug(String id){
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.drugs) {
             Drug drug = (Drug) o;
             if (drug.getId().equals(id)) {
                 sessionFactory.getCurrentSession().delete(drug);
-                return (Map) new HashMap<>().put("response", "success");
+                Handler.drugs = getDrugs();
+                result.add("success");
+                return result;
             }
         }
-        return (Map) new HashMap<>().put("response","failed");
+        result.add("failed");
+        return result;
     }
 }

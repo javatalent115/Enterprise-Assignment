@@ -35,11 +35,65 @@ public class Drug implements Comparable {
     private String country;
     @Column
     private int money;
+
+    @Column
+    private int stock;
     @ManyToOne
     @JoinColumn(name="producer", nullable=false)
     private Producers producers;
 
     public Drug(){}
+
+    public Drug(String id, String name, String preparation, String packaging, String drugGroup, String dosage, String type, String ingredients, int money, int stock, Producers producers, String country){
+        this.id = id;
+        this.name = name;
+        if (preparation.equals("null") || preparation.equals("")){
+            this.preparation = "Undefined";
+        }
+        else {
+            this.preparation = preparation;
+        }
+        if (packaging.equals("null") || packaging.equals("")) {
+            this.packaging = "Undefined";
+        }
+        else {
+            this.packaging = packaging;
+        }
+        if (drugGroup.equals("null") || drugGroup.equals("")) {
+            this.drugGroup = "Undefined";
+        }
+        else {
+            this.drugGroup = drugGroup;
+        }
+        if (dosage.equals("null") || dosage.equals("--") || dosage.equals(" ")) {
+            this.dosage = "Undefined";
+        }
+        else {
+            this.dosage = dosage;
+        }
+        if (type.equals("null") || type.equals("")) {
+            this.type = "Undefined";
+        }
+        else {
+            this.type = type;
+        }
+        if (ingredients.equals("null") || ingredients.equals("")) {
+            this.ingredients = "Undefined";
+        }
+        else {
+            this.ingredients = ingredients;
+        }
+        this.producers = producers;
+        if (country.equals("null") || country.equals("")) {
+            this.country = "Undefined";
+        }
+        else {
+            this.country = country;
+        }
+        this.money = money;
+        this.stock = stock;
+    }
+
     public Drug(String id, String name, String preparation, String packaging, String drugGroup, String dosage, String type, String ingredients, Producers producers, String country){
         this.id = id;
         this.name = name;
@@ -86,13 +140,13 @@ public class Drug implements Comparable {
         else {
             this.country = country;
         }
-        this.country = country;
         this.money = new Random().nextInt(50)+8;
+        this.stock = new Random().nextInt(50)+3;
     }
 
     @Override
     public String toString() {
-        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ producers.getId();
+        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ stock + " -- "+ producers.getId();
     }
 
     public String getName() {
