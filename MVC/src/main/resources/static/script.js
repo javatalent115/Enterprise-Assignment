@@ -12,14 +12,14 @@ $('.cart-btn').on('click', function (){
     }).css({
       'opacity': '0.8',
       'position': 'absolute',
-      'height': '50px',
-      'width': '50px',
+      'height': '35px',
+      'width': '35px',
       'z-index': '100'
     }).appendTo($('body')).animate({
       'top': cart.offset().top + 20,
       'left': cart.offset().left + 30,
-      'width': 50,
-      'height': 50  
+      'width': 35,
+      'height':  35 
     }, 1000, 'easeInOutExpo');
 
     setTimeout(function(){
