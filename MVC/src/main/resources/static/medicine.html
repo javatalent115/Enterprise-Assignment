@@ -9,7 +9,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
 </head>
 <style>
-    
     .container-fluid{
         position: relative;
         height: 350px;
@@ -137,9 +136,9 @@
         position: relative;
         padding: 80px 140px;
         word-wrap: break-word;
-        
-        margin: 25px 25px;
-        
+        top: 35px;
+        z-index: -1;
+        margin: 0 25px;
         border-radius: 15px;
         box-shadow: 5px 10px 10px #aaa;
     }
@@ -250,21 +249,6 @@
         background-color: DodgerBlue !important;
         color: #ffffff;
     }
-    .slide-wrapper{
-    display: flex;
-    justify-content: space-evenly;
-    }
-    .carousel-item{
-    }
-    .slide-img{
-    width: 20%;
-}
-.carousel-control-next-icon {
-    background-image: url("images/arrow-right.png");
-}
-.carousel-control-prev-icon {
-    background-image: url("images//arrow-left.png");
-}
 </style>
 <body>
     <div class="container-fluid">
@@ -290,238 +274,97 @@
         <div class="header">
             Welcome to <br> Medicine <br> Online
         </div>
+        <div class="search-wrapper">
+                <div class="search-input">
+                    <div style="padding-left:3px;font-size:20px">Search Medicine</div>
+                    <div class="autocomplete">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <input type="text" name="medicine" id="medicine">
+                            <div>
+                                <button>
+                                </button>
+                            </div></div>
+
+                    </div>
+
+                </div>
+        </div>
     </div>
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
             <div class="information-medicine-header">
-                 <span>Most wanted medicine</span> 
+                 <span>Infomation of medicine</span> 
             </div>
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                      <div class="slide-wrapper">
-                        <img class="slide-img" src="./images/panaldo.png"  alt="...">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                      </div>
-                   
-                  </div>
-                  <div class="carousel-item">
-                    <div class="slide-wrapper">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                      </div>
-                  </div>
-                  <div class="carousel-item">
-                    <div class="slide-wrapper">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                        <img class="slide-img" src="./images/cart.png"  alt="...">
-                      </div>
-                  </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
-        </div>
-    </div>
-    <style>
-        .feature-wrapper{
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-        }
-        .free-delivery, .best-service-description,.shopping-online-description{
-            display:flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-        }
-        .feature-wrapper img{
-            background-size: 100% 100%;
-            height: 55px;
-        }
-        .feature-wrapper span{
-            font-weight: bold;
-            font-size: 20px;
-        }
-        .news{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-        }
-        .news{
-            font-weight: bold;
-        }
-        .news span{
-            flex-grow: 3;
-            font-size: 70px;
-
-        }
-        .news-item-wrapper{
-            display: flex;
-            width: 100% ;
-            align-items: center;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            
-        }
-        .news-item{
-            display: flex;  
-            flex-direction:column;
-            width: 250px;
-            height: 300px;
-            text-align: center;
-            position: relative;
-        }
-        .news-item-date{
-            border: blue 1px solid;
-            background:white;
-            width: 50px;
-            height: 50px;
-            color: blue;
-            position: absolute;
-            top: 15px;
-            left: -20px;
-        }
-    </style>
-    <div class="feature-wrapper">
-        <div class="free-delivery">
-            <img src="./images/free-delivery.png" alt="">
-            <span>Free delivery</span>
-        </div>
-        <div class="best-service-description">
-            <img src="./images/best-service.png" alt="">
-            <span>Best service description</span>
-        </div>
-        <div class="shopping-online-description">
-            <img src="./images/cart-feature.png" alt="">
-            <span>Shopping online description</span>
-        </div>
-    </div>
-    <div class="picture">
-        <img src="./images/picture.png" alt="" style="background-size: 100% 100%;width: 90%;display:block;
-        margin: 0 auto;">
-    </div>
-    <div class="news">
-        <span>News</span>
-            <div class="news-item-wrapper">
-                <div class="news-item">
-                    <img src="./images/news-1.png" alt="">
-                    <p>News discover about vaccine to Covid 19</p>
-                    <div class="news-item-date">30<br>th4</div>
-                </div>
-                <div class="news-item">
-                    <img src="./images/news-2.png" alt="">
-                    <p>Cancer can cure?</p>
-                    <div class="news-item-date">30<br>th4</div>
-                </div>
-                <div class="news-item">
-                    <img src="./images/news-3.png" alt="">
-                    <p>Did you eat enough vegetable</p>
-                    <div class="news-item-date">30<br>th4</div>
-                </div>
+            <div class="medicine-detail-wrapper">
+                <ul class="medicine-detail" style="width:12%">
+                    <li> 
+                        ID
+                    </li>
+                    <li>
+                        1
+                    </li>
+                    <li>
+                        2
+                    </li>
+                </ul>
+                <ul class="medicine-detail" style="width:18%">
+                    <li>
+                        Name
+                    </li>
+                    <li> 
+                        Panadol
+                    </li>
+                    <li> 
+                        Alphachoay
+                    </li>
+                </ul>
+                <ul class="medicine-detail" style="width:34%;text-align:center;  ">
+                    <li>
+                        Ingridient
+                    </li>
+                    <li> 
+                        500 mg Paracetamol.
+                        – 65 mg Caffein
+                    </li>
+                    <li> 
+                        Chymotrypsin 21
+                        microkatals.
+                    </li>
+                </ul>
+                <ul class="medicine-detail"style="width:18%; text-align:center">
+                    <li>
+                        Amount
+                    </li>
+                    <li> 
+                        1 pack
+                    </li>
+                    <li> 
+                        1 pack
+                    </li>
+                </ul>
+                <ul class="medicine-detail"style="width:12%;text-align:center">
+                    <li>
+                        Price
+                    </li>
+                    <li> 
+                        1$
+                    </li>
+                    <li> 
+                        1$
+                    </li>
+                </ul>
+                <ul class="medicine-detail" style="width: 5%;">
+                    <li>
+                        <img src="./images/cart.png" alt="">
+                    </li>
+                    <li>
+                        <img src="./images/cart.png" alt="">
+                    </li>
+                    <li>
+                        <img src="./images/cart.png" alt="">
+                    </li>
+                </ul>
             </div>
-    </div>
-    <style>
-        .footer{
-            height: 250px;
-            background-color: grey;
-            display: flex;
-            color: white;
-            justify-content: space-around;
-        }
-        .icon-wrapper{
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
-        }
-        .footer-item-1 h1,.footer-item-2 h1, .footer-item-3 h1  {
-            position: relative;
-        }
-        .footer-item-1 h1::before,.footer-item-2 h1::before,.footer-item-3 h1::before{
-        content: "";
-        background: white;
-        position: absolute;
-        width: 100%;
-        height: 4px;
-        bottom: -5px;
-        }
-    .contact{
-        display: flex;
-        gap: 15px;
-        justify-content: left;
-        align-items: center;
-        font-size: 40px;
-    }
-    
-    .keyword{
-        display: flex;
-        flex-direction: row;
-        gap: 15px;
-        justify-content: left;
-        align-items: center;
-        margin-top: 20px;
-    }
-    .keyword-item{
-        width: fit-content;
-        background-color: #999;
-        border: 2px solid white;
-        padding: 0px 10px;
-        font-size: 25px;
-    }
-    </style>
-    <div class="footer">
-        <div class="footer-item-1">
-            <h1>Connect with us</h1>
-            <div class="icon-wrapper">
-                <div class="icon">
-                    <a href=""><img src="./images/icon-1.png" alt=""></a>
-                </div>
-                <div class="icon">
-                    <a href=""><img src="./images/icon-2.png" alt=""></a></div>
-                <div class="icon">
-                    <a href=""><img src="./images/icon-3.png" alt=""></a></div>
-            </div>
-        </div>
-        <div class="footer-item-2">
-            <h1>Hotline (7h-22h)</h1>
-            <div class="contact">
-                <img src="./images/phone-call.png" alt="">
-                <p>083-6598249</p>
-            </div>
-        </div>
-        <div class="footer-item-3">
-            <h1>Keyword</h1>
-            <div class="keyword">
-                <div class="keyword-item">
-                    Pharmacy
-                </div>
-                <div class="keyword-item">
-                    Drug
-                </div>
-                <div class="keyword-item">
-                    Store
-                </div>
-                <div class="keyword-item">
-                    Health
-                </div>
-                <div class="keyword-item">
-                    Health Care
-                </div>  
-            </div>
-            
         </div>
     </div>
 <!-- Modal  -->
@@ -583,7 +426,7 @@
             </div>
         </div>
         </div>
-    </div>
+</div>
     <script>
         let name = [];
         async function autocomplete(inp, arr) {
@@ -702,8 +545,11 @@
                 }
             }
         }
+
+
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("medicine"), name);
     </script>
 </body>
+
 </html>
