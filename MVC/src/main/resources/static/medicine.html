@@ -30,7 +30,7 @@
         content: "";
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        background: url(/images/home-background.jpg);
+        background: url("./images/home-background.jpg");
         position: absolute;
         top: 0;
         bottom: 0;
@@ -147,7 +147,7 @@
 
     .search-wrapper button {
         background: white;
-        background-image: url("/images/search-image.png");
+        background-image: url("./images/search-image.png");
         background-repeat: no-repeat;
         background-size: 100% 100%;
         width: 33px;
@@ -344,6 +344,14 @@
             max-width: 28px;
             min-width: 16.66px;
         }
+        .more-button-submenu-wrapper{
+            position: relative;
+        }
+        .more-button-submenu-item{
+            position: absolute;
+            left: -18px;
+            z-index: 1;
+        }
     </style>
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
@@ -378,8 +386,13 @@
                         <li>
                             Price
                         </li>
-                        <li>
-                            <img src="./images/more.png" class="more-image" style="cursor: pointer;">
+                        <li >
+                            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;" >
+                            <div class="more-button more-button-submenu-wrapper">
+                                <div class="more-button-submenu-item">
+                                    Advance
+                                </div>
+                            </div>
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
@@ -401,8 +414,13 @@
                         <li>
                             1$
                         </li>
-                        <li>
-                            <img src="./images/more.png" class="more-image" style="cursor: pointer;">
+                        <li >
+                            <img src="./images/more.png" class="more-image  more-button" style="cursor: pointer;">
+                            <div class="more-button-submenu-wrapper">
+                                <div class="more-button-submenu-item">
+                                    Advance
+                                </div>
+                            </div>
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
@@ -425,7 +443,12 @@
                             1$
                         </li>
                         <li>
-                            <img src="./images/more.png" class="more-image" style="cursor: pointer;">
+                            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+                            <div class="more-button-submenu-wrapper">
+                                <div class="more-button-submenu-item">
+                                    Advance
+                                </div>
+                            </div>
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
@@ -465,7 +488,27 @@
             </div>
         </div>
     </div>
+    <script>
+        localStorage.setItem("more-button-submenu-visible",false)
+        var length = document.querySelectorAll(".more-button-submenu-wrapper")
+        for (let i = 0; i < length.length; i++) {
+            document.querySelectorAll(".more-button-submenu-item")[i].setAttribute("style","display:none")
+        }
+        $(".more-button").click(function(){
+            if (localStorage.getItem("more-button-submenu-visible") == "true"){
+                localStorage.setItem("more-button-submenu-visible",false)
+                $(this).parent("li").children("div").children("div").css("display","none")
+            }
+            else{
+                localStorage.setItem("more-button-submenu-visible",true)
+                $(this).parent("li").children("div").children("div").css("display","block")
 
+            }
+  });
+        
+            
+        
+    </script>
 
     <!-- Modal  -->
     <style>
