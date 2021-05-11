@@ -39,21 +39,45 @@ $('.cart-btn').on('click', function () {
 localStorage.setItem("more-button-submenu-visible", false)
 var length = document.querySelectorAll(".more-button-submenu-wrapper")
 for (let i = 0; i < length.length; i++) {
-  document.querySelectorAll(".more-button-submenu-item")[i].setAttribute("style", "display:none")
+  document.querySelectorAll(".more-button-submenu-wrapper")[i].setAttribute("style", "display:none")
 }
 $(".more-button").click(function () {
   if (localStorage.getItem("more-button-submenu-visible") == "true") {
     localStorage.setItem("more-button-submenu-visible", false)
-    $(this).parent("li").children("div").children("div").css("display", "none")
+    $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "none")
   }
   else {
     localStorage.setItem("more-button-submenu-visible", true)
-    $(this).parent("li").children("div").children("div").css("display", "block")
-
+    $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "block")
   }
 });
 
 $(".more-button-submenu-item").click(function (){
-  
-
+    localStorage.setItem("more-button-submenu-visible", false)
+    $(this).parent("ul").parent("div").css("display", "none")
 });
+
+$(".more-button-submenu-item").click(function (){
+  localStorage.setItem("more-button-submenu-visible", false)
+  $(this).parent("ul").parent("div").css("display", "none")
+});
+
+$(".quick-change").click(function (){
+  $(this).parent("ul").parent("div").parent("li").parent("ul").find(".changeAble").attr("contenteditable","true")
+  $(this).parent("ul").parent("div").parent("li").parent("ul").find(".changeAble").css({
+    "border": "1px solid black"
+  }
+    )
+    $(this).parent("ul").parent("div").parent("li").find("img").css("display","none")
+    $(this).parent("ul").parent("div").parent("li").find(".done").css("display","block")
+});
+
+$(".done").click(function(){
+  $(this).css("display","none")
+  $(this).parent("li").find("img").css("display","inline-block")
+  $(this).parent("li").parent("ul").find(".changeAble").css({
+    "border":"none"
+  })
+  $(this).parent("li").find(".changeAble").attr("contenteditable","false")
+});
+

@@ -347,22 +347,37 @@
         }
 
         .more-button-submenu-wrapper {
-            position: relative;
-        }
-
-        .more-button-submenu-item {
-            background-color: white;
-            border: 1px solid black;
-            border-radius: 5px;
-            padding: 5px 10px;
             position: absolute;
+            display: none;
+            margin-left: -40px;
+            border: 1px black solid;
+            border-radius: 2px;
+        }
+        .more-button-submenu{
+            width: 100%; 
+            gap: 0;
+            display: block;
+            padding:0;
+
+        }
+        .more-button-submenu-item {
+            list-style: none;
+            background-color: white;
             font-size: 12px;
+            padding: 5px;
             z-index: 1;
             width: fit-content;
             cursor: pointer;
+            min-width: 120px;
+            height: fit-content;
+            border-bottom: 1px solid black;            
         }
         .more-button-submenu-item:hover{
             background-color: #eee;
+        }
+        .done{
+            display: none;
+            border: 1px solid black;
         }
     </style>
     <div class="information-medicine-container">
@@ -383,27 +398,33 @@
                 </div>
                 <div class="medicines">
                     <ul class="medicine-item">
-                        <li>
+                        <li class="changeAble">
                             ID
                         </li>
-                        <li>
+                        <li class="changeAble">
                             Name
                         </li>
-                        <li>
+                        <li class="changeAble">
                             Stock
                         </li>
-                        <li>
+                        <li class="changeAble">
                             Amount
                         </li>
-                        <li>
+                        <li class="changeAble">
                             Price
                         </li>
                         <li>
+                            <div class="done">Done</div>
                             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-                            <div class="more-button-submenu-wrapper">
-                                <div class="more-button-submenu-item" data-bs-toggle="modal" data-bs-target="#modifyMedicine">
-                                    Advanced
-                                </div>
+                            <div class="more-button-submenu-wrapper" >
+                                <ul class="more-button-submenu">
+                                    <li class="more-button-submenu-item quick-change">
+                                        Quick change
+                                    </li>
+                                    <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal" data-bs-target="#modifyMedicine">
+                                        Advance
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                         <li>
@@ -411,27 +432,33 @@
                         </li>
                     </ul>
                     <ul class="medicine-item">
-                        <li>
+                        <li class="changeAble">
                             1
                         </li>
-                        <li>
+                        <li class="changeAble">
                             Panaldo
                         </li>
-                        <li>
+                        <li class="changeAble">
                             5
                         </li>
-                        <li>
+                        <li class="changeAble">
                             1 pack
                         </li>
-                        <li>
+                        <li class="changeAble">
                             1$
                         </li>
                         <li>
+                            <div class="done">Done</div>
                             <img src="./images/more.png" class="more-image  more-button" style="cursor: pointer;">
-                            <div class="more-button-submenu-wrapper">
-                                <div class="more-button-submenu-item">
-                                    Advanced
-                                </div>
+                            <div class="more-button-submenu-wrapper" >
+                                <ul class="more-button-submenu">
+                                    <li class="more-button-submenu-item quick-change">
+                                        Quick change
+                                    </li>
+                                    <li class="more-button-submenu-item" data-bs-toggle="modal" data-bs-target="#modifyMedicine">
+                                        Advance
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                         <li>
@@ -439,27 +466,33 @@
                         </li>
                     </ul>
                     <ul class="medicine-item">
-                        <li>
+                        <li class="changeAble">
                             2
                         </li>
-                        <li>
+                        <li class="changeAble">
                             Panaldo
                         </li>
-                        <li>
+                        <li class="changeAble">
                             5
                         </li>
-                        <li>
+                        <li class="changeAble">
                             1 pack
                         </li>
-                        <li>
+                        <li class="changeAble">
                             1$
                         </li>
                         <li>
+                            <div class="done">Done</div>
                             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-                            <div class="more-button-submenu-wrapper">
-                                <div class="more-button-submenu-item">
-                                    Advanced
-                                </div>
+                            <div class="more-button-submenu-wrapper" >
+                                <ul class="more-button-submenu">
+                                    <li class="more-button-submenu-item quick-change">
+                                        Quick change
+                                    </li>
+                                    <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal" data-bs-target="#modifyMedicine">
+                                        Advance
+                                    </li>
+                                </ul>
                             </div>
                         </li>
                         <li>
@@ -623,7 +656,7 @@
                 </div>
                 <div class="modal-footer"
                     style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px;">
-                    <button class="done-button" data-bs-dismiss="modal" aria-label="Close">Done</button>
+                    <button class="`" data-bs-dismiss="modal" aria-label="Close">Done</button>
                 </div>
             </div>
         </div>
