@@ -329,6 +329,7 @@
         .medicine-item :nth-child(6),
         .medicines ul :nth-child(7) {
             flex-basis: 5%;
+
         }
 
         .medicines> :nth-child(odd) {
@@ -344,13 +345,24 @@
             max-width: 28px;
             min-width: 16.66px;
         }
-        .more-button-submenu-wrapper{
+
+        .more-button-submenu-wrapper {
             position: relative;
         }
-        .more-button-submenu-item{
+
+        .more-button-submenu-item {
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 5px 10px;
             position: absolute;
-            left: -18px;
+            font-size: 12px;
             z-index: 1;
+            width: fit-content;
+            cursor: pointer;
+        }
+        .more-button-submenu-item:hover{
+            background-color: #eee;
         }
     </style>
     <div class="information-medicine-container">
@@ -386,11 +398,11 @@
                         <li>
                             Price
                         </li>
-                        <li >
-                            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;" >
-                            <div class="more-button more-button-submenu-wrapper">
-                                <div class="more-button-submenu-item">
-                                    Advance
+                        <li>
+                            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+                            <div class="more-button-submenu-wrapper">
+                                <div class="more-button-submenu-item" data-bs-toggle="modal" data-bs-target="#modifyMedicine">
+                                    Advanced
                                 </div>
                             </div>
                         </li>
@@ -414,11 +426,11 @@
                         <li>
                             1$
                         </li>
-                        <li >
+                        <li>
                             <img src="./images/more.png" class="more-image  more-button" style="cursor: pointer;">
                             <div class="more-button-submenu-wrapper">
                                 <div class="more-button-submenu-item">
-                                    Advance
+                                    Advanced
                                 </div>
                             </div>
                         </li>
@@ -446,7 +458,7 @@
                             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
                             <div class="more-button-submenu-wrapper">
                                 <div class="more-button-submenu-item">
-                                    Advance
+                                    Advanced
                                 </div>
                             </div>
                         </li>
@@ -488,41 +500,81 @@
             </div>
         </div>
     </div>
-    <script>
-        localStorage.setItem("more-button-submenu-visible",false)
-        var length = document.querySelectorAll(".more-button-submenu-wrapper")
-        for (let i = 0; i < length.length; i++) {
-            document.querySelectorAll(".more-button-submenu-item")[i].setAttribute("style","display:none")
-        }
-        $(".more-button").click(function(){
-            if (localStorage.getItem("more-button-submenu-visible") == "true"){
-                localStorage.setItem("more-button-submenu-visible",false)
-                $(this).parent("li").children("div").children("div").css("display","none")
-            }
-            else{
-                localStorage.setItem("more-button-submenu-visible",true)
-                $(this).parent("li").children("div").children("div").css("display","block")
-
-            }
-  });
-        
-            
-        
-    </script>
 
     <!-- Modal  -->
+    <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="about-us">
+                        Modify medicine
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <form class="">
+                        <div class="mb-3">
+                          <label for="validationTextarea" class="form-label">Textarea</label>
+                          <input class="form-control" type="text" placeholder="Default input" aria-label="default input example">
+                        </div>
+
+                        <div class="form-check mb-3">
+                          <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
+                          <label class="form-check-label" for="validationFormCheck1">Check this checkbox</label>
+                          <div class="invalid-feedback">Example invalid feedback text</div>
+                        </div>
+                      
+                        <div class="form-check">
+                          <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
+                          <label class="form-check-label" for="validationFormCheck2">Toggle this radio</label>
+                        </div>
+                        <div class="form-check mb-3">
+                          <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
+                          <label class="form-check-label" for="validationFormCheck3">Or toggle this other radio</label>
+                          <div class="invalid-feedback">More example invalid feedback text</div>
+                        </div>
+                      
+                        <div class="mb-3">
+                          <select class="form-select" required aria-label="select example">
+                            <option value="">Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                          <div class="invalid-feedback">Example invalid select feedback</div>
+                        </div>
+                      
+                        <div class="mb-3">
+                          <input type="file" class="form-control" aria-label="file example" required>
+                          <div class="invalid-feedback">Example invalid form file feedback</div>
+                        </div>
+                      
+                        
+                </div>
+                <div class="modal-footer"
+                    style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px;">
+                    <button class="done-button" data-bs-dismiss="modal" aria-label="Close">Done</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+<!-- Modal  -->
     <style>
-        .modal-content {
+        #staticBackdrop .modal-content {
             background-color: #8ee9fd;
         }
 
-        .modal-header {
+        #staticBackdrop .modal-header {
             border: none;
             padding: 0rem 1rem !important;
 
         }
 
-        .about-us {
+        #staticBackdrop .about-us {
             background-color: #18bff3;
             font-size: 25px;
             color: white;
@@ -534,7 +586,7 @@
 
         }
 
-        .modal-body {
+        #staticBackdrop .modal-body {
             margin: 0px 35px;
             background-color: white;
             border: none;
@@ -543,7 +595,7 @@
             font-weight: bold;
         }
 
-        .done-button {
+        #staticBackdrop .done-button {
             color: white;
             background-color: #77f58b;
             padding: 0px 10px;
@@ -551,7 +603,7 @@
             border: none;
         }
 
-        .modal-dialog-scrollable .modal-content {
+        #staticBackdrop .modal-dialog-scrollable .modal-content {
             overflow: visible;
         }
     </style>
