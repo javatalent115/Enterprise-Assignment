@@ -42,7 +42,7 @@ public class AppConfig {
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:9999/postgres");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("baobao");
+        dataSource.setPassword("816528");
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 

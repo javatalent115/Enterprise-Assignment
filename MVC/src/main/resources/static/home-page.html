@@ -400,8 +400,14 @@
         border-radius: 10px;
         border: none;
     }
+
     .modal-dialog-scrollable .modal-content {
         overflow: visible;
+    }
+
+    #medicineautocomplete-list {
+        height: 70vh;
+        overflow: scroll;
     }
 </style>
     <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -470,7 +476,7 @@
             });
             /*execute a function presses a key on the keyboard:*/
             inp.addEventListener("keydown", function (e) {
-                var x = document.getElementById(this.id + "autocomplete-list");
+                var x = document.getElementById(this.id + "autocomplete-list"); //TODO
                 if (x) x = x.getElementsByTagName("div");
                 if (e.keyCode == 40) {
                     /*If the arrow DOWN key is pressed,
