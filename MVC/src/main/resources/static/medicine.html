@@ -314,7 +314,7 @@
             font-weight: bold;
             display: flex;
             list-style: none;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
             gap: 0px;
             width: 100%;
@@ -323,13 +323,13 @@
 
         .medicine-item li {
             text-align: center;
-            flex-basis: 18%;
-            max-width: 18%;
+            flex-basis: 17%;
+            overflow: auto;
         }
 
         .medicine-item :nth-child(6),
         .medicines ul :nth-child(7) {
-            flex-basis: 5%;
+            flex-basis: 7%;
 
         }
 
@@ -350,9 +350,8 @@
             max-width: 25px;
             min-width: 20px;
             margin: 0 auto;
-            margin-bottom:-4px;
             display: none;
-        
+            cursor: pointer;
         }
         .more-button-submenu-wrapper {
             position: absolute;
@@ -385,7 +384,13 @@
         }
         .done{
             display: none;
+            overflow:unset;
             border: 1px solid black;
+            cursor: pointer;
+        }
+        .add-image{
+            cursor: pointer;
+            max-width: 25px
         }
     </style>
     <div class="information-medicine-container">
@@ -395,6 +400,9 @@
             </div>
             <div class="medicine-detail-wrapper">
                 <div class="search-wrapper-2">
+                    <div>
+                        <img src="./images/add-image.png" class="add-image" alt="">
+                    </div>
                     <div class="autocomplete">
                         <input type="text" name="medicine" id="medicine" placeholder="Search medicine"
                             style="width: 300px;">
@@ -415,7 +423,7 @@
                         <li class="changeAble">
                             Stock
                         </li>
-                        <li class="changeAble">
+                        <li class="changeAble amount">
                             Amount
                         </li>
                         <li class="changeAble">
@@ -450,7 +458,7 @@
                         <li class="changeAble">
                             5
                         </li>
-                        <li class="changeAble">
+                        <li class="changeAble amount">
                             1 pack
                         </li>
                         <li class="changeAble">
@@ -485,7 +493,7 @@
                         <li class="changeAble">
                             5
                         </li>
-                        <li class="changeAble">
+                        <li class="changeAble amount">
                             1 pack
                         </li>
                         <li class="changeAble">
