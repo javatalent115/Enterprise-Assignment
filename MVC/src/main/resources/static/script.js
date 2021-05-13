@@ -1,4 +1,20 @@
+$(document).ready(function(){
+  
+});
+
+if(localStorage.getItem("accountType") == "guest"){
+  $("li:nth-child(6)").css("display","none")
+  $("li:nth-child(7)").css("display","none")
+}
+else if(localStorage.getItem("accountType") == "account"){
+  $("li:nth-child(6)").css("display","none")
+}
+else{
+  $(".trash-image").css("display","block")
+  $(".cart-images").css("display","none")
+}
 document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
+sessionStorage.setItem("abc",123)
 //if add to cart btn clicked
 $('.cart-btn').on('click', function () {
   let count = localStorage.getItem("cart");
@@ -57,7 +73,6 @@ $(".more-button-submenu-item").click(function (){
 });
 
 $(".more-button-submenu-item").click(function (){
-  localStorage.setItem("more-button-submenu-visible", false)
   $(this).parent("ul").parent("div").css("display", "none")
 });
 
@@ -84,3 +99,4 @@ function reset(){
   window.localStorage.clear();
   document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
 }
+

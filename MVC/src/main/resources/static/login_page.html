@@ -188,7 +188,7 @@
                         document.querySelector(".invalid-password").setAttribute("style", "display: block")
                     }
                     else {
-                        localStorage.setItem("login", result[0].toString());
+                        localStorage.setItem("accountType", result[0].toString());
                         location.href = "http://localhost:8080/home-page.html"
                     }
                     return data;

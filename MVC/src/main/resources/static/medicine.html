@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -258,9 +257,11 @@
                 <li class="nav-item">
                     <a href="cart.html"> Cart</a>
                 </li>
-                <li class="nav-item">
-                    <a href="login_page.html">Sign-in</a>
+                <li class="nav-item sign">
+                    <a href="login_page.html" id ="sign-in">Sign-in</a>
+                    <a href="" id ="sign-out" >Sign-out</a>
                 </li>
+                <script src="./sign-in.js"></script>
             </ul>
         </nav>
         <div class="header">
@@ -342,14 +343,16 @@
         }
 
         .more-image {
-            max-width: 28px;
-            min-width: 16.66px;
+            min-width: 24.66px;
         }
 
         .trash-image{
-            max-width: 20px;
-            margin-bottom: 4px;
+            max-width: 25px;
+            min-width: 20px;
+            margin: 0 auto;
+            margin-bottom:-4px;
             display: none;
+        
         }
         .more-button-submenu-wrapper {
             position: absolute;
@@ -794,6 +797,7 @@
         /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
         autocomplete(document.getElementById("medicine"), name);
     </script>
+    
 </body>
 
 </html>
