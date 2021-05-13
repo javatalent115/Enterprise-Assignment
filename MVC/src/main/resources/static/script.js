@@ -1,28 +1,28 @@
-function checkAccount(){
-if(localStorage.getItem("accountType") == "guest"){
-  $("li:nth-child(6)").css("display","none")
-  $("li:nth-child(7)").css("display","none")
-  $(".add-image").css("display","none")
-
-}
-else if(localStorage.getItem("accountType") == "account"){
-  $("li:nth-child(6)").css("display","none")
-  $(".add-image").css("display","none")
-}
-else{
-  $(".amount").css("display","none")
-  $(".trash-image").css("display","block")
-  $(".cart-images").css("display","none")
-  $(".cart-nav").css("display","none")
-}
+function checkAccount() {
+  if (localStorage.getItem("accountType") == "guest") {
+    $("li:nth-child(6)").css("display", "none")
+    $("li:nth-child(7)").css("display", "none")
+    $(".add-image").css("display", "none")
+    $(".cart-nav").css("display", "none")
+  }
+  else if (localStorage.getItem("accountType") == "user") {
+    $("li:nth-child(6)").css("display", "none")
+    $(".add-image").css("display", "none")
+  }
+  else {
+    $(".amount").css("display", "none")
+    $(".trash-image").css("display", "block")
+    $(".cart-images").css("display", "none")
+    $(".cart-nav").css("display", "none")
+  }
 }
 checkAccount();
-document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
-sessionStorage.setItem("abc",123)
+document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
+sessionStorage.setItem("abc", 123)
 //if add to cart btn clicked
 $('.cart-btn').on('click', function () {
   let count = localStorage.getItem("cart");
-  document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
+  document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
   let cart = $('.cart-nav');
   // find the img of that card which button is clicked by user
   let imgtodrag = $(this).parent('li').find("img").eq(0);
@@ -46,7 +46,7 @@ $('.cart-btn').on('click', function () {
 
     setTimeout(function () {
       count++;
-      localStorage.setItem("cart",count)
+      localStorage.setItem("cart", count)
       $(".cart-nav .item-count").text(localStorage.getItem("cart"));
     }, 1500);
 
@@ -73,61 +73,74 @@ for (let i = 0; i < length.length; i++) {
 //   // }
 // });
 
-$(document).on("click",".more-button", function() {
-      if ($(this).parent("li").find(".more-button-submenu-wrapper").css("display") == "block") {
-      $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "none")
-    }
-    else {
-      $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "block")
-    }
+$(document).on("click", ".more-button", function () {
+  event.preventDefault()
+  if ($(this).parent("li").find(".more-button-submenu-wrapper").css("display") == "block") {
+    $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "none")
+  }
+  else {
+    $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "block")
+  }
 });
 
-$(document).on("click",".more-button-submenu-item",function (){
-    $(this).parent("ul").parent("div").css("display", "none")
+$(document).on("click", ".more-button-submenu-item", function () {
+  event.preventDefault()
+  $(this).parent("ul").parent("div").css("display", "none")
 });
 
-$(document).on("click",".quick-change",function (){
-  $(this).parent("ul").parent("div").parent("li").parent("ul").find(".changeAble").attr("contenteditable","true")
+$(document).on("click", ".quick-change", function () {
+  event.preventDefault()
+  $(this).parent("ul").parent("div").parent("li").parent("ul").find(".changeAble").attr("contenteditable", "true")
   $(this).parent("ul").parent("div").parent("li").parent("ul").find(".changeAble").css({
     "border": "1px solid black"
   }
-    )
-    $(this).parent("ul").parent("div").parent("li").find("img").css("display","none")
-    $(this).parent("ul").parent("div").parent("li").find(".done").css("display","block")
+  )
+  $(this).parent("ul").parent("div").parent("li").find("img").css("display", "none")
+  $(this).parent("ul").parent("div").parent("li").find(".done").css("display", "block")
 });
 
-$(document).on("click",".done",function(){
-  $(this).css("display","none")
-  $(this).parent("li").find("img").css("display","inline-block")
+$(document).on("click", ".done", function () {
+  event.preventDefault()
+  $(this).css("display", "none")
+  $(this).parent("li").find("img").css("display", "inline-block")
   $(this).parent("li").parent("ul").find(".changeAble").css({
-    "border":"none"
+    "border": "none"
   })
-  $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable","false")
+  $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable", "false")
+  $(this).parent("li").parent("ul").find(".changeAble")
+  let id = $(this).parent("li").parent("ul").find(".id").text()
+  let name = $(this).parent("li").parent("ul").find(".name").text()
+  let stock = $(this).parent("li").parent("ul").find(".stock").text()
+  let price = $(this).parent("li").parent("ul").find(".price").text()
+  // console.log(id)
+  // console.log(name)
+  // console.log(stock)
+  // console.log(price)
+  // var obj = {
+  //   id: id,
+  //   name: name,
+  //   stock: stock,
+  //   price: price
+  // }
+  // var myJSON = JSON.stringify(obj)
+  // localStorage.setItem("json", myJSON)
 });
 
-$(document).on("click",".trash-image",function(){
+$(document).on("click", ".trash-image", function () {
+  event.preventDefault()
   $(this).parent("li").parent("ul").remove()
 });
 
-$(".add-image").click(function(){
+$(".add-image").click(function () {
+  event.preventDefault()
   $(".medicines").append(`
   
   <ul class="medicine-item">
-                        <li class="changeAble" contenteditable="true">
-                            
-                        </li>
-                        <li class="changeAble" contenteditable="true">
-                            
-                        </li>
-                        <li class="changeAble" contenteditable="true">
-                            
-                        </li>
-                        <li class="changeAble amount" contenteditable="true">
-                            
-                        </li>
-                        <li class="changeAble" contenteditable="true">
-                            
-                        </li>
+                        <li class="changeAble id" contenteditable="true"></li>
+                        <li class="changeAble name" contenteditable="true"></li>
+                        <li class="changeAble stock" contenteditable="true"></li>
+                        <li class="changeAble amount" contenteditable="true"></li>
+                        <li class="changeAble price" contenteditable="true"></li>
                         <li>
                             <div class="done">Done</div>
                             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;"">
@@ -147,23 +160,20 @@ $(".add-image").click(function(){
                             <img src="./images/trash.png" class="trash-image" alt="">
                         </li>
                     </ul>
-  `)  
-  let lastChild = document.querySelectorAll(".changeAble").length 
-  console.log(lastChild )
-  console.log(document.querySelectorAll(".changeAble").length  -4 )
-  for (let i = lastChild-5; i < lastChild ; i++) {
-    document.querySelectorAll(".changeAble")[i].setAttribute("style","border: 1px solid black")
+  `)
+  let lastChild = document.querySelectorAll(".changeAble").length
+  console.log(lastChild)
+  console.log(document.querySelectorAll(".changeAble").length - 4)
+  for (let i = lastChild - 5; i < lastChild; i++) {
+    document.querySelectorAll(".changeAble")[i].setAttribute("style", "border: 1px solid black")
   }
   console.log(document.querySelectorAll(".done").length)
-
-  document.querySelectorAll(".done")[document.querySelectorAll(".done").length-1].setAttribute("style","display:block")
-  document.querySelectorAll(".more-button")[document.querySelectorAll(".more-button").length-1].setAttribute("style","display:none")
-
+  document.querySelectorAll(".done")[document.querySelectorAll(".done").length - 1].setAttribute("style", "display:block")
+  document.querySelectorAll(".more-button")[document.querySelectorAll(".more-button").length - 1].setAttribute("style", "display:none")
   checkAccount()
-
 });
-function reset(){
+function reset() {
   window.localStorage.clear();
-  document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
+  document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
 }
 
