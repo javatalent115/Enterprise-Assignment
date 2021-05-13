@@ -2,9 +2,12 @@ function checkAccount(){
 if(localStorage.getItem("accountType") == "guest"){
   $("li:nth-child(6)").css("display","none")
   $("li:nth-child(7)").css("display","none")
+  $(".add-image").css("display","none")
+
 }
 else if(localStorage.getItem("accountType") == "account"){
   $("li:nth-child(6)").css("display","none")
+  $(".add-image").css("display","none")
 }
 else{
   $(".amount").css("display","none")
