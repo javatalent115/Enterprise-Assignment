@@ -1,6 +1,8 @@
-let count = 0;
+document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
 //if add to cart btn clicked
 $('.cart-btn').on('click', function () {
+  let count = localStorage.getItem("cart");
+  document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
   let cart = $('.cart-nav');
   // find the img of that card which button is clicked by user
   let imgtodrag = $(this).parent('li').find("img").eq(0);
@@ -24,7 +26,8 @@ $('.cart-btn').on('click', function () {
 
     setTimeout(function () {
       count++;
-      $(".cart-nav .item-count").text(count);
+      localStorage.setItem("cart",count)
+      $(".cart-nav .item-count").text(localStorage.getItem("cart"));
     }, 1500);
 
     imgclone.animate({
@@ -36,24 +39,20 @@ $('.cart-btn').on('click', function () {
   }
 });
 
-localStorage.setItem("more-button-submenu-visible", false)
 var length = document.querySelectorAll(".more-button-submenu-wrapper")
 for (let i = 0; i < length.length; i++) {
   document.querySelectorAll(".more-button-submenu-wrapper")[i].setAttribute("style", "display:none")
 }
 $(".more-button").click(function () {
-  if (localStorage.getItem("more-button-submenu-visible") == "true") {
-    localStorage.setItem("more-button-submenu-visible", false)
+  if ($(this).parent("li").find(".more-button-submenu-wrapper").css("display") == "block") {
     $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "none")
   }
   else {
-    localStorage.setItem("more-button-submenu-visible", true)
     $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "block")
   }
 });
 
 $(".more-button-submenu-item").click(function (){
-    localStorage.setItem("more-button-submenu-visible", false)
     $(this).parent("ul").parent("div").css("display", "none")
 });
 
@@ -78,6 +77,10 @@ $(".done").click(function(){
   $(this).parent("li").parent("ul").find(".changeAble").css({
     "border":"none"
   })
-  $(this).parent("li").find(".changeAble").attr("contenteditable","false")
+  $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable","false")
 });
 
+function reset(){
+  window.localStorage.clear();
+  document.querySelector(".item-count").innerHTML =parseInt(0+localStorage.getItem("cart"))
+}

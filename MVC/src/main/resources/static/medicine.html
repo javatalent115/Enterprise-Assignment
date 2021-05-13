@@ -346,6 +346,11 @@
             min-width: 16.66px;
         }
 
+        .trash-image{
+            max-width: 20px;
+            margin-bottom: 4px;
+            display: none;
+        }
         .more-button-submenu-wrapper {
             position: absolute;
             display: none;
@@ -429,6 +434,7 @@
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                            <img src="./images/trash.png" class="trash-image" alt="">
                         </li>
                     </ul>
                     <ul class="medicine-item">
@@ -463,6 +469,7 @@
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                            <img src="./images/trash.png" class="trash-image" alt="">
                         </li>
                     </ul>
                     <ul class="medicine-item">
@@ -497,6 +504,7 @@
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                            <img src="./images/trash.png" class="trash-image" alt="">
                         </li>
                     </ul>
                 </div>
@@ -532,6 +540,8 @@
                 <script src="script.js"></script>
             </div>
         </div>
+    <button style="z-index: 9999;" onclick="reset()">Reset localStorage</button>
+
     </div>
 
     <!-- Modal  -->
@@ -656,7 +666,7 @@
                 </div>
                 <div class="modal-footer"
                     style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px;">
-                    <button class="`" data-bs-dismiss="modal" aria-label="Close">Done</button>
+                    <button class="done-button" data-bs-dismiss="modal" aria-label="Close">Done</button>
                 </div>
             </div>
         </div>
