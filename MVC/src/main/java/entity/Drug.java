@@ -146,7 +146,7 @@ public class Drug implements Comparable {
 
     @Override
     public String toString() {
-        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ stock + " -- "+ producers.getId();
+        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ stock +" -- "+ money +" -- " + producers.getId();
     }
 
     public String getName() {

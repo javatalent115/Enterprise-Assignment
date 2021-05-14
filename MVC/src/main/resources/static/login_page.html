@@ -189,7 +189,17 @@
                     }
                     else {
                         localStorage.setItem("accountType", result[0].toString());
-                        location.href = "http://localhost:8080/home-page.html"
+                        console.log(localStorage.getItem("currentPage"))
+                        if(localStorage.getItem("currentPage") == "homePage"){
+                            location.href = "http://localhost:8080/home-page.html"
+                        }
+                        else if(localStorage.getItem("currentPage")=="medicinePage"){
+                            console.log("hello")
+                            location.href = "http://localhost:8080/medicine.html"
+                        }
+                        else if(localStorage.getItem("currentPage") == "cartPage"){
+                            location.href = "http://localhost:8080/cart.html"
+                        }
                     }
                     return data;
                 }

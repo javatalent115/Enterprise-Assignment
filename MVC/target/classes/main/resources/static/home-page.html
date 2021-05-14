@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 </head>
+<script>
+    localStorage.setItem("currentPage","homePage")
+</script>
 <style>
     .container-fluid{
         position: relative;
@@ -18,7 +23,7 @@
         content: "";
         background-repeat: no-repeat;  
         background-size: 100% 100%;
-        background:url(/images/home-background.jpg);
+        background:url("./images/home-background.jpg");
         position: absolute;
         top: 0;
         bottom: 0;
@@ -136,9 +141,9 @@
         position: relative;
         padding: 80px 140px;
         word-wrap: break-word;
-        top: -62px;
-        z-index: -1;
-        margin: 0 8px;
+        
+        margin: 25px 25px;
+        
         border-radius: 15px;
         box-shadow: 5px 10px 10px #aaa;
     }
@@ -249,118 +254,279 @@
         background-color: DodgerBlue !important;
         color: #ffffff;
     }
+    .slide-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+    }
+    .carousel-item{
+    }
+    .slide-img{
+    width: 20%;
+}
+.carousel-control-next-icon {
+    background-image: url("images/arrow-right.png");
+}
+.carousel-control-prev-icon {
+    background-image: url("images//arrow-left.png");
+}
 </style>
 <body>
     <div class="container-fluid">
         <nav class="nav-bar">
             <ul>
                 <li class="nav-item">
+                    <a href="home-page.html">Home Page</a>
+                </li>
+                <li class="nav-item">
                     <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">About</a>
                 </li>
                 <li class="nav-item">
-                    <a href="">Medicine</a> 
+                    <a href="medicine.html">Medicine</a> 
                 </li>
                 <li class="nav-item">
                     <a href="cart.html"> Cart</a>
                 </li>
-                <li class="nav-item">
-                    <a href="login_page.html">Sign-in</a>
+                <li class="nav-item sign">
+                    <a href="login_page.html" id ="sign-in">Sign-in</a>
+                    <a href="" id ="sign-out" >Sign-out</a>
                 </li>
             </ul>
         </nav>
         <div class="header">
             Welcome to <br> Medicine <br> Online
         </div>
-        <div class="search-wrapper">
-                <div class="search-input">
-                    <div style="padding-left:3px;font-size:20px">Search Medicine</div>
-                    <div class="autocomplete">
-                        <div style="display: flex; align-items: center; gap: 20px;"><input type="text" name="medicine" id="medicine">
-                            <div>
-                                <button>
-                                </button>
-                            </div></div>
-
-                    </div>
-
+    </div>
+    <div class="information-medicine-container">
+        <div class="information-medicine-wrapper">
+            <div class="information-medicine-header">
+                 <span>Most wanted medicine</span> 
+            </div>
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                      <div class="slide-wrapper">
+                        <img class="slide-img" src="./images/panaldo.png"  alt="...">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                      </div>
+                   
+                  </div>
+                  <div class="carousel-item">
+                    <div class="slide-wrapper">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                      </div>
+                  </div>
+                  <div class="carousel-item">
+                    <div class="slide-wrapper">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                        <img class="slide-img" src="./images/cart.png"  alt="...">
+                      </div>
+                  </div>
                 </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
         </div>
-        <div class="information-medicine-container">
-            <div class="information-medicine-wrapper">
-                <div class="information-medicine-header">
-                     <span>Infomation of medicine</span> 
+    </div>
+    <style>
+        .feature-wrapper{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .free-delivery, .best-service-description,.shopping-online-description{
+            display:flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .feature-wrapper img{
+            background-size: 100% 100%;
+            height: 55px;
+        }
+        .feature-wrapper span{
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .news{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .news{
+            font-weight: bold;
+        }
+        .news span{
+            flex-grow: 3;
+            font-size: 70px;
+
+        }
+        .news-item-wrapper{
+            display: flex;
+            width: 100% ;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            
+        }
+        .news-item{
+            display: flex;  
+            flex-direction:column;
+            width: 250px;
+            height: 300px;
+            text-align: center;
+            position: relative;
+        }
+        .news-item-date{
+            border: blue 1px solid;
+            background:white;
+            width: 50px;
+            height: 50px;
+            color: blue;
+            position: absolute;
+            top: 15px;
+            left: -20px;
+        }
+    </style>
+    <div class="feature-wrapper">
+        <div class="free-delivery">
+            <img src="./images/free-delivery.png" alt="">
+            <span>Free delivery</span>
+        </div>
+        <div class="best-service-description">
+            <img src="./images/best-service.png" alt="">
+            <span>Best service description</span>
+        </div>
+        <div class="shopping-online-description">
+            <img src="./images/cart-feature.png" alt="">
+            <span>Shopping online description</span>
+        </div>
+    </div>
+    <div class="picture">
+        <img src="./images/picture.png" alt="" style="background-size: 100% 100%;width: 90%;display:block;
+        margin: 0 auto;">
+    </div>
+    <div class="news">
+        <span>News</span>
+            <div class="news-item-wrapper">
+                <div class="news-item">
+                    <img src="./images/news-1.png" alt="">
+                    <p>News discover about vaccine to Covid 19</p>
+                    <div class="news-item-date">30<br>th4</div>
                 </div>
-                <div class="medicine-detail-wrapper">
-                    <ul class="medicine-detail" style="width:12%">
-                        <li> 
-                            ID
-                        </li>
-                        <li>
-                            1
-                        </li>
-                        <li>
-                            2
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail" style="width:18%">
-                        <li>
-                            Name
-                        </li>
-                        <li> 
-                            Panadol
-                        </li>
-                        <li> 
-                            Alphachoay
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail" style="width:34%;text-align:center;  ">
-                        <li>
-                            Ingridient
-                        </li>
-                        <li> 
-                            500 mg Paracetamol.
-                            – 65 mg Caffein
-                        </li>
-                        <li> 
-                            Chymotrypsin 21
-                            microkatals.
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail"style="width:18%; text-align:center">
-                        <li>
-                            Amount
-                        </li>
-                        <li> 
-                            1 pack
-                        </li>
-                        <li> 
-                            1 pack
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail"style="width:12%;text-align:center">
-                        <li>
-                            Price
-                        </li>
-                        <li> 
-                            1$
-                        </li>
-                        <li> 
-                            1$
-                        </li>
-                    </ul>
-                    <ul class="medicine-detail" style="width: 5%;">
-                        <li>
-                            <img src="./images/cart.png" alt="">
-                        </li>
-                        <li>
-                            <img src="./images/cart.png" alt="">
-                        </li>
-                        <li>
-                            <img src="./images/cart.png" alt="">
-                        </li>
-                    </ul>
+                <div class="news-item">
+                    <img src="./images/news-2.png" alt="">
+                    <p>Cancer can cure?</p>
+                    <div class="news-item-date">30<br>th4</div>
+                </div>
+                <div class="news-item">
+                    <img src="./images/news-3.png" alt="">
+                    <p>Did you eat enough vegetable</p>
+                    <div class="news-item-date">30<br>th4</div>
                 </div>
             </div>
+    </div>
+    <style>
+        .footer{
+            height: 250px;
+            background-color: grey;
+            display: flex;
+            color: white;
+            justify-content: space-around;
+        }
+        .icon-wrapper{
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-item-1 h1,.footer-item-2 h1, .footer-item-3 h1  {
+            position: relative;
+        }
+        .footer-item-1 h1::before,.footer-item-2 h1::before,.footer-item-3 h1::before{
+        content: "";
+        background: white;
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: -5px;
+        }
+    .contact{
+        display: flex;
+        gap: 15px;
+        justify-content: left;
+        align-items: center;
+        font-size: 40px;
+    }
+    
+    .keyword{
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: left;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .keyword-item{
+        width: fit-content;
+        background-color: #999;
+        border: 2px solid white;
+        padding: 0px 10px;
+        font-size: 25px;
+    }
+    </style>
+    <div class="footer">
+        <div class="footer-item-1">
+            <h1>Connect with us</h1>
+            <div class="icon-wrapper">
+                <div class="icon">
+                    <a href=""><img src="./images/icon-1.png" alt=""></a>
+                </div>
+                <div class="icon">
+                    <a href=""><img src="./images/icon-2.png" alt=""></a></div>
+                <div class="icon">
+                    <a href=""><img src="./images/icon-3.png" alt=""></a></div>
+            </div>
+        </div>
+        <div class="footer-item-2">
+            <h1>Hotline (7h-22h)</h1>
+            <div class="contact">
+                <img src="./images/phone-call.png" alt="">
+                <p>083-6598249</p>
+            </div>
+        </div>
+        <div class="footer-item-3">
+            <h1>Keyword</h1>
+            <div class="keyword">
+                <div class="keyword-item">
+                    Pharmacy
+                </div>
+                <div class="keyword-item">
+                    Drug
+                </div>
+                <div class="keyword-item">
+                    Store
+                </div>
+                <div class="keyword-item">
+                    Health
+                </div>
+                <div class="keyword-item">
+                    Health Care
+                </div>  
+            </div>
+            
         </div>
     </div>
 <!-- Modal  -->
@@ -422,130 +588,7 @@
             </div>
         </div>
         </div>
-</div>
-    <script>
-        let name = [];
-        async function autocomplete(inp, arr) {
-            /*the autocomplete function takes two arguments,
-            the text field element and an array of possible autocompleted values:*/
-            var currentFocus;
-            /*execute a function when someone writes in the text field:*/
-            inp.addEventListener("input", function (e) {
-                var a, b, i, val = this.value;
-                /*close any already open lists of autocompleted values*/
-                closeAllLists();
-                if (!val) {
-                    return false;
-                }
-                currentFocus = -1;
-                /*create a DIV element that will contain the items (values):*/
-                a = document.createElement("DIV");
-                a.setAttribute("id", this.id + "autocomplete-list");
-                a.setAttribute("class", "autocomplete-items");
-                /*append the DIV element as a child of the autocomplete container:*/
-                this.parentNode.appendChild(a);
-                /*for each item in the array...*/
-                for (i = 0; i < arr.length; i++) {
-                    /*check if the item starts with the same letters as the text field value:*/
-                    if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                        /*create a DIV element for each matching element:*/
-                        b = document.createElement("DIV");
-                        /*make the matching letters bold:*/
-                        b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                        b.innerHTML += arr[i].substr(val.length);
-                        /*insert a input field that will hold the current array item's value:*/
-                        b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                        /*execute a function when someone clicks on the item value (DIV element):*/
-                        b.addEventListener("click", function (e) {
-                            /*insert the value for the autocomplete text field:*/
-                            inp.value = this.getElementsByTagName("input")[0].value;
-                            /*close the list of autocompleted values,
-                            (or any other open lists of autocompleted values:*/
-                            closeAllLists();
-                        });
-                        a.appendChild(b);
-                    }
-                }
-            });
-            /*execute a function presses a key on the keyboard:*/
-            inp.addEventListener("keydown", function (e) {
-                var x = document.getElementById(this.id + "autocomplete-list");
-                if (x) x = x.getElementsByTagName("div");
-                if (e.keyCode == 40) {
-                    /*If the arrow DOWN key is pressed,
-                    increase the currentFocus variable:*/
-                    currentFocus++;
-                    /*and and make the current item more visible:*/
-                    addActive(x);
-                } else if (e.keyCode == 38) { //up
-                    /*If the arrow UP key is pressed,
-                    decrease the currentFocus variable:*/
-                    currentFocus--;
-                    /*and and make the current item more visible:*/
-                    addActive(x);
-                } else if (e.keyCode == 13) {
-                    /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                    e.preventDefault();
-                    if (currentFocus > -1) {
-                        /*and simulate a click on the "active" item:*/
-                        if (x) x[currentFocus].click();
-                    }
-                }
-            });
-
-            function addActive(x) {
-                /*a function to classify an item as "active":*/
-                if (!x) return false;
-                /*start by removing the "active" class on all items:*/
-                removeActive(x);
-                if (currentFocus >= x.length) currentFocus = 0;
-                if (currentFocus < 0) currentFocus = (x.length - 1);
-                /*add class "autocomplete-active":*/
-                x[currentFocus].classList.add("autocomplete-active");
-            }
-
-            function removeActive(x) {
-                /*a function to remove the "active" class from all autocomplete items:*/
-                for (var i = 0; i < x.length; i++) {
-                    x[i].classList.remove("autocomplete-active");
-                }
-            }
-
-            function closeAllLists(elmnt) {
-                /*close all autocomplete lists in the document,
-                except the one passed as an argument:*/
-                var x = document.getElementsByClassName("autocomplete-items");
-                for (var i = 0; i < x.length; i++) {
-                    if (elmnt !== x[i] && elmnt !== inp) {
-                        x[i].parentNode.removeChild(x[i]);
-                    }
-                }
-            }
-
-            /*execute a function when someone clicks in the document:*/
-            document.addEventListener("click", function (e) {
-                closeAllLists(e.target);
-            });
-            let res = await fetch('http://localhost:8080/api/getDrugs', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-            if (res.ok) {
-                let data = await res.json();
-                let result = Object.values(data);
-                for (let i = 0; i < result.length; i++) {
-                    name.push(result[i].split(" -- ")[1]);
-                }
-            }
-        }
-
-
-        /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-        autocomplete(document.getElementById("medicine"), name);
-    </script>
+    </div>
+    <script src="./sign-in.js"></script>
 </body>
-
 </html>

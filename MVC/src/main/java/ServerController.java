@@ -136,9 +136,9 @@ public class ServerController {
     public Map<String, String> isValid(@RequestBody Map<String, String> user){
         Map<String, String> map = new HashMap<>();
         if (user.get("username").equals("user123") && user.get("password").equals("user123")){
-            map.put("0", "customer");
+            map.put("0", "user");
         }
-        else if (user.get("username").equals("admin321") && user.get("password").equals("admin321")){
+        else if (user.get("username").equals("admin123") && user.get("password").equals("admin123")){
             map.put("0", "admin");
         }
         else map.put("0", "invalid");

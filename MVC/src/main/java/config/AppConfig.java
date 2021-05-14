@@ -40,9 +40,9 @@ public class AppConfig {
 
         //Change the port-number (9999) to your port-number, also change username and password if there is a difference
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:9999/postgres");
+        dataSource.setUrl("jdbc:postgresql://localhost:7777/postgres");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("baobao");
+        dataSource.setPassword("0989172935");
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
