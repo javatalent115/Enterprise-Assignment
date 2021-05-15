@@ -69,21 +69,21 @@ $(document).on("click", ".cart-btn", function () {
       count++;
       localStorage.setItem("cart", count)
       $(".cart-nav .item-count").text(localStorage.getItem("cart"));
-      let id = $(this).parent("li").parent("ul").find(".id").text()
-      let name = $(this).parent("li").parent("ul").find(".name").text()
-      let stock = $(this).parent("li").parent("ul").find(".stock").text()
-      let price = $(this).parent("li").parent("ul").find(".price").text()
-      var obj = {
-        id: id,
-        name: name,
-        stock: stock,
-        price: price
-      }
-      listItem.push(obj)
-      var myJSON = JSON.stringify(listItem)
-      localStorage.setItem("cart-item", myJSON)
-    }, 1500);
 
+    }, 1500);
+    let id = $(this).parent("li").parent("ul").find(".id").text()
+    let name = $(this).parent("li").parent("ul").find(".name").text()
+    let amount = $(this).parent("li").parent("ul").find(".amount").text()
+    let price = $(this).parent("li").parent("ul").find(".price").text()
+    var obj = {
+      id: id,
+      name: name,
+      amount: amount,
+      price: price
+    }
+    listItem.push(obj)
+    var myJSON = JSON.stringify(listItem)
+    localStorage.setItem("cart-item", myJSON)
     imgclone.animate({
       'width': 0,
       'height': 0
@@ -91,7 +91,6 @@ $(document).on("click", ".cart-btn", function () {
       $(this).detach()
     });
   }
-
 });
 
 var length = document.querySelectorAll(".more-button-submenu-wrapper")
@@ -174,7 +173,7 @@ $(".add-image").click(function () {
                         <li class="changeAble id" contenteditable="true"></li>
                         <li class="changeAble name" contenteditable="true"></li>
                         <li class="changeAble stock" contenteditable="true"></li>
-                        <li class="changeAble amount" contenteditable="true"></li>
+                        <li class="changeAble amount" contenteditable="true"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
                         <li class="changeAble price" contenteditable="true"></li>
                         <li>
                             <div class="done">Done</div>
@@ -239,7 +238,7 @@ async function addAllItem() {
     <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
     <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
     <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-    <li class="changeAble amount">1 pack</li>
+    <li class="changeAble amount"><div>4</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
     <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
     <li>
         <div class="done">Done</div>
@@ -300,7 +299,7 @@ $(document).on("click", ".search-button-2", function () {
         <li class="changeAble id">${data.split("\n")[index].split("&&")[0]}</li>
         <li class="changeAble name">${data.split("\n")[index].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[index].split("&&")[9]}</li>
-        <li class="changeAble amount">1 pack</li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[index].split("&&")[10]}</li>
         <li>
             <div class="done">Done</div>
@@ -532,6 +531,12 @@ $(document).on("click", ".page", function () {
     checkAccount()
   }
 });
+
+$(document).on("click",".increase-amount-image",function(){
+  let amount = parseInt($(this).parent("li").find("div").text())
+  $(this).parent("li").find("div").html(amount+1)
+  console.log($(this).parent("li").find("div").text())
+})
 
 
 

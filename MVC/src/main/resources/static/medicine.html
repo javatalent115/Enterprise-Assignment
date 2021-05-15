@@ -403,7 +403,21 @@
 
         .add-image {
             cursor: pointer;
-            max-width: 25px
+            max-width: 30px
+        }
+
+        .increase-amount-image{
+            cursor: pointer;
+            max-width: 25px;
+        }
+        .amount{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .amount div{
+            margin-left: 36px;
         }
     </style>
     <div class="information-medicine-container">
@@ -447,7 +461,7 @@
                         <li class="changeAble id" contenteditable="true">1</li>
                         <li class="changeAble name" contenteditable="true">2</li>
                         <li class="changeAble stock" contenteditable="true">3</li>
-                        <li class="changeAble amount" contenteditable="true">4</li>
+                        <li class="changeAble amount" contenteditable="true"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
                         <li class="changeAble price" contenteditable="true">5</li>
                         <li>
                             <div class="done">Done</div>
