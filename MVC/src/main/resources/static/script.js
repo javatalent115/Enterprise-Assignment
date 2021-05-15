@@ -27,14 +27,15 @@ $("#medicine2").on('keyup', function (e) {
   }
 });
 
+let pages = localStorage.getItem('pages')
+  ? JSON.parse(localStorage.getItem('pages'))
+  : 161
 
 function intinialize() {
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
   checkAccount();
   // checkPagination()
 }
-intinialize()
-
 //Initialize cart-item
 let listItem = localStorage.getItem('cart-item')
   ? JSON.parse(localStorage.getItem('cart-item'))
@@ -163,7 +164,31 @@ $(document).on("click", ".done", function () {
 $(document).on("click", ".trash-image", function () {
   event.preventDefault()
   $(this).parent("li").parent("ul").remove()
+  deleteDrug($(this).parent("li").parent("ul").find(".id").text())
 });
+
+async function deleteDrug(id){
+  try {
+      let res = await fetch('http://localhost:8080/api/deleteDrug', {
+          method: 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          body: id
+      });
+      if (res.ok) {
+          let data = await res.json();
+          let result = Object.values(data);
+          console.log(result[0]);
+          if (result[0] !=="failed"){
+              await addAllItem()
+          }
+          return data;
+      }
+  }catch (e) {}
+  return 404;
+}
 
 $(".add-image").click(function () {
   event.preventDefault()
@@ -210,131 +235,6 @@ function reset() {
   window.localStorage.clear();
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
 }
-
-
-async function addAllItem() {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
-  let all = "";
-  if (res.ok) {
-    let data = await res.json();
-    let result = Object.values(data);
-    for (let i = 0; i < result.length; i++) {
-      name.push(result[i].split(" -- ")[1]);
-      all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
-        + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
-    }
-  }
-  localStorage.setItem("data", all);
-  let wrapper = document.querySelector(".medicines")
-  let data = localStorage.getItem("data")
-  for (let i = 0; i < 10; i++) {
-    wrapper.innerHTML += `<ul class="medicine-item">
-    <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-    <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-    <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-    <li class="changeAble amount"><div>4</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-    <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-    <li>
-        <div class="done">Done</div>
-        <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-        <div class="more-button-submenu-wrapper">
-            <ul class="more-button-submenu">
-                <li class="more-button-submenu-item quick-change">
-                    Quick change
-                </li>
-                <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                    data-bs-target="#modifyMedicine">
-                    Advance
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-        <img src="./images/trash.png" class="trash-image" alt="">
-    </li>
-</ul>`
-  }
-  checkAccount();
-}
-
-addAllItem()
-
-function removeAllItem() {
-  let x = document.querySelectorAll(".medicine-item").length - 1
-  for (let i = x; i > 0; i--) {
-    document.querySelectorAll(".medicine-item")[i].remove()
-  }
-}
-
-$(document).on("click", ".search-button-2", function () {
-  let searchName = document.getElementById("medicine2").value
-  document.getElementById("medicine2").value = ""
-  if (searchName == 0) {
-    removeAllItem()
-    addAllItem()
-  }
-  else {
-    let data = localStorage.getItem("data")
-    removeAllItem()
-    let index = 0
-    let found = false
-    let lastItem = data.split("\n").length
-    for (let i = 0; i < lastItem; i++) {
-      if (searchName == data.split("\n")[i].split("&&")[1]) {
-        index = i
-        found = true
-        break
-      }
-    }
-    if (found) {
-      let wrapper = document.querySelector(".medicines")
-      wrapper.innerHTML += `<ul class="medicine-item">
-        <li class="changeAble id">${data.split("\n")[index].split("&&")[0]}</li>
-        <li class="changeAble name">${data.split("\n")[index].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[index].split("&&")[9]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[index].split("&&")[10]}</li>
-        <li>
-            <div class="done">Done</div>
-            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-            <div class="more-button-submenu-wrapper">
-                <ul class="more-button-submenu">
-                    <li class="more-button-submenu-item quick-change">
-                        Quick change
-                    </li>
-                    <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                        data-bs-target="#modifyMedicine">
-                        Advance
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="">
-        </li>
-    </ul>`
-      checkAccount()
-    }
-    else {
-      console.log("Can not find drug")
-    }
-  }
-});
-
-
-
-/* * * * * * * * * * * * * * * * *
- * Pagination
- * javascript page navigation
- * * * * * * * * * * * * * * * * */
 
 var Pagination = {
 
@@ -479,20 +379,168 @@ var Pagination = {
 
 var init = function () {
   Pagination.Init(document.getElementById('pagination'), {
-    size: 160, // pages size
+    size: pages, // pages size
     page: 1,  // selected page
     step: 2   // pages before and after current
   });
 };
 
-document.addEventListener('DOMContentLoaded', init, false);
-let page = 0
+async function addAllItem() {
+  let res = await fetch('http://localhost:8080/api/getDrugs', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
+  let all = "";
+  if (res.ok) {
+    let data = await res.json();
+    let result = Object.values(data);
+    for (let i = 0; i < result.length; i++) {
+      name.push(result[i].split(" -- ")[1]);
+      all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+        + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+    }
+  }
+  localStorage.setItem("data", all);
+  removeAllItem()
+  let wrapper = document.querySelector(".medicines")
+  let data = localStorage.getItem("data")
+  for (let i = 0; i < 10; i++) {
+    wrapper.innerHTML += `<ul class="medicine-item">
+    <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
+    <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
+    <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+    <li class="changeAble amount"><div>4</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+    <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+    <li>
+        <div class="done">Done</div>
+        <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+        <div class="more-button-submenu-wrapper">
+            <ul class="more-button-submenu">
+                <li class="more-button-submenu-item quick-change">
+                    Quick change
+                </li>
+                <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                    data-bs-target="#modifyMedicine">
+                    Advance
+                </li>
+            </ul>
+        </div>
+    </li>
+    <li>
+        <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+        <img src="./images/trash.png" class="trash-image" alt="">
+    </li>
+</ul>`
+  }
+  checkAccount();
+  pages = localStorage.getItem("data").split("\n").length
+  console.log(pages)
+  pages = checkNumberIsFloat(pages/10)
+  localStorage.setItem("pages",pages)
+}
+addAllItem()
+
+document.addEventListener('DOMContentLoaded', init, true);
+
+
+function removeAllItem() {
+  let x = document.querySelectorAll(".medicine-item").length - 1
+  for (let i = x; i > 0; i--) {
+    document.querySelectorAll(".medicine-item")[i].remove()
+  }
+}
+
+$(document).on("click", ".search-button-2", function () {
+  let searchName = document.getElementById("medicine2").value
+  document.getElementById("medicine2").value = ""
+  if (searchName == 0) {
+    removeAllItem()
+    addAllItem()
+  }
+  else {
+    let data = localStorage.getItem("data")
+    removeAllItem()
+    let index = 0
+    let found = false
+    let lastItem = data.split("\n").length
+    for (let i = 0; i < lastItem; i++) {
+      if (searchName == data.split("\n")[i].split("&&")[1]) {
+        index = i
+        found = true
+        break
+      }
+    }
+    if (found) {
+      let wrapper = document.querySelector(".medicines")
+      wrapper.innerHTML += `<ul class="medicine-item">
+        <li class="changeAble id">${data.split("\n")[index].split("&&")[0]}</li>
+        <li class="changeAble name">${data.split("\n")[index].split("&&")[1]}</li>
+        <li class="changeAble stock">${data.split("\n")[index].split("&&")[9]}</li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+        <li class="changeAble price">${data.split("\n")[index].split("&&")[10]}</li>
+        <li>
+            <div class="done">Done</div>
+            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+            <div class="more-button-submenu-wrapper">
+                <ul class="more-button-submenu">
+                    <li class="more-button-submenu-item quick-change">
+                        Quick change
+                    </li>
+                    <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                        data-bs-target="#modifyMedicine">
+                        Advance
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+            <img src="./images/trash.png" class="trash-image" alt="">
+        </li>
+    </ul>`
+      checkAccount()
+    }
+    else {
+      console.log("Can not find drug")
+    }
+  }
+
+});
+
+intinialize()
+
+
+/* * * * * * * * * * * * * * * * *
+ * Pagination
+ * javascript page navigation
+ * * * * * * * * * * * * * * * * */
+
+
+function checkNumberIsFloat(x) {
+
+  let regexPattern = /^-?[0-9]+$/;
+  
+  // check if the passed number is integer or float
+  let result = regexPattern.test(x);
+  
+  if(result) {
+      return x
+  }
+  else {
+      return parseInt(x)+1
+  }
+}
+
+
 
 $(document).on("click", ".page", function () {
+  let page = 0
   page = document.querySelector(".current").innerHTML
-  console.log(page)
-
   let itemDisplayAtATime = 10
+  removeAllItem()
   let data = localStorage.getItem("data")
   let itemIndex = (page - 1) * itemDisplayAtATime
   let wrapper = document.querySelector(".medicines")

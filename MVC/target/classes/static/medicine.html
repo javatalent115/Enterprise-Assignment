@@ -15,7 +15,7 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
 </head>
-<script>localStorage.setItem("currentPage","medicinePage")</script>
+<script>localStorage.setItem("currentPage", "medicinePage")</script>
 <style>
     body {
         height: 1px;
@@ -313,9 +313,10 @@
             position: relative;
         }
 
-        .medicine-item:first-child{
+        .medicine-item:first-child {
             font-weight: bold;
         }
+
         .medicine-item {
             display: flex;
             list-style: none;
@@ -363,7 +364,7 @@
         .more-button-submenu-wrapper {
             position: absolute;
             display: none;
-            margin-left: -40px;
+            margin-left: -30px;
             border: 1px black solid;
             border-radius: 2px;
         }
@@ -402,7 +403,21 @@
 
         .add-image {
             cursor: pointer;
-            max-width: 25px
+            max-width: 30px
+        }
+
+        .increase-amount-image{
+            cursor: pointer;
+            max-width: 25px;
+        }
+        .amount{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .amount div{
+            margin-left: 36px;
         }
     </style>
     <div class="information-medicine-container">
@@ -415,7 +430,7 @@
                     <div>
                         <img src="./images/add-image.png" class="add-image" alt="">
                     </div>
-                    <div class="autocomplete" >
+                    <div class="autocomplete">
                         <input type="text" id="medicine2" name="medicine" placeholder="Search medicine"
                             style="width: 300px;" autocomplete="on">
                     </div>
@@ -442,57 +457,111 @@
                             <img src="./images/trash.png" class="trash-image" alt="" style="visibility: hidden;">
                         </li>
                     </ul>
-                </div>
-                <style>
-                    .cart-wrapper {
-                        display: flex;
-                        width: 100%;
-                        justify-content: flex-end;
-                        margin: 25px 0px;
-                    }
-
-                    .cart-nav {
-                        background-color: #8ee9fd;
-                        border-radius: 10px;
-                        width: fit-content;
-                        display: flex;
-                        justify-content: space-evenly;
-                        padding: 13px 15px;
-                        width: 130px;
-                        font-size: 20px;
-                        font-weight: bold;
-                    }
-                </style>
-                <div class="cart-wrapper">
-                    <div class="cart-nav">
-                        <div class="icon">
-                            <span style="color: white;">Cart</span>
-                            <i class="fas fa-shopping-cart"></i>
-                        </div>
-                        <div class="item-count">0</div>
-                    </div>
-                </div>
-                <script src="script.js"></script>
             </div>
             <style>
-                .pagination{
+                .cart-wrapper {
                     display: flex;
+                    width: 100%;
                     justify-content: flex-end;
+                    margin: 25px 0px;
+                }
+
+                .cart-nav {
+                    background-color: #8ee9fd;
+                    border-radius: 10px;
+                    width: fit-content;
+                    display: flex;
+                    justify-content: space-evenly;
+                    padding: 13px 15px;
+                    width: 130px;
+                    font-size: 20px;
+                    font-weight: bold;
                 }
             </style>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-              </nav>
+            <div class="cart-wrapper">
+                <div class="cart-nav">
+                    <div class="icon">
+                        <span style="color: white;">Cart</span>
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="item-count">0</div>
+                </div>
+            </div>
         </div>
-        <button style="z-index: 9999;" onclick="reset()">Reset localStorage</button>
-        
+        <div id="pagination" class="paginations"></div>
     </div>
+    <button style="z-index: 9999;" onclick="reset()">Reset localStorage</button>
+    <a class="paginaiton-arrow" href=""><img src="./images/arrow-right.png" alt=""></a>
+    </div>
+
+    <style>
+        .paginaiton-arrow {
+            display: none;
+        }
+
+        #pagination {
+            display: inline-block;
+            vertical-align: middle;
+            padding: 1px 2px 4px 2px;
+            background-color: white;
+            width: 100%;
+            text-align: right;
+        }
+
+
+        #pagination a,
+        #pagination i {
+            display: inline-block;
+            vertical-align: middle;
+            width: 26px;
+            height: 26px;
+            color: black;
+            text-align: center;
+            font-size: 14px;
+            padding: 3px 0 2px 0;
+            
+        }
+
+
+        #pagination a {
+            margin: 0 2px 0 2px;
+            border-radius: 4px;
+            border: 1px solid #E3E3E3;
+            cursor: pointer;
+            box-shadow: inset 0 1px 0 0 #FFF, 0 1px 2px #666;
+            text-shadow: 0 1px 1px #FFF;
+            background-color: #E6E6E6;
+            background-image: -webkit-linear-gradient(top, #F3F3F3, #D7D7D7);
+            background-image: -moz-linear-gradient(top, #F3F3F3, #D7D7D7);
+            background-image: -ms-linear-gradient(top, #F3F3F3, #D7D7D7);
+            background-image: -o-linear-gradient(top, #F3F3F3, #D7D7D7);
+            background-image: linear-gradient(top, #F3F3F3, #D7D7D7);
+            text-decoration: none;
+
+        }
+
+        #pagination a img {
+            max-width: 13px;
+
+        }
+
+        #pagination i {
+            margin: 0 3px 0 3px;
+        }
+
+        #pagination a.current {
+            border: 1px solid #E9E9E9;
+            box-shadow: 0 1px 1px #999;
+            background-color: #DFDFDF;
+            background-image: -webkit-linear-gradient(top, #D0D0D0, #EBEBEB);
+            background-image: -moz-linear-gradient(top, #D0D0D0, #EBEBEB);
+            background-image: -ms-linear-gradient(top, #D0D0D0, #EBEBEB);
+            background-image: -o-linear-gradient(top, #D0D0D0, #EBEBEB);
+            background-image: linear-gradient(top, #D0D0D0, #EBEBEB);
+            text-decoration: none;
+        }
+    </style>
+
 
     <!-- Modal  -->
     <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -622,6 +691,7 @@
     </div>
     <script src="./auto-complete.js">
     </script>
+    <script src="script.js"></script>
 
 </body>
 

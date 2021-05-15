@@ -94,7 +94,7 @@ public class ServerController {
         return map;
     }
 
-    @PostMapping(value = "/api/sortDrugDes")
+    @GetMapping(value = "/api/sortDrugDes")
     public Map<String, String> getDrugsSortDes(){
         HashMap<String,String> map = new HashMap<>();
         List list =  Handler.getDrugSortDes();
