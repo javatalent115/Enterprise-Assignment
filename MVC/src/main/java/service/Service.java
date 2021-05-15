@@ -81,8 +81,16 @@ public class Service {
 
             }
         }
-        sessionFactory.getCurrentSession().save(drug);
-        result.add("success");
+        for (Object o : Handler.producers) {
+            Producers producers = (Producers) o;
+            if (producers.getId().equals(drug.getProducers().getId())) {
+                drug.setProducers(producers);
+                sessionFactory.getCurrentSession().save(drug);
+                result.add("success");
+                return result;
+            }
+        }
+        result.add("failed");
         return result;
     }
 
@@ -155,7 +163,7 @@ public class Service {
     public List getNOP (String producerID){
         List<String> result = new ArrayList<>();
         int count = 0;
-        for (Object o : Handler.producers) {
+        for (Object o : Handler.drugs) {
             Drug drug = (Drug) o;
             if (drug.getProducers().getId().equals(producerID)) {
                 count++;

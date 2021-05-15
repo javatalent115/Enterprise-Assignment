@@ -147,18 +147,7 @@ $(document).on("click", ".done", function () {
   let name = $(this).parent("li").parent("ul").find(".name").text()
   let stock = $(this).parent("li").parent("ul").find(".stock").text()
   let price = $(this).parent("li").parent("ul").find(".price").text()
-  // console.log(id)
-  // console.log(name)
-  // console.log(stock)
-  // console.log(price)
-  // var obj = {
-  //   id: id,
-  //   name: name,
-  //   stock: stock,
-  //   price: price
-  // }
-  // var myJSON = JSON.stringify(obj)
-  // localStorage.setItem("json", myJSON)
+  
 });
 
 $(document).on("click", ".trash-image", function () {
