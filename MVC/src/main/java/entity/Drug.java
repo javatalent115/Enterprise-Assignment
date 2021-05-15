@@ -44,6 +44,10 @@ public class Drug implements Comparable {
 
     public Drug(){}
 
+    public void setProducers(Producers producers) {
+        this.producers = producers;
+    }
+
     public Drug(String id, String name, String preparation, String packaging, String drugGroup, String dosage, String type, String ingredients, int money, int stock, Producers producers, String country){
         this.id = id;
         this.name = name;

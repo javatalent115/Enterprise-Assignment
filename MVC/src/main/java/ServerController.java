@@ -32,9 +32,9 @@ public class ServerController {
 
 
     @PostMapping(value = "/api/updateDrug")
-    public Map<String, String> updateDrug(@RequestBody String id, @RequestBody int money){
+    public Map<String, String> updateDrug(@RequestBody Map<String, String> data){
         Map<String, String> map = new HashMap<>();
-        map.put("0", (String) Handler.updateDrugMoney(id, money).get(0));
+        map.put("0", (String) Handler.updateDrugMoney(data.get("id"), Integer.parseInt(data.get("money"))).get(0));
         return map;
     }
 
@@ -50,16 +50,18 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/addDrug")
-    public Map<String, String> addDrug(@RequestBody Drug drug) {
+    public Map<String, String> addDrug(@RequestBody Map<String, String> data) {
+        Drug drug = new Drug(data.get("id"), data.get("name"), data.get("preparation"), data.get("packaging"), data.get("drugGroup"), data.get("dosage"), data.get("type")
+                , data.get("ingredients"), Integer.parseInt(data.get("money")), Integer.parseInt(data.get("stock")), new Producers(data.get("producers_id"),"name"), data.get("country"));
         Map<String, String> map = new HashMap<>();
         map.put("0", (String) Handler.saveDrug(drug).get(0));
         return map;
     }
 
     @PostMapping(value = "/api/addProducer")
-    public Map<String, String> addProducer(@RequestBody Producers producer){
+    public Map<String, String> addProducer(@RequestBody Map<String, String> data){
         Map<String, String> map = new HashMap<>();
-        map.put("0", (String) Handler.saveProducer(producer).get(0));
+        map.put("0", (String) Handler.saveProducer(new Producers(data.get("id"),data.get("name"))).get(0));
         return map;
     }
 
