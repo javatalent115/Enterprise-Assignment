@@ -1,5 +1,5 @@
 
-
+let itemDisplayAtATime = 10
 function checkAccount() {
   if (localStorage.getItem("accountType") == "guest") {
     $("li:nth-child(6)").css("display", "none")
@@ -147,7 +147,7 @@ $(document).on("click", ".done", function () {
   let name = $(this).parent("li").parent("ul").find(".name").text()
   let stock = $(this).parent("li").parent("ul").find(".stock").text()
   let price = $(this).parent("li").parent("ul").find(".price").text()
-  
+
 });
 
 $(document).on("click", ".trash-image", function () {
@@ -171,7 +171,7 @@ async function deleteDrug(id){
           let result = Object.values(data);
           console.log(result[0]);
           if (result[0] !=="failed"){
-              await addAllItem()
+              await addAllItem(itemDisplayAtATime)
           }
           return data;
       }
@@ -210,12 +210,9 @@ $(".add-image").click(function () {
                     </ul>
   `)
   let lastChild = document.querySelectorAll(".changeAble").length
-  console.log(lastChild)
-  console.log(document.querySelectorAll(".changeAble").length - 4)
   for (let i = lastChild - 5; i < lastChild; i++) {
     document.querySelectorAll(".changeAble")[i].setAttribute("style", "border: 1px solid black")
   }
-  console.log(document.querySelectorAll(".done").length)
   document.querySelectorAll(".done")[document.querySelectorAll(".done").length - 1].setAttribute("style", "display:block")
   document.querySelectorAll(".more-button")[document.querySelectorAll(".more-button").length - 1].setAttribute("style", "display:none")
   checkAccount()
@@ -374,7 +371,7 @@ var init = function () {
   });
 };
 
-async function addAllItem() {
+async function addAllItem(item) {
   let res = await fetch('http://localhost:8080/api/getDrugs', {
     method: 'POST',
     headers: {
@@ -396,12 +393,12 @@ async function addAllItem() {
   removeAllItem()
   let wrapper = document.querySelector(".medicines")
   let data = localStorage.getItem("data")
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < item; i++) {
     wrapper.innerHTML += `<ul class="medicine-item">
     <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
     <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
     <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-    <li class="changeAble amount"><div>4</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+    <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
     <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
     <li>
         <div class="done">Done</div>
@@ -427,10 +424,10 @@ async function addAllItem() {
   checkAccount();
   pages = localStorage.getItem("data").split("\n").length
   console.log(pages)
-  pages = checkNumberIsFloat(pages/10)
+  pages = checkNumberIsFloat(pages/itemDisplayAtATime)
   localStorage.setItem("pages",pages)
 }
-addAllItem()
+addAllItem(itemDisplayAtATime)
 
 document.addEventListener('DOMContentLoaded', init, true);
 
@@ -447,7 +444,7 @@ $(document).on("click", ".search-button-2", function () {
   document.getElementById("medicine2").value = ""
   if (searchName == 0) {
     removeAllItem()
-    addAllItem()
+    addAllItem(itemDisplayAtATime)
   }
   else {
     let data = localStorage.getItem("data")
@@ -528,12 +525,12 @@ function checkNumberIsFloat(x) {
 $(document).on("click", ".page", function () {
   let page = 0
   page = document.querySelector(".current").innerHTML
-  let itemDisplayAtATime = 10
+  let itemDisplay = itemDisplayAtATime
   removeAllItem()
   let data = localStorage.getItem("data")
-  let itemIndex = (page - 1) * itemDisplayAtATime
+  let itemIndex = (page - 1) * itemDisplay
   let wrapper = document.querySelector(".medicines")
-  for (let i = itemIndex; i < itemIndex + itemDisplayAtATime; i++) {
+  for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
     if (data.split("\n")[i].split("&&")[0] == 0) {
       break
     }
@@ -542,7 +539,7 @@ $(document).on("click", ".page", function () {
         <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-        <li class="changeAble amount">1 pack</li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
         <li>
             <div class="done">Done</div>
@@ -574,8 +571,3 @@ $(document).on("click",".increase-amount-image",function(){
   $(this).parent("li").find("div").html(amount+1)
   console.log($(this).parent("li").find("div").text())
 })
-
-
-
-
-
