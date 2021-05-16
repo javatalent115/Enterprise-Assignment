@@ -582,6 +582,3 @@ $(document).on("click",".checkbox-filter",function(){
     localStorage.setItem($(this).parent("li").find("span").text(),true)
   }
 });
-
-
-
