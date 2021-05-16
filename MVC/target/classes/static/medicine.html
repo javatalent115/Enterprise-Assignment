@@ -419,6 +419,85 @@
         .amount div{
             margin-left: 36px;
         }
+        .dropdown-item{
+            cursor: pointer;
+        }
+        .checked {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checked input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.checked:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checked input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.checked input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.checked .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.check-box{
+    max-width: 25px;
+    background: white;
+}
+.dropdown-item:hover img{
+    background-color: #e9ecef;
+}
+.dropdown-item:active img{
+    background-color:#0d6efd ;
+}
     </style>
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
@@ -427,6 +506,32 @@
             </div>
             <div class="medicine-detail-wrapper">
                 <div class="search-wrapper-2">
+                    <div class="dropdown filter">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Type
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item checkbox-filter">
+                                <img src="./images/unchecked.png" alt="" class="check-box">
+                                <span>Tan Duoc</span>
+                            </a></li>
+                            <li><a class="dropdown-item checkbox-filter">
+                                <img src="./images/unchecked.png" alt="" class="check-box">
+                                <span>Dong Duoc</span>
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="dropdown sort">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                          Sort by
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item">Name (A-Z)</a></li>
+                          <li><a class="dropdown-item">ID</a></li>
+                          <li><a class="dropdown-item">Name (Z-A)</a></li>
+                        </ul>
+                    </div>
                     <div>
                         <img src="./images/add-image.png" class="add-image" alt="">
                     </div>

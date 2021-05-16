@@ -572,7 +572,16 @@ $(document).on("click",".increase-amount-image",function(){
   console.log($(this).parent("li").find("div").text())
 })
 
-
+$(document).on("click",".checkbox-filter",function(){
+  if ($(this).find("img").attr("src") == "./images/checked.png"){
+    $(this).find("img").attr("src","./images/unchecked.png")
+    localStorage.setItem($(this).parent("li").find("span").text(),false)
+  }
+  else{
+    $(this).find("img").attr("src","./images/checked.png")
+    localStorage.setItem($(this).parent("li").find("span").text(),true)
+  }
+});
 
 
 
