@@ -18,7 +18,6 @@ public class Producers {
     @Column
     private String name;
 
-
     public Producers() {}
 
     public String getId() {
@@ -36,6 +35,7 @@ public class Producers {
     public void setName(String name) {
         this.name = name;
     }
+
     public String toString() {
         return id +" -- " + name ;
     }

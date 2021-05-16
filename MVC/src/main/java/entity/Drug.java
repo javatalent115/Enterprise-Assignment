@@ -1,6 +1,7 @@
 package main.java.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -33,14 +34,19 @@ public class Drug implements Comparable {
 
     @Column (length = 1024)
     private String country;
+
     @Column
     private int money;
 
     @Column
     private int stock;
+
     @ManyToOne
-    @JoinColumn(name="producer", nullable=false)
+    @JoinColumn(name="producer", referencedColumnName = "id", nullable=false)
     private Producers producers;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "drug")
+    private List<Order> orderList;
 
     public Drug(){}
 
