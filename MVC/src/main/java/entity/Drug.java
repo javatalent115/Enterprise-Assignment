@@ -185,7 +185,7 @@ public class Drug implements Comparable {
         return producers;
     }
 
-    private int getMoney() {
+    public int getMoney() {
         return money;
     }
 }

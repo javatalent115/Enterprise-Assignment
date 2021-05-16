@@ -12,18 +12,17 @@ import java.util.List;
 @Entity
 @Table(name = "Transaction")
 public class Transaction implements Comparable {
-    @Column
     @ManyToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "customer_username", referencedColumnName = "username")
     private Customer customer;
 
     @Id
     @GenericGenerator(name = "purchase_time", strategy = "id_generation.DateIdGenerator")
     @GeneratedValue(generator = "purchase_time")
-    private String purchase_time;
+    private String purchaseTime;
 
     @Column
-    private String purchase_type;
+    private String purchaseType;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "transaction")
     List<Order> orderList;
@@ -32,7 +31,7 @@ public class Transaction implements Comparable {
     public int compareTo(Object o) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd MM:mm:ss");
         try {
-            Date thisDate = simpleDateFormat.parse(purchase_time);
+            Date thisDate = simpleDateFormat.parse(purchaseTime);
             Date thatDate = simpleDateFormat.parse(((String) o));
             if (thisDate.after(thatDate)) return 1;
             else return -1;
@@ -50,20 +49,20 @@ public class Transaction implements Comparable {
         this.customer = customer;
     }
 
-    public String getPurchase_time() {
-        return purchase_time;
+    public String getPurchaseTime() {
+        return purchaseTime;
     }
 
-    public void setPurchase_time(String purchase_time) {
-        this.purchase_time = purchase_time;
+    public void setPurchaseTime(String purchase_time) {
+        this.purchaseTime = purchase_time;
     }
 
-    public String getPurchase_type() {
-        return purchase_type;
+    public String getPurchaseType() {
+        return purchaseType;
     }
 
-    public void setPurchase_type(String purchase_type) {
-        this.purchase_type = purchase_type;
+    public void setPurchaseType(String purchase_type) {
+        this.purchaseType = purchase_type;
     }
 
     public List<Order> getOrderList() {
@@ -72,6 +71,19 @@ public class Transaction implements Comparable {
 
     public void setOrderList(List<Order> orderList) {
         this.orderList = orderList;
+    }
+
+    public int getTransactionCost() {
+        int sum = 0;
+        for (Order order : orderList) {
+            sum += order.getOrderCost();
+        }
+        return sum;
+    }
+
+    @Override
+    public String toString() {
+        return customer.getUsername() + " -- " + purchaseTime + " -- " + purchaseType + " -- " + getTransactionCost();
     }
 }
 

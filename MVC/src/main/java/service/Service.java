@@ -1,6 +1,5 @@
 package main.java.service;
-import main.java.entity.Drug;
-import main.java.entity.Producers;
+import main.java.entity.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +17,8 @@ import java.util.Scanner;
 /**
  * Created by CoT on 10/13/17.
  */
+
+//TODO remove raw use of List
 
 @Transactional
 public class Service {
@@ -104,6 +105,33 @@ public class Service {
         return q.getResultList();
     }
 
+    public List getTransactionList() {
+        CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<Transaction> query = builder.createQuery(Transaction.class);
+        Root<Transaction> root = query.from(Transaction.class);
+        query.select(root);
+        Query<Transaction> q = sessionFactory.getCurrentSession().createQuery(query);
+        return q.getResultList();
+    }
+
+    public List getCustomerList() {
+        CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
+        Root<Customer> root = query.from(Customer.class);
+        query.select(root);
+        Query<Customer> q = sessionFactory.getCurrentSession().createQuery(query);
+        return q.getResultList();
+    }
+
+    public List getOrderList() {
+        CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
+        CriteriaQuery<Order> query = builder.createQuery(Order.class);
+        Root<Order> root = query.from(Order.class);
+        query.select(root);
+        Query<Order> q = sessionFactory.getCurrentSession().createQuery(query);
+        return q.getResultList();
+    }
+
     public List getDrugs(){
         Handler.drugs = getDrugsList();
         return Handler.drugs;
@@ -112,6 +140,21 @@ public class Service {
     public List getProducers(){
         Handler.producers = getDrugsList();
         return Handler.producers;
+    }
+
+    public List getTransactions(){
+        Handler.transactions = getDrugsList();
+        return Handler.transactions;
+    }
+
+    public List getCustomers(){
+        Handler.customers = getDrugsList();
+        return Handler.customers;
+    }
+    
+    public List getOrders(){
+        Handler.orders = getDrugsList();
+        return Handler.orders;
     }
 
     public List updateDrugMoney(String id, int money){
@@ -217,5 +260,67 @@ public class Service {
         return result;
     }
 
+    public List getTransactionsByCustomerUsename(String username) {
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.transactions) {
+            Transaction transaction = (Transaction) o;
+            if (transaction.getCustomer().getUsername().equals(username)) {
+                result.add(transaction.toString());
+            }
+        }
+        return result;
+    }
 
+    //TODO remove function above (get list inside object instead)
+    //TODO change return variable (not String or List<String>)
+
+    public List getTransactionsByPurchaseTime(String purchaseTime) {
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.transactions) {
+            Transaction transaction = (Transaction) o;
+            if (transaction.getPurchaseTime().equals(purchaseTime)) {
+                result.add(transaction.toString());
+            }
+        }
+        return result;
+    }
+
+    public String getCustomerByUsername(String username) {
+        for (Object o : Handler.customers) {
+            Customer customer = (Customer) o;
+            if (customer.getUsername().equals(username)) {
+                return customer.toString();
+            }
+        }
+        return "";
+    }
+
+
+    public List getOrdersByTransactionTime(String transactionTime) {
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.orders) {
+            Order order = (Order) o;
+            if (order.getTransaction().getPurchaseTime().equals(transactionTime)) {
+                result.add(order.toString());
+            }
+        }
+        return result;
+    }
+
+    //TODO remove function above (get list inside object instead)
+    //TODO change return variable (not String or List<String>)
+
+    public List getOrdersByCustomerUsername(String username) {
+        List<String> result = new ArrayList<>();
+        for (Object o : Handler.orders) {
+            Order order = (Order) o;
+            if (order.getTransaction().getCustomer().getUsername().equals(username)) {
+                result.add(order.toString());
+            }
+        }
+        return result;
+    }
+
+    //TODO remove function above (get list inside object instead)
+    //TODO change return variable (not String or List<String>)
 }

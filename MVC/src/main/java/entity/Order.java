@@ -62,4 +62,13 @@ public class Order {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public int getOrderCost() {
+        return quantity * drug.getMoney();
+    }
+
+    @Override
+    public String toString() {
+        return id + " -- " + transaction.getPurchaseTime() + " -- " + drug.getId() + " -- " + getOrderCost();
+    }
 }
