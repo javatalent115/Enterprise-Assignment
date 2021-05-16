@@ -570,7 +570,6 @@ $(document).on("click",".increase-amount-image",function(){
   let amount = parseInt($(this).parent("li").find("div").text())
   $(this).parent("li").find("div").html(amount+1)
   console.log($(this).parent("li").find("div").text())
-<<<<<<< HEAD
 })
 
 $(document).on("click",".checkbox-filter",function(){
@@ -587,6 +586,4 @@ $(document).on("click",".checkbox-filter",function(){
 
 
 
-=======
-})
->>>>>>> 0531c9566db77c2f47fc558ac0143f19ba609bb6
+

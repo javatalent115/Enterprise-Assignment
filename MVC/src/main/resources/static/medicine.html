@@ -422,82 +422,12 @@
         .dropdown-item{
             cursor: pointer;
         }
-        .checked {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Hide the browser's default checkbox */
-.checked input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
-}
-
-/* On mouse-over, add a grey background color */
-.checked:hover input ~ .checkmark {
-  background-color: #ccc;
-}
-
-/* When the checkbox is checked, add a blue background */
-.checked input:checked ~ .checkmark {
-  background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-  content: "";
-  position: absolute;
-  display: none;
-}
-
-/* Show the checkmark when checked */
-.checked input:checked ~ .checkmark:after {
-  display: block;
-}
-
-/* Style the checkmark/indicator */
-.checked .checkmark:after {
-  left: 9px;
-  top: 5px;
-  width: 5px;
-  height: 10px;
-  border: solid white;
-  border-width: 0 3px 3px 0;
-  -webkit-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-.check-box{
-    max-width: 25px;
-    background: white;
-}
-.dropdown-item:hover img{
-    background-color: #e9ecef;
-}
-.dropdown-item:active img{
-    background-color:#0d6efd ;
-}
+        .dropdown-item:hover img{
+            background-color: #e9ecef;
+        }
+        .dropdown-item:active img{
+            background-color:#0d6efd ;
+        }
     </style>
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
@@ -629,24 +559,18 @@
 
 
         #pagination a {
-            margin: 0 2px 0 2px;
-            border-radius: 4px;
-            border: 1px solid #E3E3E3;
+            margin: 0 2px 0 5px;
+            border-radius: 4px; 
             cursor: pointer;
-            box-shadow: inset 0 1px 0 0 #FFF, 0 1px 2px #666;
-            text-shadow: 0 1px 1px #FFF;
-            background-color: #E6E6E6;
-            background-image: -webkit-linear-gradient(top, #F3F3F3, #D7D7D7);
-            background-image: -moz-linear-gradient(top, #F3F3F3, #D7D7D7);
-            background-image: -ms-linear-gradient(top, #F3F3F3, #D7D7D7);
-            background-image: -o-linear-gradient(top, #F3F3F3, #D7D7D7);
-            background-image: linear-gradient(top, #F3F3F3, #D7D7D7);
             text-decoration: none;
-
+            background-color: #cecece;
+            color: #757575;
+            box-shadow: #858585  1px 2px 3px;
         }
 
         #pagination a img {
             max-width: 13px;
+            margin-bottom: 3px;
 
         }
 
