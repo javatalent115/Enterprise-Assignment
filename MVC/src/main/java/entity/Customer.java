@@ -10,13 +10,57 @@ import javax.persistence.*;
 public class Customer {
     @Column
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
-    @GenericGenerator(
-            name = "book_seq",
-            strategy = "assignment.id_generator.SequenceIdGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = SequenceIdGenerator.INCREMENT_PARAM, value = "1"),
-                    @org.hibernate.annotations.Parameter(name = SequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "CUS_"),
-                    @org.hibernate.annotations.Parameter(name = SequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
-    private String id;
+    private String username;
+
+    @Column
+    private String password;
+
+    @Column
+    private String firstname;
+
+    @Column
+    private String lastname;
+
+    @Column
+    private String address;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 }

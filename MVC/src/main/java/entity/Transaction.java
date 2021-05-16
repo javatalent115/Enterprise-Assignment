@@ -1,12 +1,10 @@
 package main.java.entity;
 
-import main.java.id_generator.SequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -41,6 +39,39 @@ public class Transaction implements Comparable {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        return 0;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public String getPurchase_time() {
+        return purchase_time;
+    }
+
+    public void setPurchase_time(String purchase_time) {
+        this.purchase_time = purchase_time;
+    }
+
+    public String getPurchase_type() {
+        return purchase_type;
+    }
+
+    public void setPurchase_type(String purchase_type) {
+        this.purchase_type = purchase_type;
+    }
+
+    public List<Order> getOrderList() {
+        return orderList;
+    }
+
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 }
 
