@@ -13,17 +13,17 @@ public class ProducerController {
     @Autowired
     private ProducerService producerService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Producer> getAllProducers(){
         return producerService.getAllProducers();
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public void addProducer(@RequestBody Producer producer){
         producerService.addProducer(producer);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.DELETE)
+    @RequestMapping(path = "", method = RequestMethod.DELETE)
     public void deleteAllProducers(){
         producerService.deleteAllProducer();
     }

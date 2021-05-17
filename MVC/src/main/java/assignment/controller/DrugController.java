@@ -13,17 +13,17 @@ public class DrugController {
     @Autowired
     private DrugService drugService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Drug> getAllDrugs(){
         return drugService.getAllDrugs();
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public void addDrug(@RequestBody Drug drug){
         drugService.addDrug(drug);
     }
 
-    @RequestMapping(path = "/", method = RequestMethod.DELETE)
+    @RequestMapping(path = "", method = RequestMethod.DELETE)
     public void deleteAllDrugs(){
         drugService.deleteAllDrug();
     }
