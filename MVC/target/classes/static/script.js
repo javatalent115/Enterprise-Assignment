@@ -27,9 +27,6 @@ $("#medicine2").on('keyup', function (e) {
   }
 });
 
-let pages = localStorage.getItem('pages')
-  ? JSON.parse(localStorage.getItem('pages'))
-  : 161
 
 function intinialize() {
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
@@ -363,7 +360,26 @@ var Pagination = {
   }
 };
 
-var init = function () {
+var init = async function () {
+  let res = await fetch('http://localhost:8080/api/getDrugs', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
+  let all = "";
+  if (res.ok) {
+    let data = await res.json();
+    let result = Object.values(data);
+    for (let i = 0; i < result.length; i++) {
+      all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+        + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+    }
+  }
+  localStorage.setItem("data", all);
+  let pages = checkNumberIsFloat((localStorage.getItem("data").split("\n").length)/itemDisplayAtATime)
+  localStorage.setItem("pages",pages)
   Pagination.Init(document.getElementById('pagination'), {
     size: pages, // pages size
     page: 1,  // selected page
@@ -388,8 +404,8 @@ async function addAllItem(item) {
       all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
         + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
     }
+    
   }
-  localStorage.setItem("data", all);
   removeAllItem()
   let wrapper = document.querySelector(".medicines")
   let data = localStorage.getItem("data")
@@ -422,14 +438,11 @@ async function addAllItem(item) {
 </ul>`
   }
   checkAccount();
-  pages = localStorage.getItem("data").split("\n").length
-  console.log(pages)
-  pages = checkNumberIsFloat(pages/itemDisplayAtATime)
-  localStorage.setItem("pages",pages)
+
 }
 addAllItem(itemDisplayAtATime)
+document.addEventListener('DOMContentLoaded', init,false);
 
-document.addEventListener('DOMContentLoaded', init, true);
 
 
 function removeAllItem() {
@@ -582,6 +595,3 @@ $(document).on("click",".checkbox-filter",function(){
     localStorage.setItem($(this).parent("li").find("span").text(),true)
   }
 });
-
-
-
