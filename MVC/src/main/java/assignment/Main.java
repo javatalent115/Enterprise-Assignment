@@ -12,7 +12,7 @@ public class Main {
         /**
          * Setup database if not exist
          */
-//        Handler.setupDatabase();
+//        Setup.setupDatabase();
 
         /**
          * Comment below line if u want to setup database. After finishing setting up, comment in above line and comment out below line
