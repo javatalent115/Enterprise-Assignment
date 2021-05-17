@@ -30,7 +30,6 @@ public class ServerController {
         return map;
     }
 
-
     @PostMapping(value = "/api/updateDrug")
     public Map<String, String> updateDrug(@RequestBody Map<String, String> data){
         Map<String, String> map = new HashMap<>();
@@ -65,9 +64,9 @@ public class ServerController {
         return map;
     }
 
-    @PostMapping(value = "/api/getTypes")
-    public Map<String, String> getAllTypes(){
-        List list = Handler.getAllTypes();
+    @PostMapping(value = "/api/getDrugsByType")
+    public Map<String, String> getDrugsByType(@RequestBody String type){
+        List list = Handler.getDrugsByType(type);
         Map<String, String> map = new HashMap<>();
         for (int i = 0; i< list.size(); i++){
             map.put(Integer.toString(i), (String) list.get(i));
@@ -75,9 +74,19 @@ public class ServerController {
         return map;
     }
 
-    @PostMapping(value = "/api/getGroups")
-    public Map<String, String> getAllGroups(){
-        List list = Handler.getAllGroups();
+    @PostMapping(value = "/api/getDrugsByGroup")
+    public Map<String, String> getDrugsByGroup(@RequestBody String group){
+        List list = Handler.getDrugsByGroup(group);
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i< list.size(); i++){
+            map.put(Integer.toString(i), (String) list.get(i));
+        }
+        return map;
+    }
+
+    @PostMapping(value = "/api/getDrugsByGroupAndType")
+    public Map<String,String> getDrugsByTypeAndGroup(@RequestBody Map<String, String> data){
+        List list = Handler.getDrugsByTypeAndGroup(data.get("group"), data.get("type"));
         Map<String, String> map = new HashMap<>();
         for (int i = 0; i< list.size(); i++){
             map.put(Integer.toString(i), (String) list.get(i));
@@ -111,16 +120,6 @@ public class ServerController {
     public Map<String, String> searchDrugsById(@RequestBody String id){
         HashMap<String,String> map = new HashMap<>();
         List list =  Handler.searchDrugsById(id);
-        for (int i = 0; i< list.size(); i++){
-            map.put(Integer.toString(i), (String) list.get(i));
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/searchDrugsByName")
-    public Map<String, String> searchDrugsByName(@RequestBody String name){
-        HashMap<String,String> map = new HashMap<>();
-        List list =  Handler.searchDrugsByName(name);
         for (int i = 0; i< list.size(); i++){
             map.put(Integer.toString(i), (String) list.get(i));
         }

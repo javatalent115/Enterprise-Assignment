@@ -2,7 +2,6 @@ package main.java.service;
 import main.java.config.AppConfig;
 import main.java.entity.Drug;
 import main.java.entity.Producers;
-import main.java.service.Service;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.util.*;
 
@@ -40,13 +39,15 @@ public class Handler {
         return service.getDrugs();
     }
 
-    public static List getAllGroups(){
-        return service.getAllGroups();
+    public static List getDrugsByGroup(String group){
+        return service.getDrugsByGroup(group);
     }
 
-    public static List getAllTypes(){
-        return service.getAllTypes();
+    public static List getDrugsByType(String type){
+        return service.getDrugsByType(type);
     }
+
+    public static List getDrugsByTypeAndGroup(String group, String type){ return service.getDrugsByTypeAndGroup(group,type); }
 
     public static List getDrugSortAsc(){
         List<Drug> list = (List<Drug>) getAllDrugs();
@@ -63,10 +64,6 @@ public class Handler {
 
     public static List searchDrugsById(String id){
         return service.searchDrugsById(id);
-    }
-
-    public static List searchDrugsByName(String name){
-        return service.searchDrugsByName(name);
     }
 
     public static List getNOP (String producerID){

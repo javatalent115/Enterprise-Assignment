@@ -149,17 +149,6 @@ public class Service {
         return l;
     }
 
-    public List searchDrugsByName(String name){
-        List<String> result = new ArrayList<>();
-        for (Object o : Handler.drugs) {
-            Drug drug = (Drug) o;
-            if (drug.getName().contains(name)) {
-                result.add(drug.toString());
-            }
-        }
-        return result;
-    }
-
     public List getNOP (String producerID){
         List<String> result = new ArrayList<>();
         int count = 0;
@@ -173,26 +162,36 @@ public class Service {
         return result;
     }
 
-    public List getAllGroups(){
+    public List getDrugsByGroup(String group){
         List<String> result = new ArrayList<>();
         for (int i = 0; i < Handler.drugs.size(); i++) {
             Drug drug = (Drug) Handler.drugs.get(i);
-            if (!result.contains(drug.getDrugGroup())) {
-                result.add(drug.getDrugGroup());
+            if (drug.getDrugGroup().equals(group)) {
+                result.add(drug.toString());
             }
         }
         return result;
     }
 
-    public List getAllTypes(){
+    public List getDrugsByType(String type){
         List<String> result = new ArrayList<>();
         for (int i = 0; i < Handler.drugs.size(); i++) {
             Drug drug = (Drug) Handler.drugs.get(i);
-            if (!result.contains(drug.getType()) && !drug.getType().equals(" ") && !drug.getType().equals("--")) {
-                result.add(drug.getDrugGroup());
+            if (drug.getType().equals(type)) {
+                result.add(drug.toString());
             }
         }
-        result.add("Undefined");
+        return result;
+    }
+
+    public List getDrugsByTypeAndGroup(String group, String type){
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < Handler.drugs.size(); i++) {
+            Drug drug = (Drug) Handler.drugs.get(i);
+            if (drug.getType().equals(type) && drug.getDrugGroup().equals(group)) {
+                result.add(drug.toString());
+            }
+        }
         return result;
     }
 
