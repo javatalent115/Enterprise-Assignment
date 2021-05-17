@@ -1,5 +1,4 @@
-package main.java.config;
-
+package assignment.config;
 
 import main.java.service.Service;
 import org.hibernate.SessionFactory;

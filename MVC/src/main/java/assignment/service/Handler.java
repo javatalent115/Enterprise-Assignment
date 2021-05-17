@@ -1,8 +1,7 @@
-package main.java.service;
-import main.java.config.AppConfig;
-import main.java.entity.Drug;
-import main.java.entity.Producers;
-import main.java.service.Service;
+package assignment.service;
+
+import assignment.config.AppConfig;
+import assignment.entity.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.util.*;
 
@@ -24,7 +23,7 @@ public class Handler {
         return service.saveDrug(drug);
     }
 
-    public static List saveProducer(Producers producer){
+    public static List saveProducer(Producer producer){
         return service.saveProducer(producer);
     }
 

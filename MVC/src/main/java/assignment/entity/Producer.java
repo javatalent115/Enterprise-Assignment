@@ -1,5 +1,4 @@
-package main.java.entity;
-
+package assignment.entity;
 
 import javax.persistence.*;
 
@@ -8,8 +7,8 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "Producers")
-public class Producers {
+@Table(name = "Producer")
+public class Producer {
 
     @Id
     @Column
@@ -19,7 +18,7 @@ public class Producers {
     private String name;
 
 
-    public Producers() {}
+    public Producer() {}
 
     public String getId() {
         return id;

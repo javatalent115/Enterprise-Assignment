@@ -1,6 +1,5 @@
-package main.java.service;
-import main.java.entity.Drug;
-import main.java.entity.Producers;
+package assignment.service;
+import assignment.entity.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class Service {
 
     public void setupDatabase(){
         ArrayList<Drug> drugs = new ArrayList<>();
-        ArrayList<Producers> producers = new ArrayList<>();
+        ArrayList<assignment.entity.Producer> producers = new ArrayList<>();
         try {
             File myObj = new File("message.txt");
             Scanner myReader = new Scanner(myObj);
@@ -35,14 +34,14 @@ public class Service {
                 String data = myReader.nextLine();
                 String[] split = data.split("&&");
                 boolean isExist = false;
-                for (Producers value : producers) {
+                for (assignment.entity.Producer value : producers) {
                     if (value.getId().equals(split[9])) {
                         isExist = true;
                         break;
                     }
                 }
                 if (!isExist) {
-                    Producers producer = new Producers();
+                    assignment.entity.Producer producer = new assignment.entity.Producer();
                     producer.setId(split[9]);
                     producer.setName(split[8]);
                     producers.add(producer);
@@ -52,7 +51,7 @@ public class Service {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 String[] split = data.split("&&");
-                for (Producers producer : producers) {
+                for (assignment.entity.Producer producer : producers) {
                     if (producer.getId().equals(split[9])) {
                         Drug drug = new Drug(split[0], split[1], split[2], split[3], split[4], split[5], split[6], split[7], producer, split[10]);
                         drugs.add(drug);
@@ -63,7 +62,7 @@ public class Service {
             myReader.close();
         } catch (FileNotFoundException ignored) {}
 
-        for (Producers producer: producers) {
+        for (assignment.entity.Producer producer: producers) {
             sessionFactory.getCurrentSession().save(producer);
         }
         for (Drug drug: drugs) {
@@ -97,10 +96,10 @@ public class Service {
     }
     public List getProducersList(){
         CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
-        CriteriaQuery<Producers> query = builder.createQuery(Producers.class);
-        Root<Producers> root = query.from(Producers.class);
+        CriteriaQuery<assignment.entity.Producer> query = builder.createQuery(assignment.entity.Producer.class);
+        Root<assignment.entity.Producer> root = query.from(assignment.entity.Producer.class);
         query.select(root);
-        Query<Producers> q = sessionFactory.getCurrentSession().createQuery(query);
+        Query<assignment.entity.Producer> q = sessionFactory.getCurrentSession().createQuery(query);
         return q.getResultList();
     }
 
@@ -188,10 +187,10 @@ public class Service {
         return result;
     }
 
-    public List saveProducer(Producers newProducer){
+    public List saveProducer(assignment.entity.Producer newProducer){
         List<String> result = new ArrayList<>();
         for (Object o : Handler.producers) {
-            Producers producer = (Producers) o;
+            assignment.entity.Producer producer = (assignment.entity.Producer) o;
             if (producer.getId().equals(newProducer.getId())) {
                 result.add("failed");
                 return result;
