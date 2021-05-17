@@ -35,6 +35,7 @@ public class Drug implements Comparable {
 
     @Column (length = 1024)
     private String country;
+
     @Column
     private int money;
 
@@ -167,6 +168,78 @@ public class Drug implements Comparable {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPreparation() {
+        return preparation;
+    }
+
+    public void setPreparation(String preparation) {
+        this.preparation = preparation;
+    }
+
+    public String getPackaging() {
+        return packaging;
+    }
+
+    public void setPackaging(String packaging) {
+        this.packaging = packaging;
+    }
+
+    public void setDrugGroup(String drugGroup) {
+        this.drugGroup = drugGroup;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(String ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
+    }
+
     public void setMoney(int money) {
         this.money = money;
     }
@@ -183,5 +256,20 @@ public class Drug implements Comparable {
 
     private int getMoney() {
         return money;
+    }
+
+    public void replace(Drug drug) {
+        this.name = drug.getName();
+        this.preparation = drug.getPreparation();
+        this.country = drug.getCountry();
+        this.drugGroup = drug.getDrugGroup();
+        this.dosage = drug.getDosage();
+        this.id = drug.getId();
+        this.dosage = drug.getDosage();
+        this.ingredients = drug.getIngredients();
+        this.packaging = drug.getPackaging();
+        this.money = drug.getMoney();
+        this.stock = drug.getStock();
+        this.type = drug.getType();
     }
 }

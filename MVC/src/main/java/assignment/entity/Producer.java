@@ -17,7 +17,6 @@ public class Producer {
     @Column
     private String name;
 
-
     public Producer() {}
 
     public String getId() {
@@ -35,7 +34,12 @@ public class Producer {
     public void setName(String name) {
         this.name = name;
     }
+
     public String toString() {
         return id +" -- " + name ;
+    }
+
+    public void replace(Producer producer) {
+        this.name = producer.getName();
     }
 }
