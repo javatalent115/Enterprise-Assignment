@@ -16,7 +16,7 @@
 <style>
     .container-fluid{
         position: relative;
-        height: 350px;
+        height: inherit;
         min-width: 1200px;
     }
     .container-fluid::after{
@@ -35,29 +35,28 @@
         position: relative;
         z-index: 1;
         margin: 0;
-        padding-right:  60px;
+        padding-right: 30px;
         padding-top: 10px;
     }
     .nav-item{
         list-style: none;
-        font-size: 30px;
+        font-size: 22px;
         font-weight: bold;
-        
     }
     a{
         text-decoration: none;
-        color: white;
+        color: mediumorchid;
         display: flex;
         position: relative;
         justify-content: center;
         align-items: center;
     }
     a:hover{
-        color: white;
+        color: wheat;
     }
     a::after{
         content: "";
-        background: white;
+        background: wheat;
         position: absolute;
         width: 100%;
         height: 5px;
@@ -86,9 +85,10 @@
         font-weight: bold;
         color: white;
         font-family: Arial;
-        font-size: 60px;
+        font-size: 35px;
         padding-left: 20px;
         top: -25px;
+        color: blue;
         position: relative;
     }
     .search-wrapper{
@@ -153,10 +153,10 @@
     }
     .information-medicine-header{
         width: fit-content;
-        background:#18bff3;
+        background:rgb(138, 58, 58);
         color: white;
         padding: 8px 37px;
-        font-size: 17px;
+        font-size: 30px;
         border-radius: 19px;
         position: relative;
         top: -22px;
@@ -293,7 +293,15 @@
             </ul>
         </nav>
         <div class="header">
-            Welcome to <br> Medicine <br> Online
+            <div style="text-shadow: 2px 2px 4px #000000;">
+                Welcome to <br>
+            </div>
+            <div style="margin-left: 100px; text-shadow: 2px 2px 4px #000000;">
+                Medicine <br>
+            </div> 
+            <div style="margin-left: 200px; text-shadow: 2px 2px 4px #000000;">
+                Online
+            </div> 
         </div>
     </div>
     <div class="information-medicine-container">
@@ -305,7 +313,7 @@
                 <div class="carousel-inner">
                   <div class="carousel-item active">
                       <div class="slide-wrapper">
-                        <img class="slide-img" src="./images/panaldo.png"  alt="...">
+                        <img class="slide-img" src="./images/panaldo.png" alt="...">
                         <img class="slide-img" src="./images/cart.png"  alt="...">
                         <img class="slide-img" src="./images/cart.png"  alt="...">
                       </div>
@@ -340,6 +348,8 @@
     <style>
         .feature-wrapper{
             display: flex;
+            padding-top: 20px;
+            padding-bottom: 30px;
             justify-content: space-around;
             align-items: center;
         }
@@ -348,7 +358,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 30px;
+            gap: 5px;
         }
         .feature-wrapper img{
             background-size: 100% 100%;
@@ -367,13 +377,16 @@
         }
         .news{
             font-weight: bold;
+            padding-top: 20px;
+            padding-bottom: 80px;
         }
         .news span{
             flex-grow: 3;
-            font-size: 70px;
-
+            text-align: center;
+            font-size: 60px;
         }
         .news-item-wrapper{
+            padding-top: 50px;
             display: flex;
             width: 100% ;
             align-items: center;
@@ -384,8 +397,8 @@
         .news-item{
             display: flex;  
             flex-direction:column;
-            width: 250px;
-            height: 300px;
+            width: 200px;
+            height: 200px;
             text-align: center;
             position: relative;
         }
@@ -419,7 +432,7 @@
         margin: 0 auto;">
     </div>
     <div class="news">
-        <span>News</span>
+        <span style="background:yellowgreen; width: 100%;">News</span>
             <div class="news-item-wrapper">
                 <div class="news-item">
                     <img src="./images/news-1.png" alt="">
@@ -440,7 +453,8 @@
     </div>
     <style>
         .footer{
-            height: 250px;
+            padding-top: 20px;
+            height: inherit;
             background-color: grey;
             display: flex;
             color: white;
@@ -448,16 +462,18 @@
         }
         .icon-wrapper{
             display: flex;
-            gap: 15px;
+            gap: 20px;
+            padding-top: 5px;
+            padding-bottom: 20px;
             justify-content: center;
             align-items: center;
         }
-        .footer-item-1 h1,.footer-item-2 h1, .footer-item-3 h1  {
+        .footer-item-1 h3,.footer-item-2 h3, .footer-item-3 h3  {
             position: relative;
         }
-        .footer-item-1 h1::before,.footer-item-2 h1::before,.footer-item-3 h1::before{
+        .footer-item-1 h3::before,.footer-item-2 h3::before,.footer-item-3 h3::before{
         content: "";
-        background: white;
+        background: lightblue;
         position: absolute;
         width: 100%;
         height: 4px;
@@ -468,7 +484,7 @@
         gap: 15px;
         justify-content: left;
         align-items: center;
-        font-size: 40px;
+        font-size: 25px;
     }
     
     .keyword{
@@ -484,31 +500,31 @@
         background-color: #999;
         border: 2px solid white;
         padding: 0px 10px;
-        font-size: 25px;
+        font-size: 20px;
     }
     </style>
     <div class="footer">
         <div class="footer-item-1">
-            <h1>Connect with us</h1>
+            <h3 style="color:lightblue;">Connect with us</h3>
             <div class="icon-wrapper">
                 <div class="icon">
-                    <a href=""><img src="./images/icon-1.png" alt=""></a>
+                    <a href=""><img src="./images/icon-1.png " width = "55" height = "50" alt=""></a>
                 </div>
                 <div class="icon">
-                    <a href=""><img src="./images/icon-2.png" alt=""></a></div>
+                    <a href=""><img src="./images/icon-2.png" width = "55" height = "66" alt=""></a></div>
                 <div class="icon">
-                    <a href=""><img src="./images/icon-3.png" alt=""></a></div>
+                    <a href=""><img src="./images/icon-3.png" width = "55" height = "55" alt=""></a></div>
             </div>
         </div>
         <div class="footer-item-2">
-            <h1>Hotline (7h-22h)</h1>
+            <h3 style="color:lightblue;">Hotline (7h-22h)</h3>
             <div class="contact">
                 <img src="./images/phone-call.png" alt="">
                 <p>083-6598249</p>
             </div>
         </div>
         <div class="footer-item-3">
-            <h1>Keyword</h1>
+            <h3 style="color:lightblue;">Keyword</h3>
             <div class="keyword">
                 <div class="keyword-item">
                     Pharmacy
