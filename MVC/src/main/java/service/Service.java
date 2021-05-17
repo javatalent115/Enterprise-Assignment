@@ -11,9 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by CoT on 10/13/17.
@@ -171,6 +169,17 @@ public class Service {
             }
         }
         return result;
+    }
+
+    public List sortDrugsName(){
+        List<Drug> list = new ArrayList<>();
+        list = (List<Drug>) Handler.drugs.subList(0,Handler.drugs.size()-1);
+        list.sort(new Comparator<Drug>() {
+            public int compare(Drug drug1, Drug drug2) {
+                return drug1.getName().compareTo(drug2.getName());
+            }
+        });
+        return list;
     }
 
     public List getDrugsByType(String type){

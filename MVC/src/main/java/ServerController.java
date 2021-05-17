@@ -2,8 +2,10 @@ package main.java;
 import main.java.entity.Drug;
 import main.java.entity.Producers;
 import main.java.service.Handler;
+import org.hsqldb.lib.Collection;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -77,6 +79,27 @@ public class ServerController {
     @PostMapping(value = "/api/getDrugsByGroup")
     public Map<String, String> getDrugsByGroup(@RequestBody String group){
         List list = Handler.getDrugsByGroup(group);
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i< list.size(); i++){
+            map.put(Integer.toString(i), (String) list.get(i));
+        }
+        return map;
+    }
+
+    @PostMapping(value = "/api/sortDrugsNameAsc")
+    public Map<String,String>sortDrugsNameAsc(){
+        List list = Handler.sortDrugsName();
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i< list.size(); i++){
+            map.put(Integer.toString(i), (String) list.get(i));
+        }
+        return map;
+    }
+
+    @PostMapping(value = "/api/sortDrugsNameDes")
+    public Map<String,String>sortDrugsNameDes(){
+        List list = Handler.sortDrugsName();
+        Collections.reverse(list);
         Map<String, String> map = new HashMap<>();
         for (int i = 0; i< list.size(); i++){
             map.put(Integer.toString(i), (String) list.get(i));

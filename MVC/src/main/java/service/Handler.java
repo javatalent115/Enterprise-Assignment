@@ -69,4 +69,8 @@ public class Handler {
     public static List getNOP (String producerID){
         return service.getNOP(producerID);
     }
+
+    public static List sortDrugsName(){
+        return service.sortDrugsName();
+    }
 }
