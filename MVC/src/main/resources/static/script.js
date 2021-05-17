@@ -1,4 +1,5 @@
-
+localStorage.setItem("Tan Duoc",true)
+localStorage.setItem("Dong Duoc",true)
 let itemDisplayAtATime = 10
 function checkAccount() {
   if (localStorage.getItem("accountType") == "guest") {
@@ -403,41 +404,9 @@ async function addAllItem(item) {
       all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
         + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
     }
-    
   }
   localStorage.setItem("data", all);
-  removeAllItem()
-  let wrapper = document.querySelector(".medicines")
-  let data = localStorage.getItem("data")
-  for (let i = 0; i < item; i++) {
-    wrapper.innerHTML += `<ul class="medicine-item">
-    <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-    <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-    <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-    <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-    <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-    <li>
-        <div class="done">Done</div>
-        <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-        <div class="more-button-submenu-wrapper">
-            <ul class="more-button-submenu">
-                <li class="more-button-submenu-item quick-change">
-                    Quick change
-                </li>
-                <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                    data-bs-target="#modifyMedicine">
-                    Advance
-                </li>
-            </ul>
-        </div>
-    </li>
-    <li>
-        <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-        <img src="./images/trash.png" class="trash-image" alt="">
-    </li>
-</ul>`
-  }
-  checkAccount();
+  addItem(itemDisplayAtATime)
 
 }
 addAllItem(itemDisplayAtATime)
@@ -548,6 +517,7 @@ $(document).on("click", ".page", function () {
       break
     }
     else {
+      if(localStorage.getItem("Dong Duoc") == "true" && localStorage.getItem("Tan Duoc")=="true"){
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
@@ -574,6 +544,67 @@ $(document).on("click", ".page", function () {
             <img src="./images/trash.png" class="trash-image" alt="">
         </li>
     </ul>`
+      }
+      else if(localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "false"){
+        if (data.split("\n")[i].split("&&")[4]== "Tân dược"){
+          wrapper.innerHTML += `<ul class="medicine-item">
+          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
+          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
+          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+          <li>
+              <div class="done">Done</div>
+              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+              <div class="more-button-submenu-wrapper">
+                  <ul class="more-button-submenu">
+                      <li class="more-button-submenu-item quick-change">
+                          Quick change
+                      </li>
+                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                          data-bs-target="#modifyMedicine">
+                          Advance
+                      </li>
+                  </ul>
+              </div>
+          </li>
+          <li>
+              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+              <img src="./images/trash.png" class="trash-image" alt="">
+          </li>
+      </ul>`
+        }
+      }
+      else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
+        if (data.split("\n")[i].split("&&")[4]== "Đông dược"){
+          wrapper.innerHTML += `<ul class="medicine-item">
+          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
+          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
+          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+          <li>
+              <div class="done">Done</div>
+              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+              <div class="more-button-submenu-wrapper">
+                  <ul class="more-button-submenu">
+                      <li class="more-button-submenu-item quick-change">
+                          Quick change
+                      </li>
+                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                          data-bs-target="#modifyMedicine">
+                          Advance
+                      </li>
+                  </ul>
+              </div>
+          </li>
+          <li>
+              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+              <img src="./images/trash.png" class="trash-image" alt="">
+          </li>
+      </ul>`
+        }
+      }
     }
     checkAccount()
   }
@@ -589,9 +620,167 @@ $(document).on("click",".checkbox-filter",function(){
   if ($(this).find("img").attr("src") == "./images/checked.png"){
     $(this).find("img").attr("src","./images/unchecked.png")
     localStorage.setItem($(this).parent("li").find("span").text(),false)
+    addItem(itemDisplayAtATime)
   }
   else{
     $(this).find("img").attr("src","./images/checked.png")
     localStorage.setItem($(this).parent("li").find("span").text(),true)
+    addItem(itemDisplayAtATime)
+
   }
 });
+
+$(document).on("click",".dropdown-item-sort",async function(){
+  let menu = $(this).text()
+  $(".sort").children("button").text(menu)
+  if (menu =="Money (High to Low)"){
+    let res = await fetch('http://localhost:8080/api/sortDrugDes', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    let all = "";
+    if (res.ok) {
+      let data = await res.json();
+      let result = Object.values(data);
+      for (let i = 0; i < result.length; i++) {
+        all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+          + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+      }
+    }
+    localStorage.setItem("data", all);
+    addItem(itemDisplayAtATime)
+  }
+  else if(menu =="Money (Low to High)"){
+    let res = await fetch('http://localhost:8080/api/sortDrugAsc', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    });
+    let all = "";
+    if (res.ok) {
+      let data = await res.json();
+      let result = Object.values(data);
+      for (let i = 0; i < result.length; i++) {
+        all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+          + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+      }
+    }
+    localStorage.setItem("data", all);
+    addItem(itemDisplayAtATime)
+    console.log("hello")
+  }
+  else if(menu == "ID"){
+    addAllItem(itemDisplayAtATime)
+  }
+});
+
+function addItem(item){
+  removeAllItem()
+  let wrapper = document.querySelector(".medicines")
+  let data = localStorage.getItem("data")
+  for (let i = 0,j=0; j < item; i++,j++) {
+    if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "true"){
+      wrapper.innerHTML += `<ul class="medicine-item">
+      <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
+      <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
+      <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+      <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+      <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+      <li>
+          <div class="done">Done</div>
+          <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+          <div class="more-button-submenu-wrapper">
+              <ul class="more-button-submenu">
+                  <li class="more-button-submenu-item quick-change">
+                      Quick change
+                  </li>
+                  <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                      data-bs-target="#modifyMedicine">
+                      Advance
+                  </li>
+              </ul>
+          </div>
+      </li>
+      <li>
+          <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+          <img src="./images/trash.png" class="trash-image" alt="">
+      </li>
+  </ul>`
+    }
+    else if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "false"){
+        if (data.split("\n")[i].split("&&")[4]== "Tân dược"){
+          wrapper.innerHTML += `<ul class="medicine-item">
+          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
+          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
+          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+          <li>
+              <div class="done">Done</div>
+              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+              <div class="more-button-submenu-wrapper">
+                  <ul class="more-button-submenu">
+                      <li class="more-button-submenu-item quick-change">
+                          Quick change
+                      </li>
+                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                          data-bs-target="#modifyMedicine">
+                          Advance
+                      </li>
+                  </ul>
+              </div>
+          </li>
+          <li>
+              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+              <img src="./images/trash.png" class="trash-image" alt="">
+          </li>
+      </ul>`
+        }
+        else{
+          j--
+        }
+    }
+    else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
+      if (data.split("\n")[i].split("&&")[4]== "Đông dược"){
+        wrapper.innerHTML += `<ul class="medicine-item">
+        <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
+        <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
+        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+        <li>
+            <div class="done">Done</div>
+            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+            <div class="more-button-submenu-wrapper">
+                <ul class="more-button-submenu">
+                    <li class="more-button-submenu-item quick-change">
+                        Quick change
+                    </li>
+                    <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                        data-bs-target="#modifyMedicine">
+                        Advance
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+            <img src="./images/trash.png" class="trash-image" alt="">
+        </li>
+    </ul>`
+      }
+      else{
+        j--;
+      }
+    }
+    else{
+      console.log("none")
+    }
+  }
+  checkAccount();
+}
