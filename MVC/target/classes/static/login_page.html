@@ -115,7 +115,7 @@
     }
     .sign-in-2:hover{
         cursor: pointer;
-        background: lightsteelblue;
+        background: #59cfde;
     }
     a:visited {
         color: blue;
@@ -175,6 +175,11 @@
         </div>
     </div>
     <script>
+
+        if (localStorage.getItem("accountType") === "user" || localStorage.getItem("accountType") === "admin"){
+            location.href = "http://localhost:8080/home-page.html";
+        }
+
         async function to_home() {
             let User ={
                 username: document.querySelector("#username").value,
@@ -213,7 +218,6 @@
                 }
             }catch (e) {}
             return 404;
-
         }
     </script>
 </body>

@@ -505,6 +505,8 @@
                         </li>
                     </ul>
             </div>
+            <div id="pagination" class="paginations"></div>
+
             <style>
                 .cart-wrapper {
                     display: flex;
@@ -535,7 +537,6 @@
                 </div>
             </div>
         </div>
-        <div id="pagination" class="paginations"></div>
     </div>
     <button style="z-index: 9999;" onclick="reset()">Reset localStorage</button>
     <a class="paginaiton-arrow" href=""><img src="./images/arrow-right.png" alt=""></a>
@@ -606,7 +607,7 @@
 
     <!-- Modal  -->
     <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <div class="about-us">
@@ -664,6 +665,30 @@
             </div>
         </div>
     </div>
+
+
+    <!--Delete Modal  -->
+    <div class="modal fade" id="delete-confirm-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            Are you sure to delete this medicine
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary confirm-delete" data-bs-dismiss="modal">Yes</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+
+
+
     <!-- Modal  -->
     <style>
         #staticBackdrop .modal-content {

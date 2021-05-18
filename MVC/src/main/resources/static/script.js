@@ -147,11 +147,24 @@ $(document).on("click", ".done", function () {
   let price = $(this).parent("li").parent("ul").find(".price").text()
 
 });
+let img;
+$(document).ready(function(){
+  $("#delete-confirm-modal").on("show.bs.modal", function(event){
+      // Get the button that triggered the modal
+      img = $(event.relatedTarget)
+  });
+});
+
+$(document).on("click",".confirm-delete",function(){
+  img.parent().parent().remove()
+  deleteDrug(img.parent().parent().find(".id").text())
+})
 
 $(document).on("click", ".trash-image", function () {
-  event.preventDefault()
-  $(this).parent("li").parent("ul").remove()
-  deleteDrug($(this).parent("li").parent("ul").find(".id").text())
+
+  // event.preventDefault()
+  // $(this).parent("li").parent("ul").remove()
+  // deleteDrug($(this).parent("li").parent("ul").find(".id").text())
 });
 
 async function deleteDrug(id){
@@ -203,7 +216,7 @@ $(".add-image").click(function () {
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                            <img src="./images/trash.png" class="trash-image" alt="">
+                            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
   `)
@@ -466,7 +479,7 @@ $(document).on("click", ".search-button-2", function () {
         </li>
         <li>
             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="">
+            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
       checkAccount()
@@ -517,7 +530,6 @@ $(document).on("click", ".page", function () {
       break
     }
     else {
-      if(localStorage.getItem("Dong Duoc") == "true" && localStorage.getItem("Tan Duoc")=="true"){
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
@@ -541,71 +553,10 @@ $(document).on("click", ".page", function () {
         </li>
         <li>
             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="">
+            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
       }
-      else if(localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "false"){
-        if (data.split("\n")[i].split("&&")[4]== "Tân dược"){
-          wrapper.innerHTML += `<ul class="medicine-item">
-          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-          <li>
-              <div class="done">Done</div>
-              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-              <div class="more-button-submenu-wrapper">
-                  <ul class="more-button-submenu">
-                      <li class="more-button-submenu-item quick-change">
-                          Quick change
-                      </li>
-                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                          data-bs-target="#modifyMedicine">
-                          Advance
-                      </li>
-                  </ul>
-              </div>
-          </li>
-          <li>
-              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-              <img src="./images/trash.png" class="trash-image" alt="">
-          </li>
-      </ul>`
-        }
-      }
-      else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
-        if (data.split("\n")[i].split("&&")[4]== "Đông dược"){
-          wrapper.innerHTML += `<ul class="medicine-item">
-          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-          <li>
-              <div class="done">Done</div>
-              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-              <div class="more-button-submenu-wrapper">
-                  <ul class="more-button-submenu">
-                      <li class="more-button-submenu-item quick-change">
-                          Quick change
-                      </li>
-                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                          data-bs-target="#modifyMedicine">
-                          Advance
-                      </li>
-                  </ul>
-              </div>
-          </li>
-          <li>
-              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-              <img src="./images/trash.png" class="trash-image" alt="">
-          </li>
-      </ul>`
-        }
-      }
-    }
     checkAccount()
   }
 });
@@ -620,11 +571,13 @@ $(document).on("click",".checkbox-filter",function(){
   if ($(this).find("img").attr("src") == "./images/checked.png"){
     $(this).find("img").attr("src","./images/unchecked.png")
     localStorage.setItem($(this).parent("li").find("span").text(),false)
+    $(".sort").find("button").text("Sort by")
     addItem(itemDisplayAtATime)
   }
   else{
     $(this).find("img").attr("src","./images/checked.png")
     localStorage.setItem($(this).parent("li").find("span").text(),true)
+    $(".sort").find("button").text("Sort by")
     addItem(itemDisplayAtATime)
 
   }
@@ -672,19 +625,82 @@ $(document).on("click",".dropdown-item-sort",async function(){
     }
     localStorage.setItem("data", all);
     addItem(itemDisplayAtATime)
-    console.log("hello")
   }
   else if(menu == "ID"){
     addAllItem(itemDisplayAtATime)
   }
 });
 
-function addItem(item){
+async function addItem(item){
   removeAllItem()
   let wrapper = document.querySelector(".medicines")
-  let data = localStorage.getItem("data")
-  for (let i = 0,j=0; j < item; i++,j++) {
-    if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "true"){
+  let data;
+  if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "true"){
+    let res = await fetch('http://localhost:8080/api/getDrugs', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
+  let all = "";
+  if (res.ok) {
+    let data = await res.json();
+    let result = Object.values(data);
+    for (let i = 0; i < result.length; i++) {
+      name.push(result[i].split(" -- ")[1]);
+      all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+        + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+    }
+  }
+  localStorage.setItem("data", all);
+  }
+  else if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "false"){
+    let res = await fetch('http://localhost:8080/api/getDrugsByGroup', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: "Tân dược"
+  });
+    let all = "";
+    if (res.ok) {
+      let data = await res.json();
+      let result = Object.values(data);
+      for (let i = 0; i < result.length; i++) {
+        all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+          + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+      }
+    }
+    document.addEventListener('DOMContentLoaded', init,false);
+    localStorage.setItem("data", all);
+  }
+  else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
+    let res = await fetch('http://localhost:8080/api/getDrugsByGroup', {
+      method: 'POST',
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      body: "Đông dược"
+  });
+    let all = "";
+    if (res.ok) {
+      let data = await res.json();
+      let result = Object.values(data);
+      for (let i = 0; i < result.length; i++) {
+        all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+          + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+      }
+    }
+    localStorage.setItem("data", all);
+  }
+  else{
+    localStorage.setItem("data", "");
+  }
+  data = localStorage.getItem("data")
+  for (let i = 0; i < item; i++) {
       wrapper.innerHTML += `<ul class="medicine-item">
       <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
       <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
@@ -708,79 +724,9 @@ function addItem(item){
       </li>
       <li>
           <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-          <img src="./images/trash.png" class="trash-image" alt="">
+          <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
       </li>
   </ul>`
     }
-    else if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "false"){
-        if (data.split("\n")[i].split("&&")[4]== "Tân dược"){
-          wrapper.innerHTML += `<ul class="medicine-item">
-          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-          <li>
-              <div class="done">Done</div>
-              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-              <div class="more-button-submenu-wrapper">
-                  <ul class="more-button-submenu">
-                      <li class="more-button-submenu-item quick-change">
-                          Quick change
-                      </li>
-                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                          data-bs-target="#modifyMedicine">
-                          Advance
-                      </li>
-                  </ul>
-              </div>
-          </li>
-          <li>
-              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-              <img src="./images/trash.png" class="trash-image" alt="">
-          </li>
-      </ul>`
-        }
-        else{
-          j--
-        }
-    }
-    else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
-      if (data.split("\n")[i].split("&&")[4]== "Đông dược"){
-        wrapper.innerHTML += `<ul class="medicine-item">
-        <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-        <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-        <li>
-            <div class="done">Done</div>
-            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-            <div class="more-button-submenu-wrapper">
-                <ul class="more-button-submenu">
-                    <li class="more-button-submenu-item quick-change">
-                        Quick change
-                    </li>
-                    <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                        data-bs-target="#modifyMedicine">
-                        Advance
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="">
-        </li>
-    </ul>`
-      }
-      else{
-        j--;
-      }
-    }
-    else{
-      console.log("none")
-    }
-  }
   checkAccount();
 }
