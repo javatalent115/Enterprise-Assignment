@@ -7,14 +7,14 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "Producer")
+@Table(name = "Producers")
 public class Producer {
 
     @Id
-    @Column
+    @Column(length = 1024)
     private String id;
 
-    @Column
+    @Column(length = 1024)
     private String name;
 
     public Producer() {}

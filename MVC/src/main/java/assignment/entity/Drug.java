@@ -6,7 +6,7 @@ import java.util.Random;
 import assignment.entity.Producer;
 
 @Entity
-@Table(name = "Drug")
+@Table(name = "Drugs")
 public class Drug implements Comparable {
     @Id
     @Column

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "Customer")
+@Table(name = "Customers")
 public class Customer {
     @Id
     @Column(length = 1024)
@@ -23,7 +23,7 @@ public class Customer {
     private String address;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private List<Transaction> transactionList;
+    private List<Order> orderList;
 
     public String getUsername() {
         return username;
@@ -65,12 +65,12 @@ public class Customer {
         this.address = address;
     }
 
-    public List<Transaction> getTransactionList() {
-        return transactionList;
+    public List<Order> getTransactionList() {
+        return orderList;
     }
 
-    public void setTransactionList(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+    public void setTransactionList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 
     @Override

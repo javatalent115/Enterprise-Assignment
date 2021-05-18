@@ -1,7 +1,7 @@
 package assignment.service;
 
-import assignment.entity.Order;
-import assignment.repository.OrderRepo;
+import assignment.entity.OrderDetail;
+import assignment.repository.OrderDetailRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,34 +13,34 @@ import java.util.Optional;
 @Service
 public class OrderService {
     @Autowired
-    OrderRepo OrderRepo;
+    OrderDetailRepo OrderDetailRepo;
 
-    public void addOrder(Order order){
-        this.OrderRepo.save(order);
+    public void addOrder(OrderDetail orderDetail){
+        this.OrderDetailRepo.save(orderDetail);
     }
 
-    public List<Order> getAllOrders(){
-        return this.OrderRepo.findAll();
+    public List<OrderDetail> getAllOrders(){
+        return this.OrderDetailRepo.findAll();
     }
 
     public void deleteByOrderId(String id) {
-        this.OrderRepo.deleteById(id);
+        this.OrderDetailRepo.deleteById(id);
     }
 
-    public Order getOrderById(String id) {
-        Optional<Order> result = this.OrderRepo.findById(id);
+    public OrderDetail getOrderById(String id) {
+        Optional<OrderDetail> result = this.OrderDetailRepo.findById(id);
         return result.orElse(null);
     }
 
-//    public void updateOrderById(String id, Order newOrder) {
+//    public void updateOrderById(String id, OrderDetail newOrder) {
 //        getOrderById(id).replace(newOrder);
 //    }
 
     public long countOrder() {
-        return this.OrderRepo.count();
+        return this.OrderDetailRepo.count();
     }
 
     public void deleteAllOrder() {
-        this.OrderRepo.deleteAll();
+        this.OrderDetailRepo.deleteAll();
     }
 }

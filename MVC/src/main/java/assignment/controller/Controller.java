@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class Controller {
     @Autowired
     private DrugService drugService;

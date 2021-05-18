@@ -1,7 +1,7 @@
 package assignment.service;
 
-import assignment.entity.Transaction;
-import assignment.repository.TransactionRepo;
+import assignment.entity.Order;
+import assignment.repository.OrderRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,34 +13,34 @@ import java.util.Optional;
 @Service
 public class TransactionService {
     @Autowired
-    TransactionRepo TransactionRepo;
+    OrderRepo OrderRepo;
 
-    public void addTransaction(Transaction transaction){
-        this.TransactionRepo.save(transaction);
+    public void addTransaction(Order order){
+        this.OrderRepo.save(order);
     }
 
-    public List<Transaction> getAllTransactions(){
-        return this.TransactionRepo.findAll();
+    public List<Order> getAllTransactions(){
+        return this.OrderRepo.findAll();
     }
 
     public void deleteByTransactionId(String id) {
-        this.TransactionRepo.deleteById(id);
+        this.OrderRepo.deleteById(id);
     }
 
-    public Transaction getTransactionById(String id) {
-        Optional<Transaction> result = this.TransactionRepo.findById(id);
+    public Order getTransactionById(String id) {
+        Optional<Order> result = this.OrderRepo.findById(id);
         return result.orElse(null);
     }
 
-//    public void updateTransactionById(String id, Transaction newTransaction) {
+//    public void updateTransactionById(String id, Order newTransaction) {
 //        getTransactionById(id).replace(newTransaction);
 //    }
 
     public long countTransaction() {
-        return this.TransactionRepo.count();
+        return this.OrderRepo.count();
     }
 
     public void deleteAllTransaction() {
-        this.TransactionRepo.deleteAll();
+        this.OrderRepo.deleteAll();
     }
 }
