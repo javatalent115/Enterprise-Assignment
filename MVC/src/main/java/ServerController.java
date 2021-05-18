@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("http://localhost:5500")
+@CrossOrigin("http://localhost:8080")
 public class ServerController {
 
     @PostMapping(value = "/api/getDrugs")
