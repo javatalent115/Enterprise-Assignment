@@ -156,7 +156,6 @@ $(document).ready(function(){
 });
 
 $(document).on("click",".confirm-delete",function(){
-  console.log("hello")
   img.parent().parent().remove()
   deleteDrug(img.parent().parent().find(".id").text())
 })
@@ -183,7 +182,7 @@ async function deleteDrug(id){
           let result = Object.values(data);
           console.log(result[0]);
           if (result[0] !=="failed"){
-              await addAllItem(itemDisplayAtATime)
+              await addItem(itemDisplayAtATime)
           }
           return data;
       }
@@ -605,7 +604,6 @@ $(document).on("click",".dropdown-item-sort",async function(){
       }
     }
     localStorage.setItem("data", all);
-    console.log(all)
     addItem(itemDisplayAtATime)
   }
   else if(menu =="Money (Low to High)"){
@@ -627,7 +625,6 @@ $(document).on("click",".dropdown-item-sort",async function(){
     }
     localStorage.setItem("data", all);
     addItem(itemDisplayAtATime)
-    console.log("hello")
   }
   else if(menu == "ID"){
     addAllItem(itemDisplayAtATime)

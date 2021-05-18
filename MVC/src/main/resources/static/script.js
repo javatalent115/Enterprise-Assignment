@@ -182,7 +182,7 @@ async function deleteDrug(id){
           let result = Object.values(data);
           console.log(result[0]);
           if (result[0] !=="failed"){
-              await addAllItem(itemDisplayAtATime)
+              await addItem(itemDisplayAtATime)
           }
           return data;
       }

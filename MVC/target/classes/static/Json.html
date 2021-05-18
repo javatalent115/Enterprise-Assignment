@@ -95,11 +95,12 @@
     }
     async function updateDrug(){
         let Drug = {
-            id: "asd",
-            money: "22",
+            type: "...", // ("Thuốc kê đơn" or "Thuốc không kê đơn" or "none")
+            group: "...", // ("Tân dược" or "Đông dược" or "none")
+            sortType: "..."  // ("money-asc" or "money-des" or "name-asc" or "name-des" or "none")
         };
         try {
-            let res = await fetch('http://localhost:8080/api/updateDrug', {
+            let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
