@@ -25,8 +25,8 @@ public class Handler {
         return service.saveDrug(drug);
     }
 
-    public static List updateDrug(String id, int money, String type){
-        return service.updateDrug(id, money, type);
+    public static List updateDrug(String id, int money, String sortType){
+        return service.updateDrug(id, money, sortType);
     }
 
     public static List getAllDrugs(){
