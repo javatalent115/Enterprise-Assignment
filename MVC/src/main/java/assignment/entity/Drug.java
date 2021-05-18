@@ -244,18 +244,18 @@ public class Drug implements Comparable {
         this.money = money;
     }
 
-    @Override
-    public int compareTo(Object drug) {
-        int compareMoney=((Drug)drug).getMoney();
-        return this.money-compareMoney;
-    }
-
     public Producer getProducers() {
         return producer;
     }
 
-    private int getMoney() {
+    public int getMoney() {
         return money;
+    }
+
+    @Override
+    public int compareTo(Object drug) {
+        int compareMoney=((Drug)drug).getMoney();
+        return this.money-compareMoney;
     }
 
     public void replace(Drug drug) {
@@ -265,7 +265,6 @@ public class Drug implements Comparable {
         this.drugGroup = drug.getDrugGroup();
         this.dosage = drug.getDosage();
         this.id = drug.getId();
-        this.dosage = drug.getDosage();
         this.ingredients = drug.getIngredients();
         this.packaging = drug.getPackaging();
         this.money = drug.getMoney();
