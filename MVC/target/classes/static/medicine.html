@@ -446,6 +446,16 @@
             </div>
             <div class="medicine-detail-wrapper">
                 <div class="search-wrapper-2">
+                    <div class="dropdown type">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                          Type
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item dropdown-item-type">Thuốc kê đơn</a></li>
+                          <li><a class="dropdown-item dropdown-item-type">Thuốc không kê đơn</a></li>
+                          <li><a class="dropdown-item dropdown-item-type">Both</a></li>
+                        </ul>
+                    </div>
                     <div class="dropdown filter">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           Type
@@ -487,6 +497,7 @@
                     </div>
                 </div>
                 <div class="medicines">
+                    
                     <ul class="medicine-item">
                         <li class="changeAble id">ID</li>
                         <li class="changeAble name">Name</li>
@@ -504,6 +515,11 @@
                             <img src="./images/trash.png" class="trash-image" alt="" style="visibility: hidden;">
                         </li>
                     </ul>
+                    <div class="text-center spinner">
+                        <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
             </div>
             <div id="pagination" class="paginations"></div>
 

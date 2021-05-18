@@ -32,6 +32,7 @@ $("#medicine2").on('keyup', function (e) {
 function intinialize() {
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
   checkAccount();
+  $(".spinner").css("display","block")
   // checkPagination()
 }
 //Initialize cart-item
@@ -419,6 +420,9 @@ async function addAllItem(item) {
     }
   }
   localStorage.setItem("data", all);
+  localStorage.setItem("Thuốc kê đơn",true)
+  localStorage.setItem("Thuốc không kê đơn",true)
+
   addItem(itemDisplayAtATime)
 
 }
@@ -583,6 +587,24 @@ $(document).on("click",".checkbox-filter",function(){
   }
 });
 
+$(document).on("click",".dropdown-item-type",function(){
+  let menu = $(this).text()
+  $(".type").children("button").text(menu)
+  if($(this).text() == "Thuốc kê đơn"){
+    localStorage.setItem("Thuốc kê đơn",true)
+    localStorage.setItem("Thuốc không kê đơn",false)
+  }
+  else if($(this).text() == "Thuốc không kê đơn"){
+    localStorage.setItem($(this).text(),true)
+    localStorage.setItem("Thuốc kê đơn",false)
+  }
+  else{
+    localStorage.setItem("Thuốc kê đơn",true)
+    localStorage.setItem("Thuốc không kê đơn",true)
+  }
+  
+});
+
 $(document).on("click",".dropdown-item-sort",async function(){
   let menu = $(this).text()
   $(".sort").children("button").text(menu)
@@ -633,6 +655,7 @@ $(document).on("click",".dropdown-item-sort",async function(){
 
 async function addItem(item){
   removeAllItem()
+  $(".spinner").css("display","block")
   let wrapper = document.querySelector(".medicines")
   let data;
   if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "true"){
@@ -677,7 +700,7 @@ async function addItem(item){
     localStorage.setItem("data", all);
   }
   else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
-    let res = await fetch('http://localhost:8080/api/getDrugsByGroup', {
+    let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
       method: 'POST',
       headers: {
           'Accept': 'application/json',
@@ -699,6 +722,7 @@ async function addItem(item){
   else{
     localStorage.setItem("data", "");
   }
+  $(".spinner").css("display","none")
   data = localStorage.getItem("data")
   for (let i = 0; i < item; i++) {
       wrapper.innerHTML += `<ul class="medicine-item">

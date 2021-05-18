@@ -446,6 +446,16 @@
             </div>
             <div class="medicine-detail-wrapper">
                 <div class="search-wrapper-2">
+                    <div class="dropdown type">
+                        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                          Type
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                          <li><a class="dropdown-item dropdown-item-type">Thuốc kê đơn</a></li>
+                          <li><a class="dropdown-item dropdown-item-type">Thuốc không kê đơn</a></li>
+                          <li><a class="dropdown-item dropdown-item-type">Both</a></li>
+                        </ul>
+                    </div>
                     <div class="dropdown filter">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                           Type
@@ -487,8 +497,10 @@
                     </div>
                 </div>
                 <div class="medicines">
+                    
                     <ul class="medicine-item">
-                        <li class="changeAble id">ID</li>
+                        <li class="changeAble id" data-bs-toggle="modal"
+                        data-bs-target="#modifyMedicine">ID</li>
                         <li class="changeAble name">Name</li>
                         <li class="changeAble stock">Stock</li>
                         <li class="changeAble amount">Amount</li>
@@ -504,6 +516,11 @@
                             <img src="./images/trash.png" class="trash-image" alt="" style="visibility: hidden;">
                         </li>
                     </ul>
+                    <div class="text-center spinner">
+                        <div class="spinner-border" role="status" style="width: 5rem; height: 5rem;">
+                          <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
             </div>
             <div id="pagination" class="paginations"></div>
 
@@ -602,65 +619,84 @@
             background-image: linear-gradient(top, #D0D0D0, #EBEBEB);
             text-decoration: none;
         }
+        .a{
+            background-image: url("./images/modify-modal-background.png");
+            background-size: 100% 100%;
+        }
+        .a div input{
+            height: 28px;
+            background:#023a57;
+            color: white;
+            border: 1px solid white;
+
+        }
+        .a .d-flex button{
+            color: white;
+            background:#64c2f7;
+            border-radius: 9px;
+            border: none;
+        }
+
     </style>
 
 
     <!-- Modal  -->
     <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <div class="about-us">
-                        Modify medicine
+                <div class="modal-body a">
+                    <div class="row text-light mb-3 justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Medicine name
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
+                        </div>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <form class="">
-                        <div class="mb-3">
-                            <label for="validationTextarea" class="form-label">Textarea</label>
-                            <input class="form-control" type="text" placeholder="Default input"
-                                aria-label="default input example">
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            ID:
                         </div>
-
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
-                            <label class="form-check-label" for="validationFormCheck1">Check this checkbox</label>
-                            <div class="invalid-feedback">Example invalid feedback text</div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
                         </div>
-
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked"
-                                required>
-                            <label class="form-check-label" for="validationFormCheck2">Toggle this radio</label>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Product by:
                         </div>
-                        <div class="form-check mb-3">
-                            <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked"
-                                required>
-                            <label class="form-check-label" for="validationFormCheck3">Or toggle this other
-                                radio</label>
-                            <div class="invalid-feedback">More example invalid feedback text</div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
                         </div>
-
-                        <div class="mb-3">
-                            <select class="form-select" required aria-label="select example">
-                                <option value="">Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Unit:
                         </div>
-
-                        <div class="mb-3">
-                            <input type="file" class="form-control" aria-label="file example" required>
-                            <div class="invalid-feedback">Example invalid form file feedback</div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
                         </div>
-
-
-                </div>
-                <div class="modal-footer"
-                    style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px;">
-                    <button class="done-button" data-bs-dismiss="modal" aria-label="Close">Done</button>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Category:
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
+                        </div>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Ingreient:
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button class="px-4 mx-2" data-bs-dismiss="modal">Cancel</button>
+                        <button class="px-4 mx-2" data-bs-dismiss="modal">Done</button>
+                    </div>
                 </div>
             </div>
         </div>
