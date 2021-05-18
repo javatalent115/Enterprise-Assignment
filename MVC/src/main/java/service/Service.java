@@ -85,13 +85,13 @@ public class Service {
                 drug.setProducers(producers);
                 sessionFactory.getCurrentSession().save(drug);
                 result.add("success");
+                Handler.drugs = getDrugsList();
                 return result;
             }
         }
         result.add("failed");
         return result;
     }
-
 
     public List getDrugsList(){
         CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
@@ -101,6 +101,7 @@ public class Service {
         Query<Drug> q = sessionFactory.getCurrentSession().createQuery(query);
         return q.getResultList();
     }
+
     public List getProducersList(){
         CriteriaBuilder builder = sessionFactory.getCurrentSession().getCriteriaBuilder();
         CriteriaQuery<Producers> query = builder.createQuery(Producers.class);
@@ -110,41 +111,21 @@ public class Service {
         return q.getResultList();
     }
 
-    public List getDrugs(){
-        Handler.drugs = getDrugsList();
-        return Handler.drugs;
-    }
-
-    public List getProducers(){
-        Handler.producers = getDrugsList();
-        return Handler.producers;
-    }
-
-    public List updateDrugMoney(String id, int money){
+    public List updateDrug(String id, int value, String type){
         List<String> result = new ArrayList<>();
         for (Object o : Handler.drugs) {
             Drug drug = (Drug) o;
             if (drug.getId().equals(id)) {
-                drug.setMoney(money);
+                if (type.equals("money")) drug.setMoney(value);
+                else drug.setStock(value);
                 sessionFactory.getCurrentSession().update(drug);
-                Handler.drugs = getDrugs();
+                Handler.drugs = getDrugsList();
                 result.add("success");
                 return result;
             }
         }
         result.add("failed");
         return result;
-    }
-
-    public List searchDrugsById(String id){
-        List<String> l = new ArrayList<>();
-        for (Object o : Handler.drugs) {
-            Drug drug = (Drug) o;
-            if (drug.getId().contains(id)) {
-                l.add(drug.toString());
-            }
-        }
-        return l;
     }
 
     public List getNOP (String producerID){
@@ -161,45 +142,73 @@ public class Service {
     }
 
     public List getDrugsByGroup(String group){
-        List<String> result = new ArrayList<>();
+        List<Drug> result = new ArrayList<>();
         for (int i = 0; i < Handler.drugs.size(); i++) {
             Drug drug = (Drug) Handler.drugs.get(i);
             if (drug.getDrugGroup().equals(group)) {
-                result.add(drug.toString());
+                result.add(drug);
             }
         }
         return result;
-    }
-
-    public List sortDrugsName(){
-        List<Drug> list = new ArrayList<>();
-        list = (List<Drug>) Handler.drugs.subList(0,Handler.drugs.size()-1);
-        list.sort(new Comparator<Drug>() {
-            public int compare(Drug drug1, Drug drug2) {
-                return drug1.getName().compareTo(drug2.getName());
-            }
-        });
-        return list;
     }
 
     public List getDrugsByType(String type){
-        List<String> result = new ArrayList<>();
+        List<Drug> result = new ArrayList<>();
         for (int i = 0; i < Handler.drugs.size(); i++) {
             Drug drug = (Drug) Handler.drugs.get(i);
             if (drug.getType().equals(type)) {
-                result.add(drug.toString());
+                result.add(drug);
             }
         }
         return result;
     }
 
-    public List getDrugsByTypeAndGroup(String group, String type){
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i < Handler.drugs.size(); i++) {
-            Drug drug = (Drug) Handler.drugs.get(i);
-            if (drug.getType().equals(type) && drug.getDrugGroup().equals(group)) {
-                result.add(drug.toString());
+    public List getDrugsByFilter(String group, String type, String sortType){
+        List<Drug> result;
+        if (!group.equals("none")){
+            if (type.equals("none")){
+                result = getDrugsByGroup(group);
             }
+            else {
+                result = new ArrayList<>();
+                for (int i = 0; i < Handler.drugs.size(); i++) {
+                    Drug drug = (Drug) Handler.drugs.get(i);
+                    if (drug.getType().equals(type) && drug.getDrugGroup().equals(group)) {
+                        result.add(drug);
+                    }
+                }
+            }
+        }
+        else {
+            if (!type.equals("none")) {
+                result = getDrugsByType("type");
+            }
+            else result = Handler.drugs.subList(0,Handler.drugs.size()-1);
+        }
+        switch (sortType) {
+            case "money-asc":
+                Collections.sort(result);
+                break;
+            case "money-des":
+                Collections.sort(result);
+                Collections.reverse(result);
+                break;
+            case "name-asc":
+                result.sort(new Comparator<Drug>() {
+                    public int compare(Drug drug1, Drug drug2) {
+                        return drug1.getName().compareTo(drug2.getName());
+                    }
+                });
+                break;
+            case "name-des":
+                result.sort(new Comparator<Drug>() {
+                    public int compare(Drug drug1, Drug drug2) {
+                        return drug1.getName().compareTo(drug2.getName());
+                    }
+                });
+                Collections.reverse(result);
+                break;
+            default: break;
         }
         return result;
     }
@@ -215,6 +224,7 @@ public class Service {
         }
         sessionFactory.getCurrentSession().save(newProducer);
         result.add("success");
+        Handler.producers = getProducersList();
         return result;
     }
 
@@ -224,7 +234,7 @@ public class Service {
             Drug drug = (Drug) o;
             if (drug.getId().equals(id)) {
                 sessionFactory.getCurrentSession().delete(drug);
-                Handler.drugs = getDrugs();
+                Handler.drugs = getDrugsList();
                 result.add("success");
                 return result;
             }

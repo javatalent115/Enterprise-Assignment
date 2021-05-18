@@ -14,6 +14,7 @@ import java.util.Map;
 @CrossOrigin("http://localhost:8080")
 public class ServerController {
 
+    /////////////// Drug //////////////////////////////
     @PostMapping(value = "/api/getDrugs")
     public Map<String, String> getDrugs(){
         List list = Handler.getAllDrugs();
@@ -35,18 +36,7 @@ public class ServerController {
     @PostMapping(value = "/api/updateDrug")
     public Map<String, String> updateDrug(@RequestBody Map<String, String> data){
         Map<String, String> map = new HashMap<>();
-        map.put("0", (String) Handler.updateDrugMoney(data.get("id"), Integer.parseInt(data.get("money"))).get(0));
-        return map;
-    }
-
-    @PostMapping(value = "/api/getProducers")
-    public Map<String, String> getProducers(){
-        List list = Handler.getAllProducers();
-        Map<String, String> map = new HashMap<>();
-        for (int i = 0; i< list.size(); i++){
-            Producers producer = (Producers) list.get(i);
-            map.put(Integer.toString(i), producer.toString());
-        }
+        map.put("0", (String) Handler.updateDrug(data.get("id"), Integer.parseInt(data.get("money")), data.get("type")).get(0));
         return map;
     }
 
@@ -59,93 +49,28 @@ public class ServerController {
         return map;
     }
 
+    @PostMapping(value = "/api/getDrugsByFilter")
+    public List getDrugsByFilter(@RequestBody Map<String, String> data){
+        return Handler.getDrugsByFilter(data.get("group"), data.get("type"), data.get("sort"));
+    }
+
+
+    /////////////// Producer //////////////////////////////
+    @PostMapping(value = "/api/getProducers")
+    public Map<String, String> getProducers(){
+        List list = Handler.getAllProducers();
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0; i< list.size(); i++){
+            Producers producer = (Producers) list.get(i);
+            map.put(Integer.toString(i), producer.toString());
+        }
+        return map;
+    }
+
     @PostMapping(value = "/api/addProducer")
     public Map<String, String> addProducer(@RequestBody Map<String, String> data){
         Map<String, String> map = new HashMap<>();
         map.put("0", (String) Handler.saveProducer(new Producers(data.get("id"),data.get("name"))).get(0));
-        return map;
-    }
-
-    @PostMapping(value = "/api/getDrugsByType")
-    public Map<String, String> getDrugsByType(@RequestBody String type){
-        List list = Handler.getDrugsByType(type);
-        Map<String, String> map = new HashMap<>();
-        for (int i = 0; i< list.size(); i++){
-            map.put(Integer.toString(i), (String) list.get(i));
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/getDrugsByGroup")
-    public Map<String, String> getDrugsByGroup(@RequestBody String group){
-        List list = Handler.getDrugsByGroup(group);
-        Map<String, String> map = new HashMap<>();
-        for (int i = 0; i< list.size(); i++){
-            map.put(Integer.toString(i), (String) list.get(i));
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/sortDrugsNameAsc")
-    public Map<String,String>sortDrugsNameAsc(){
-        List list = Handler.sortDrugsName();
-        Map<String, String> map = new HashMap<>();
-        for (int i = 0; i< list.size(); i++){
-            map.put(Integer.toString(i), (String) list.get(i));
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/sortDrugsNameDes")
-    public Map<String,String>sortDrugsNameDes(){
-        List list = Handler.sortDrugsName();
-        Collections.reverse(list);
-        Map<String, String> map = new HashMap<>();
-        for (int i = 0; i< list.size(); i++){
-            map.put(Integer.toString(i), (String) list.get(i));
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/getDrugsByGroupAndType")
-    public Map<String,String> getDrugsByTypeAndGroup(@RequestBody Map<String, String> data){
-        List list = Handler.getDrugsByTypeAndGroup(data.get("group"), data.get("type"));
-        Map<String, String> map = new HashMap<>();
-        for (int i = 0; i< list.size(); i++){
-            map.put(Integer.toString(i), (String) list.get(i));
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/sortDrugAsc")
-    public Map<String, String> getDrugsSortAsc(){
-        HashMap<String,String> map = new HashMap<>();
-        List list =  Handler.getDrugSortAsc();
-        for (int i = 0; i< list.size(); i++){
-            Drug drug = (Drug) list.get(i);
-            map.put(Integer.toString(i), drug.toString());
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/sortDrugDes")
-    public Map<String, String> getDrugsSortDes(){
-        HashMap<String,String> map = new HashMap<>();
-        List list =  Handler.getDrugSortDes();
-        for (int i = 0; i< list.size(); i++){
-            Drug drug = (Drug) list.get(i);
-            map.put(Integer.toString(i), drug.toString());
-        }
-        return map;
-    }
-
-    @PostMapping(value = "/api/searchDrugsById")
-    public Map<String, String> searchDrugsById(@RequestBody String id){
-        HashMap<String,String> map = new HashMap<>();
-        List list =  Handler.searchDrugsById(id);
-        for (int i = 0; i< list.size(); i++){
-            map.put(Integer.toString(i), (String) list.get(i));
-        }
         return map;
     }
 
@@ -156,6 +81,8 @@ public class ServerController {
         return map;
     }
 
+
+    //////////// Authentication //////////////////////
     @PostMapping(value = "/api/authUser")
     public Map<String, String> isValid(@RequestBody Map<String, String> user){
         Map<String, String> map = new HashMap<>();

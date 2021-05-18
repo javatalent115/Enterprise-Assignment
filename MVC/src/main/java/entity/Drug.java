@@ -186,4 +186,8 @@ public class Drug implements Comparable {
     private int getMoney() {
         return money;
     }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }

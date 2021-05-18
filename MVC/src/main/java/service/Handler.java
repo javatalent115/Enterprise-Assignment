@@ -15,6 +15,8 @@ public class Handler {
 
     public static void setupDatabase(){ service.setupDatabase(); }
 
+
+    ///////////////// Drug ///////////////////////
     public static List deleteDrug(String id){
         return service.deleteDrug(id);
     }
@@ -23,54 +25,30 @@ public class Handler {
         return service.saveDrug(drug);
     }
 
+    public static List updateDrug(String id, int money, String type){
+        return service.updateDrug(id, money, type);
+    }
+
+    public static List getAllDrugs(){
+        return drugs;
+    }
+
+    public static List getDrugsByFilter(String group, String type, String sortType){
+        return service.getDrugsByFilter(group, type, sortType);
+    }
+
+
+    ///////////////// Producer///////////////////////
     public static List saveProducer(Producers producer){
         return service.saveProducer(producer);
     }
 
-    public static List updateDrugMoney(String id, int money){
-        return service.updateDrugMoney(id, money);
-    }
-
     public static List getAllProducers(){
-        return service.getProducers();
-    }
-
-    public static List getAllDrugs(){
-        return service.getDrugs();
-    }
-
-    public static List getDrugsByGroup(String group){
-        return service.getDrugsByGroup(group);
-    }
-
-    public static List getDrugsByType(String type){
-        return service.getDrugsByType(type);
-    }
-
-    public static List getDrugsByTypeAndGroup(String group, String type){ return service.getDrugsByTypeAndGroup(group,type); }
-
-    public static List getDrugSortAsc(){
-        List<Drug> list = (List<Drug>) getAllDrugs();
-        Collections.sort(list);
-        return list;
-    }
-
-    public static List getDrugSortDes(){
-        List<Drug> list = (List<Drug>) getAllDrugs();
-        Collections.sort(list);
-        Collections.reverse(list);
-        return list;
-    }
-
-    public static List searchDrugsById(String id){
-        return service.searchDrugsById(id);
+        return producers;
     }
 
     public static List getNOP (String producerID){
         return service.getNOP(producerID);
     }
 
-    public static List sortDrugsName(){
-        return service.sortDrugsName();
-    }
 }
