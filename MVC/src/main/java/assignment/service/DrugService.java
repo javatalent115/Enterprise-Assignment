@@ -87,7 +87,9 @@ public class DrugService {
             if (!type.equals("none")) {
                 result = getDrugsByType(type);
             }
-            else result = drugList.subList(0,drugList.size()-1);
+            else{
+                result = new ArrayList<>(drugList);
+            }
         }
         switch (sortType) {
             case "money-asc":
@@ -100,7 +102,7 @@ public class DrugService {
             case "name-asc":
                 result.sort(new Comparator<Drug>() {
                     public int compare(Drug drug1, Drug drug2) {
-                        return drug1.getName().compareTo(drug2.getName());
+                        return drug1.getName().toLowerCase().compareTo(drug2.getName().toLowerCase());
                     }
                 });
                 break;
@@ -108,7 +110,7 @@ public class DrugService {
                 result.sort(new Comparator<Drug>() {
                     @Override
                     public int compare(Drug drug1, Drug drug2) {
-                        return drug1.getName().compareTo(drug2.getName());
+                        return drug1.getName().toLowerCase().compareTo(drug2.getName().toLowerCase());
                     }
                 });
                 Collections.reverse(result);
