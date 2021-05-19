@@ -19,7 +19,6 @@ import java.util.*;
 
 @Transactional
 public class Service {
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -181,9 +180,9 @@ public class Service {
         }
         else {
             if (!type.equals("none")) {
-                result = getDrugsByType("type");
+                result = getDrugsByType(type);
             }
-            else result = Handler.drugs.subList(0,Handler.drugs.size()-1);
+            else result = getDrugsList();
         }
         switch (sortType) {
             case "money-asc":

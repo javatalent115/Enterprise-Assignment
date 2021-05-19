@@ -463,11 +463,11 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item checkbox-filter">
                                 <img src="./images/checked.png" alt="" class="check-box">
-                                <span>Tan Duoc</span>
+                                <span>Tân dược</span>
                             </a></li>
                             <li><a class="dropdown-item checkbox-filter">
                                 <img src="./images/checked.png" alt="" class="check-box">
-                                <span>Dong Duoc</span>
+                                <span>Đông dược</span>
                             </a>
                             </li>
                         </ul>
@@ -478,10 +478,10 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                           <li><a class="dropdown-item dropdown-item-sort">Name (A-Z)</a></li>
-                          <li><a class="dropdown-item dropdown-item-sort">ID</a></li>
                           <li><a class="dropdown-item dropdown-item-sort">Name (Z-A)</a></li>
-                          <li><a class="dropdown-item dropdown-item-sort">Money (Low to High)</a></li>
-                          <li><a class="dropdown-item dropdown-item-sort">Money (High to Low)</a></li>
+                          <li><a class="dropdown-item dropdown-item-sort">Money (low - high)</a></li>
+                          <li><a class="dropdown-item dropdown-item-sort">Money (high - low)</a></li>
+                          <li><a class="dropdown-item dropdown-item-sort">ID</a></li>
                         </ul>
                     </div>
                     <div>
@@ -499,13 +499,14 @@
                 <div class="medicines">
                     
                     <ul class="medicine-item">
-                        <li class="changeAble id">ID</li>
-                        <li class="changeAble name">Name</li>
-                        <li class="changeAble stock">Stock</li>
+                        <li class="changeAble id" data-bs-toggle="modal"
+                        data-bs-target="#modifyMedicine">ID</li>
+                        <li class="name">Name</li>
+                        <li class="stock">Stock</li>
                         <li class="changeAble amount">Amount</li>
                         <li class="changeAble price">Price</li>
                         <li>
-                            <div class="done">Done</div>
+                            <div class="done" data>Done</div>
                             <img src="./images/more.png" class="more-image more-button"
                                 style="cursor: pointer; visibility: hidden;">
                         </li>
@@ -618,72 +619,91 @@
             background-image: linear-gradient(top, #D0D0D0, #EBEBEB);
             text-decoration: none;
         }
+        .a{
+            background-image: url("./images/modify-modal-background.png");
+            background-size: 100% 100%;
+        }
+        .a div input{
+            height: 28px;
+            background:#023a57;
+            color: white;
+            border: 1px solid white;
+
+        }
+        .a .d-flex button{
+            color: white;
+            background:#64c2f7;
+            border-radius: 9px;
+            border: none;
+        }
+
     </style>
 
 
     <!-- Modal  -->
     <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
-                <div class="modal-header">
-                    <div class="about-us">
-                        Modify medicine
+                <div class="modal-body a">
+                    <div class="row text-light mb-3 justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Medicine name
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
+                        </div>
                     </div>
-                </div>
-                <div class="modal-body">
-                    <form class="">
-                        <div class="mb-3">
-                            <label for="validationTextarea" class="form-label">Textarea</label>
-                            <input class="form-control" type="text" placeholder="Default input"
-                                aria-label="default input example">
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            ID:
                         </div>
-
-                        <div class="form-check mb-3">
-                            <input type="checkbox" class="form-check-input" id="validationFormCheck1" required>
-                            <label class="form-check-label" for="validationFormCheck1">Check this checkbox</label>
-                            <div class="invalid-feedback">Example invalid feedback text</div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
                         </div>
-
-                        <div class="form-check">
-                            <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked"
-                                required>
-                            <label class="form-check-label" for="validationFormCheck2">Toggle this radio</label>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Product by:
                         </div>
-                        <div class="form-check mb-3">
-                            <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked"
-                                required>
-                            <label class="form-check-label" for="validationFormCheck3">Or toggle this other
-                                radio</label>
-                            <div class="invalid-feedback">More example invalid feedback text</div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
                         </div>
-
-                        <div class="mb-3">
-                            <select class="form-select" required aria-label="select example">
-                                <option value="">Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                            <div class="invalid-feedback">Example invalid select feedback</div>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Unit:
                         </div>
-
-                        <div class="mb-3">
-                            <input type="file" class="form-control" aria-label="file example" required>
-                            <div class="invalid-feedback">Example invalid form file feedback</div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
                         </div>
-
-
-                </div>
-                <div class="modal-footer"
-                    style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px;">
-                    <button class="done-button" data-bs-dismiss="modal" aria-label="Close">Done</button>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Category:
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
+                        </div>
+                    </div>
+                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
+                        <div class="col-4 text-end">
+                            Ingreient:
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="" id="">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button class="px-4 mx-2" data-bs-dismiss="modal">Cancel</button>
+                        <button class="px-4 mx-2" data-bs-dismiss="modal">Done</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!--Delete Modal  -->
+    <!--Confirm Delete Modal  -->
     <div class="modal fade" id="delete-confirm-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -702,6 +722,26 @@
         </div>
     </div>
 
+    <!--Add company Modal  -->
+    <div class="modal fade" id="add-company-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <select id="company-select">
+
+            </select>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary confirm-delete" data-bs-dismiss="modal">Yes</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
 
 

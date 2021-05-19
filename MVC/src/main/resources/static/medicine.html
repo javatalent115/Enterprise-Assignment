@@ -463,11 +463,11 @@
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item checkbox-filter">
                                 <img src="./images/checked.png" alt="" class="check-box">
-                                <span>Tan Duoc</span>
+                                <span>Tân dược</span>
                             </a></li>
                             <li><a class="dropdown-item checkbox-filter">
                                 <img src="./images/checked.png" alt="" class="check-box">
-                                <span>Dong Duoc</span>
+                                <span>Đông dược</span>
                             </a>
                             </li>
                         </ul>
@@ -478,10 +478,10 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                           <li><a class="dropdown-item dropdown-item-sort">Name (A-Z)</a></li>
-                          <li><a class="dropdown-item dropdown-item-sort">ID</a></li>
                           <li><a class="dropdown-item dropdown-item-sort">Name (Z-A)</a></li>
-                          <li><a class="dropdown-item dropdown-item-sort">Money (Low to High)</a></li>
-                          <li><a class="dropdown-item dropdown-item-sort">Money (High to Low)</a></li>
+                          <li><a class="dropdown-item dropdown-item-sort">Money (low - high)</a></li>
+                          <li><a class="dropdown-item dropdown-item-sort">Money (high - low)</a></li>
+                          <li><a class="dropdown-item dropdown-item-sort">ID</a></li>
                         </ul>
                     </div>
                     <div>
@@ -501,12 +501,12 @@
                     <ul class="medicine-item">
                         <li class="changeAble id" data-bs-toggle="modal"
                         data-bs-target="#modifyMedicine">ID</li>
-                        <li class="changeAble name">Name</li>
-                        <li class="changeAble stock">Stock</li>
+                        <li class="name">Name</li>
+                        <li class="stock">Stock</li>
                         <li class="changeAble amount">Amount</li>
                         <li class="changeAble price">Price</li>
                         <li>
-                            <div class="done">Done</div>
+                            <div class="done" data>Done</div>
                             <img src="./images/more.png" class="more-image more-button"
                                 style="cursor: pointer; visibility: hidden;">
                         </li>
@@ -703,7 +703,7 @@
     </div>
 
 
-    <!--Delete Modal  -->
+    <!--Confirm Delete Modal  -->
     <div class="modal fade" id="delete-confirm-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -722,6 +722,26 @@
         </div>
     </div>
 
+    <!--Add company Modal  -->
+    <div class="modal fade" id="add-company-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <select id="company-select">
+
+            </select>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary confirm-delete" data-bs-dismiss="modal">Yes</button>
+            </div>
+        </div>
+        </div>
+    </div>
 
 
 

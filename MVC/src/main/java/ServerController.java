@@ -50,8 +50,14 @@ public class ServerController {
     }
 
     @PostMapping(value = "/api/getDrugsByFilter")
-    public List getDrugsByFilter(@RequestBody Map<String, String> data){
-        return Handler.getDrugsByFilter(data.get("group"), data.get("type"), data.get("sortType"));
+    public Map<String, String> getDrugsByFilter(@RequestBody Map<String, String> data){
+        List list = Handler.getDrugsByFilter(data.get("group"), data.get("type"), data.get("sortType"));
+        Map <String, String> map = new HashMap<>();
+        for (int i = 0 ; i< list.size(); i++){
+            Drug drug = (Drug) list.get(i);
+            map.put(Integer.toString(i), drug.toString());
+        }
+        return map;
     }
 
 
