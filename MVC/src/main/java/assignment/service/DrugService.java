@@ -14,13 +14,14 @@ import java.util.*;
 public class DrugService {
     @Autowired
     DrugRepo drugRepo;
-
+    private List<Drug> drugList;
     public void addDrug(Drug drug){
         this.drugRepo.save(drug);
     }
 
     public List<Drug> getAllDrugs(){
-        return this.drugRepo.findAll();
+        drugList = this.drugRepo.findAll();
+        return drugList;
     }
 
     public void deleteByDrugId(String id) {
@@ -42,7 +43,7 @@ public class DrugService {
         this.drugRepo.save(drug);
     }
 
-    public List<Drug> getDrugsByGroup(String group, List<Drug> drugList){
+    public List<Drug> getDrugsByGroup(String group){
         List<Drug> result = new ArrayList<>();
         for (Drug drug : drugList) {
             if (drug.getDrugGroup().equals(group)) {
@@ -52,7 +53,7 @@ public class DrugService {
         return result;
     }
 
-    public List<Drug> getDrugsByType(String type, List<Drug> drugList){
+    public List<Drug> getDrugsByType(String type){
         List<Drug> result = new ArrayList<>();
         for (Drug drug : drugList) {
             if (drug.getType().equals(type)) {
@@ -68,11 +69,10 @@ public class DrugService {
     }
 
     public List<Drug> getDrugsByFilter(String group, String type, String sortType){
-        List<Drug> drugList = getAllDrugs();
         List<Drug> result;
         if (!group.equals("none")){
             if (type.equals("none")){
-                result = getDrugsByGroup(group, drugList);
+                result = getDrugsByGroup(group);
             }
             else {
                 result = new ArrayList<>();
@@ -85,7 +85,7 @@ public class DrugService {
         }
         else {
             if (!type.equals("none")) {
-                result = getDrugsByType(type, drugList);
+                result = getDrugsByType(type);
             }
             else result = drugList.subList(0,drugList.size()-1);
         }

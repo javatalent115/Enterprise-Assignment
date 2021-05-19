@@ -5,6 +5,7 @@ import assignment.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,10 +16,12 @@ import java.util.Map;
 public class DrugController {
     @Autowired
     private DrugService drugService;
-
+    private List<Drug> list = new ArrayList<>();
     @RequestMapping(path = "", method = RequestMethod.GET)
     public Map<String, String> getAllDrugs(){
-        List<Drug> list =drugService.getAllDrugs();
+        if (list.size() == 0){
+            list = drugService.getAllDrugs();
+        }
         Map <String, String> map = new HashMap<>();
         for (int i = 0 ; i< list.size(); i++){
             Drug drug = list.get(i);
@@ -34,10 +37,11 @@ public class DrugController {
         }catch (Exception e){
             return "failed";
         }
+        list = drugService.getAllDrugs();
         return "success";
     }
 
-    @RequestMapping(path = "/getRelation", method = RequestMethod.POST)
+    @RequestMapping(path = "/getRelatedDrugs", method = RequestMethod.POST)
     public Map<String, String> getRelatedDrugs(@RequestBody String id){
         List<Drug> list = drugService.getRelatedDrugs(id);
         Map <String, String> map = new HashMap<>();
@@ -47,14 +51,16 @@ public class DrugController {
         return map;
     }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/deleteDrug", method = RequestMethod.DELETE)
     public void deleteDrugById(@RequestBody String id) {
         drugService.deleteByDrugId(id);
+        list = drugService.getAllDrugs();
     }
 
-    @RequestMapping(path = "", method = RequestMethod.PUT)
+    @RequestMapping(path = "/updateDrug", method = RequestMethod.PUT)
     public void updateDrugById(@RequestBody Map<String, String> data) {
         drugService.updateDrugById(data.get("id"), Integer.parseInt(data.get("money")), Integer.parseInt(data.get("stock")));
+        list = drugService.getAllDrugs();
     }
 
     @PostMapping(value = "/getDrugsByFilter")
