@@ -24,24 +24,24 @@ public class CustomerController {
         customerService.addCustomer(customer);
     }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
-    public void deleteAllCustomers(){
-        customerService.deleteAllCustomer();
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Customer getCustomerById(@PathVariable String id) {
-        return customerService.getCustomerById(id);
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void deleteCustomerById(@PathVariable String id) {
-        customerService.deleteByCustomerId(id);
-    }
-
-//    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-//    public void updateCustomerById(@PathVariable String id, @RequestBody Customer customer) {
-//        customerService.updateCustomerById(id, customer);
+//    @RequestMapping(path = "", method = RequestMethod.DELETE)
+//    public void deleteAllCustomers(){
+//        customerService.deleteAllCustomer();
 //    }
+
+    @RequestMapping(path = "", method = RequestMethod.DELETE)
+    public void deleteCustomerByUsername(@RequestBody String username) {
+        customerService.deleteByCustomerUsername(username.trim());
+    }
+
+    @RequestMapping(path = "/{username}", method = RequestMethod.PUT)
+    public void updateCustomerByUsername(@PathVariable String username, @RequestBody Customer customer) {
+        customerService.updateCustomerByUsername(username, customer);
+    }
+
+    @RequestMapping(path = "/{username}", method = RequestMethod.GET)
+    public Customer getCustomerById(@PathVariable String username) {
+        return customerService.getCustomerByUsername(username.trim());
+    }
 }
 

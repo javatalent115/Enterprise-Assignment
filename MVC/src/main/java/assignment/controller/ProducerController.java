@@ -24,15 +24,10 @@ public class ProducerController {
         producerService.addProducer(producer);
     }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
-    public void deleteAllProducers(){
-        producerService.deleteAllProducer();
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Producer getProducerById(@PathVariable String id) {
-        return producerService.getProducerById(id);
-    }
+//    @RequestMapping(path = "", method = RequestMethod.DELETE)
+//    public void deleteAllProducers(){
+//        producerService.deleteAllProducer();
+//    }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void deleteProducerById(@PathVariable String id) {
@@ -42,6 +37,11 @@ public class ProducerController {
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
     public void updateProducerById(@PathVariable String id, @RequestBody Producer producer) {
         producerService.updateProducerById(id, producer);
+    }
+
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public Producer getProducerById(@PathVariable String id) {
+        return producerService.getProducerById(id);
     }
 }
 

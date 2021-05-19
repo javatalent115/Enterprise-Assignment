@@ -41,6 +41,7 @@ public class Drug implements Comparable {
 
     @Column
     private int stock;
+
     @ManyToOne
     @JoinColumn(name="producer", nullable=false)
     private Producer producer;
@@ -147,11 +148,6 @@ public class Drug implements Comparable {
         this.stock = new Random().nextInt(50)+3;
     }
 
-    @Override
-    public String toString() {
-        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ stock + " -- "+ producer.getId();
-    }
-
     public String getName() {
         return name;
     }
@@ -253,22 +249,13 @@ public class Drug implements Comparable {
     }
 
     @Override
+    public String toString() {
+        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ stock + " -- "+ producer.getId();
+    }
+
+    @Override
     public int compareTo(Object drug) {
         int compareMoney=((Drug)drug).getMoney();
         return this.money-compareMoney;
-    }
-
-    public void replace(Drug drug) {
-        this.name = drug.getName();
-        this.preparation = drug.getPreparation();
-        this.country = drug.getCountry();
-        this.drugGroup = drug.getDrugGroup();
-        this.dosage = drug.getDosage();
-        this.id = drug.getId();
-        this.ingredients = drug.getIngredients();
-        this.packaging = drug.getPackaging();
-        this.money = drug.getMoney();
-        this.stock = drug.getStock();
-        this.type = drug.getType();
     }
 }

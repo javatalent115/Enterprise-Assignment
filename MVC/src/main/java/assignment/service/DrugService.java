@@ -32,9 +32,9 @@ public class DrugService {
         return result.orElse(null);
     }
 
-    public void updateDrugById(String id, Drug newDrug) {
-        getDrugById(id).replace(newDrug);
-    }
+//    public void updateDrugById(String id, Drug newDrug) {
+//        getDrugById(id).replace(newDrug);
+//    }
 
     public long countDrug() {
         return this.drugRepo.count();

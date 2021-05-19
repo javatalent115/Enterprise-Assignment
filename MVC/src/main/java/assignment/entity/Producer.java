@@ -1,6 +1,7 @@
 package assignment.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by CoT on 10/13/17.
@@ -16,6 +17,9 @@ public class Producer {
 
     @Column(length = 1024)
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producer")
+    private List<Drug> drugList;
 
     public Producer() {}
 
@@ -35,6 +39,15 @@ public class Producer {
         this.name = name;
     }
 
+    public List<Drug> getDrugList() {
+        return drugList;
+    }
+
+    public void setDrugList(List<Drug> drugList) {
+        this.drugList = drugList;
+    }
+
+    @Override
     public String toString() {
         return id +" -- " + name ;
     }

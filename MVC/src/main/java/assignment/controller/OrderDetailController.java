@@ -24,10 +24,10 @@ public class OrderDetailController {
         orderService.addOrder(orderDetail);
     }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
-    public void deleteAllOrders(){
-        orderService.deleteAllOrder();
-    }
+//    @RequestMapping(path = "", method = RequestMethod.DELETE)
+//    public void deleteAllOrders(){
+//        orderService.deleteAllOrder();
+//    }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public OrderDetail getOrderById(@PathVariable String id) {

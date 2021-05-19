@@ -24,23 +24,24 @@ public class DrugController {
         drugService.addDrug(drug);
     }
 
+//    @RequestMapping(path = "", method = RequestMethod.DELETE)
+//    public void deleteAllDrugs(){
+//        drugService.deleteAllDrug();
+//    }
+
     @RequestMapping(path = "", method = RequestMethod.DELETE)
-    public void deleteAllDrugs(){
-        drugService.deleteAllDrug();
+    public void deleteDrugById(@RequestBody String id) {
+        drugService.deleteByDrugId(id);
     }
+
+//    @RequestMapping(path = "", method = RequestMethod.PUT)
+//    public void updateDrugById(@RequestBody Drug drug) {
+//        drugService.updateDrugById(drug.getId(), drug);
+//    }
+//TODO update this put request
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public Drug getDrugById(@PathVariable String id) {
         return drugService.getDrugById(id);
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void deleteDrugById(@PathVariable String id) {
-        drugService.deleteByDrugId(id);
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public void updateDrugById(@PathVariable String id, @RequestBody Drug drug) {
-        drugService.updateDrugById(id, drug);
     }
 }

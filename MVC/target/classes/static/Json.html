@@ -57,8 +57,119 @@
 
     }
 
+    async function addDrug(){
+        let Drug = {
+            id: "asd",
+            name:"aaa",
+            preparation:" ",
+            packaging:" ",
+            drugGroup:" ",
+            dosage:" ",
+            type:" ",
+            ingredients:" ",
+            country:" ",
+            money:"12",
+            stock:"10",
+            producers_id: "AMPHARCO",
+        };
+        try {
+            let res = await fetch('http://localhost:8080/api/addDrug', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(Drug)
+            });
+            if (res.ok) {
+                let data = await res.json();
+                let result = Object.values(data);
+                console.log(result[0]);
+                if (result[0] !=="failed"){
+                    localStorage.setItem("changeDrug", "yes");
+                }
+                return Drug;
+            }
+        }catch (e) {}
+        return 404;
+    }
+    async function updateDrug(){
+        let Drug = {
+            type: "...", // ("Thuốc kê đơn" or "Thuốc không kê đơn" or "none")
+            group: "...", // ("Tân dược" or "Đông dược" or "none")
+            sortType: "..."  // ("money-asc" or "money-des" or "name-asc" or "name-des" or "none")
+        };
+        try {
+            let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(Drug)
+            });
+            if (res.ok) {
+                let data = await res.json();
+                let result = Object.values(data);
+                console.log(result[0]);
+                if (result[0] !=="failed"){
+                    localStorage.setItem("changeDrug", "yes");
+                }
+                return Drug;
+            }
+        }catch (e) {}
+        return 404;
+    }
+
+
+    async function getNOP(){
+        let id = "AMPHARCO";
+        try {
+            let res = await fetch('http://localhost:8080/api/getNOP', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: id
+            });
+            if (res.ok) {
+                let data = await res.json();
+                let result = Object.values(data);
+                console.log(result[0]);
+                if (result[0] !=="failed"){
+                    localStorage.setItem("changeDrug", "yes");
+                }
+                return Drug;
+            }
+        }catch (e) {}
+        return 404;
+    }
+    async function getNOP(){
+        let id = "AMPHARCO";
+        try {
+            let res = await fetch('http://localhost:8080/api/getNOP', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: id
+            });
+            if (res.ok) {
+                let data = await res.json();
+                let result = Object.values(data);
+                console.log(result[0]);
+                if (result[0] !=="failed"){
+                    localStorage.setItem("changeDrug", "yes");
+                }
+                return Drug;
+            }
+        }catch (e) {}
+        return 404;
+    }
     async function deleteDrug(){
-        let id = document.getElementById("delete").value;
+        let id = "asd";
         try {
             let res = await fetch('http://localhost:8080/api/deleteDrug', {
                 method: 'POST',
@@ -80,6 +191,6 @@
         }catch (e) {}
         return 404;
     }
-    getDrugs()
+    deleteDrug()
 </script>
 </html>

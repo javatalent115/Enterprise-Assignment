@@ -21,7 +21,7 @@ public class Controller {
     @Autowired
     private ProducerService producerService;
 
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public String hello(){
         return "Hello";
     }

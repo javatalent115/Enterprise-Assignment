@@ -24,17 +24,12 @@ public class OrderController {
         transactionService.addTransaction(order);
     }
 
+//    @RequestMapping(path = "", method = RequestMethod.DELETE)
+//    public void deleteAllTransactions(){
+//        transactionService.deleteAllTransaction();
+//    }
+
     @RequestMapping(path = "", method = RequestMethod.DELETE)
-    public void deleteAllTransactions(){
-        transactionService.deleteAllTransaction();
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Order getTransactionById(@PathVariable String id) {
-        return transactionService.getTransactionById(id);
-    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void deleteTransactionById(@PathVariable String id) {
         transactionService.deleteByTransactionId(id);
     }
@@ -43,5 +38,10 @@ public class OrderController {
 //    public void updateTransactionById(@PathVariable String id, @RequestBody Order transaction) {
 //        transactionService.updateTransactionById(id, transaction);
 //    }
+
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+    public Order getTransactionById(@PathVariable String id) {
+        return transactionService.getTransactionById(id);
+    }
 }
 

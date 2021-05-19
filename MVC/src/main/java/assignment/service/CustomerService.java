@@ -13,34 +13,37 @@ import java.util.Optional;
 @Service
 public class CustomerService {
     @Autowired
-    CustomerRepo CustomerRepo;
+    CustomerRepo customerRepo;
 
     public void addCustomer(Customer order){
-        this.CustomerRepo.save(order);
+        this.customerRepo.save(order);
     }
 
     public List<Customer> getAllCustomers(){
-        return this.CustomerRepo.findAll();
+        return this.customerRepo.findAll();
     }
 
-    public void deleteByCustomerId(String id) {
-        this.CustomerRepo.deleteById(id);
+    public void deleteByCustomerUsername(String username) {
+        this.customerRepo.deleteById(username);
     }
 
-    public Customer getCustomerById(String id) {
-        Optional<Customer> result = this.CustomerRepo.findById(id);
+    public Customer getCustomerByUsername(String username) {
+        Optional<Customer> result = this.customerRepo.findById(username);
         return result.orElse(null);
     }
 
-    public void updateCustomerById(String id, Customer newCustomer) {
-        getCustomerById(id).replace(newCustomer);
+    public void updateCustomerByUsername(String username, Customer newCustomer) {
+        Customer oldCustomer = getCustomerByUsername(username);
+        newCustomer.setTransactionList(oldCustomer.getTransactionList());
+        oldCustomer = newCustomer;
+        customerRepo.save(oldCustomer);
     }
 
     public long countCustomer() {
-        return this.CustomerRepo.count();
+        return this.customerRepo.count();
     }
 
     public void deleteAllCustomer() {
-        this.CustomerRepo.deleteAll();
+        this.customerRepo.deleteAll();
     }
 }
