@@ -400,6 +400,7 @@ var init = async function () {
     let data = await res.json();
     let result = Object.values(data);
     for (let i = 0; i < result.length; i++) {
+      autoName.push(result[i].split(" -- ")[1])
       all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
         + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
     }
@@ -475,9 +476,9 @@ $(document).on("click", ".search-button-2", function () {
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="id">${data.split("\n")[index].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[index].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[index].split("&&")[9]}</li>
+        <li class="changeAble stock">${data.split("\n")[index].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[index].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[index].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
@@ -549,9 +550,9 @@ $(document).on("click", ".page", function () {
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+        <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
@@ -611,7 +612,7 @@ $(document).on("click",".dropdown-item-type",function(){
     localStorage.setItem("Thuốc kê đơn",true)
     localStorage.setItem("Thuốc không kê đơn",true)
   }
-  
+  addItem()
 });
 
 $(document).on("click",".dropdown-item-sort",async function(){
@@ -737,9 +738,9 @@ async function addItem(item){
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+        <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">

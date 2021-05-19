@@ -1,4 +1,4 @@
-let name = [];
+let autoName = [];
 function autocomplete(inp, arr) {
     /*the autocomplete function takes two arguments,
     the text field element and an array of possible autocompleted values:*/
@@ -101,5 +101,5 @@ function autocomplete(inp, arr) {
 
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("medicine"), name);
-autocomplete(document.getElementById("medicine2"), name);
+autocomplete(document.getElementById("medicine"), autoName);
+autocomplete(document.getElementById("medicine2"), autoName);

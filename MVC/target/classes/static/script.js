@@ -1,5 +1,8 @@
-localStorage.setItem("Tan Duoc",true)
-localStorage.setItem("Dong Duoc",true)
+localStorage.setItem("Tân dược",true)
+localStorage.setItem("Đông dược",true)
+localStorage.setItem("sort-type","none")
+localStorage.setItem("Thuốc kê đơn",true)
+localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
 function checkAccount() {
   if (localStorage.getItem("accountType") == "guest") {
@@ -32,6 +35,7 @@ $("#medicine2").on('keyup', function (e) {
 function intinialize() {
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
   checkAccount();
+  $(".spinner").css("display","block")
   // checkPagination()
 }
 //Initialize cart-item
@@ -121,6 +125,14 @@ $(document).on("click", ".more-button-submenu-item", function () {
   $(this).parent("ul").parent("div").css("display", "none")
 });
 
+let quickChange;
+$(document).ready(function(){
+  $("#add-company-modal").on("show.bs.modal", function(event){
+      // Get the button that triggered the modal
+      quickChange = $(event.relatedTarget)
+      console.log("hello")
+  });
+});
 $(document).on("click", ".quick-change", function () {
   event.preventDefault()
   $(this).parent("ul").parent("div").parent("li").parent("ul").find(".changeAble").attr("contenteditable", "true")
@@ -146,12 +158,26 @@ $(document).on("click", ".done", function () {
   let stock = $(this).parent("li").parent("ul").find(".stock").text()
   let price = $(this).parent("li").parent("ul").find(".price").text()
 
+
+});
+let img;
+$(document).ready(function(){
+  $("#delete-confirm-modal").on("show.bs.modal", function(event){
+      // Get the button that triggered the modal
+      img = $(event.relatedTarget)
+  });
 });
 
+$(document).on("click",".confirm-delete",function(){
+  img.parent().parent().remove()
+  deleteDrug(img.parent().parent().find(".id").text())
+})
+
 $(document).on("click", ".trash-image", function () {
-  event.preventDefault()
-  $(this).parent("li").parent("ul").remove()
-  deleteDrug($(this).parent("li").parent("ul").find(".id").text())
+
+  // event.preventDefault()
+  // $(this).parent("li").parent("ul").remove()
+  // deleteDrug($(this).parent("li").parent("ul").find(".id").text())
 });
 
 async function deleteDrug(id){
@@ -169,7 +195,7 @@ async function deleteDrug(id){
           let result = Object.values(data);
           console.log(result[0]);
           if (result[0] !=="failed"){
-              await addAllItem(itemDisplayAtATime)
+              await addItem(itemDisplayAtATime)
           }
           return data;
       }
@@ -188,7 +214,7 @@ $(".add-image").click(function () {
                         <li class="changeAble amount" contenteditable="true"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
                         <li class="changeAble price" contenteditable="true"></li>
                         <li>
-                            <div class="done">Done</div>
+                            <div class="done" data-bs-toggle="modal" data-bs-target="#add-company-modal" >Done</div>
                             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;"">
                             <div class="more-button-submenu-wrapper" >
                                 <ul class="more-button-submenu">
@@ -203,7 +229,7 @@ $(".add-image").click(function () {
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                            <img src="./images/trash.png" class="trash-image" alt="">
+                            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
   `)
@@ -362,8 +388,8 @@ var Pagination = {
 };
 
 var init = async function () {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
+  let res = await fetch('http://localhost:8080/drug', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -374,6 +400,7 @@ var init = async function () {
     let data = await res.json();
     let result = Object.values(data);
     for (let i = 0; i < result.length; i++) {
+      autoName.push(result[i].split(" -- ")[1])
       all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
         + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
     }
@@ -388,8 +415,8 @@ var init = async function () {
 };
 
 async function addAllItem(item) {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
+  let res = await fetch('http://localhost:8080/drug', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -399,20 +426,23 @@ async function addAllItem(item) {
   if (res.ok) {
     let data = await res.json();
     let result = Object.values(data);
-    for (let i = 0; i < result.length; i++) {
-      name.push(result[i].split(" -- ")[1]);
-      all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
-        + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
-    }
+    all = formatData(result)
   }
   localStorage.setItem("data", all);
   addItem(itemDisplayAtATime)
-
 }
 addAllItem(itemDisplayAtATime)
 document.addEventListener('DOMContentLoaded', init,false);
 
-
+function formatData(result){
+  let all = ""
+  for (let i = 0; i < result.length; i++) {
+    all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
+      + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
+  }
+  console.log(all)
+  return all
+}
 
 function removeAllItem() {
   let x = document.querySelectorAll(".medicine-item").length - 1
@@ -444,11 +474,11 @@ $(document).on("click", ".search-button-2", function () {
     if (found) {
       let wrapper = document.querySelector(".medicines")
       wrapper.innerHTML += `<ul class="medicine-item">
-        <li class="changeAble id">${data.split("\n")[index].split("&&")[0]}</li>
-        <li class="changeAble name">${data.split("\n")[index].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[index].split("&&")[9]}</li>
+        <li class="id">${data.split("\n")[index].split("&&")[0]}</li>
+        <li class="name">${data.split("\n")[index].split("&&")[1]}</li>
+        <li class="changeAble stock">${data.split("\n")[index].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[index].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[index].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
@@ -466,7 +496,7 @@ $(document).on("click", ".search-button-2", function () {
         </li>
         <li>
             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="">
+            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
       checkAccount()
@@ -517,13 +547,12 @@ $(document).on("click", ".page", function () {
       break
     }
     else {
-      if(localStorage.getItem("Dong Duoc") == "true" && localStorage.getItem("Tan Duoc")=="true"){
       wrapper.innerHTML += `<ul class="medicine-item">
-        <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-        <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+        <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
+        <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
+        <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
@@ -541,71 +570,10 @@ $(document).on("click", ".page", function () {
         </li>
         <li>
             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="">
+            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
       }
-      else if(localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "false"){
-        if (data.split("\n")[i].split("&&")[4]== "Tân dược"){
-          wrapper.innerHTML += `<ul class="medicine-item">
-          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-          <li>
-              <div class="done">Done</div>
-              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-              <div class="more-button-submenu-wrapper">
-                  <ul class="more-button-submenu">
-                      <li class="more-button-submenu-item quick-change">
-                          Quick change
-                      </li>
-                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                          data-bs-target="#modifyMedicine">
-                          Advance
-                      </li>
-                  </ul>
-              </div>
-          </li>
-          <li>
-              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-              <img src="./images/trash.png" class="trash-image" alt="">
-          </li>
-      </ul>`
-        }
-      }
-      else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
-        if (data.split("\n")[i].split("&&")[4]== "Đông dược"){
-          wrapper.innerHTML += `<ul class="medicine-item">
-          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-          <li>
-              <div class="done">Done</div>
-              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-              <div class="more-button-submenu-wrapper">
-                  <ul class="more-button-submenu">
-                      <li class="more-button-submenu-item quick-change">
-                          Quick change
-                      </li>
-                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                          data-bs-target="#modifyMedicine">
-                          Advance
-                      </li>
-                  </ul>
-              </div>
-          </li>
-          <li>
-              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-              <img src="./images/trash.png" class="trash-image" alt="">
-          </li>
-      </ul>`
-        }
-      }
-    }
     checkAccount()
   }
 });
@@ -626,133 +594,153 @@ $(document).on("click",".checkbox-filter",function(){
     $(this).find("img").attr("src","./images/checked.png")
     localStorage.setItem($(this).parent("li").find("span").text(),true)
     addItem(itemDisplayAtATime)
-
   }
+});
+
+$(document).on("click",".dropdown-item-type",function(){
+  let menu = $(this).text()
+  $(".type").children("button").text(menu)
+  if($(this).text() == "Thuốc kê đơn"){
+    localStorage.setItem("Thuốc kê đơn",true)
+    localStorage.setItem("Thuốc không kê đơn",false)
+  }
+  else if($(this).text() == "Thuốc không kê đơn"){
+    localStorage.setItem($(this).text(),true)
+    localStorage.setItem("Thuốc kê đơn",false)
+  }
+  else{
+    localStorage.setItem("Thuốc kê đơn",true)
+    localStorage.setItem("Thuốc không kê đơn",true)
+  }
+  addItem()
 });
 
 $(document).on("click",".dropdown-item-sort",async function(){
   let menu = $(this).text()
   $(".sort").children("button").text(menu)
-  if (menu =="Money (High to Low)"){
-    let res = await fetch('http://localhost:8080/api/sortDrugDes', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-    let all = "";
-    if (res.ok) {
-      let data = await res.json();
-      let result = Object.values(data);
-      for (let i = 0; i < result.length; i++) {
-        all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
-          + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
-      }
-    }
-    localStorage.setItem("data", all);
-    addItem(itemDisplayAtATime)
+  if (menu == "Money (low - high)"){
+    localStorage.setItem("sort-type","money-asc")
   }
-  else if(menu =="Money (Low to High)"){
-    let res = await fetch('http://localhost:8080/api/sortDrugAsc', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    });
-    let all = "";
-    if (res.ok) {
-      let data = await res.json();
-      let result = Object.values(data);
-      for (let i = 0; i < result.length; i++) {
-        all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
-          + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
-      }
-    }
-    localStorage.setItem("data", all);
-    addItem(itemDisplayAtATime)
-    console.log("hello")
+  else if (menu == "Money (high - low)"){
+    localStorage.setItem("sort-type","money-des")
   }
-  else if(menu == "ID"){
-    addAllItem(itemDisplayAtATime)
+  else if (menu == "Name (A-Z)"){
+    localStorage.setItem("sort-type","name-asc")
   }
+  else if (menu == "Name (Z-A)"){
+    localStorage.setItem("sort-type","name-des")
+  }
+  else{
+    localStorage.setItem("sort-type","none")
+  }
+  addItem(itemDisplayAtATime)
 });
 
-function addItem(item){
+function getFilter(){
+  var Drug =  {
+    type: "",
+    group:"",
+    sortType:""
+  }
+  if (localStorage.getItem("Thuốc kê đơn") == "true"){
+    if (localStorage.getItem("Thuốc không kê đơn") == "true"){
+      Drug.type = "none"
+    }
+    else {
+      Drug.type = "Thuốc kê đơn"
+    }
+  }
+  else{
+    if (localStorage.getItem("Thuốc không kê đơn") == "true"){
+      Drug.type = "Thuốc không kê đơn"
+    }
+    else {
+      Drug.type = " "
+    }
+  }
+
+  if (localStorage.getItem("Đông dược") == "true"){
+    if (localStorage.getItem("Tân dược") == "true"){
+      Drug.group = "none"
+    }
+    else {
+      Drug.group = "Đông dược"
+    }
+  }
+  else{
+    if (localStorage.getItem("Tân dược") == "true"){
+      Drug.group = "Tân dược"
+    }
+    else {
+      Drug.group = "fail"
+    }
+  }
+  Drug.sortType = localStorage.getItem("sort-type")
+  return Drug
+}
+
+async function addCompany(){
+  let res = await fetch('http://localhost:8080/producer/getProducers', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
+  let all = [];
+  if (res.ok) {
+    let data = await res.json();
+    let result = Object.values(data);
+    for (let i = 0; i < result.length; i++) {
+      document.getElementById("company-select").innerHTML += `
+      <option value="">${result[i].split(" -- ")[0]}</option>
+      `
+    }
+  
+  }
+
+}
+addCompany()
+async function addItem(item){
   removeAllItem()
-  let wrapper = document.querySelector(".medicines")
+  $(".spinner").css("display","block")
+  let all = "";
+  let Drug = getFilter() 
+  try {
+    let res = await fetch('http://localhost:8080/drug/getDrugsByFilter', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Drug)
+    });
+    if (res.ok) {
+        let data = await res.json();
+        let result = Object.values(data);
+        console.log(result)
+        all = formatData(result)
+    }
+  }catch (e) {}
+  localStorage.setItem("data", all);
+  $(".spinner").css("display","none")
+  let page = 1
+  page = document.querySelector(".current").innerHTML
+  let itemDisplay = itemDisplayAtATime
   let data = localStorage.getItem("data")
-  for (let i = 0,j=0; j < item; i++,j++) {
-    if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "true"){
+  let itemIndex = (page - 1) * itemDisplay
+  let wrapper = document.querySelector(".medicines")
+  for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
+    if (data.split("\n")[i].split("&&")[0] == 0) {
+      break
+    }
+    else {
       wrapper.innerHTML += `<ul class="medicine-item">
-      <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-      <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-      <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-      <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-      <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-      <li>
-          <div class="done">Done</div>
-          <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-          <div class="more-button-submenu-wrapper">
-              <ul class="more-button-submenu">
-                  <li class="more-button-submenu-item quick-change">
-                      Quick change
-                  </li>
-                  <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                      data-bs-target="#modifyMedicine">
-                      Advance
-                  </li>
-              </ul>
-          </div>
-      </li>
-      <li>
-          <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-          <img src="./images/trash.png" class="trash-image" alt="">
-      </li>
-  </ul>`
-    }
-    else if (localStorage.getItem("Tan Duoc")== "true" && localStorage.getItem("Dong Duoc") == "false"){
-        if (data.split("\n")[i].split("&&")[4]== "Tân dược"){
-          wrapper.innerHTML += `<ul class="medicine-item">
-          <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-          <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-          <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
-          <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-          <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
-          <li>
-              <div class="done">Done</div>
-              <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-              <div class="more-button-submenu-wrapper">
-                  <ul class="more-button-submenu">
-                      <li class="more-button-submenu-item quick-change">
-                          Quick change
-                      </li>
-                      <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                          data-bs-target="#modifyMedicine">
-                          Advance
-                      </li>
-                  </ul>
-              </div>
-          </li>
-          <li>
-              <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-              <img src="./images/trash.png" class="trash-image" alt="">
-          </li>
-      </ul>`
-        }
-        else{
-          j--
-        }
-    }
-    else if(localStorage.getItem("Tan Duoc")== "false" && localStorage.getItem("Dong Duoc") == "true"){
-      if (data.split("\n")[i].split("&&")[4]== "Đông dược"){
-        wrapper.innerHTML += `<ul class="medicine-item">
-        <li class="changeAble id">${data.split("\n")[i].split("&&")[0]}</li>
-        <li class="changeAble name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+        <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
+        <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
+        <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
@@ -770,17 +758,10 @@ function addItem(item){
         </li>
         <li>
             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="">
+            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
       }
-      else{
-        j--;
-      }
-    }
-    else{
-      console.log("none")
-    }
   }
   checkAccount();
 }
