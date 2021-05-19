@@ -26,7 +26,6 @@ function checkAccount() {
 }
 $("#medicine2").on('keyup', function (e) {
   if (e.key === 'Enter' || e.keyCode === 13) {
-    console.log("hello")
     $(".search-button-2").click()
   }
 });
@@ -44,7 +43,6 @@ let listItem = localStorage.getItem('cart-item')
   : []
 //if add to cart btn clicked
 $(document).on("click", ".cart-btn", function () {
-  console.log("hello")
   let count = localStorage.getItem("cart");
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
   let cart = $('.cart-nav');
@@ -130,7 +128,6 @@ $(document).ready(function(){
   $("#add-company-modal").on("show.bs.modal", function(event){
       // Get the button that triggered the modal
       quickChange = $(event.relatedTarget)
-      console.log("hello")
   });
 });
 $(document).on("click", ".quick-change", function () {
@@ -152,12 +149,13 @@ $(document).on("click", ".done", function () {
     "border": "none"
   })
   $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable", "false")
-  $(this).parent("li").parent("ul").find(".changeAble")
+  $(this).parent("li").parent("ul").find(".id").removeClass("changeAble")
+  $(this).parent("li").parent("ul").find(".name").removeClass("changeAble")
   let id = $(this).parent("li").parent("ul").find(".id").text()
   let name = $(this).parent("li").parent("ul").find(".name").text()
   let stock = $(this).parent("li").parent("ul").find(".stock").text()
   let price = $(this).parent("li").parent("ul").find(".price").text()
-
+  
 
 });
 let img;
@@ -193,7 +191,6 @@ async function deleteDrug(id){
       if (res.ok) {
           let data = await res.json();
           let result = Object.values(data);
-          console.log(result[0]);
           if (result[0] !=="failed"){
               await addItem(itemDisplayAtATime)
           }
@@ -440,7 +437,6 @@ function formatData(result){
     all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
       + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
   }
-  console.log(all)
   return all
 }
 
@@ -581,7 +577,6 @@ $(document).on("click", ".page", function () {
 $(document).on("click",".increase-amount-image",function(){
   let amount = parseInt($(this).parent("li").find("div").text())
   $(this).parent("li").find("div").html(amount+1)
-  console.log($(this).parent("li").find("div").text())
 })
 
 $(document).on("click",".checkbox-filter",function(){
@@ -718,7 +713,6 @@ async function addItem(item){
     if (res.ok) {
         let data = await res.json();
         let result = Object.values(data);
-        console.log(result)
         all = formatData(result)
     }
   }catch (e) {}
