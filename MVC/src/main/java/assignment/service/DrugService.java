@@ -1,13 +1,13 @@
 package assignment.service;
 
+import assignment.controller.DrugController;
 import assignment.entity.Drug;
 import assignment.repository.DrugRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Transactional
 @Service
@@ -35,12 +35,86 @@ public class DrugService {
 //    public void updateDrugById(String id, Drug newDrug) {
 //        getDrugById(id).replace(newDrug);
 //    }
-
-    public long countDrug() {
-        return this.drugRepo.count();
+    public void updateDrugById(String id, int money, int stock){
+        Drug drug = getDrugById(id);
+        drug.setMoney(money);
+        drug.setStock(stock);
+        this.drugRepo.save(drug);
     }
 
-    public void deleteAllDrug() {
-        this.drugRepo.deleteAll();
+    public List<Drug> getDrugsByGroup(String group, List<Drug> drugList){
+        List<Drug> result = new ArrayList<>();
+        for (Drug drug : drugList) {
+            if (drug.getDrugGroup().equals(group)) {
+                result.add(drug);
+            }
+        }
+        return result;
+    }
+
+    public List<Drug> getDrugsByType(String type, List<Drug> drugList){
+        List<Drug> result = new ArrayList<>();
+        for (Drug drug : drugList) {
+            if (drug.getType().equals(type)) {
+                result.add(drug);
+            }
+        }
+        return result;
+    }
+
+    public List<Drug> getRelatedDrugs(String id){
+        Drug drug = getDrugById(id);
+        return drug.getDrugsOfSameProducer();
+    }
+
+    public List<Drug> getDrugsByFilter(String group, String type, String sortType){
+        List<Drug> drugList = getAllDrugs();
+        List<Drug> result;
+        if (!group.equals("none")){
+            if (type.equals("none")){
+                result = getDrugsByGroup(group, drugList);
+            }
+            else {
+                result = new ArrayList<>();
+                for (Drug drug : drugList) {
+                    if (drug.getType().equals(type) && drug.getDrugGroup().equals(group)) {
+                        result.add(drug);
+                    }
+                }
+            }
+        }
+        else {
+            if (!type.equals("none")) {
+                result = getDrugsByType(type, drugList);
+            }
+            else result = drugList.subList(0,drugList.size()-1);
+        }
+        switch (sortType) {
+            case "money-asc":
+                Collections.sort(result);
+                break;
+            case "money-des":
+                Collections.sort(result);
+                Collections.reverse(result);
+                break;
+            case "name-asc":
+                result.sort(new Comparator<Drug>() {
+                    public int compare(Drug drug1, Drug drug2) {
+                        return drug1.getName().compareTo(drug2.getName());
+                    }
+                });
+                break;
+            case "name-des":
+                result.sort(new Comparator<Drug>() {
+                    @Override
+                    public int compare(Drug drug1, Drug drug2) {
+                        return drug1.getName().compareTo(drug2.getName());
+                    }
+                });
+                Collections.reverse(result);
+                break;
+            default: break;
+        }
+        return result;
     }
 }

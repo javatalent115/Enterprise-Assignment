@@ -5,18 +5,25 @@ import assignment.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/producer")
+@RequestMapping(path = "/api")
 public class ProducerController {
     @Autowired
     private ProducerService producerService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Producer> getAllProducers(){
-        return producerService.getAllProducers();
+    @RequestMapping(path = "/getProducers", method = RequestMethod.POST)
+    public Map<String, String> getAllProducers(){
+        List<Producer> list = producerService.getAllProducers();
+        Map<String, String> map = new HashMap<>();
+        for (int i = 0 ; i < list.size(); i++){
+            map.put(String.valueOf(i), list.get(i).toString());
+        }
+        return map;
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
@@ -34,10 +41,6 @@ public class ProducerController {
         producerService.deleteByProducerId(id);
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public void updateProducerById(@PathVariable String id, @RequestBody Producer producer) {
-        producerService.updateProducerById(id, producer);
-    }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public Producer getProducerById(@PathVariable String id) {

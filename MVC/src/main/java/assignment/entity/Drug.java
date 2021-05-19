@@ -1,6 +1,7 @@
 package assignment.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Random;
 
 import assignment.entity.Producer;
@@ -148,6 +149,10 @@ public class Drug implements Comparable {
         this.stock = new Random().nextInt(50)+3;
     }
 
+    public List<Drug> getDrugsOfSameProducer(){
+        return this.producer.getDrugList();
+    }
+
     public String getName() {
         return name;
     }
@@ -250,7 +255,7 @@ public class Drug implements Comparable {
 
     @Override
     public String toString() {
-        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+ stock + " -- "+ producer.getId();
+        return id +" -- " + name +" -- " +  preparation +" -- " + packaging + " -- " + drugGroup + " -- " + dosage + " -- " + type + " -- "+ ingredients + " -- " + country +" -- "+  money + " -- " + stock + " -- "+ producer.getId();
     }
 
     @Override

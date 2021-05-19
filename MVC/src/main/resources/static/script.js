@@ -388,8 +388,8 @@ var Pagination = {
 };
 
 var init = async function () {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
+  let res = await fetch('http://localhost:8080/drug', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -414,8 +414,8 @@ var init = async function () {
 };
 
 async function addAllItem(item) {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
+  let res = await fetch('http://localhost:8080/drug', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -618,7 +618,7 @@ $(document).on("click",".dropdown-item-sort",async function(){
   let menu = $(this).text()
   $(".sort").children("button").text(menu)
   if (menu == "Money (low - high)"){
-    localStorage.setItem("sort-type","money-acs")
+    localStorage.setItem("sort-type","money-asc")
   }
   else if (menu == "Money (high - low)"){
     localStorage.setItem("sort-type","money-des")
@@ -706,7 +706,7 @@ async function addItem(item){
   let all = "";
   let Drug = getFilter() 
   try {
-    let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
+    let res = await fetch('http://localhost:8080/drug/getDrugsByFilter', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
