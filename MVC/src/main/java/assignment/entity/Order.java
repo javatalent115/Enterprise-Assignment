@@ -34,6 +34,10 @@ public class Order implements Comparable{
     @Column
     private String purchaseType;
 
+//    @Column
+//    private String total;
+    //TODO can be added later
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     List<OrderDetail> orderDetailList;
 

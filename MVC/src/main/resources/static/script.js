@@ -156,8 +156,8 @@ $(document).on("click", ".trash-image", function () {
 
 async function deleteDrug(id){
   try {
-      let res = await fetch('http://localhost:8080/api/deleteDrug', {
-          method: 'POST',
+      let res = await fetch('http://localhost:8080/drug', {
+          method: 'DELETE',
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
@@ -362,7 +362,7 @@ var Pagination = {
 };
 
 var init = async function () {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
+  let res = await fetch('http://localhost:8080/drug', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -376,7 +376,7 @@ var init = async function () {
     for (let i = 0; i < result.length; i++) {
       all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
         + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
-    }
+    } //TODO simplify this
   }
   localStorage.setItem("data", all);
   let pages = checkNumberIsFloat((localStorage.getItem("data").split("\n").length)/itemDisplayAtATime)
@@ -388,8 +388,8 @@ var init = async function () {
 };
 
 async function addAllItem(item) {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
+  let res = await fetch('http://localhost:8080/drug', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -634,7 +634,7 @@ $(document).on("click",".dropdown-item-sort",async function(){
   let menu = $(this).text()
   $(".sort").children("button").text(menu)
   if (menu =="Money (High to Low)"){
-    let res = await fetch('http://localhost:8080/api/sortDrugDes', {
+    let res = await fetch('http://localhost:8080/api/sortDrugDes', {//TODO create a sort drug DES and change this one
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -648,13 +648,13 @@ $(document).on("click",".dropdown-item-sort",async function(){
       for (let i = 0; i < result.length; i++) {
         all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
           + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
-      }
+      } //TODO simplify it
     }
     localStorage.setItem("data", all);
     addItem(itemDisplayAtATime)
   }
   else if(menu =="Money (Low to High)"){
-    let res = await fetch('http://localhost:8080/api/sortDrugAsc', {
+    let res = await fetch('http://localhost:8080/api/sortDrugAsc', {//TODO create a sort drug ASC and change this one
       method: 'POST',
       headers: {
         'Accept': 'application/json',

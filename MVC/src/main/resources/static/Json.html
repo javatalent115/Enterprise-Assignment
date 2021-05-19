@@ -23,8 +23,8 @@
     async function getDrugs(){
         try {
                 if (localStorage.getItem("changeDrug") !== "no" || localStorage.getItem("changeDrug") == null ) {
-                    let res = await fetch('http://localhost:8080/api/getDrugs', {
-                        method: 'POST',
+                    let res = await fetch('http://localhost:8080/drug', {
+                        method: 'GET',
                         headers: {
                             'Accept': 'application/json',
                             'Content-Type': 'application/json'
@@ -73,7 +73,7 @@
             producers_id: "AMPHARCO",
         };
         try {
-            let res = await fetch('http://localhost:8080/api/addDrug', {
+            let res = await fetch('http://localhost:8080/drug', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -100,7 +100,7 @@
             sortType: "..."  // ("money-asc" or "money-des" or "name-asc" or "name-des" or "none")
         };
         try {
-            let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
+            let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {//TODO change this function accordingly. Input param above
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -125,7 +125,7 @@
     async function getNOP(){
         let id = "AMPHARCO";
         try {
-            let res = await fetch('http://localhost:8080/api/getNOP', {
+            let res = await fetch('http://localhost:8080/api/getNOP', {//TODO create a get drugList.size() in service
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
