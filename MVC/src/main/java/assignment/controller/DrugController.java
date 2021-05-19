@@ -17,6 +17,9 @@ public class DrugController {
     @Autowired
     private DrugService drugService;
     private List<Drug> list = new ArrayList<>();
+
+
+
     @RequestMapping(path = "", method = RequestMethod.GET)
     public Map<String, String> getAllDrugs(){
         if (list.size() == 0){

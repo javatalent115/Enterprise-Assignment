@@ -11,11 +11,10 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/producer")
 public class ProducerController {
     @Autowired
     private ProducerService producerService;
-
     @RequestMapping(path = "/getProducers", method = RequestMethod.POST)
     public Map<String, String> getAllProducers(){
         List<Producer> list = producerService.getAllProducers();
@@ -26,25 +25,21 @@ public class ProducerController {
         return map;
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
-    public void addProducer(@RequestBody Producer producer){
-        producerService.addProducer(producer);
+    @RequestMapping(path = "/addProducer", method = RequestMethod.POST)
+    public String addProducer(@RequestBody Producer producer){
+        try {
+            producerService.addProducer(producer);
+        }catch (Exception e){
+            return "failed";
+        }
+        return "success";
     }
 
-//    @RequestMapping(path = "", method = RequestMethod.DELETE)
-//    public void deleteAllProducers(){
-//        producerService.deleteAllProducer();
-//    }
-
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void deleteProducerById(@PathVariable String id) {
+    @RequestMapping(path = "/deleteProducer", method = RequestMethod.DELETE)
+    public void deleteProducerById(@RequestBody String id) {
         producerService.deleteByProducerId(id);
     }
 
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Producer getProducerById(@PathVariable String id) {
-        return producerService.getProducerById(id);
-    }
 }
 

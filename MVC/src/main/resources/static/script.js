@@ -679,7 +679,7 @@ function getFilter(){
 }
 
 async function addCompany(){
-  let res = await fetch('http://localhost:8080/api/getProducers', {
+  let res = await fetch('http://localhost:8080/producer/getProducers', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
