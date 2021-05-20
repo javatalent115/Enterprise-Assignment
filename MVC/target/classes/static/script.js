@@ -26,7 +26,6 @@ function checkAccount() {
 }
 $("#medicine2").on('keyup', function (e) {
   if (e.key === 'Enter' || e.keyCode === 13) {
-    console.log("hello")
     $(".search-button-2").click()
   }
 });
@@ -44,7 +43,6 @@ let listItem = localStorage.getItem('cart-item')
   : []
 //if add to cart btn clicked
 $(document).on("click", ".cart-btn", function () {
-  console.log("hello")
   let count = localStorage.getItem("cart");
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
   let cart = $('.cart-nav');
@@ -130,7 +128,6 @@ $(document).ready(function(){
   $("#add-company-modal").on("show.bs.modal", function(event){
       // Get the button that triggered the modal
       quickChange = $(event.relatedTarget)
-      console.log("hello")
   });
 });
 $(document).on("click", ".quick-change", function () {
@@ -152,12 +149,13 @@ $(document).on("click", ".done", function () {
     "border": "none"
   })
   $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable", "false")
-  $(this).parent("li").parent("ul").find(".changeAble")
+  $(this).parent("li").parent("ul").find(".id").removeClass("changeAble")
+  $(this).parent("li").parent("ul").find(".name").removeClass("changeAble")
   let id = $(this).parent("li").parent("ul").find(".id").text()
   let name = $(this).parent("li").parent("ul").find(".name").text()
   let stock = $(this).parent("li").parent("ul").find(".stock").text()
   let price = $(this).parent("li").parent("ul").find(".price").text()
-
+  
 
 });
 let img;
@@ -193,7 +191,6 @@ async function deleteDrug(id){
       if (res.ok) {
           let data = await res.json();
           let result = Object.values(data);
-          console.log(result[0]);
           if (result[0] !=="failed"){
               await addItem(itemDisplayAtATime)
           }
@@ -388,8 +385,8 @@ var Pagination = {
 };
 
 var init = async function () {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
+  let res = await fetch('http://localhost:8080/drug', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -400,6 +397,7 @@ var init = async function () {
     let data = await res.json();
     let result = Object.values(data);
     for (let i = 0; i < result.length; i++) {
+      autoName.push(result[i].split(" -- ")[1])
       all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
         + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
     }
@@ -414,8 +412,8 @@ var init = async function () {
 };
 
 async function addAllItem(item) {
-  let res = await fetch('http://localhost:8080/api/getDrugs', {
-    method: 'POST',
+  let res = await fetch('http://localhost:8080/drug', {
+    method: 'GET',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json'
@@ -439,7 +437,6 @@ function formatData(result){
     all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
       + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
   }
-  console.log(all)
   return all
 }
 
@@ -475,9 +472,9 @@ $(document).on("click", ".search-button-2", function () {
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="id">${data.split("\n")[index].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[index].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[index].split("&&")[9]}</li>
+        <li class="changeAble stock">${data.split("\n")[index].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[index].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[index].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
@@ -549,9 +546,9 @@ $(document).on("click", ".page", function () {
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+        <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
@@ -580,7 +577,6 @@ $(document).on("click", ".page", function () {
 $(document).on("click",".increase-amount-image",function(){
   let amount = parseInt($(this).parent("li").find("div").text())
   $(this).parent("li").find("div").html(amount+1)
-  console.log($(this).parent("li").find("div").text())
 })
 
 $(document).on("click",".checkbox-filter",function(){
@@ -611,14 +607,14 @@ $(document).on("click",".dropdown-item-type",function(){
     localStorage.setItem("Thuốc kê đơn",true)
     localStorage.setItem("Thuốc không kê đơn",true)
   }
-  
+  addItem()
 });
 
 $(document).on("click",".dropdown-item-sort",async function(){
   let menu = $(this).text()
   $(".sort").children("button").text(menu)
   if (menu == "Money (low - high)"){
-    localStorage.setItem("sort-type","money-acs")
+    localStorage.setItem("sort-type","money-asc")
   }
   else if (menu == "Money (high - low)"){
     localStorage.setItem("sort-type","money-des")
@@ -679,7 +675,7 @@ function getFilter(){
 }
 
 async function addCompany(){
-  let res = await fetch('http://localhost:8080/api/getProducers', {
+  let res = await fetch('http://localhost:8080/producer/getProducers', {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
@@ -706,7 +702,7 @@ async function addItem(item){
   let all = "";
   let Drug = getFilter() 
   try {
-    let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
+    let res = await fetch('http://localhost:8080/drug/getDrugsByFilter', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -717,7 +713,6 @@ async function addItem(item){
     if (res.ok) {
         let data = await res.json();
         let result = Object.values(data);
-        console.log(result)
         all = formatData(result)
     }
   }catch (e) {}
@@ -737,9 +732,9 @@ async function addItem(item){
       wrapper.innerHTML += `<ul class="medicine-item">
         <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[9]}</li>
+        <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
         <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[10]}</li>
+        <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
