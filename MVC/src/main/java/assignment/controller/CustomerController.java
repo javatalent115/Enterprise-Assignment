@@ -19,7 +19,7 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST) //TODO pass "succeeded" or "failed"
     public void addCustomer(@RequestBody Customer customer){
         customerService.addCustomer(customer);
     }
