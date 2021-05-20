@@ -1,3 +1,35 @@
+// if(localStorage.getItem("Tân dược")){
+//   localStorage.setItem("Tân dược",localStorage.getItem("Tân dược"))
+
+// }
+// else{
+//   localStorage.setItem("Tân dược",true)
+
+// }
+// if(localStorage.getItem("Đông dược")){
+//   localStorage.setItem("Đông dược",localStorage.getItem("Đông dược"))
+// }
+// else{
+//   localStorage.setItem("Đông dược",true)
+// }
+// if(localStorage.getItem("sort-type")){
+//   localStorage.setItem("sort-type",localStorage.getItem("sort-type"))
+// }
+// else{
+//   localStorage.setItem("sort-type","none")
+// }
+// if(localStorage.getItem("Thuốc kê đơn")){
+//   localStorage.setItem("Thuốc kê đơn",localStorage.getItem("Thuốc kê đơn"))
+// }
+// else{
+//   localStorage.setItem("Thuốc kê đơn",true)
+// }
+// if(localStorage.getItem("Thuốc không kê dơn")){
+//   localStorage.setItem("Thuốc không kê dơn",localStorage.getItem("Thuốc không kê dơn"))
+// }
+// else{
+//   localStorage.setItem("Thuốc không kê dơn",true)
+// }
 localStorage.setItem("Tân dược",true)
 localStorage.setItem("Đông dược",true)
 localStorage.setItem("sort-type","none")
@@ -131,7 +163,6 @@ $(document).ready(function(){
   });
 });
 $(document).on("click",".no-add-company",function(){
-  console.log("hello")
   quickChange.parent().parent().remove()
 })
 
@@ -748,6 +779,7 @@ async function addItem(item){
     if (res.ok) {
         let data = await res.json();
         let result = Object.values(data);
+        console.log(result)
         all = formatData(result)
     }
   }catch (e) {}
