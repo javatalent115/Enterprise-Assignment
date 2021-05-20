@@ -130,6 +130,46 @@ $(document).ready(function(){
       quickChange = $(event.relatedTarget)
   });
 });
+$(document).on("click",".no-add-company",function(){
+  quickChange.parent().parent().remove()
+})
+
+$(document).on("click",".confirm-add-company",function(){
+
+  if (quickChange.parent().parent().find(".id").text() == 0 || quickChange.parent().parent().find(".name").text() == 0 ||quickChange.parent().parent().find(".stock").text() == 0 || quickChange.parent().parent().find(".price").text() == 0){
+    alert("This must have a value")
+    quickChange.parent("li").parent("ul").find(".id").addClass("changeAble")
+    quickChange.parent("li").parent("ul").find(".name").addClass("changeAble")
+    quickChange.parent("li").parent("ul").find(".changeAble").attr("contenteditable","true")
+    quickChange.parent("li").parent("ul").find(".changeAble").css({
+      "border": "1px solid red"
+    })
+    quickChange.css("display","block")
+    quickChange.parent("li").find("img").css("display", "none")
+    quickChange.attr("data-bs-toggle","modal")
+    quickChange.attr("data-bs-target","#add-company-modal")
+  }
+  else{
+    quickChange.attr("data-bs-toggle","modal")
+    quickChange.attr("data-bs-target","#add-company-modal")
+    quickChange.css("display", "none")
+    quickChange.parent("li").find("img").css("display", "inline-block")
+    quickChange.parent("li").parent("ul").find(".changeAble").css({
+      "border": "none"
+    })
+    quickChange.parent("li").parent("ul").find(".changeAble").attr("contenteditable", "false")
+    quickChange.parent("li").parent("ul").find(".id").removeClass("changeAble")
+    quickChange.parent("li").parent("ul").find(".name").removeClass("changeAble")
+    quickChange.removeAttr("data-bs-toggle")
+    quickChange.removeAttr("data-bs-target")
+    let id=quickChange.parent().parent().find(".id").text()
+    let name=quickChange.parent().parent().find(".name").text()
+    let stock=quickChange.parent().parent().find(".stock").text()
+    let price=quickChange.parent().parent().find(".price").text()
+    let company = document.getElementById("company-select").value
+}
+})
+
 $(document).on("click", ".quick-change", function () {
   event.preventDefault()
   $(this).parent("ul").parent("div").parent("li").parent("ul").find(".changeAble").attr("contenteditable", "true")
@@ -151,11 +191,8 @@ $(document).on("click", ".done", function () {
   $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable", "false")
   $(this).parent("li").parent("ul").find(".id").removeClass("changeAble")
   $(this).parent("li").parent("ul").find(".name").removeClass("changeAble")
-  let id = $(this).parent("li").parent("ul").find(".id").text()
-  let name = $(this).parent("li").parent("ul").find(".name").text()
-  let stock = $(this).parent("li").parent("ul").find(".stock").text()
-  let price = $(this).parent("li").parent("ul").find(".price").text()
-  
+  $(this).removeAttr("data-bs-toggle")
+  $(this).removeAttr("data-bs-target")
 
 });
 let img;
@@ -199,11 +236,9 @@ async function deleteDrug(id){
   }catch (e) {}
   return 404;
 }
-
-$(".add-image").click(function () {
+$(document).on("click",".add-image",function(){
   event.preventDefault()
   $(".medicines").append(`
-  
   <ul class="medicine-item">
                         <li class="changeAble id" contenteditable="true"></li>
                         <li class="changeAble name" contenteditable="true"></li>
@@ -211,7 +246,7 @@ $(".add-image").click(function () {
                         <li class="changeAble amount" contenteditable="true"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
                         <li class="changeAble price" contenteditable="true"></li>
                         <li>
-                            <div class="done" data-bs-toggle="modal" data-bs-target="#add-company-modal" >Done</div>
+                            <div class="done" data-bs-toggle="modal" data-bs-target="#add-company-modal">Done</div>
                             <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;"">
                             <div class="more-button-submenu-wrapper" >
                                 <ul class="more-button-submenu">
@@ -229,7 +264,8 @@ $(".add-image").click(function () {
                             <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
-  `)
+  `
+)
   let lastChild = document.querySelectorAll(".changeAble").length
   for (let i = lastChild - 5; i < lastChild; i++) {
     document.querySelectorAll(".changeAble")[i].setAttribute("style", "border: 1px solid black")
@@ -682,16 +718,14 @@ async function addCompany(){
       'Content-Type': 'application/json'
     }
   });
-  let all = [];
   if (res.ok) {
     let data = await res.json();
     let result = Object.values(data);
     for (let i = 0; i < result.length; i++) {
       document.getElementById("company-select").innerHTML += `
-      <option value="">${result[i].split(" -- ")[0]}</option>
+      <option>${result[i].split(" -- ")[0]}</option>
       `
     }
-  
   }
 
 }

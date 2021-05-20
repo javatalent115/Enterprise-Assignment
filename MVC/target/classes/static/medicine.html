@@ -351,6 +351,7 @@
 
         .more-image {
             min-width: 24.66px;
+            cursor: pointer;
         }
 
         .trash-image {
@@ -400,7 +401,6 @@
             border: 1px solid black;
             cursor: pointer;
         }
-
         .add-image {
             cursor: pointer;
             max-width: 30px
@@ -436,6 +436,9 @@
             display: flex;
             align-items: center;
             gap: 5px;
+        }
+        .company-option{
+            background-color: red;
         }
        
     </style>
@@ -506,7 +509,7 @@
                         <li class="changeAble amount">Amount</li>
                         <li class="changeAble price">Price</li>
                         <li>
-                            <div class="done" data>Done</div>
+                            <div class="done">Done</div>
                             <img src="./images/more.png" class="more-image more-button"
                                 style="cursor: pointer; visibility: hidden;">
                         </li>
@@ -731,13 +734,13 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <select id="company-select">
+            <select id="company-select" onfocus='this.size=5;' onblur="this.size=1;" onchange='this.size=1; this.blur()';>
 
             </select>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-            <button type="button" class="btn btn-primary confirm-delete" data-bs-dismiss="modal">Yes</button>
+            <button type="button" class="btn btn-secondary no-add-company" data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary confirm-add-company" data-bs-dismiss="modal">Yes</button>
             </div>
         </div>
         </div>
