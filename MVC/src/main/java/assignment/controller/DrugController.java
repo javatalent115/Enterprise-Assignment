@@ -13,12 +13,10 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/drug")
-public class DrugController {
+public class DrugController {//TODO change Map to List if there is more time
     @Autowired
     private DrugService drugService;
     private List<Drug> list = new ArrayList<>();
-
-
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public Map<String, String> getAllDrugs(){
@@ -66,7 +64,7 @@ public class DrugController {
         list = drugService.getAllDrugs();
     }
 
-    @PostMapping(value = "/getDrugsByFilter")
+    @RequestMapping(value = "/getDrugsByFilter", method = RequestMethod.POST)
     public Map<String, String> getDrugsByFilter(@RequestBody Map<String, String> data){
         List<Drug> list = drugService.getDrugsByFilter(data.get("group"), data.get("type"), data.get("sortType"));
         Map <String, String> map = new HashMap<>();

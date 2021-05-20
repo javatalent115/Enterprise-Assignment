@@ -42,6 +42,58 @@ let listItem = localStorage.getItem('cart-item')
   ? JSON.parse(localStorage.getItem('cart-item'))
   : []
 //if add to cart btn clicked
+
+$(document).on("click", ".cart-nav", function () {
+  let new_order = JSON.parse(localStorage.getItem("cart-item"))
+  let date = new Date()
+  let order = {
+    id: date.getTime(),
+    customer:{"username":"user123"},
+    purchaseTime: date,
+    purchaseType: "COD"
+  }
+
+  // createOrder(order)
+  console.log(new_order)
+  for (let i = 0; i < new_order.length; i++) {
+    console.log(new_order[i]["id"])
+    let orderDetail = {
+      order: {id: "9999"},
+      drug: {id: new_order[i]["id"]},
+      quantity: new_order[i]["amount"]
+    }
+    createOrderDetail(orderDetail)
+  }
+})
+
+async function createOrder(order) {
+  try {
+    let res = await fetch('http://localhost:8080/order', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(order)
+    });
+  }catch (e) {}
+  return 404;
+}
+
+async function createOrderDetail(orderDetail, orderId) {
+  try {
+    let res = await fetch('http://localhost:8080/orderDetail', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(orderDetail)
+    });
+  }catch (e) {}
+  return 404;
+}
+
 $(document).on("click", ".cart-btn", function () {
   let count = localStorage.getItem("cart");
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
@@ -66,23 +118,37 @@ $(document).on("click", ".cart-btn", function () {
       'height': 35
     }, 1000, 'easeInOutExpo');
 
+    let id = $(this).parent("li").parent("ul").find(".id").text()
+    let amount = parseInt($(this).parent("li").parent("ul").find(".amount").text())
+
+    let inTheCart = false;
+    for (let i = 0; i < listItem.length; i++) {
+      if (listItem[i]["id"] === id) {
+        let temp = listItem[i]["amount"]
+        temp += amount
+        listItem[i]["amount"] = temp
+        inTheCart = true
+      }
+    }
+
     setTimeout(function () {
-      count++;
+      if (!inTheCart) count++;
       localStorage.setItem("cart", count)
       $(".cart-nav .item-count").text(localStorage.getItem("cart"));
 
     }, 1500);
-    let id = $(this).parent("li").parent("ul").find(".id").text()
-    let name = $(this).parent("li").parent("ul").find(".name").text()
-    let amount = $(this).parent("li").parent("ul").find(".amount").text()
-    let price = $(this).parent("li").parent("ul").find(".price").text()
-    var obj = {
-      id: id,
-      name: name,
-      amount: amount,
-      price: price
+
+    if (!inTheCart) {
+      let name = $(this).parent("li").parent("ul").find(".name").text()//TODO remove these 2
+      let price = $(this).parent("li").parent("ul").find(".price").text()
+      var obj = {
+        id: id,
+        name: name,
+        amount: amount,
+        price: price
+      }
+      listItem.push(obj)
     }
-    listItem.push(obj)
     var myJSON = JSON.stringify(listItem)
     localStorage.setItem("cart-item", myJSON)
     imgclone.animate({

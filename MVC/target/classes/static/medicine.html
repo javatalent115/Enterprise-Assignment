@@ -31,7 +31,8 @@
         content: "";
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        background: url("./images/home-background.jpg");
+        background:url("./images/background/home-background.jpg");
+        width: 100%;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -147,9 +148,7 @@
     }
 
     .search-wrapper button {
-        background: white;
-        background-image: url("./images/search-image.png");
-        background-repeat: no-repeat;
+        background: white url("./images/icons/search-image.png") no-repeat;
         background-size: 100% 100%;
         width: 33px;
         height: 30px;
@@ -296,9 +295,7 @@
         }
 
         .search-button-2 {
-            background: white;
-            background-image: url(/images/search-image.png);
-            background-repeat: no-repeat;
+            background: white url(/images/icons/search-image.png) no-repeat;
             background-size: 100% 100%;
             width: 33px;
             height: 30px;
@@ -462,11 +459,11 @@
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                             <li><a class="dropdown-item checkbox-filter">
-                                <img src="./images/checked.png" alt="" class="check-box">
+                                <img src="./images/icons/checked.png" alt="" class="check-box">
                                 <span>Tân dược</span>
                             </a></li>
                             <li><a class="dropdown-item checkbox-filter">
-                                <img src="./images/checked.png" alt="" class="check-box">
+                                <img src="./images/icons/checked.png" alt="" class="check-box">
                                 <span>Đông dược</span>
                             </a>
                             </li>
@@ -485,7 +482,7 @@
                         </ul>
                     </div>
                     <div>
-                        <img src="./images/add-image.png" class="add-image" alt="">
+                        <img src="./images/icons/add-image.png" class="add-image" alt="">
                     </div>
                     <div class="autocomplete">
                         <input type="text" id="medicine2" name="medicine" placeholder="Search medicine"
@@ -507,13 +504,13 @@
                         <li class="changeAble price">Price</li>
                         <li>
                             <div class="done" data>Done</div>
-                            <img src="./images/more.png" class="more-image more-button"
+                            <img src="./images/icons/more.png" class="more-image more-button"
                                 style="cursor: pointer; visibility: hidden;">
                         </li>
                         <li>
-                            <img src="./images/cart.png" class="cart-btn cart-images"
+                            <img src="./images/icons/cart.png" class="cart-btn cart-images"
                                 style="cursor: pointer; visibility: hidden;">
-                            <img src="./images/trash.png" class="trash-image" alt="" style="visibility: hidden;">
+                            <img src="./images/icons/trash.png" class="trash-image" alt="" style="visibility: hidden;">
                         </li>
                     </ul>
                     <div class="text-center spinner">
@@ -556,7 +553,7 @@
         </div>
     </div>
     <button style="z-index: 9999;" onclick="reset()">Reset localStorage</button>
-    <a class="paginaiton-arrow" href=""><img src="./images/arrow-right.png" alt=""></a>
+    <a class="paginaiton-arrow" href=""><img src="./images/icons/arrow-right.png" alt=""></a>
     </div>
 
     <style>
@@ -620,7 +617,7 @@
             text-decoration: none;
         }
         .a{
-            background-image: url("./images/modify-modal-background.png");
+            background-image: url("./images/background/modify-modal-background.png");
             background-size: 100% 100%;
         }
         .a div input{
@@ -639,7 +636,7 @@
 
     </style>
 
-
+    // TODO resolve these emtpy ids
     <!-- Modal  -->
     <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg">

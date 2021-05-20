@@ -19,9 +19,14 @@ public class CustomerController {
         return customerService.getAllCustomers();
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST) //TODO pass "succeeded" or "failed"
-    public void addCustomer(@RequestBody Customer customer){
-        customerService.addCustomer(customer);
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    public String addCustomer(@RequestBody Customer customer) {
+        try {
+            customerService.addCustomer(customer);
+            return "succeeded";
+        } catch (Exception e) {
+            return "failed";
+        }
     }
 
 //    @RequestMapping(path = "", method = RequestMethod.DELETE)
@@ -29,14 +34,14 @@ public class CustomerController {
 //        customerService.deleteAllCustomer();
 //    }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/deleteCustomer", method = RequestMethod.DELETE)
     public void deleteCustomerByUsername(@RequestBody String username) {
         customerService.deleteByCustomerUsername(username.trim());
     }
 
-    @RequestMapping(path = "/{username}", method = RequestMethod.PUT)
-    public void updateCustomerByUsername(@PathVariable String username, @RequestBody Customer customer) {
-        customerService.updateCustomerByUsername(username, customer);
+    @RequestMapping(path = "/updateCustomer", method = RequestMethod.PUT)
+    public void updateCustomerByUsername(@RequestBody Customer customer) {
+        customerService.updateCustomerByUsername(customer.getUsername(), customer);
     }
 
     @RequestMapping(path = "/{username}", method = RequestMethod.GET)

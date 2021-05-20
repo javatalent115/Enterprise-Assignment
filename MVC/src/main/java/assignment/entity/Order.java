@@ -11,17 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "Orders")
-public class Order implements Comparable{
+public class Order {
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ord_seq")
-    @GenericGenerator(
-            name = "ord_seq",
-            strategy = "assignment.id_generator.SequenceIdGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = SequenceIdGenerator.INCREMENT_PARAM, value = "1"),
-                    @org.hibernate.annotations.Parameter(name = SequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "ORD_"),
-                    @org.hibernate.annotations.Parameter(name = SequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
     private String id;
 
     @ManyToOne
@@ -41,18 +33,20 @@ public class Order implements Comparable{
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     List<OrderDetail> orderDetailList;
 
-    @Override
-    public int compareTo(Object o) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd MM:mm:ss");
-        try {
-            Date thisDate = simpleDateFormat.parse(purchaseTime);
-            Date thatDate = simpleDateFormat.parse(((String) o));
-            if (thisDate.after(thatDate)) return 1;
-            else return -1;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return 0;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<OrderDetail> getOrderDetailList() {
+        return orderDetailList;
+    }
+
+    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+        this.orderDetailList = orderDetailList;
     }
 
     public Customer getCustomer() {
@@ -87,16 +81,16 @@ public class Order implements Comparable{
         this.orderDetailList = orderDetailList;
     }
 
-    public int getTransactionCost() {
-        int sum = 0;
-        for (OrderDetail orderDetail : orderDetailList) {
-            sum += orderDetail.getOrderCost();
-        }
-        return sum;
-    }
+//    public int getTransactionCost() {
+//        int sum = 0;
+//        for (OrderDetail orderDetail : orderDetailList) {
+//            sum += orderDetail.getOrderCost();
+//        }
+//        return sum;
+//    }
 
     @Override
     public String toString() {
-        return customer.getUsername() + " -- " + purchaseTime + " -- " + purchaseType + " -- " + getTransactionCost();
+        return customer.getUsername() + " -- " + purchaseTime + " -- " + purchaseType;
     }
 }
