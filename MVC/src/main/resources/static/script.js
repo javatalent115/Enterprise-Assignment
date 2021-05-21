@@ -1,41 +1,22 @@
-// if(localStorage.getItem("Tân dược")){
-//   localStorage.setItem("Tân dược",localStorage.getItem("Tân dược"))
 
-// }
-// else{
-//   localStorage.setItem("Tân dược",true)
 
-// }
-// if(localStorage.getItem("Đông dược")){
-//   localStorage.setItem("Đông dược",localStorage.getItem("Đông dược"))
-// }
-// else{
-//   localStorage.setItem("Đông dược",true)
-// }
-// if(localStorage.getItem("sort-type")){
-//   localStorage.setItem("sort-type",localStorage.getItem("sort-type"))
-// }
-// else{
-//   localStorage.setItem("sort-type","none")
-// }
-// if(localStorage.getItem("Thuốc kê đơn")){
-//   localStorage.setItem("Thuốc kê đơn",localStorage.getItem("Thuốc kê đơn"))
-// }
-// else{
-//   localStorage.setItem("Thuốc kê đơn",true)
-// }
-// if(localStorage.getItem("Thuốc không kê dơn")){
-//   localStorage.setItem("Thuốc không kê dơn",localStorage.getItem("Thuốc không kê dơn"))
-// }
-// else{
-//   localStorage.setItem("Thuốc không kê dơn",true)
-// }
-localStorage.setItem("Tân dược",true)
-localStorage.setItem("Đông dược",true)
-localStorage.setItem("sort-type","none")
-localStorage.setItem("Thuốc kê đơn",true)
-localStorage.setItem("Thuốc không kê đơn",true)
+// localStorage.setItem("Tân dược",true)
+// localStorage.setItem("Đông dược",true)
+// localStorage.setItem("sort-type","none")
+// localStorage.setItem("Thuốc kê đơn",true)
+// localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
+// $(document).on("click",".name",function(){
+//   let drug = {
+//     id: $(this).parent().find(".id").text(),
+//     name: $(this).parent().find(".name").text(),
+//     stock:$(this).parent().find(".stock").text(),
+//     amount:$(this).parent().find(".amount").text(),
+//     price:$(this).parent().find(".price").text()
+//   }
+//   localStorage.setItem("drug-click",JSON.stringify(drug))
+//   window.location.href = "http://localhost:8080/drug-infomation.html"
+// })
 function checkAccount() {
   if (localStorage.getItem("accountType") == "guest") {
     $("li:nth-child(6)").css("display", "none")
@@ -63,11 +44,85 @@ $("#medicine2").on('keyup', function (e) {
 });
 
 
-function intinialize() {
+function initializes() {
   document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
   checkAccount();
   $(".spinner").css("display","block")
   // checkPagination()
+  if(localStorage.getItem("Tân dược")){
+    localStorage.setItem("Tân dược",localStorage.getItem("Tân dược"))
+  
+  }
+  else{
+    localStorage.setItem("Tân dược",true)
+  
+  }
+  if(localStorage.getItem("Đông dược")){
+    localStorage.setItem("Đông dược",localStorage.getItem("Đông dược"))
+  }
+  else{
+    localStorage.setItem("Đông dược",true)
+  }
+  if(localStorage.getItem("sort-type")){
+    localStorage.setItem("sort-type",localStorage.getItem("sort-type"))
+  }
+  else{
+    localStorage.setItem("sort-type","none")
+  }
+  if(localStorage.getItem("Thuốc kê đơn")){
+    localStorage.setItem("Thuốc kê đơn",localStorage.getItem("Thuốc kê đơn"))
+  }
+  else{
+    localStorage.setItem("Thuốc kê đơn",true)
+  }
+  if(localStorage.getItem("Thuốc không kê đơn")){
+    localStorage.setItem("Thuốc không kê đơn",localStorage.getItem("Thuốc không kê đơn"))
+  }
+  else{
+    localStorage.setItem("Thuốc không kê đơn",true)
+  }
+  if (localStorage.getItem("Thuốc kê đơn") == "true" && localStorage.getItem("Thuốc không kê đơn") == "true"){
+    $(".type").children("button").text("Both")
+  }
+  else if (localStorage.getItem("Thuốc kê đơn") == "false" && localStorage.getItem("Thuốc không kê đơn") == "true"){
+    $(".type").children("button").text("Thuốc không kê đơn")
+  }
+  else if (localStorage.getItem("Thuốc kê đơn") == "true" && localStorage.getItem("Thuốc không kê đơn") == "false"){
+    $(".type").children("button").text("Thuốc kê đơn")
+  }
+  if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "true"){
+      $(".checkbox-filter").find("img").attr("src","./images/checked.png")
+      $(".checkbox-filter").find("img").attr("src","./images/checked.png")
+  }
+  else if (localStorage.getItem("Tân dược") == "false" && localStorage.getItem("Đông dược") == "true"){
+    $(".tan-duoc").find("img").attr("src","./images/unchecked.png")
+    $(".dong-duoc").find("img").attr("src","./images/checked.png")
+  }
+  else if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "false"){
+    $(".tan-duoc").find("img").attr("src","./images/checked.png")
+    $(".dong-duoc").find("img").attr("src","./images/unchecked.png")
+  }
+  else{
+    $(".tan-duoc").find("img").attr("src","./images/unchecked.png")
+    $(".dong-duoc").find("img").attr("src","./images/unchecked.png")
+  }
+  if (localStorage.getItem("sort-type") == "none"){
+    $(".sort").children("button").text("ID")
+  }
+  else if (localStorage.getItem("sort-type") == "name-asc"){
+    $(".sort").children("button").text("Name (A-Z)")
+  }
+  else if (localStorage.getItem("sort-type") == "name-des"){
+    $(".sort").children("button").text("Name (Z-A)")
+  }
+  else if (localStorage.getItem("sort-type") == "money-asc"){
+    $(".sort").children("button").text("Money (low - high)")
+  }
+  else if (localStorage.getItem("sort-type") == "name-des"){
+    $(".sort").children("button").text("Money (high - low)")
+  }
+  document.addEventListener('DOMContentLoaded', init,false);
+  addCompany()
 }
 //Initialize cart-item
 let listItem = localStorage.getItem('cart-item')
@@ -215,17 +270,27 @@ $(document).on("click", ".quick-change", function () {
 
 $(document).on("click", ".done", function () {
   event.preventDefault()
-  $(this).css("display", "none")
-  $(this).parent("li").find("img").css("display", "inline-block")
-  $(this).parent("li").parent("ul").find(".changeAble").css({
-    "border": "none"
-  })
-  $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable", "false")
-  $(this).parent("li").parent("ul").find(".id").removeClass("changeAble")
-  $(this).parent("li").parent("ul").find(".name").removeClass("changeAble")
-  $(this).removeAttr("data-bs-toggle")
-  $(this).removeAttr("data-bs-target")
-
+  if ($(this).parent().parent().find(".id").text() == 0 || $(this).parent().parent().find(".name").text() == 0 ||$(this).parent().parent().find(".stock").text() == 0 || $(this).parent().parent().find(".price").text() == 0){
+    console.log("hello")
+  }
+  else{
+    $(this).css("display", "none")
+    $(this).parent("li").find("img").css("display", "inline-block")
+    $(this).parent("li").parent("ul").find(".changeAble").css({
+      "border": "none"
+    })
+    $(this).parent("li").parent("ul").find(".changeAble").attr("contenteditable", "false")
+    $(this).parent("li").parent("ul").find(".id").removeClass("changeAble")
+    $(this).parent("li").parent("ul").find(".name").removeClass("changeAble")
+    $(this).removeAttr("data-bs-toggle")
+    $(this).removeAttr("data-bs-target")
+    var drug =  {
+      id : $(this).parent().parent().find(".id").text(),
+      stock : $(this).parent().parent().find(".stock").text(),
+      price : $(this).parent().parent().find(".price").text()
+    }
+    console.log("123")
+  } 
 });
 let img;
 $(document).ready(function(){
@@ -302,6 +367,7 @@ $(document).on("click",".add-image",function(){
   for (let i = lastChild - 5; i < lastChild; i++) {
     document.querySelectorAll(".changeAble")[i].setAttribute("style", "border: 1px solid black")
   }
+
   document.querySelectorAll(".done")[document.querySelectorAll(".done").length - 1].setAttribute("style", "display:block")
   document.querySelectorAll(".more-button")[document.querySelectorAll(".more-button").length - 1].setAttribute("style", "display:none")
   checkAccount()
@@ -453,24 +519,7 @@ var Pagination = {
 };
 
 var init = async function () {
-  let res = await fetch('http://localhost:8080/drug', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
-  let all = "";
-  if (res.ok) {
-    let data = await res.json();
-    let result = Object.values(data);
-    for (let i = 0; i < result.length; i++) {
-      autoName.push(result[i].split(" -- ")[1])
-      all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
-        + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
-    }
-  }
-  localStorage.setItem("data", all);
+  await addItem()
   let pages = checkNumberIsFloat((localStorage.getItem("data").split("\n").length)/itemDisplayAtATime)
   Pagination.Init(document.getElementById('pagination'), {
     size: pages, // pages size
@@ -479,29 +528,10 @@ var init = async function () {
   });
 };
 
-async function addAllItem(item) {
-  let res = await fetch('http://localhost:8080/drug', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  });
-  let all = "";
-  if (res.ok) {
-    let data = await res.json();
-    let result = Object.values(data);
-    all = formatData(result)
-  }
-  localStorage.setItem("data", all);
-  addItem(itemDisplayAtATime)
-}
-addAllItem(itemDisplayAtATime)
-document.addEventListener('DOMContentLoaded', init,false);
-
 function formatData(result){
   let all = ""
   for (let i = 0; i < result.length; i++) {
+    autoName.push(result[i].split(" -- ")[1])
     all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5]
       + "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
   }
@@ -520,7 +550,7 @@ $(document).on("click", ".search-button-2", function () {
   document.getElementById("medicine2").value = ""
   if (searchName == 0) {
     removeAllItem()
-    addAllItem(itemDisplayAtATime)
+    addItem(itemDisplayAtATime)
   }
   else {
     let data = localStorage.getItem("data")
@@ -572,7 +602,7 @@ $(document).on("click", ".search-button-2", function () {
 
 });
 
-intinialize()
+initializes()
 
 
 /* * * * * * * * * * * * * * * * *
@@ -649,20 +679,17 @@ $(document).on("click",".increase-amount-image",function(){
 
 $(document).on("click",".checkbox-filter",function(){
   if ($(this).find("img").attr("src") == "./images/checked.png"){
-    $(this).find("img").attr("src","./images/unchecked.png")
     localStorage.setItem($(this).parent("li").find("span").text(),false)
     addItem(itemDisplayAtATime)
   }
   else{
-    $(this).find("img").attr("src","./images/checked.png")
     localStorage.setItem($(this).parent("li").find("span").text(),true)
     addItem(itemDisplayAtATime)
   }
+  window.location.reload()
 });
 
 $(document).on("click",".dropdown-item-type",function(){
-  let menu = $(this).text()
-  $(".type").children("button").text(menu)
   if($(this).text() == "Thuốc kê đơn"){
     localStorage.setItem("Thuốc kê đơn",true)
     localStorage.setItem("Thuốc không kê đơn",false)
@@ -676,11 +703,11 @@ $(document).on("click",".dropdown-item-type",function(){
     localStorage.setItem("Thuốc không kê đơn",true)
   }
   addItem()
+  window.location.reload()
 });
 
 $(document).on("click",".dropdown-item-sort",async function(){
   let menu = $(this).text()
-  $(".sort").children("button").text(menu)
   if (menu == "Money (low - high)"){
     localStorage.setItem("sort-type","money-asc")
   }
@@ -697,6 +724,8 @@ $(document).on("click",".dropdown-item-sort",async function(){
     localStorage.setItem("sort-type","none")
   }
   addItem(itemDisplayAtATime)
+  window.location.reload()
+
 });
 
 function getFilter(){
@@ -735,7 +764,7 @@ function getFilter(){
       Drug.group = "Tân dược"
     }
     else {
-      Drug.group = "fail"
+      Drug.group = "none"
     }
   }
   Drug.sortType = localStorage.getItem("sort-type")
@@ -761,7 +790,6 @@ async function addCompany(){
   }
 
 }
-addCompany()
 async function addItem(item){
   removeAllItem()
   $(".spinner").css("display","block")
@@ -777,52 +805,53 @@ async function addItem(item){
         body: JSON.stringify(Drug)
     });
     if (res.ok) {
-        let data = await res.json();
-        let result = Object.values(data);
-        console.log(result)
+        let datas = await res.json();
+        let result = Object.values(datas);
         all = formatData(result)
+        localStorage.setItem("data", all);
+        $(".spinner").css("display","none")
+        let page = 1
+        let itemDisplay = itemDisplayAtATime
+        let data = localStorage.getItem("data")
+        let itemIndex = (page - 1) * itemDisplay
+        let wrapper = document.querySelector(".medicines")
+        for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
+          if (data.split("\n")[i].split("&&")[0] == 0) {
+            break
+          }
+          else {
+            wrapper.innerHTML += `<ul class="medicine-item">
+              <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
+              <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
+              <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
+              <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+              <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
+              <li>
+                  <div class="done">Done</div>
+                  <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+                  <div class="more-button-submenu-wrapper">
+                      <ul class="more-button-submenu">
+                          <li class="more-button-submenu-item quick-change">
+                              Quick change
+                          </li>
+                          <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
+                              data-bs-target="#modifyMedicine">
+                              Advance
+                          </li>
+                      </ul>
+                  </div>
+              </li>
+              <li>
+                  <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                  <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+              </li>
+          </ul>`
+            }
+        }
     }
-  }catch (e) {}
-  localStorage.setItem("data", all);
-  $(".spinner").css("display","none")
-  let page = 1
-  page = document.querySelector(".current").innerHTML
-  let itemDisplay = itemDisplayAtATime
-  let data = localStorage.getItem("data")
-  let itemIndex = (page - 1) * itemDisplay
-  let wrapper = document.querySelector(".medicines")
-  for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
-    if (data.split("\n")[i].split("&&")[0] == 0) {
-      break
-    }
-    else {
-      wrapper.innerHTML += `<ul class="medicine-item">
-        <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
-        <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
-        <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
-        <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
-        <li>
-            <div class="done">Done</div>
-            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
-            <div class="more-button-submenu-wrapper">
-                <ul class="more-button-submenu">
-                    <li class="more-button-submenu-item quick-change">
-                        Quick change
-                    </li>
-                    <li class="more-button-submenu-item more-button-submenu-item" data-bs-toggle="modal"
-                        data-bs-target="#modifyMedicine">
-                        Advance
-                    </li>
-                </ul>
-            </div>
-        </li>
-        <li>
-            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
-        </li>
-    </ul>`
-      }
+  }catch (e) {
+    
   }
+
   checkAccount();
 }

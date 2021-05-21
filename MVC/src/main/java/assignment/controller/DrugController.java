@@ -68,6 +68,9 @@ public class DrugController {
 
     @PostMapping(value = "/getDrugsByFilter")
     public Map<String, String> getDrugsByFilter(@RequestBody Map<String, String> data){
+        if (list.size() == 0){
+            list = drugService.getAllDrugs();
+        }
         List<Drug> list = drugService.getDrugsByFilter(data.get("group"), data.get("type"), data.get("sortType"));
         Map <String, String> map = new HashMap<>();
         for (int i = 0 ; i< list.size(); i++){

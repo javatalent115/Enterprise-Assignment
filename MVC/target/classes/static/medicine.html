@@ -440,6 +440,14 @@
         .company-option{
             background-color: red;
         }
+        .name:hover{
+            color: blue;
+            cursor: pointer;
+        }
+        .header-name:hover{
+            color: black !important;
+            cursor:text;
+        }
        
     </style>
     <div class="information-medicine-container">
@@ -464,11 +472,11 @@
                           Group
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item checkbox-filter">
+                            <li><a class="dropdown-item checkbox-filter tan-duoc">
                                 <img src="./images/checked.png" alt="" class="check-box">
                                 <span>Tân dược</span>
                             </a></li>
-                            <li><a class="dropdown-item checkbox-filter">
+                            <li><a class="dropdown-item checkbox-filter dong-duoc">
                                 <img src="./images/checked.png" alt="" class="check-box">
                                 <span>Đông dược</span>
                             </a>
@@ -504,7 +512,7 @@
                     <ul class="medicine-item">
                         <li class="changeAble id" data-bs-toggle="modal"
                         data-bs-target="#modifyMedicine">ID</li>
-                        <li class="name">Name</li>
+                        <li class="name header-name">Name</li>
                         <li class="stock">Stock</li>
                         <li class="changeAble amount">Amount</li>
                         <li class="changeAble price">Price</li>
