@@ -6,7 +6,7 @@
 // localStorage.setItem("Thuốc kê đơn",true)
 // localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
-// $(document).on("click",".name",function(){
+// `$(document).on("click",".name",function(){
 //   let drug = {
 //     id: $(this).parent().find(".id").text(),
 //     name: $(this).parent().find(".name").text(),
@@ -16,7 +16,7 @@ let itemDisplayAtATime = 10
 //   }
 //   localStorage.setItem("drug-click",JSON.stringify(drug))
 //   window.location.href = "http://localhost:8080/drug-infomation.html"
-// })
+// })`
 function checkAccount() {
   if (localStorage.getItem("accountType") == "guest") {
     $("li:nth-child(6)").css("display", "none")
@@ -254,6 +254,21 @@ $(document).on("click",".confirm-add-company",function(){
     let stock=quickChange.parent().parent().find(".stock").text()
     let price=quickChange.parent().parent().find(".price").text()
     let company = document.getElementById("company-select").value
+    let drug = {
+       id:quickChange.parent().parent().find(".id").text(),
+       name:quickChange.parent().parent().find(".name").text(),
+       stock:quickChange.parent().parent().find(".stock").text(),
+       price:quickChange.parent().parent().find(".price").text(),
+       company : document.getElementById("company-select").value
+    }
+
+
+    //FETCH add drug o day, co object drug r do
+
+
+
+
+
 }
 })
 
@@ -271,7 +286,6 @@ $(document).on("click", ".quick-change", function () {
 $(document).on("click", ".done", function () {
   event.preventDefault()
   if ($(this).parent().parent().find(".id").text() == 0 || $(this).parent().parent().find(".name").text() == 0 ||$(this).parent().parent().find(".stock").text() == 0 || $(this).parent().parent().find(".price").text() == 0){
-    console.log("hello")
   }
   else{
     $(this).css("display", "none")
@@ -289,7 +303,16 @@ $(document).on("click", ".done", function () {
       stock : $(this).parent().parent().find(".stock").text(),
       price : $(this).parent().parent().find(".price").text()
     }
-    console.log("123")
+
+    //Fetch update o day, co object drug r do
+
+
+
+
+
+
+
+
   } 
 });
 let img;
