@@ -305,7 +305,6 @@ $(document).on("click", ".quick-change", function () {
 $(document).on("click", ".done", function () {
   event.preventDefault()
   if ($(this).parent().parent().find(".id").text() == 0 || $(this).parent().parent().find(".name").text() == 0 ||$(this).parent().parent().find(".stock").text() == 0 || $(this).parent().parent().find(".price").text() == 0){
-    console.log()
     
   }
   else{
@@ -729,6 +728,13 @@ $(document).on("click", ".page", function () {
   }
 });
 
+$(document).on("click",".decrease-amount-image",function(){
+  let amount = parseInt($(this).parent("li").find("div").text())
+  if (amount > 1){
+    $(this).parent("li").find("div").html(amount-1)
+  }
+})
+
 $(document).on("click",".increase-amount-image",function(){
   let amount = parseInt($(this).parent("li").find("div").text())
   $(this).parent("li").find("div").html(amount+1)
@@ -881,7 +887,7 @@ async function addItem(item){
               <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
               <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
               <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-              <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+              <li class="changeAble amount"><img class = "decrease-amount-image" src="./images/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
               <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
               <li>
                   <div class="done">Done</div>
