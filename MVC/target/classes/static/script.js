@@ -6,17 +6,17 @@
 // localStorage.setItem("Thuốc kê đơn",true)
 // localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
-$(document).on("click",".name",function(){
-  let drug = {
-    id: $(this).parent().find(".id").text(),
-    name: $(this).parent().find(".name").text(),
-    stock:$(this).parent().find(".stock").text(),
-    amount:$(this).parent().find(".amount").text(),
-    price:$(this).parent().find(".price").text()
-  }
-  localStorage.setItem("drug-click",JSON.stringify(drug))
-  window.location.href = "http://localhost:8080/drug-infomation.html"
-})
+// `$(document).on("click",".name",function(){
+//   let drug = {
+//     id: $(this).parent().find(".id").text(),
+//     name: $(this).parent().find(".name").text(),
+//     stock:$(this).parent().find(".stock").text(),
+//     amount:$(this).parent().find(".amount").text(),
+//     price:$(this).parent().find(".price").text()
+//   }
+//   localStorage.setItem("drug-click",JSON.stringify(drug))
+//   window.location.href = "http://localhost:8080/drug-infomation.html"
+// })`
 function checkAccount() {
   if (localStorage.getItem("accountType") == "guest") {
     $("li:nth-child(6)").css("display", "none")
@@ -249,13 +249,47 @@ $(document).on("click",".confirm-add-company",function(){
     quickChange.parent("li").parent("ul").find(".name").removeClass("changeAble")
     quickChange.removeAttr("data-bs-toggle")
     quickChange.removeAttr("data-bs-target")
-    let id=quickChange.parent().parent().find(".id").text()
-    let name=quickChange.parent().parent().find(".name").text()
-    let stock=quickChange.parent().parent().find(".stock").text()
-    let price=quickChange.parent().parent().find(".price").text()
-    let company = document.getElementById("company-select").value
+    let drug = {
+       id:quickChange.parent().parent().find(".id").text(),
+       name:quickChange.parent().parent().find(".name").text(),
+       stock:quickChange.parent().parent().find(".stock").text(),
+       money:quickChange.parent().parent().find(".price").text(),
+       producer: {
+          id: document.getElementById("company-select").value
+        }
+    };
+
+
+    //FETCH add drug o day, co object drug r do
+    addDrug(drug);
+
+
+
+
 }
-})
+});
+
+async function addDrug(drug){
+  try {
+    let res = await fetch('http://localhost:8080/drug/addDrug', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(drug)
+    });
+    if (res.ok) {
+      let data = await res.json();
+      let result = Object.values(data);
+      if (result[0] !=="failed"){
+        await addItem(itemDisplayAtATime)
+      }
+      return data;
+    }
+  }catch (e) {}
+  return 404;
+}
 
 $(document).on("click", ".quick-change", function () {
   event.preventDefault()
@@ -271,7 +305,8 @@ $(document).on("click", ".quick-change", function () {
 $(document).on("click", ".done", function () {
   event.preventDefault()
   if ($(this).parent().parent().find(".id").text() == 0 || $(this).parent().parent().find(".name").text() == 0 ||$(this).parent().parent().find(".stock").text() == 0 || $(this).parent().parent().find(".price").text() == 0){
-    console.log("hello")
+    console.log($(this).attr("data-bs-target"))
+    
   }
   else{
     $(this).css("display", "none")
@@ -287,11 +322,28 @@ $(document).on("click", ".done", function () {
     var drug =  {
       id : $(this).parent().parent().find(".id").text(),
       stock : $(this).parent().parent().find(".stock").text(),
-      price : $(this).parent().parent().find(".price").text()
-    }
-    console.log("123")
+      money : $(this).parent().parent().find(".price").text()
+    };
+
+    //Fetch update o day, co object drug r do
+    updateExistDrug(drug);
   } 
 });
+
+async function updateExistDrug(drug){
+  try {
+    await fetch("http://localhost:8080/drug/updateDrug",{
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(drug)
+    });
+  }
+  catch (e) {}
+}
+
 let img;
 $(document).ready(function(){
   $("#delete-confirm-modal").on("show.bs.modal", function(event){
@@ -314,8 +366,8 @@ $(document).on("click", ".trash-image", function () {
 
 async function deleteDrug(id){
   try {
-      let res = await fetch('http://localhost:8080/api/deleteDrug', {
-          method: 'POST',
+      let res = await fetch('http://localhost:8080/drug/deleteDrug', {
+          method: 'DELETE',
           headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
@@ -367,7 +419,7 @@ $(document).on("click",".add-image",function(){
   for (let i = lastChild - 5; i < lastChild; i++) {
     document.querySelectorAll(".changeAble")[i].setAttribute("style", "border: 1px solid black")
   }
-  
+
   document.querySelectorAll(".done")[document.querySelectorAll(".done").length - 1].setAttribute("style", "display:block")
   document.querySelectorAll(".more-button")[document.querySelectorAll(".more-button").length - 1].setAttribute("style", "display:none")
   checkAccount()

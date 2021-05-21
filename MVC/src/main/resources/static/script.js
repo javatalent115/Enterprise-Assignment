@@ -305,8 +305,14 @@ $(document).on("click", ".quick-change", function () {
 $(document).on("click", ".done", function () {
   event.preventDefault()
   if ($(this).parent().parent().find(".id").text() == 0 || $(this).parent().parent().find(".name").text() == 0 ||$(this).parent().parent().find(".stock").text() == 0 || $(this).parent().parent().find(".price").text() == 0){
+    console.log()
+    
   }
   else{
+    if ($(this).attr("data-bs-target") == "#add-company-modal"){
+
+    }
+    else{
     $(this).css("display", "none")
     $(this).parent("li").find("img").css("display", "inline-block")
     $(this).parent("li").parent("ul").find(".changeAble").css({
@@ -325,7 +331,8 @@ $(document).on("click", ".done", function () {
 
     //Fetch update o day, co object drug r do
     updateExistDrug(drug);
-  } 
+  }
+}
 });
 
 async function updateExistDrug(drug){
