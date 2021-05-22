@@ -118,7 +118,7 @@ function initializes() {
   else if (localStorage.getItem("sort-type") == "money-asc"){
     $(".sort").children("button").text("Money (low - high)")
   }
-  else if (localStorage.getItem("sort-type") == "name-des"){
+  else if (localStorage.getItem("sort-type") == "money-des"){
     $(".sort").children("button").text("Money (high - low)")
   }
   document.addEventListener('DOMContentLoaded', init,false);
@@ -245,6 +245,7 @@ $(document).on("click",".confirm-add-company",function(){
     quickChange.attr("data-bs-target","#add-company-modal")
   }
   else{
+    img.removeClass("add-trash-image")
     quickChange.attr("data-bs-toggle","modal")
     quickChange.attr("data-bs-target","#add-company-modal")
     quickChange.css("display", "none")
@@ -365,8 +366,13 @@ $(document).ready(function(){
 });
 
 $(document).on("click",".confirm-delete",function(){
-  img.parent().parent().remove()
-  deleteDrug(img.parent().parent().find(".id").text())
+  if(img.hasClass("add-trash-image")){
+    img.parent().parent().remove()
+  }
+  else{
+    img.parent().parent().remove()
+    deleteDrug(img.parent().parent().find(".id").text())
+  }
 })
 
 $(document).on("click", ".trash-image", function () {
@@ -422,7 +428,7 @@ $(document).on("click",".add-image",function(){
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+                            <img src="./images/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
   `
@@ -796,7 +802,6 @@ $(document).on("click",".dropdown-item-sort",async function(){
   }
   addItem(itemDisplayAtATime)
   window.location.reload()
-
 });
 
 function getFilter(){

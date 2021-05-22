@@ -118,7 +118,7 @@ function initializes() {
   else if (localStorage.getItem("sort-type") == "money-asc"){
     $(".sort").children("button").text("Money (low - high)")
   }
-  else if (localStorage.getItem("sort-type") == "name-des"){
+  else if (localStorage.getItem("sort-type") == "money-des"){
     $(".sort").children("button").text("Money (high - low)")
   }
   document.addEventListener('DOMContentLoaded', init,false);
@@ -153,24 +153,32 @@ $(document).on("click", ".cart-btn", function () {
       'height': 35
     }, 1000, 'easeInOutExpo');
 
-    setTimeout(function () {
-      count++;
-      localStorage.setItem("cart", count)
-      $(".cart-nav .item-count").text(localStorage.getItem("cart"));
-
-    }, 1500);
     let id = $(this).parent("li").parent("ul").find(".id").text()
     let name = $(this).parent("li").parent("ul").find(".name").text()
     let amount = $(this).parent("li").parent("ul").find(".amount").text()
     let price = $(this).parent("li").parent("ul").find(".price").text()
-    var obj = {
+    const drug = {
       id: id,
       name: name,
       amount: amount,
       price: price
-    }
-    listItem.push(obj)
-    var myJSON = JSON.stringify(listItem)
+    };
+    setTimeout(function () {
+      if (count === null) count = "0";
+      count = (parseInt(count) +  parseInt(drug.amount));
+      localStorage.setItem("cart", count)
+      $(".cart-nav .item-count").text(localStorage.getItem("cart"));
+
+    }, 1500);
+    let isExist = false;
+    listItem.forEach(function(object) {
+      if (object.id === drug.id) {
+        object.amount = (parseInt(object.amount) +  parseInt(drug.amount));
+        isExist = true;
+      }
+    });
+    if (!isExist) listItem.push(drug);
+    const myJSON = JSON.stringify(listItem);
     localStorage.setItem("cart-item", myJSON)
     imgclone.animate({
       'width': 0,
@@ -357,8 +365,15 @@ $(document).ready(function(){
 });
 
 $(document).on("click",".confirm-delete",function(){
-  img.parent().parent().remove()
-  deleteDrug(img.parent().parent().find(".id").text())
+  if(img.hasClass("add-trash-image")){
+    console.log("123")
+    img.parent().parent().remove()
+  }
+  else{
+    img.removeClass("add-trash-image")
+    img.parent().parent().remove()
+    deleteDrug(img.parent().parent().find(".id").text())
+  }
 })
 
 $(document).on("click", ".trash-image", function () {
@@ -414,7 +429,7 @@ $(document).on("click",".add-image",function(){
                         </li>
                         <li>
                             <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+                            <img src="./images/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
   `
@@ -788,7 +803,6 @@ $(document).on("click",".dropdown-item-sort",async function(){
   }
   addItem(itemDisplayAtATime)
   window.location.reload()
-
 });
 
 function getFilter(){
