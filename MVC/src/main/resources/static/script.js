@@ -153,12 +153,6 @@ $(document).on("click", ".cart-btn", function () {
       'height': 35
     }, 1000, 'easeInOutExpo');
 
-    setTimeout(function () {
-      count++;
-      localStorage.setItem("cart", count)
-      $(".cart-nav .item-count").text(localStorage.getItem("cart"));
-
-    }, 1500);
     let id = $(this).parent("li").parent("ul").find(".id").text()
     let name = $(this).parent("li").parent("ul").find(".name").text()
     let amount = $(this).parent("li").parent("ul").find(".amount").text()
@@ -169,6 +163,13 @@ $(document).on("click", ".cart-btn", function () {
       amount: amount,
       price: price
     };
+    setTimeout(function () {
+      if (count === null) count = "0";
+      count = (parseInt(count) +  parseInt(drug.amount));
+      localStorage.setItem("cart", count)
+      $(".cart-nav .item-count").text(localStorage.getItem("cart"));
+
+    }, 1500);
     let isExist = false;
     listItem.forEach(function(object) {
       if (object.id === drug.id) {
