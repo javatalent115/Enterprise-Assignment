@@ -413,7 +413,7 @@ $(document).on("click",".confirm-modifyMedicine",function(){
 
     }
   };
-  advanceUpdate(drug).then()
+  advanceUpdate(drug)
 });
 
 
@@ -427,6 +427,7 @@ async function advanceUpdate(drug){
       },
       body: JSON.stringify(drug)
     });
+    await addItem()
   }catch (e) {}
 }
 
