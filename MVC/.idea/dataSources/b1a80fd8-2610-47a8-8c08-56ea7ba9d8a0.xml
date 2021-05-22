@@ -1007,6 +1007,7 @@ false Zulu
     </sequence>
     <table id="35" parent="19" name="customers">
       <ObjectId>16856</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>7742</StateNumber>
     </table>
@@ -1022,6 +1023,7 @@ false Zulu
     </table>
     <table id="38" parent="19" name="orders">
       <ObjectId>16872</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>7741</StateNumber>
     </table>

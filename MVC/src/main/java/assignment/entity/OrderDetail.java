@@ -45,14 +45,6 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public Order getTransaction() {
-        return order;
-    }
-
-    public void setTransaction(Order order) {
-        this.order = order;
-    }
-
     public Drug getDrug() {
         return drug;
     }

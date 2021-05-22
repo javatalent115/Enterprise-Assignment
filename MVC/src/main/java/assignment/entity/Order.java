@@ -26,9 +26,15 @@ public class Order {
     @Column
     private String purchaseType;
 
+    @Column
+    private int total;
+
 //    @Column
 //    private String total;
     //TODO can be added later
+
+
+    public Order() { }
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     List<OrderDetail> orderDetailList;
@@ -81,7 +87,15 @@ public class Order {
         this.orderDetailList = orderDetailList;
     }
 
-//    public int getTransactionCost() {
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        this.total = total;
+    }
+
+    //    public int getTransactionCost() {
 //        int sum = 0;
 //        for (OrderDetail orderDetail : orderDetailList) {
 //            sum += orderDetail.getOrderCost();

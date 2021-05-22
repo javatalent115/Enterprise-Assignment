@@ -5,18 +5,23 @@ import assignment.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/customer")
+@RequestMapping(path = "/customer")//TODO can be splitted to AdminController
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomers();
+        List<Customer> customerList = customerService.getAllCustomers();
+        for (Customer c : customerList) {
+            c.setOrderList(new ArrayList<>());
+        }
+        return customerList;
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)

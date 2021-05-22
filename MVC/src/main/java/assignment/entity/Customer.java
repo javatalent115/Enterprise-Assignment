@@ -20,7 +20,13 @@ public class Customer {
     private String lastname;
 
     @Column(length = 1024)
+    private String email;
+
+    @Column(length = 1024)
     private String address;
+
+    @Column(length = 1024)
+    private String lastLogin;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private List<Order> orderList;
@@ -73,12 +79,20 @@ public class Customer {
         this.address = address;
     }
 
-    public List<Order> getTransactionList() {
-        return orderList;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTransactionList(List<Order> orderList) {
-        this.orderList = orderList;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
     @Override

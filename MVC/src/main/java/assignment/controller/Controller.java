@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @RestController
@@ -39,7 +40,11 @@ public class Controller {
         if (customer == null) {
             return "invalid";
         } else if (customer.getPassword().equals(user.get("password"))) {
-            return "customer";
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            customer.setLastLogin(dateFormat.format(date));
+            customerService.save(customer);
+            return "user";
         }
         return "invalid";
     }
