@@ -6,17 +6,17 @@
 // localStorage.setItem("Thuốc kê đơn",true)
 // localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
-// `$(document).on("click",".name",function(){
-//   let drug = {
-//     id: $(this).parent().find(".id").text(),
-//     name: $(this).parent().find(".name").text(),
-//     stock:$(this).parent().find(".stock").text(),
-//     amount:$(this).parent().find(".amount").text(),
-//     price:$(this).parent().find(".price").text()
-//   }
-//   localStorage.setItem("drug-click",JSON.stringify(drug))
-//   window.location.href = "http://localhost:8080/drug-infomation.html"
-// })`
+$(document).on("click",".name",function(){
+  let drug = {
+    id: $(this).parent().find(".id").text(),
+    name: $(this).parent().find(".name").text(),
+    stock:$(this).parent().find(".stock").text(),
+    amount:$(this).parent().find(".amount").text(),
+    price:$(this).parent().find(".price").text()
+  }
+  localStorage.setItem("drug-click",JSON.stringify(drug))
+  window.location.href = "http://localhost:8080/drug-infomation.html"
+})
 function checkAccount() {
   if (localStorage.getItem("accountType") == "guest") {
     $("li:nth-child(6)").css("display", "none")
@@ -230,11 +230,8 @@ $(document).on("click",".no-add-company",function(){
 })
 
 $(document).on("click",".confirm-add-company",function(){
-
-  if (quickChange.parent().parent().find(".id").text() == 0 || quickChange.parent().parent().find(".name").text() == 0 ||quickChange.parent().parent().find(".stock").text() == 0 || quickChange.parent().parent().find(".price").text() == 0){
+  if (quickChange.parent().parent().find(".id").text() == 0 || quickChange.parent().parent().find(".add-name").text() == 0 ||quickChange.parent().parent().find(".stock").text() == 0 || quickChange.parent().parent().find(".price").text() == 0){
     alert("This must have a value")
-    quickChange.parent("li").parent("ul").find(".id").addClass("changeAble")
-    quickChange.parent("li").parent("ul").find(".name").addClass("changeAble")
     quickChange.parent("li").parent("ul").find(".changeAble").attr("contenteditable","true")
     quickChange.parent("li").parent("ul").find(".changeAble").css({
       "border": "1px solid red"
@@ -245,7 +242,9 @@ $(document).on("click",".confirm-add-company",function(){
     quickChange.attr("data-bs-target","#add-company-modal")
   }
   else{
-    img.removeClass("add-trash-image")
+    $(".cart-btn").parent().find("img").removeClass("add-trash-image")
+    quickChange.parent().parent().find("li").removeClass("add-name")
+    quickChange.parent().parent().find("li").addClass("name")
     quickChange.attr("data-bs-toggle","modal")
     quickChange.attr("data-bs-target","#add-company-modal")
     quickChange.css("display", "none")
@@ -375,8 +374,6 @@ $(document).ready(function(){
       for (let i = 0; i < data.split("\n").length-1; i++) {
         if(data.split("\n")[i].split("&&")[1] == advance.parent().parent().parent().parent().find(".name").text()){
           index = i
-          console.log(i)
-          console.log(index)
           break
         } 
       }
@@ -385,18 +382,34 @@ $(document).ready(function(){
       $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
       $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
       $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
-      $("#advanced-preperation").val(data.split("\n")[index].split("&&")[2])
+      // $("#advanced-preperation").val(data.split("\n")[index].split("&&")[2])
       $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
-      $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
-      $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
+      // $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
+      // $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
       $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
       $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
-      if (data.split("\n")[index].split("&&")[6] == "undefined"){
+      if (data.split("\n")[index].split("&&")[6] == "Undefined"){
       }
       else{
         $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
       }
   });
+});
+
+$(document).on("click",".confirm-modifyMedicine",function(){
+  var drug = {
+    id : $("#advanced-id").val(),
+    name : $("#advanced-name").val(),
+    stock : $("#advanced-stock").val(),
+    price : $("#advanced-price").val(),
+    preperation : $("#advanced-preperation").val(),
+    packaging : $("#advanced-packaging").val(),
+    dosaga : $("#advanced-dosaga").val(),
+    ingredient : $("#advanced-ingredient").val(),
+    country : $("#advanced-country").val(),
+    type : $("#advanced-type").val(),
+    group: $("#advanced-group").val()
+  }
 });
 
 $(document).on("click",".confirm-delete",function(){
@@ -442,7 +455,7 @@ $(document).on("click",".add-image",function(){
   $(".medicines").append(`
   <ul class="medicine-item">
                         <li class="changeAble id" contenteditable="true"></li>
-                        <li class="changeAble name" contenteditable="true"></li>
+                        <li class="changeAble add-name" contenteditable="true"></li>
                         <li class="changeAble stock" contenteditable="true"></li>
                         <li class="changeAble amount" contenteditable="true"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
                         <li class="changeAble price" contenteditable="true"></li>
