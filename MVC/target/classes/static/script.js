@@ -342,6 +342,83 @@ $(document).ready(function() {
 });
 
 let advance;
+<<<<<<< HEAD
+$(document).ready(function(){
+  $("#modifyMedicine").on("show.bs.modal", function(event){
+      // Get the button that triggered the modal
+      advance = $(event.relatedTarget)
+      let index;
+      let data = localStorage.getItem("data")
+      for (let i = 0; i < data.split("\n").length-1; i++) {
+        if(data.split("\n")[i].split("&&")[1] == advance.parent().parent().parent().parent().find(".name").text()){
+          index = i
+          break
+        } 
+      }
+      console.log(data.split("\n")[index])
+      $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
+      $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
+      $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
+      $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
+      $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
+      $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
+      $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
+      $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
+      $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
+      $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
+      if (data.split("\n")[index].split("&&")[6] == "Undefined"){
+      }
+      else{
+        $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
+      }
+  });
+});
+
+$(document).on("click",".confirm-modifyMedicine",function(){
+  let drug = {
+    id : $("#advanced-id").val(),
+    name: $("#advanced-name").val(),
+    preparation : $("#advanced-preparation").val(),
+    packaging : $("#advanced-packaging").val(),
+    drugGroup: $("#advanced-group").val(),
+    dosage : $("#advanced-dosage").val(),
+    type : $("#advanced-type").val(),
+    ingredients : $("#advanced-ingredient").val(),
+    country : $("#advanced-country").val(),
+    money : parseInt($("#advanced-stock").val()),
+    stock : parseInt($("#advanced-price").val()),
+    producer:{
+
+    }
+  };
+  advanceUpdate(drug)
+});
+
+
+async function advanceUpdate(drug){
+  try {
+    await fetch('http://localhost:8080/drug/advanceUpdateDrug', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(drug)
+    });
+    await addItem()
+  }catch (e) {}
+}
+
+$(document).on("click",".confirm-delete",function(){
+  if(img.hasClass("add-trash-image")){
+    img.parent().parent().remove()
+  }
+  else{
+    img.parent().parent().remove()
+    deleteDrug(img.parent().parent().find(".id").text())
+  }
+});
+=======
 $(document).ready(function() {
     $("#modifyMedicine").on("show.bs.modal", function(event) {
         // Get the button that triggered the modal
@@ -391,6 +468,7 @@ $(document).on("click", ".confirm-modifyMedicine", function() {
     advanceUpdate(drug)
 });
 
+>>>>>>> 1e466ce9d467eaa7ef94c2097402fd56ad8da321
 
 async function advanceUpdate(drug) {
     try {
@@ -422,6 +500,19 @@ $(document).on("click", ".trash-image", function() {
     // deleteDrug($(this).parent("li").parent("ul").find(".id").text())
 });
 
+<<<<<<< HEAD
+async function deleteDrug(id){
+  try {
+      let res = await fetch('http://localhost:8080/drug/deleteDrug', {
+          method: 'DELETE',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          },
+          body: id
+      });
+  }catch (e) {}
+=======
 async function deleteDrug(id) {
     try {
         let res = await fetch('http://localhost:8080/drug/deleteDrug', {
@@ -433,6 +524,7 @@ async function deleteDrug(id) {
             body: id
         });
     } catch (e) {}
+>>>>>>> 1e466ce9d467eaa7ef94c2097402fd56ad8da321
 }
 $(document).on("click", ".add-image", function() {
     event.preventDefault()
