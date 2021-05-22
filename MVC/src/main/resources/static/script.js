@@ -800,13 +800,13 @@ $(document).on("click",".dropdown-item-sort",async function(){
 });
 
 function getFilter(){
-  var Drug =  {
+  let Drug = {
     type: "",
-    group:"",
-    sortType:""
-  }
-  if (localStorage.getItem("Thuốc kê đơn") == "true"){
-    if (localStorage.getItem("Thuốc không kê đơn") == "true"){
+    group: "",
+    sortType: ""
+  };
+  if (localStorage.getItem("Thuốc kê đơn") === "true"){
+    if (localStorage.getItem("Thuốc không kê đơn") === "true"){
       Drug.type = "none"
     }
     else {
@@ -814,7 +814,7 @@ function getFilter(){
     }
   }
   else{
-    if (localStorage.getItem("Thuốc không kê đơn") == "true"){
+    if (localStorage.getItem("Thuốc không kê đơn") === "true"){
       Drug.type = "Thuốc không kê đơn"
     }
     else {
@@ -822,8 +822,8 @@ function getFilter(){
     }
   }
 
-  if (localStorage.getItem("Đông dược") == "true"){
-    if (localStorage.getItem("Tân dược") == "true"){
+  if (localStorage.getItem("Đông dược") === "true"){
+    if (localStorage.getItem("Tân dược") === "true"){
       Drug.group = "none"
     }
     else {
@@ -831,14 +831,14 @@ function getFilter(){
     }
   }
   else{
-    if (localStorage.getItem("Tân dược") == "true"){
+    if (localStorage.getItem("Tân dược") === "true"){
       Drug.group = "Tân dược"
     }
     else {
-      Drug.group = "none"
+      Drug.group = " "
     }
   }
-  Drug.sortType = localStorage.getItem("sort-type")
+  Drug.sortType = localStorage.getItem("sort-type");
   return Drug
 }
 
@@ -865,7 +865,7 @@ async function addItem(item){
   removeAllItem()
   $(".spinner").css("display","block")
   let all = "";
-  let Drug = getFilter() 
+  let Drug = getFilter();
   try {
     let res = await fetch('http://localhost:8080/drug/getDrugsByFilter', {
         method: 'POST',
