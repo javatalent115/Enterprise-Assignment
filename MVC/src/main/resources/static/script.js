@@ -382,10 +382,10 @@ $(document).ready(function(){
       $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
       $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
       $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
-      // $("#advanced-preperation").val(data.split("\n")[index].split("&&")[2])
+      $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
       $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
-      // $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
-      // $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
+      $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
+      $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
       $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
       $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
       if (data.split("\n")[index].split("&&")[6] == "Undefined"){
@@ -397,20 +397,39 @@ $(document).ready(function(){
 });
 
 $(document).on("click",".confirm-modifyMedicine",function(){
-  var drug = {
+  let drug = {
     id : $("#advanced-id").val(),
-    name : $("#advanced-name").val(),
-    stock : $("#advanced-stock").val(),
-    price : $("#advanced-price").val(),
-    preperation : $("#advanced-preperation").val(),
+    name: $("#advanced-name").val(),
+    preparation : $("#advanced-preparation").val(),
     packaging : $("#advanced-packaging").val(),
-    dosaga : $("#advanced-dosaga").val(),
-    ingredient : $("#advanced-ingredient").val(),
-    country : $("#advanced-country").val(),
+    drugGroup: $("#advanced-group").val(),
+    dosage : $("#advanced-dosage").val(),
     type : $("#advanced-type").val(),
-    group: $("#advanced-group").val()
-  }
+    ingredients : $("#advanced-ingredient").val(),
+    country : $("#advanced-country").val(),
+    money : parseInt($("#advanced-stock").val()),
+    stock : parseInt($("#advanced-price").val()),
+    producer:{
+
+    }
+  };
+  advanceUpdate(drug)
 });
+
+
+async function advanceUpdate(drug){
+  try {
+    await fetch('http://localhost:8080/drug/advanceUpdateDrug', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(drug)
+    });
+    await addItem()
+  }catch (e) {}
+}
 
 $(document).on("click",".confirm-delete",function(){
   if(img.hasClass("add-trash-image")){
@@ -420,7 +439,7 @@ $(document).on("click",".confirm-delete",function(){
     img.parent().parent().remove()
     deleteDrug(img.parent().parent().find(".id").text())
   }
-})
+});
 
 $(document).on("click", ".trash-image", function () {
 
@@ -439,16 +458,7 @@ async function deleteDrug(id){
           },
           body: id
       });
-      if (res.ok) {
-          let data = await res.json();
-          let result = Object.values(data);
-          if (result[0] !=="failed"){
-              await addItem(itemDisplayAtATime)
-          }
-          return data;
-      }
   }catch (e) {}
-  return 404;
 }
 $(document).on("click",".add-image",function(){
   event.preventDefault()
