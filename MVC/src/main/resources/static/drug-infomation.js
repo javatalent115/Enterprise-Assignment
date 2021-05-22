@@ -4,13 +4,14 @@ function initialize(){
     $(".name").text(drug.name)
     $(".stock").text(drug.stock)
     $(".price").text(drug.price)
-    $(".preperation").text(drug.preperation)
+    $(".preparation").text(drug.preparation)
     $(".packaging").text(drug.packaging)
     $(".dosage").text(drug.dosage)
-    $(".ingredient").text(drug.ingredient)
+    $(".ingredient").text(drug.ingredients)
     $(".country").text(drug.country)
     $(".group").text(drug.group)
     $(".type").text(drug.type)
+    $(".producer").text(drug.producers_id)
     $(".drug-image").attr("src",returnImage(drug.name))
 }
 
