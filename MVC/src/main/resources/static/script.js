@@ -1,8 +1,3 @@
-// localStorage.setItem("Tân dược",true)
-// localStorage.setItem("Đông dược",true)
-// localStorage.setItem("sort-type","none")
-// localStorage.setItem("Thuốc kê đơn",true)
-// localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
 $(document).on("click", ".name", function() {
     let data = localStorage.getItem("data")

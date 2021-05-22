@@ -239,7 +239,7 @@
 </style>
 
 <body>
-    <div class="container-fluid">
+<div class="container-fluid">
         <nav class="nav-bar">
             <ul>
                 <li class="nav-item">
@@ -258,11 +258,18 @@
                     <a href="login_page.html" id="sign-in">Sign-in</a>
                     <a href="" id="sign-out">Sign-out</a>
                 </li>
-                <script src="./sign-in.js"></script>
             </ul>
         </nav>
         <div class="header">
-            Welcome to <br> Medicine <br> Online
+            <div style="text-shadow: 2px 2px 4px #000000;">
+                Welcome to <br>
+            </div>
+            <div style="margin-left: 100px; text-shadow: 2px 2px 4px #000000;">
+                Medicine <br>
+            </div>
+            <div style="margin-left: 200px; text-shadow: 2px 2px 4px #000000;">
+                Online
+            </div>
         </div>
         <div class="search-wrapper">
             <div class="search-input">
@@ -851,31 +858,31 @@
 
 
     <!--Confirm Delete Modal  -->
-    <div class="modal fade " id="delete-confirm-modal " data-bs-backdrop="static " data-bs-keyboard="false " tabindex="-1 " aria-labelledby="staticBackdropLabel " aria-hidden="true ">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content ">
-                <div class="modal-header ">
-                    <h5 class="modal-title " id="staticBackdropLabel ">Modal title</h5>
-                    <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+    <div class="modal fade" id="delete-confirm-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
                     Are you sure to delete this medicine
                 </div>
                 <div class="modal-footer ">
-                    <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">No</button>
-                    <button type="button " class="btn btn-primary confirm-delete " data-bs-dismiss="modal ">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary confirm-delete" data-bs-dismiss="modal">Yes</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!--Add company Modal  -->
-    <div class="modal fade " id="add-company-modal " data-bs-backdrop="static " data-bs-keyboard="false " tabindex="-1 " aria-labelledby="staticBackdropLabel " aria-hidden="true ">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content ">
-                <div class="modal-header ">
-                    <h5 class="modal-title " id="staticBackdropLabel ">Modal title</h5>
-                    <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+    <div class="modal fade" id="add-company-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel " aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <select id="company-select" onfocus='this.size=5;' onblur="this.size=1;" onchange='this.size=1; this.blur()' ;>
@@ -934,29 +941,30 @@
             overflow: visible;
         }
     </style>
-    <div class="modal fade " id="staticBackdrop " tabindex="-1 " aria-labelledby="staticBackdropLabel " aria-hidden="true ">
-        <div class="modal-dialog modal-dialog-scrollable ">
-            <div class="modal-content ">
-                <div class="modal-header ">
-                    <div class="about-us ">
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="about-us">
                         About us
                     </div>
                 </div>
-                <div class="modal-body ">
+                <div class="modal-body">
                     Description:
-                    <div class="content ">
+                    <div class="content">
 
                     </div>
                 </div>
-                <div class="modal-footer " style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px; ">
-                    <button class="done-button " data-bs-dismiss="modal " aria-label="Close ">Done</button>
+                <div class="modal-footer" style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px; ">
+                    <button class="done-button" data-bs-dismiss="modal">Done</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="./auto-complete.js "></script>
-    <script src="script.js "></script>
-    <script src="page.js "></script>
+    <script src="./auto-complete.js"></script>
+    <script src="script.js"></script>
+    <script src="page.js"></script>
+    <script src="sign-in.js"></script>
 
 </body>
 
