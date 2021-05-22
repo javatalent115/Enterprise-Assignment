@@ -5,23 +5,33 @@ import assignment.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/customer")
+@RequestMapping(path = "/customer")//TODO can be splitted to AdminController
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomers();
+        List<Customer> customerList = customerService.getAllCustomers();
+        for (Customer c : customerList) {
+            c.setOrderList(new ArrayList<>());
+        }
+        return customerList;
     }
 
-    @RequestMapping(path = "", method = RequestMethod.POST) //TODO pass "succeeded" or "failed"
-    public void addCustomer(@RequestBody Customer customer){
-        customerService.addCustomer(customer);
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    public String addCustomer(@RequestBody Customer customer) {
+        try {
+            customerService.addCustomer(customer);
+            return "succeeded";
+        } catch (Exception e) {
+            return "failed";
+        }
     }
 
 //    @RequestMapping(path = "", method = RequestMethod.DELETE)
@@ -29,14 +39,14 @@ public class CustomerController {
 //        customerService.deleteAllCustomer();
 //    }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/deleteCustomer", method = RequestMethod.DELETE)
     public void deleteCustomerByUsername(@RequestBody String username) {
         customerService.deleteByCustomerUsername(username.trim());
     }
 
-    @RequestMapping(path = "/{username}", method = RequestMethod.PUT)
-    public void updateCustomerByUsername(@PathVariable String username, @RequestBody Customer customer) {
-        customerService.updateCustomerByUsername(username, customer);
+    @RequestMapping(path = "/updateCustomer", method = RequestMethod.PUT)
+    public void updateCustomerByUsername(@RequestBody Customer customer) {
+        customerService.updateCustomerByUsername(customer.getUsername(), customer);
     }
 
     @RequestMapping(path = "/{username}", method = RequestMethod.GET)

@@ -39,7 +39,5 @@ public class ProducerController {
     public void deleteProducerById(@RequestBody String id) {
         producerService.deleteByProducerId(id);
     }
-
-
 }
 

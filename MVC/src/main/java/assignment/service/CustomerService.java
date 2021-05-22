@@ -37,16 +37,20 @@ public class CustomerService {
 
     public void updateCustomerByUsername(String username, Customer newCustomer) {
         Customer oldCustomer = getCustomerByUsername(username);
-        newCustomer.setTransactionList(oldCustomer.getTransactionList());
+        newCustomer.setOrderList(oldCustomer.getOrderList());
         oldCustomer = newCustomer;
         customerRepo.save(oldCustomer);
     }
 
     public long countCustomer() {
-        return this.customerRepo.count();
+        return customerRepo.count();
     }
 
     public void deleteAllCustomer() {
-        this.customerRepo.deleteAll();
+        customerRepo.deleteAll();
+    }
+
+    public void save(Customer customer) {
+        customerRepo.save(customer);
     }
 }

@@ -2,6 +2,7 @@ package assignment.entity;
 
 import assignment.id_generator.SequenceIdGenerator;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 
@@ -31,20 +32,17 @@ public class OrderDetail {
     @Column
     private int quantity;
 
+    @Column
+    private int cost;
+
+    public OrderDetail() { }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Order getTransaction() {
-        return order;
-    }
-
-    public void setTransaction(Order order) {
-        this.order = order;
     }
 
     public Drug getDrug() {
@@ -63,8 +61,24 @@ public class OrderDetail {
         this.quantity = quantity;
     }
 
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
     public int getOrderCost() {
         return quantity * drug.getMoney();
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override

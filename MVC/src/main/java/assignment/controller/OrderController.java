@@ -1,7 +1,7 @@
 package assignment.controller;
 
 import assignment.entity.Order;
-import assignment.service.TransactionService;
+import assignment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,39 +9,40 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/transaction")
+@RequestMapping(path = "/order")
 public class OrderController {
     @Autowired
-    private TransactionService transactionService;
+    private OrderService orderService;
 
     @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Order> getAllTransactions(){
-        return transactionService.getAllTransactions();
+    public List<Order> getAllOrders(){
+        return orderService.getAllOrders();
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public void addTransaction(@RequestBody Order order){
-        transactionService.addTransaction(order);
+    public void addOrder(@RequestBody Order order){
+//        System.out.println(order);
+        orderService.addOrder(order);
     }
 
 //    @RequestMapping(path = "", method = RequestMethod.DELETE)
-//    public void deleteAllTransactions(){
-//        transactionService.deleteAllTransaction();
+//    public void deleteAllOrders(){
+//        orderService.deleteAllOrder();
 //    }
 
     @RequestMapping(path = "", method = RequestMethod.DELETE)
-    public void deleteTransactionById(@PathVariable String id) {
-        transactionService.deleteByTransactionId(id);
+    public void deleteOrderById(@PathVariable String id) {
+        orderService.deleteByOrderId(id);
     }
 
 //    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-//    public void updateTransactionById(@PathVariable String id, @RequestBody Order transaction) {
-//        transactionService.updateTransactionById(id, transaction);
+//    public void updateOrderById(@PathVariable String id, @RequestBody Order order) {
+//        orderService.updateOrderById(id, order);
 //    }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Order getTransactionById(@PathVariable String id) {
-        return transactionService.getTransactionById(id);
+    public Order getOrderById(@PathVariable String id) {
+        return orderService.getOrderById(id);
     }
 }
 

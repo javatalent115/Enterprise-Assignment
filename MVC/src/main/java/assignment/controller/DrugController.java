@@ -10,7 +10,7 @@ import java.util.*;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping(path = "/drug")
-public class DrugController {
+public class DrugController {//TODO change Map to List if there is more time
     @Autowired
     private DrugService drugService;
     private boolean initial = true;
@@ -48,7 +48,7 @@ public class DrugController {
         drugService.getAllDrugs();
     }
 
-    @PostMapping(value = "/getDrugsByFilter")
+    @RequestMapping(value = "/getDrugsByFilter", method = RequestMethod.POST)
     public Map<String, String> getDrugsByFilter(@RequestBody Map<String, String> data){
         if (initial){
             drugService.getAllDrugs();

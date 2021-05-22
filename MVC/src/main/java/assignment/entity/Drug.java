@@ -259,7 +259,7 @@ public class Drug implements Comparable {
     }
 
     @Override
-    public int compareTo(Object drug) {
+    public int compareTo(Object drug) {//TODO remove this
         int compareMoney=((Drug)drug).getMoney();
         return this.money-compareMoney;
     }

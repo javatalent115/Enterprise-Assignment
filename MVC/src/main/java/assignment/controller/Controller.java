@@ -1,7 +1,9 @@
 package assignment.controller;
 
+import assignment.entity.Customer;
 import assignment.entity.Drug;
 import assignment.entity.Producer;
+import assignment.service.CustomerService;
 import assignment.service.DrugService;
 import assignment.service.ProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -21,9 +23,30 @@ public class Controller {
     @Autowired
     private ProducerService producerService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @RequestMapping(path = "", method = RequestMethod.GET)
     public String hello(){
         return "Hello";
+    }
+
+    @RequestMapping(path = "/auth", method = RequestMethod.POST)
+    public String authenticate(@RequestBody Map<String, String> user) {
+        if (user.get("username").equals("admin123") && user.get("password").equals("admin123")) {
+            return "admin";
+        }
+        Customer customer = customerService.getCustomerByUsername(user.get("username"));
+        if (customer == null) {
+            return "invalid";
+        } else if (customer.getPassword().equals(user.get("password"))) {
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            customer.setLastLogin(dateFormat.format(date));
+            customerService.save(customer);
+            return "user";
+        }
+        return "invalid";
     }
 
     @RequestMapping(path = "/setDatabase", method = RequestMethod.GET)
