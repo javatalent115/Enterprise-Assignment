@@ -5,12 +5,39 @@
 // localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
 $(document).on("click", ".name", function() {
+    let data = localStorage.getItem("data")
+    let index;
+    for (let i = 0; i < data.split("\n").length - 1; i++) {
+        if (data.split("\n")[i].split("&&")[1] == $(this).text()) {
+            index = i
+            break
+            }
+        }
+        $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
+        $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
+        $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
+        $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
+        $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
+        $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
+        $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
+        $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
+        $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
+        $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
+        if (data.split("\n")[index].split("&&")[6] == "Undefined") {} else {
+            $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
+        }
     let drug = {
-        id: $(this).parent().find(".id").text(),
-        name: $(this).parent().find(".name").text(),
-        stock: $(this).parent().find(".stock").text(),
-        amount: $(this).parent().find(".amount").text(),
-        price: $(this).parent().find(".price").text()
+        id: data.split("\n")[index].split("&&")[0],
+        name: data.split("\n")[index].split("&&")[1],
+        stock: data.split("\n")[index].split("&&")[10],
+        price: data.split("\n")[index].split("&&")[9],
+        preperation:data.split("\n")[index].split("&&")[2],
+        packaging:data.split("\n")[index].split("&&")[3],
+        dosage:data.split("\n")[index].split("&&")[5],
+        ingredients:data.split("\n")[index].split("&&")[7],
+        country:data.split("\n")[index].split("&&")[8],
+        group:data.split("\n")[index].split("&&")[4],
+        type: data.split("\n")[index].split("&&")[6],
     }
     localStorage.setItem("drug-click", JSON.stringify(drug))
     window.location.href = "http://localhost:8080/drug-infomation.html"
@@ -81,17 +108,17 @@ function initializes() {
         $(".type").children("button").text("Thuốc kê đơn")
     }
     if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "true") {
-        $(".checkbox-filter").find("img").attr("src", "./images/checked.png")
-        $(".checkbox-filter").find("img").attr("src", "./images/checked.png")
+        $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png")
+        $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png")
     } else if (localStorage.getItem("Tân dược") == "false" && localStorage.getItem("Đông dược") == "true") {
-        $(".tan-duoc").find("img").attr("src", "./images/unchecked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/checked.png")
+        $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png")
+        $(".dong-duoc").find("img").attr("src", "./images/icons/checked.png")
     } else if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "false") {
-        $(".tan-duoc").find("img").attr("src", "./images/checked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/unchecked.png")
+        $(".tan-duoc").find("img").attr("src", "./images/icons/checked.png")
+        $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png")
     } else {
-        $(".tan-duoc").find("img").attr("src", "./images/unchecked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/unchecked.png")
+        $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png")
+        $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png")
     }
     if (localStorage.getItem("sort-type") == "none") {
         $(".sort").children("button").text("ID")
@@ -342,83 +369,6 @@ $(document).ready(function() {
 });
 
 let advance;
-<<<<<<< HEAD
-$(document).ready(function(){
-  $("#modifyMedicine").on("show.bs.modal", function(event){
-      // Get the button that triggered the modal
-      advance = $(event.relatedTarget)
-      let index;
-      let data = localStorage.getItem("data")
-      for (let i = 0; i < data.split("\n").length-1; i++) {
-        if(data.split("\n")[i].split("&&")[1] == advance.parent().parent().parent().parent().find(".name").text()){
-          index = i
-          break
-        } 
-      }
-      console.log(data.split("\n")[index])
-      $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
-      $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
-      $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
-      $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
-      $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
-      $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
-      $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
-      $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
-      $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
-      $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
-      if (data.split("\n")[index].split("&&")[6] == "Undefined"){
-      }
-      else{
-        $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
-      }
-  });
-});
-
-$(document).on("click",".confirm-modifyMedicine",function(){
-  let drug = {
-    id : $("#advanced-id").val(),
-    name: $("#advanced-name").val(),
-    preparation : $("#advanced-preparation").val(),
-    packaging : $("#advanced-packaging").val(),
-    drugGroup: $("#advanced-group").val(),
-    dosage : $("#advanced-dosage").val(),
-    type : $("#advanced-type").val(),
-    ingredients : $("#advanced-ingredient").val(),
-    country : $("#advanced-country").val(),
-    money : parseInt($("#advanced-stock").val()),
-    stock : parseInt($("#advanced-price").val()),
-    producer:{
-
-    }
-  };
-  advanceUpdate(drug)
-});
-
-
-async function advanceUpdate(drug){
-  try {
-    await fetch('http://localhost:8080/drug/advanceUpdateDrug', {
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(drug)
-    });
-    await addItem()
-  }catch (e) {}
-}
-
-$(document).on("click",".confirm-delete",function(){
-  if(img.hasClass("add-trash-image")){
-    img.parent().parent().remove()
-  }
-  else{
-    img.parent().parent().remove()
-    deleteDrug(img.parent().parent().find(".id").text())
-  }
-});
-=======
 $(document).ready(function() {
     $("#modifyMedicine").on("show.bs.modal", function(event) {
         // Get the button that triggered the modal
@@ -434,8 +384,8 @@ $(document).ready(function() {
         console.log(data.split("\n")[index])
         $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
         $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
-        $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
-        $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
+        $("#advanced-stock").val(data.split("\n")[index].split("&&")[10])
+        $("#advanced-price").val(data.split("\n")[index].split("&&")[9])
         $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
         $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
         $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
@@ -468,7 +418,6 @@ $(document).on("click", ".confirm-modifyMedicine", function() {
     advanceUpdate(drug)
 });
 
->>>>>>> 1e466ce9d467eaa7ef94c2097402fd56ad8da321
 
 async function advanceUpdate(drug) {
     try {
@@ -500,19 +449,6 @@ $(document).on("click", ".trash-image", function() {
     // deleteDrug($(this).parent("li").parent("ul").find(".id").text())
 });
 
-<<<<<<< HEAD
-async function deleteDrug(id){
-  try {
-      let res = await fetch('http://localhost:8080/drug/deleteDrug', {
-          method: 'DELETE',
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          },
-          body: id
-      });
-  }catch (e) {}
-=======
 async function deleteDrug(id) {
     try {
         let res = await fetch('http://localhost:8080/drug/deleteDrug', {
@@ -524,7 +460,6 @@ async function deleteDrug(id) {
             body: id
         });
     } catch (e) {}
->>>>>>> 1e466ce9d467eaa7ef94c2097402fd56ad8da321
 }
 $(document).on("click", ".add-image", function() {
     event.preventDefault()
@@ -537,7 +472,7 @@ $(document).on("click", ".add-image", function() {
                         <li class="changeAble price" contenteditable="true"></li>
                         <li>
                             <div class="done" data-bs-toggle="modal" data-bs-target="#add-company-modal">Done</div>
-                            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;"">
+                            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;"">
                             <div class="more-button-submenu-wrapper" >
                                 <ul class="more-button-submenu">
                                     <li class="more-button-submenu-item quick-change">
@@ -550,8 +485,8 @@ $(document).on("click", ".add-image", function() {
                             </div>
                         </li>
                         <li>
-                            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                            <img src="./images/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+                            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                            <img src="./images/icons/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
   `)
@@ -690,9 +625,9 @@ var Pagination = {
     Create: function(e) {
 
         var html = [
-            '  <a class = "page"><img src="./images/arrow-left.png" alt=""></a>', // previous button
+            '  <a class = "page"><img src="./images/icons/arrow-left.png" alt=""></a>', // previous button
             '<span ></span>', // pagination container
-            '  <a class = "page"><img src="./images/arrow-right.png" alt=""></a>' // next button
+            '  <a class = "page"><img src="./images/icons/arrow-right.png" alt=""></a>' // next button
         ];
 
         e.innerHTML = html.join('');
@@ -760,11 +695,11 @@ $(document).on("click", ".search-button-2", function() {
         <li class="id">${data.split("\n")[index].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[index].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[index].split("&&")[10]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[index].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
-            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
             <div class="more-button-submenu-wrapper">
                 <ul class="more-button-submenu">
                     <li class="more-button-submenu-item quick-change">
@@ -778,8 +713,8 @@ $(document).on("click", ".search-button-2", function() {
             </div>
         </li>
         <li>
-            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+            <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
             checkAccount()
@@ -831,11 +766,11 @@ $(document).on("click", ".page", function() {
         <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+        <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
-            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
             <div class="more-button-submenu-wrapper">
                 <ul class="more-button-submenu">
                     <li class="more-button-submenu-item quick-change">
@@ -849,8 +784,8 @@ $(document).on("click", ".page", function() {
             </div>
         </li>
         <li>
-            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+            <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
         }
@@ -871,7 +806,7 @@ $(document).on("click", ".increase-amount-image", function() {
 })
 
 $(document).on("click", ".checkbox-filter", function() {
-    if ($(this).find("img").attr("src") == "./images/checked.png") {
+    if ($(this).find("img").attr("src") == "./images/icons/checked.png") {
         localStorage.setItem($(this).parent("li").find("span").text(), false)
         addItem(itemDisplayAtATime)
     } else {
@@ -1002,11 +937,11 @@ async function addItem(item) {
               <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
               <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
               <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-              <li class="changeAble amount"><img class = "decrease-amount-image" src="./images/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+              <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
               <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
               <li>
                   <div class="done">Done</div>
-                  <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+                  <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
                   <div class="more-button-submenu-wrapper">
                       <ul class="more-button-submenu">
                           <li class="more-button-submenu-item quick-change">
@@ -1020,8 +955,8 @@ async function addItem(item) {
                   </div>
               </li>
               <li>
-                  <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                  <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+                  <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                  <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
               </li>
           </ul>`
                 }

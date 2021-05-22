@@ -5,12 +5,39 @@
 // localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
 $(document).on("click", ".name", function() {
+    let data = localStorage.getItem("data")
+    let index;
+    for (let i = 0; i < data.split("\n").length - 1; i++) {
+        if (data.split("\n")[i].split("&&")[1] == $(this).text()) {
+            index = i
+            break
+            }
+        }
+        $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
+        $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
+        $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
+        $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
+        $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
+        $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
+        $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
+        $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
+        $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
+        $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
+        if (data.split("\n")[index].split("&&")[6] == "Undefined") {} else {
+            $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
+        }
     let drug = {
-        id: $(this).parent().find(".id").text(),
-        name: $(this).parent().find(".name").text(),
-        stock: $(this).parent().find(".stock").text(),
-        amount: $(this).parent().find(".amount").text(),
-        price: $(this).parent().find(".price").text()
+        id: data.split("\n")[index].split("&&")[0],
+        name: data.split("\n")[index].split("&&")[1],
+        stock: data.split("\n")[index].split("&&")[10],
+        price: data.split("\n")[index].split("&&")[9],
+        preperation:data.split("\n")[index].split("&&")[2],
+        packaging:data.split("\n")[index].split("&&")[3],
+        dosage:data.split("\n")[index].split("&&")[5],
+        ingredients:data.split("\n")[index].split("&&")[7],
+        country:data.split("\n")[index].split("&&")[8],
+        group:data.split("\n")[index].split("&&")[4],
+        type: data.split("\n")[index].split("&&")[6],
     }
     localStorage.setItem("drug-click", JSON.stringify(drug))
     window.location.href = "http://localhost:8080/drug-infomation.html"
@@ -357,8 +384,8 @@ $(document).ready(function() {
         console.log(data.split("\n")[index])
         $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
         $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
-        $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
-        $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
+        $("#advanced-stock").val(data.split("\n")[index].split("&&")[10])
+        $("#advanced-price").val(data.split("\n")[index].split("&&")[9])
         $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
         $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
         $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
@@ -739,7 +766,7 @@ $(document).on("click", ".page", function() {
         <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
+        <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
@@ -910,7 +937,7 @@ async function addItem(item) {
               <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
               <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
               <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-              <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+              <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
               <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
               <li>
                   <div class="done">Done</div>
