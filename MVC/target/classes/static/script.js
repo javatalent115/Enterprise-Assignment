@@ -245,6 +245,7 @@ $(document).on("click",".confirm-add-company",function(){
     quickChange.attr("data-bs-target","#add-company-modal")
   }
   else{
+    img.removeClass("add-trash-image")
     quickChange.attr("data-bs-toggle","modal")
     quickChange.attr("data-bs-target","#add-company-modal")
     quickChange.css("display", "none")
@@ -364,13 +365,45 @@ $(document).ready(function(){
   });
 });
 
+let advance;
+$(document).ready(function(){
+  $("#modifyMedicine").on("show.bs.modal", function(event){
+      // Get the button that triggered the modal
+      advance = $(event.relatedTarget)
+      let index;
+      let data = localStorage.getItem("data")
+      for (let i = 0; i < data.split("\n").length-1; i++) {
+        if(data.split("\n")[i].split("&&")[1] == advance.parent().parent().parent().parent().find(".name").text()){
+          index = i
+          console.log(i)
+          console.log(index)
+          break
+        } 
+      }
+      console.log(data.split("\n")[index])
+      $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
+      $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
+      $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
+      $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
+      $("#advanced-preperation").val(data.split("\n")[index].split("&&")[2])
+      $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
+      $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
+      $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
+      $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
+      $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
+      if (data.split("\n")[index].split("&&")[6] == "undefined"){
+      }
+      else{
+        $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
+      }
+  });
+});
+
 $(document).on("click",".confirm-delete",function(){
   if(img.hasClass("add-trash-image")){
-    console.log("123")
     img.parent().parent().remove()
   }
   else{
-    img.removeClass("add-trash-image")
     img.parent().parent().remove()
     deleteDrug(img.parent().parent().find(".id").text())
   }
@@ -806,13 +839,13 @@ $(document).on("click",".dropdown-item-sort",async function(){
 });
 
 function getFilter(){
-  var Drug =  {
+  let Drug = {
     type: "",
-    group:"",
-    sortType:""
-  }
-  if (localStorage.getItem("Thuốc kê đơn") == "true"){
-    if (localStorage.getItem("Thuốc không kê đơn") == "true"){
+    group: "",
+    sortType: ""
+  };
+  if (localStorage.getItem("Thuốc kê đơn") === "true"){
+    if (localStorage.getItem("Thuốc không kê đơn") === "true"){
       Drug.type = "none"
     }
     else {
@@ -820,7 +853,7 @@ function getFilter(){
     }
   }
   else{
-    if (localStorage.getItem("Thuốc không kê đơn") == "true"){
+    if (localStorage.getItem("Thuốc không kê đơn") === "true"){
       Drug.type = "Thuốc không kê đơn"
     }
     else {
@@ -828,8 +861,8 @@ function getFilter(){
     }
   }
 
-  if (localStorage.getItem("Đông dược") == "true"){
-    if (localStorage.getItem("Tân dược") == "true"){
+  if (localStorage.getItem("Đông dược") === "true"){
+    if (localStorage.getItem("Tân dược") === "true"){
       Drug.group = "none"
     }
     else {
@@ -837,14 +870,14 @@ function getFilter(){
     }
   }
   else{
-    if (localStorage.getItem("Tân dược") == "true"){
+    if (localStorage.getItem("Tân dược") === "true"){
       Drug.group = "Tân dược"
     }
     else {
-      Drug.group = "none"
+      Drug.group = " "
     }
   }
-  Drug.sortType = localStorage.getItem("sort-type")
+  Drug.sortType = localStorage.getItem("sort-type");
   return Drug
 }
 
@@ -871,7 +904,7 @@ async function addItem(item){
   removeAllItem()
   $(".spinner").css("display","block")
   let all = "";
-  let Drug = getFilter() 
+  let Drug = getFilter();
   try {
     let res = await fetch('http://localhost:8080/drug/getDrugsByFilter', {
         method: 'POST',

@@ -439,10 +439,10 @@
         .company-option{
             background-color: red;
         }
-        /* .name:hover{
+        .name:hover{
             color: blue;
             cursor: pointer;
-        } */
+        }
         .header-name:hover{
             color: black !important;
             cursor:text;
@@ -633,79 +633,104 @@
             background-image: url("./images/modify-modal-background.png");
             background-size: 100% 100%;
         }
-        .a div input{
-            height: 28px;
-            background:#023a57;
-            color: white;
-            border: 1px solid white;
-
-        }
-        .a .d-flex button{
+        .d-flex button{
             color: white;
             background:#64c2f7;
             border-radius: 9px;
             border: none;
         }
-
+        .col-6 div input{
+            color: white;
+            background:#023a57;
+            border: 1px solid white;
+            width: 200px;
+        }
+        .col-6 input{
+            color: white;
+            background:#023a57;
+            border: 1px solid white;
+            width: 100%;
+        }
+        .col-6 select{
+            color: white;
+            background:#023a57;
+            border: 1px solid white;
+            width: 100%;
+            border-radius: 9px;
+            height: 32px;
+            font-size: 16px;
+            padding-left: 4px;
+        }
     </style>
 
 
     <!-- Modal  -->
     <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <div class="modal-body a">
-                    <div class="row text-light mb-3 justify-content-center align-items-center" ">
-                        <div class="col-4 text-end">
-                            Medicine name
-                        </div>
-                        <div class="col-5">
-                            <input type="text" name="" id="">
-                        </div>
-                    </div>
-                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
-                        <div class="col-4 text-end">
-                            ID:
-                        </div>
-                        <div class="col-5">
-                            <input type="text" name="" id="">
+                <div class="modal-body a text-light">
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-6">
+                            <div class="row g-3 align-items-center">
+                            <span class="col-3"><label for="advanced-id">ID: </label></span>
+                            <div class="col-9"><input type="text" id="advanced-id" placeholder="ID"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
-                        <div class="col-4 text-end">
-                            Product by:
-                        </div>
-                        <div class="col-5">
-                            <input type="text" name="" id="">
-                        </div>
-                    </div>
-                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
-                        <div class="col-4 text-end">
-                            Unit:
-                        </div>
-                        <div class="col-5">
-                            <input type="text" name="" id="">
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-6">
+                            <div class="row align-items-center">
+                            <span class="col-3"><label for="advanced-name">Name: </label></span>
+                            <div class="col-9"><input type="text" id="advanced-name" placeholder="Name"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
-                        <div class="col-4 text-end">
-                            Category:
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <input type="text" id="advanced-preperation" placeholder="Preperation">
                         </div>
-                        <div class="col-5">
-                            <input type="text" name="" id="">
+                        <div class="col-6">
+                            <input type="text" id="advanced-ingredient" placeholder="Ingredients">
                         </div>
                     </div>
-                    <div class="row mb-3 text-light justify-content-center align-items-center" ">
-                        <div class="col-4 text-end">
-                            Ingreient:
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <input type="text" id="advanced-packaging" placeholder="Packaging">
                         </div>
-                        <div class="col-5">
-                            <input type="text" name="" id="">
+                        <div class="col-6">
+                            <input type="text" id="advanced-dosage" placeholder="Dosage">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <select id="advanced-group">
+                                <option value="Tân dược">Tân dược</option>
+                                <option value="Đông dược">Đông dược</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <input type="number" id="advanced-stock" placeholder="Stock (must be number)">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <select id="advanced-type">
+                                <option value="Thuốc kê đơn">Thuốc kê đơn</option>
+                                <option value="Thuốc không kê đơn">Thuốc không kê đơn</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <input type="number" id="advanced-price" placeholder="Price (must be number)">
+                        </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col-6">
+                        <input type="text" id="advanced-country" placeholder="Country" style="width: 200px;">
                         </div>
                     </div>
                     <div class="d-flex align-items-center justify-content-end">
                         <button class="px-4 mx-2" data-bs-dismiss="modal">Cancel</button>
-                        <button class="px-4 mx-2" data-bs-dismiss="modal">Done</button>
+                        <button class="px-4 mx-2 confirm-modifyMedicine" data-bs-dismiss="modal">Done</button>
                     </div>
                 </div>
             </div>

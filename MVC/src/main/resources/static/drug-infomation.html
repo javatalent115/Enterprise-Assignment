@@ -140,22 +140,78 @@
         </div>
     </div>
     <style>
-
+        .col-6 div input{
+            width: 200px;
+        }
+        
     </style>
     <div class="container my-5">
         <div class="row">
-        <div class="col-md-6"><img src="./images/panaldo.png" alt=""></div>
+        <div class="col-md-6"><img src="./images/panaldo.png" alt="Loading"></div>
         <div class="col-md-6">
-            <dl class="row">
-                <dt class="col-4 mx-auto">Name</dt>
-                <dd class="col-8 mx-auto">Panldo</dd>
-                <dt class="col-4">Price</dt>
-                <dd class="col-8">8</dd>
-            </dl>
+            <div class="row mb-3 align-items-center">
+                <div class="col-6">
+                    <div class="row g-3 align-items-center">
+                    <span class="col-3"><label for="advanced-id">ID: </label></span>
+                    <div class="col-9"><input type="text" id="advanced-id" placeholder="ID"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3 align-items-center">
+                <div class="col-6">
+                    <div class="row align-items-center">
+                    <span class="col-3"><label for="advanced-name">Name: </label></span>
+                    <div class="col-9"><input type="text" id="advanced-name" placeholder="Name"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <input type="text" id="advanced-preperation" placeholder="Preperation">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="advanced-ingredient" placeholder="Ingredients">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <input type="text" id="advanced-packaging" placeholder="Packaging">
+                </div>
+                <div class="col-6">
+                    <input type="text" id="advanced-dosage" placeholder="Dosage">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <select id="advanced-group">
+                        <option value="Tân dược">Tân dược</option>
+                        <option value="Đông dược">Đông dược</option>
+                    </select>
+                </div>
+                <div class="col-">
+                    <input type="number" id="advanced-stock" placeholder="Stock (must be number)">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <select id="advanced-type">
+                        <option value="Thuốc kê đơn">Thuốc kê đơn</option>
+                        <option value="Thuốc không kê đơn">Thuốc không kê đơn</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <input type="number" id="advanced-price" placeholder="Price (must be number)">
+                </div>
+            </div>
+            <div class="row mb-3 justify-content-center">
+                <div class="col-6">
+                <input type="text" id="advanced-country" placeholder="Country" style="width: 200px;">
+                </div>
+            </div>
         </div>
         </div>
     </div>
     
 </body>
-
+<script src="drug-infomation.js"></script>
 </html>
