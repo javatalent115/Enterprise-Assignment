@@ -19,9 +19,14 @@ public class DrugService {
         this.drugRepo.save(drug);
     }
 
-    public List<Drug> getAllDrugs(){
+    public void getAllDrugs(){
         drugList = this.drugRepo.findAll();
-        return drugList;
+        drugList.sort(new Comparator<Drug>() {
+            @Override
+            public int compare(Drug drug1, Drug drug2)  {
+                return drug1.getId().toLowerCase().compareTo(drug2.getId().toLowerCase());
+            }
+        });
     }
 
     public void deleteByDrugId(String id) {
@@ -36,10 +41,24 @@ public class DrugService {
 //    public void updateDrugById(String id, Drug newDrug) {
 //        getDrugById(id).replace(newDrug);
 //    }
-    public void updateDrugById(String id, int money, int stock){
+    public void quickUpdateDrug(String id, int money, int stock){
         Drug drug = getDrugById(id);
         drug.setMoney(money);
         drug.setStock(stock);
+        this.drugRepo.save(drug);
+    }
+
+    public void advanceUpdateDrug(Drug newData){
+        Drug drug = getDrugById(newData.getId());
+        drug.setStock(newData.getStock());
+        drug.setMoney(newData.getMoney());
+        drug.setCountry(newData.getCountry());
+        drug.setDosage(newData.getDosage());
+        drug.setDrugGroup(newData.getDrugGroup());
+        drug.setIngredients(newData.getIngredients());
+        drug.setPackaging(newData.getPackaging());
+        drug.setPreparation(newData.getPreparation());
+        drug.setType(newData.getType());
         this.drugRepo.save(drug);
     }
 

@@ -163,6 +163,7 @@
         margin: 0 25px;
         border-radius: 15px;
         box-shadow: 5px 10px 10px #aaa;
+        margin-bottom: 100px;
     }
     
     .information-medicine-wrapper {
@@ -342,6 +343,7 @@
         
         .more-image {
             min-width: 24.66px;
+            cursor: pointer;
         }
         
         .trash-image {
@@ -390,13 +392,21 @@
             border: 1px solid black;
             cursor: pointer;
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
         .add-image {
             cursor: pointer;
             max-width: 30px
         }
+<<<<<<< HEAD
         
         .increase-amount-image {
+=======
+
+        .increase-amount-image,.decrease-amount-image{
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
             cursor: pointer;
             max-width: 25px;
         }
@@ -407,9 +417,13 @@
             align-items: center;
             gap: 10px;
         }
+<<<<<<< HEAD
         
         .amount div {
             margin-left: 36px;
+=======
+        .amount div{
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
         }
         
         .dropdown-item {
@@ -433,6 +447,21 @@
             align-items: center;
             gap: 5px;
         }
+<<<<<<< HEAD
+=======
+        .company-option{
+            background-color: red;
+        }
+        .name:hover{
+            color: blue;
+            cursor: pointer;
+        }
+        .header-name:hover{
+            color: black !important;
+            cursor:text;
+        }
+       
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
     </style>
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
@@ -456,6 +485,7 @@
                           Group
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+<<<<<<< HEAD
                             <li>
                                 <a class="dropdown-item checkbox-filter">
                                     <img src="./images/icons/checked.png" alt="" class="check-box">
@@ -467,6 +497,16 @@
                                     <img src="./images/icons/checked.png" alt="" class="check-box">
                                     <span>Đông dược</span>
                                 </a>
+=======
+                            <li><a class="dropdown-item checkbox-filter tan-duoc">
+                                <img src="./images/checked.png" alt="" class="check-box">
+                                <span>Tân dược</span>
+                            </a></li>
+                            <li><a class="dropdown-item checkbox-filter dong-duoc">
+                                <img src="./images/checked.png" alt="" class="check-box">
+                                <span>Đông dược</span>
+                            </a>
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
                             </li>
                         </ul>
                     </div>
@@ -496,14 +536,26 @@
                 <div class="medicines">
 
                     <ul class="medicine-item">
+<<<<<<< HEAD
                         <li class="changeAble id" data-bs-toggle="modal" data-bs-target="#modifyMedicine">ID</li>
                         <li class="name">Name</li>
+=======
+                        <li class="changeAble id" data-bs-toggle="modal"
+                        data-bs-target="#modifyMedicine">ID</li>
+                        <li class="name header-name">Name</li>
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
                         <li class="stock">Stock</li>
                         <li class="changeAble amount">Amount</li>
                         <li class="changeAble price">Price</li>
                         <li>
+<<<<<<< HEAD
                             <div class="done" data>Done</div>
                             <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer; visibility: hidden;">
+=======
+                            <div class="done">Done</div>
+                            <img src="./images/more.png" class="more-image more-button"
+                                style="cursor: pointer; visibility: hidden;">
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
                         </li>
                         <li>
                             <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer; visibility: hidden;">
@@ -552,7 +604,99 @@
         <button style="z-index: 9999;" onclick="reset()">Reset localStorage</button>
         <a class="paginaiton-arrow" href=""><img src="./images/icons/arrow-right.png" alt=""></a>
     </div>
-
+    <style>
+        .footer{
+            padding-top: 20px;
+            height: fit-content;
+            background-color: grey;
+            display: flex;
+            color: white;
+            justify-content: space-around;
+        }
+        .icon-wrapper{
+            display: flex;
+            gap: 20px;
+            padding-top: 5px;
+            padding-bottom: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer-item-1 h3,.footer-item-2 h3, .footer-item-3 h3  {
+            position: relative;
+        }
+        .footer-item-1 h3::before,.footer-item-2 h3::before,.footer-item-3 h3::before{
+        content: "";
+        background: lightblue;
+        position: absolute;
+        width: 100%;
+        height: 4px;
+        bottom: -5px;
+        }
+    .contact{
+        display: flex;
+        gap: 15px;
+        justify-content: left;
+        align-items: center;
+        font-size: 25px;
+    }
+    
+    .keyword{
+        display: flex;
+        flex-direction: row;
+        gap: 15px;
+        justify-content: left;
+        align-items: center;
+        margin-top: 20px;
+    }
+    .keyword-item{
+        width: fit-content;
+        background-color: #999;
+        border: 2px solid white;
+        padding: 0px 10px;
+        font-size: 20px;
+    }
+    </style>
+    <div class="footer">
+        <div class="footer-item-1">
+            <h3 style="color:lightblue;">Connect with us</h3>
+            <div class="icon-wrapper">
+                <div class="icon">
+                    <a href=""><img src="./images/icon-1.png " width = "55" height = "50" alt=""></a>
+                </div>
+                <div class="icon">
+                    <a href=""><img src="./images/icon-2.png" width = "55" height = "66" alt=""></a></div>
+                <div class="icon">
+                    <a href=""><img src="./images/icon-3.png" width = "55" height = "55" alt=""></a></div>
+            </div>
+        </div>
+        <div class="footer-item-2">
+            <h3 style="color:lightblue;">Hotline (7h-22h)</h3>
+            <div class="contact">
+                <img src="./images/phone-call.png" alt="">
+                <p>083-6598249</p>
+            </div>
+        </div>
+        <div class="footer-item-3">
+            <h3 style="color:lightblue;">Keyword</h3>
+            <div class="keyword">
+                <div class="keyword-item">
+                    Pharmacy
+                </div>
+                <div class="keyword-item">
+                    Drug
+                </div>
+                <div class="keyword-item">
+                    Store
+                </div>
+                <div class="keyword-item">
+                    Health
+                </div>
+                <div class="keyword-item">
+                    Health Care
+                </div>  
+            </div>
+        </div>
+    </div>
     <style>
         .paginaiton-arrow {
             display: none;
@@ -571,7 +715,7 @@
         #pagination i {
             display: inline-block;
             vertical-align: middle;
-            width: 26px;
+            width: 29px;
             height: 26px;
             color: black;
             text-align: center;
@@ -614,26 +758,56 @@
             background-image: url("./images/background/modify-modal-background.png");
             background-size: 100% 100%;
         }
+<<<<<<< HEAD
         
         .a div input {
             height: 28px;
             background: #023a57;
+=======
+        .d-flex button{
             color: white;
+            background:#64c2f7;
+            border-radius: 9px;
+            border: none;
+        }
+        .col-6 div input{
+            color: white;
+            background:#023a57;
             border: 1px solid white;
+            width: 200px;
+        }
+        .col-6 input{
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
+            color: white;
+            background:#023a57;
+            border: 1px solid white;
+<<<<<<< HEAD
         }
         
         .a .d-flex button {
             color: white;
             background: #64c2f7;
+=======
+            width: 100%;
+        }
+        .col-6 select{
+            color: white;
+            background:#023a57;
+            border: 1px solid white;
+            width: 100%;
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
             border-radius: 9px;
-            border: none;
+            height: 32px;
+            font-size: 16px;
+            padding-left: 4px;
         }
     </style>
 
     <!-- Modal  -->
     <div class="modal fade" id="modifyMedicine" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
+<<<<<<< HEAD
                 <div class="modal-body a">
                     <div class="row text-light mb-3 justify-content-center align-items-center" ">
                         <div class="col-4 text-end ">
@@ -646,11 +820,34 @@
                     <div class="row mb-3 text-light justify-content-center align-items-center " ">
                         <div class="col-4 text-end">
                             ID:
-                        </div>
-                        <div class="col-5">
-                            <input type="text" name="" id="">
+=======
+                <div class="modal-body a text-light">
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-6">
+                            <div class="row g-3 align-items-center">
+                            <span class="col-3"><label for="advanced-id">ID: </label></span>
+                            <div class="col-9"><input type="text" id="advanced-id" placeholder="ID"></div>
+                            </div>
                         </div>
                     </div>
+                    <div class="row mb-3 align-items-center">
+                        <div class="col-6">
+                            <div class="row align-items-center">
+                            <span class="col-3"><label for="advanced-name">Name: </label></span>
+                            <div class="col-9"><input type="text" id="advanced-name" placeholder="Name"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <input type="text" id="advanced-preparation" placeholder="Preperation">
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
+                        </div>
+                        <div class="col-6">
+                            <input type="text" id="advanced-ingredient" placeholder="Ingredients">
+                        </div>
+                    </div>
+<<<<<<< HEAD
                     <div class="row mb-3 text-light justify-content-center align-items-center" ">
                         <div class="col-4 text-end ">
                             Product by:
@@ -686,6 +883,46 @@
                     <div class="d-flex align-items-center justify-content-end ">
                         <button class="px-4 mx-2 " data-bs-dismiss="modal ">Cancel</button>
                         <button class="px-4 mx-2 " data-bs-dismiss="modal ">Done</button>
+=======
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <input type="text" id="advanced-packaging" placeholder="Packaging">
+                        </div>
+                        <div class="col-6">
+                            <input type="text" id="advanced-dosage" placeholder="Dosage">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <select id="advanced-group">
+                                <option value="Tân dược">Tân dược</option>
+                                <option value="Đông dược">Đông dược</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <input type="number" id="advanced-stock" placeholder="Stock (must be number)">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <select id="advanced-type">
+                                <option value="Thuốc kê đơn">Thuốc kê đơn</option>
+                                <option value="Thuốc không kê đơn">Thuốc không kê đơn</option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <input type="number" id="advanced-price" placeholder="Price (must be number)">
+                        </div>
+                    </div>
+                    <div class="row mb-3 justify-content-center">
+                        <div class="col-6">
+                        <input type="text" id="advanced-country" placeholder="Country" style="width: 200px;">
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <button class="px-4 mx-2" data-bs-dismiss="modal">Cancel</button>
+                        <button class="px-4 mx-2 confirm-modifyMedicine" data-bs-dismiss="modal">Done</button>
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
                     </div>
                 </div>
             </div>
@@ -720,6 +957,7 @@
             <h5 class="modal-title " id="staticBackdropLabel ">Modal title</h5>
             <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
             </div>
+<<<<<<< HEAD
             <div class="modal-body ">
             <select id="company-select ">
 
@@ -728,6 +966,15 @@
             <div class="modal-footer ">
             <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">No</button>
             <button type="button " class="btn btn-primary confirm-delete " data-bs-dismiss="modal ">Yes</button>
+=======
+            <div class="modal-body">
+            <select id="company-select" onfocus='this.size=5;' onblur="this.size=1;" onchange='this.size=1; this.blur()';>
+            </select>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary no-add-company" data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn btn-primary confirm-add-company" data-bs-dismiss="modal">Yes</button>
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
             </div>
         </div>
         </div>

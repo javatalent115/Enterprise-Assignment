@@ -5,10 +5,7 @@ import assignment.service.DrugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -16,6 +13,7 @@ import java.util.Map;
 public class DrugController {//TODO change Map to List if there is more time
     @Autowired
     private DrugService drugService;
+<<<<<<< HEAD
     private List<Drug> list = new ArrayList<>();
 
     @RequestMapping(path = "", method = RequestMethod.GET)
@@ -30,6 +28,9 @@ public class DrugController {//TODO change Map to List if there is more time
         }
         return map;
     }
+=======
+    private boolean initial = true;
+>>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
 
     @RequestMapping(path = "/addDrug", method = RequestMethod.POST)
     public String addDrug(@RequestBody Drug drug){
@@ -38,7 +39,7 @@ public class DrugController {//TODO change Map to List if there is more time
         }catch (Exception e){
             return "failed";
         }
-        list = drugService.getAllDrugs();
+        drugService.getAllDrugs();
         return "success";
     }
 
@@ -55,22 +56,32 @@ public class DrugController {//TODO change Map to List if there is more time
     @RequestMapping(path = "/deleteDrug", method = RequestMethod.DELETE)
     public void deleteDrugById(@RequestBody String id) {
         drugService.deleteByDrugId(id);
-        list = drugService.getAllDrugs();
+        drugService.getAllDrugs();
     }
 
     @RequestMapping(path = "/updateDrug", method = RequestMethod.PUT)
-    public void updateDrugById(@RequestBody Map<String, String> data) {
-        drugService.updateDrugById(data.get("id"), Integer.parseInt(data.get("money")), Integer.parseInt(data.get("stock")));
-        list = drugService.getAllDrugs();
+    public void quickUpdateDrug(@RequestBody Map<String, String> data) {
+        drugService.quickUpdateDrug(data.get("id"), Integer.parseInt(data.get("money")), Integer.parseInt(data.get("stock")));
+        drugService.getAllDrugs();
     }
 
     @RequestMapping(value = "/getDrugsByFilter", method = RequestMethod.POST)
     public Map<String, String> getDrugsByFilter(@RequestBody Map<String, String> data){
+        if (initial){
+            drugService.getAllDrugs();
+            initial = false;
+        }
         List<Drug> list = drugService.getDrugsByFilter(data.get("group"), data.get("type"), data.get("sortType"));
         Map <String, String> map = new HashMap<>();
         for (int i = 0 ; i< list.size(); i++){
             map.put(Integer.toString(i), list.get(i).toString());
         }
         return map;
+    }
+
+    @RequestMapping(path = "/advanceUpdateDrug", method = RequestMethod.PUT)
+    public void advanceUpdateDrug(@RequestBody Drug drug) {
+        drugService.advanceUpdateDrug(drug);
+        drugService.getAllDrugs();
     }
 }
