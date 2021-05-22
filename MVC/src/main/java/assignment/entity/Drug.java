@@ -17,25 +17,25 @@ public class Drug implements Comparable {
     private String name;
 
     @Column (length = 1024)
-    private String preparation;
+    private String preparation = "Undefined";
 
     @Column (length = 1024)
-    private String packaging;
+    private String packaging = "Undefined";
 
     @Column (length = 1024)
-    private String drugGroup;
+    private String drugGroup = "Undefined";
 
     @Column (length = 1024)
-    private String dosage;
+    private String dosage = "Undefined";
 
     @Column (length = 1024)
-    private String type;
+    private String type = "Undefined";
 
     @Column (length = 1024)
-    private String ingredients;
+    private String ingredients = "Undefined";
 
     @Column (length = 1024)
-    private String country;
+    private String country = "Undefined";
 
     @Column
     private int money;
