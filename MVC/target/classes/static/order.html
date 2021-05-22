@@ -147,7 +147,7 @@
         border: none;
     }
     
-    .customer-container {
+    .order-container {
         min-width: 1200px;
         background: #8ee9fd;
         height: auto;
@@ -161,13 +161,13 @@
         box-shadow: 5px 10px 10px #aaa;
     }
     
-    .customer-wrapper {
+    .order-wrapper {
         background: white;
         position: relative;
         border-radius: 15px;
     }
     
-    .customer-header {
+    .order-header {
         width: fit-content;
         background: #18bff3;
         color: white;
@@ -245,7 +245,7 @@
                     <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">About</a>
                 </li>
                 <li class="nav-item">
-                    <a href="customer.html">Medicine</a>
+                    <a href="order.html">Medicine</a>
                 </li>
                 <li class="nav-item">
                     <a href="cart.html"> Cart</a>
@@ -280,18 +280,18 @@
             border: none;
         }
         
-        .customer-detail-wrapper {
+        .order-detail-wrapper {
             display: flex;
             flex-direction: column;
             padding: 0 22px;
             position: relative;
         }
         
-        .customer-item:first-child {
+        .order-item:first-child {
             font-weight: bold;
         }
         
-        .customer-item {
+        .order-item {
             display: flex;
             list-style: none;
             justify-content: space-evenly;
@@ -302,18 +302,18 @@
             padding: 10px 0px;
         }
         
-        .customer-item li {
+        .order-item li {
             text-align: center;
             flex-basis: 20%;
             overflow: auto;
         }
         
-        .customer-item :nth-child(6),
-        .customers ul :nth-child(7) {
+        .order-item :nth-child(6),
+        .orders ul :nth-child(7) {
             flex-basis: 7%;
         }
         
-        .customers> :nth-child(odd) {
+        .orders> :nth-child(odd) {
             background-color: #ddd;
         }
         
@@ -416,12 +416,12 @@
             gap: 5px;
         }
     </style>
-    <div class="customer-container">
-        <div class="customer-wrapper">
-            <div class="customer-header">
-                <span id="customer-order">Information of customer</span>
+    <div class="order-container">
+        <div class="order-wrapper">
+            <div class="order-header">
+                <span>Information of order</span>
             </div>
-            <div class="customer-detail-wrapper">
+            <div class="order-detail-wrapper">
                 <div class="search-wrapper-2">
                     <div class="dropdown sort">
                         <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -435,16 +435,16 @@
                         </ul>
                     </div>
                     <div class="autocomplete">
-                        <input type="text" id="customer2" name="customer" placeholder="Search customer's username" style="width: 300px;" autocomplete="on">
+                        <input type="text" id="customer2" name="order" placeholder="Search order's username" style="width: 300px;" autocomplete="on">
                     </div>
                     <div>
                         <button class="search-button-2" onclick="searchCustomerByUsername()">
                         </button>
                     </div>
                 </div>
-                <div class="customers" style="height: 40vh; overflow: scroll">
+                <div class="orders" style="height: 40vh; overflow: scroll">
 
-                    <ul class="customer-item" style="position: sticky; top:0">
+                    <ul class="order-item" style="position: sticky; top:0">
                         <li class="username" style="flex: 20%;">Username</li>
                         <li class="name" style="flex: 20%;">Name</li>
                         <li class="email" style="flex: 30%;">Email</li>
@@ -456,7 +456,6 @@
                         </div>
                     </div>
                 </div>
-                <div id="pagination" class="paginations"></div>
             </div>
         </div>
     </div>
@@ -475,85 +474,5 @@
 
 
 </body>
-<script>
-    /**
-     * Create these new functions
-     * @param customer
-     * @returns {Promise<void>}
-     */
-    function removeAllCustomer() {
-        let x = document.querySelectorAll(".customer-item").length - 1
-        for (let i = x; i > 0; i--) {
-            document.querySelectorAll(".customer-item")[i].remove()
-        }
-    }
-
-    function searchCustomerByUsername() {
-        let keyword = document.querySelector("#customer2").value
-        if (keyword.trim() === "") return
-        getCustomerByUsername(keyword)
-    }
-
-    async function getCustomerByUsername(keyword) {
-        removeAllCustomer()
-        $(".spinner").css("display", "block")
-        let wrapper = document.querySelector(".customers")
-        try {
-            let res = await fetch('http://localhost:8080/customer', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-            });
-            if (res.ok) {
-                let data = await res.json();
-                let result = Object.values(data);
-                for (let i = 0; i < result.length; i++) {
-                    let username = result[i]["username"]
-                    if (username.includes(keyword)) username = username.replace(keyword, "<b>" + keyword + "</b>")
-                    else continue
-                    wrapper.innerHTML +=
-                        `<ul class="customer-item">
-                <li class="username" style="flex: 20%;">${username}</li>
-                <li class="name" style="flex: 20%;">${result[i]["firstname"] + ", " + result[i]["lastname"]}</li>
-                <li class="email" style="flex: 30%;">${result[i]["email"]}</li>
-                <li class="last-login" style="flex: 30%;">${result[i]["lastLogin"]}</li>`
-                }
-            }
-        } catch (e) {}
-        $(".spinner").css("display", "none")
-    }
-
-    async function getAllCustomer() {
-        removeAllCustomer()
-        $(".spinner").css("display", "block")
-        let wrapper = document.querySelector(".customers")
-        try {
-            let res = await fetch('http://localhost:8080/customer', {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-            });
-            if (res.ok) {
-                let data = await res.json();
-                let result = Object.values(data);
-                for (let i = 0; i < result.length; i++) {
-                    wrapper.innerHTML +=
-                        `<ul class="customer-item">
-                <li class="username" style="flex: 20%;">${result[i]["username"]}</li>
-                <li class="name" style="flex: 20%;">${result[i]["firstname"] + ", " + result[i]["lastname"]}</li>
-                <li class="email" style="flex: 30%;">${result[i]["email"]}</li>
-                <li class="last-login" style="flex: 30%;">${result[i]["lastLogin"]}</li>`
-                }
-            }
-        } catch (e) {}
-        $(".spinner").css("display", "none")
-    }
-
-    getAllCustomer()
-</script>
 
 </html>

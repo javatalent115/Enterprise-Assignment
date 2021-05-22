@@ -13,24 +13,7 @@ import java.util.*;
 public class DrugController {//TODO change Map to List if there is more time
     @Autowired
     private DrugService drugService;
-<<<<<<< HEAD
-    private List<Drug> list = new ArrayList<>();
-
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public Map<String, String> getAllDrugs(){
-        if (list.size() == 0){
-            list = drugService.getAllDrugs();
-        }
-        Map <String, String> map = new HashMap<>();
-        for (int i = 0 ; i< list.size(); i++){
-            Drug drug = list.get(i);
-            map.put(Integer.toString(i), drug.toString());
-        }
-        return map;
-    }
-=======
     private boolean initial = true;
->>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
 
     @RequestMapping(path = "/addDrug", method = RequestMethod.POST)
     public String addDrug(@RequestBody Drug drug){

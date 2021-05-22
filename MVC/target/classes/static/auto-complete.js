@@ -16,11 +16,7 @@ function autocomplete(inp, arr) {
         a = document.createElement("DIV");
         a.setAttribute("id", this.id + "autocomplete-list");
         a.setAttribute("class", "autocomplete-items");
-<<<<<<< HEAD
-        a.setAttribute("style", "height: 70vh; overflow: scroll;")
-=======
         a.setAttribute("style", "min-height:0vh;max-height:30vh; overflow: scroll;")
->>>>>>> 166b7ae8ed448ce31d1e40de32a96dd611068a58
         /*append the DIV element as a child of the autocomplete container:*/
         this.parentNode.appendChild(a);
         /*for each item in the array...*/
