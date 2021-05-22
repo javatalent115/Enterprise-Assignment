@@ -163,14 +163,21 @@ $(document).on("click", ".cart-btn", function () {
     let name = $(this).parent("li").parent("ul").find(".name").text()
     let amount = $(this).parent("li").parent("ul").find(".amount").text()
     let price = $(this).parent("li").parent("ul").find(".price").text()
-    var obj = {
+    const drug = {
       id: id,
       name: name,
       amount: amount,
       price: price
-    }
-    listItem.push(obj)
-    var myJSON = JSON.stringify(listItem)
+    };
+    let isExist = false;
+    listItem.forEach(function(object) {
+      if (object.id === drug.id) {
+        object.amount = (parseInt(object.amount) +  parseInt(drug.amount));
+        isExist = true;
+      }
+    });
+    if (!isExist) listItem.push(drug);
+    const myJSON = JSON.stringify(listItem);
     localStorage.setItem("cart-item", myJSON)
     imgclone.animate({
       'width': 0,
