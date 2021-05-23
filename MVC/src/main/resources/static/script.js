@@ -95,6 +95,65 @@ let listItem = localStorage.getItem('cart-item') ?
 $(document).on("click",".cart-nav",function(){
     window.location.href = "http://localhost:8080/cart.html"
 })
+$(document).on("click", ".cart-btn", function() {
+    let count = localStorage.getItem("cart");
+    document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
+    let cart = $('.cart-nav');
+    // find the img of that card which button is clicked by user
+    let imgtodrag = $(this).parent('li').find("img").eq(0);
+    if (imgtodrag) {
+        // duplicate the img
+        var imgclone = imgtodrag.clone().offset({
+            top: imgtodrag.offset().top,
+            left: imgtodrag.offset().left
+        }).css({
+            'opacity': '0.8',
+            'position': 'absolute',
+            'height': '35px',
+            'width': '35px',
+            'z-index': '100'
+        }).appendTo($('body')).animate({
+            'top': cart.offset().top + 20,
+            'left': cart.offset().left + 30,
+            'width': 35,
+            'height': 35
+        }, 1000, 'easeInOutExpo');
+
+        let id = $(this).parent("li").parent("ul").find(".id").text()
+        let name = $(this).parent("li").parent("ul").find(".name").text()
+        let amount = $(this).parent("li").parent("ul").find(".amount").text()
+        let price = $(this).parent("li").parent("ul").find(".price").text()
+        const drug = {
+            id: id,
+            name: name,
+            amount: amount,
+            price: price
+        };
+        setTimeout(function() {
+            if (count === null) count = "0";
+            count = (parseInt(count) + parseInt(drug.amount));
+            localStorage.setItem("cart", count)
+            $(".cart-nav .item-count").text(localStorage.getItem("cart"));
+
+        }, 1500);
+        let isExist = false;
+        listItem.forEach(function(object) {
+            if (object.id === drug.id) {
+                object.amount = (parseInt(object.amount) + parseInt(drug.amount));
+                isExist = true;
+            }
+        });
+        if (!isExist) listItem.push(drug);
+        const myJSON = JSON.stringify(listItem);
+        localStorage.setItem("cart-item", myJSON)
+        imgclone.animate({
+            'width': 0,
+            'height': 0
+        }, function() {
+            $(this).detach()
+        });
+    }
+});
 
 let length = document.querySelectorAll(".more-button-submenu-wrapper");
 for (let i = 0; i < length.length; i++) {
