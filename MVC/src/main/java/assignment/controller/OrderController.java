@@ -1,12 +1,12 @@
 package assignment.controller;
 
 import assignment.entity.Order;
-import assignment.entity.OrderDetail;
 import assignment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -27,7 +27,9 @@ public class OrderController {
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void addOrder(@RequestBody Order order){
-//        System.out.println(order);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss aa");
+        order.setPurchaseTime(dateFormat.format(date));
         orderService.addOrder(order);
     }
 

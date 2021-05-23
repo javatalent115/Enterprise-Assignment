@@ -55,6 +55,6 @@ function returnImage(name){
         return "./images/others/Nicpostinew.png"
     }
     else{
-        return "./images/blank-image.png"
+        return "./images/others/blank-image.png"
     }
 }

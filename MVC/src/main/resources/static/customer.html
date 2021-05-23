@@ -247,8 +247,11 @@
                 <li class="nav-item">
                     <a href="customer.html">Medicine</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item nav-item-cart">
                     <a href="cart.html"> Cart</a>
+                </li>
+                <li class="nav-item nav-item-customer">
+                    <a href=""> Customer</a>
                 </li>
                 <li class="nav-item sign">
                     <a href="login_page.html" id="sign-in">Sign-in</a>
@@ -415,6 +418,22 @@
             align-items: center;
             gap: 5px;
         }
+        
+        .username a {
+            color: darkblue;
+            text-decoration: none;
+        }
+        
+        .username a:hover {
+            color: blue;
+            cursor: pointer;
+        }
+        
+        .header-username,
+        .header-username:hover {
+            cursor: auto;
+            color: black;
+        }
     </style>
     <div class="customer-container">
         <div class="customer-wrapper">
@@ -445,7 +464,7 @@
                 <div class="customers" style="height: 40vh; overflow: scroll">
 
                     <ul class="customer-item" style="position: sticky; top:0">
-                        <li class="username" style="flex: 20%;">Username</li>
+                        <li class="username header-username" style="flex: 20%;">Username</li>
                         <li class="name" style="flex: 20%;">Name</li>
                         <li class="email" style="flex: 30%;">Email</li>
                         <li class="last-login" style="flex: 30%;">Last login</li>
@@ -462,12 +481,8 @@
     </div>
 
 </body>
+<script src="sign-in.js"></script>
 <script>
-    /**
-     * Create these new functions
-     * @returns {Promise<void>}
-     * @param element
-     */
     function invalid_user() {
         if (localStorage["accountType"] !== "admin") {
             window.location.href = "404.html"

@@ -1,6 +1,7 @@
 let itemDisplayAtATime = 10
 $(document).on("click", ".name", function() {
     let data = localStorage.getItem("data")
+    if ($(this).text() === "Name") return
     let index;
     for (let i = 0; i < data.split("\n").length - 1; i++) {
         if (data.split("\n")[i].split("&&")[1] === $(this).text()) {
@@ -13,24 +14,24 @@ $(document).on("click", ".name", function() {
         name: data.split("\n")[index].split("&&")[1],
         stock: data.split("\n")[index].split("&&")[10],
         price: data.split("\n")[index].split("&&")[9],
-        preparation: data.split("\n")[index].split("&&")[2],
-        packaging: data.split("\n")[index].split("&&")[3],
-        dosage: data.split("\n")[index].split("&&")[5],
-        ingredients: data.split("\n")[index].split("&&")[7],
-        country: data.split("\n")[index].split("&&")[8],
-        group: data.split("\n")[index].split("&&")[4],
+        preparation:data.split("\n")[index].split("&&")[2],
+        packaging:data.split("\n")[index].split("&&")[3],
+        dosage:data.split("\n")[index].split("&&")[5],
+        ingredients:data.split("\n")[index].split("&&")[7],
+        country:data.split("\n")[index].split("&&")[8],
+        group:data.split("\n")[index].split("&&")[4],
         type: data.split("\n")[index].split("&&")[6],
         producers_id: data.split("\n")[index].split("&&")[11]
     }
     localStorage.setItem("drug-click", JSON.stringify(drug))
     window.location.href = "http://localhost:8080/drug-infomation.html"
 })
-$(document).on("click", ".search-button", function() {
+$(document).on("click",".search-button",function(){
     let name = $("#medicine").val()
     let data = localStorage.getItem("data")
     let index;
     for (let i = 0; i < data.split("\n").length; i++) {
-        if (data.split("\n")[i].split("&&")[1] == name) {
+        if(data.split("\n")[i].split("&&")[1] == name){
             index = i
             break
         }
@@ -40,12 +41,12 @@ $(document).on("click", ".search-button", function() {
         name: data.split("\n")[index].split("&&")[1],
         stock: data.split("\n")[index].split("&&")[10],
         price: data.split("\n")[index].split("&&")[9],
-        preparation: data.split("\n")[index].split("&&")[2],
-        packaging: data.split("\n")[index].split("&&")[3],
-        dosage: data.split("\n")[index].split("&&")[5],
-        ingredients: data.split("\n")[index].split("&&")[7],
-        country: data.split("\n")[index].split("&&")[8],
-        group: data.split("\n")[index].split("&&")[4],
+        preparation:data.split("\n")[index].split("&&")[2],
+        packaging:data.split("\n")[index].split("&&")[3],
+        dosage:data.split("\n")[index].split("&&")[5],
+        ingredients:data.split("\n")[index].split("&&")[7],
+        country:data.split("\n")[index].split("&&")[8],
+        group:data.split("\n")[index].split("&&")[4],
         type: data.split("\n")[index].split("&&")[6],
         producers_id: data.split("\n")[index].split("&&")[11]
     }
@@ -53,7 +54,6 @@ $(document).on("click", ".search-button", function() {
     window.location.href = "http://localhost:8080/drug-infomation.html"
 
 });
-
 function addForAdvanceEdit(data, index) {
     $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
     $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
@@ -97,14 +97,14 @@ $("#medicine").on('keyup', function(e) {
     }
 });
 
-function setLocalStorage() {
+function setLocalStorage(){
     if (localStorage.getItem("Group") === null) localStorage.setItem("Group", "Both");
     if (localStorage.getItem("sort-type") === null) localStorage.setItem("sort-type", "ID");
     if (localStorage.getItem("Type") === null) localStorage.setItem("Type", "Both");
     $(".type").children("button").text(localStorage.getItem("Type"));
     if (localStorage.getItem("Group") === "Both") $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png");
     else if (localStorage.getItem("Group") === "Đông dược") $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png");
-    else if (localStorage.getItem("Group") === "Tân dược") $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png");
+    else if (localStorage.getItem("Group") === "Tân dược" ) $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png");
     else $(".checkbox-filter").find("img").attr("src", "./images/icons/unchecked.png");
 }
 
@@ -119,10 +119,11 @@ function initializes() {
 }
 //Initialize cart-item
 let listItem = localStorage.getItem('cart-item') ?
-    JSON.parse(localStorage.getItem('cart-item')) : []
+    JSON.parse(localStorage.getItem('cart-item')) :
+    []
 
-//if add to cart btn clicked
-$(document).on("click", ".cart-nav", function() {
+    //if add to cart btn clicked
+$(document).on("click",".cart-nav",function(){
     window.location.href = "http://localhost:8080/cart.html"
 })
 $(document).on("click", ".cart-btn", function() {
@@ -649,11 +650,11 @@ $(document).on("click", ".search-button-2", function() {
     } else {
         let data = localStorage.getItem("data")
         removeAllItem()
-        let index = 0
+        let index = 0 //TODO change index to list
         let found = false
         let lastItem = data.split("\n").length
         for (let i = 0; i < lastItem; i++) {
-            if (searchName === data.split("\n")[i].split("&&")[1]) {
+            if (searchName === data.split("\n")[i].split("&&")[1]) {//TODO change to include()
                 index = i
                 found = true
                 break
@@ -729,7 +730,7 @@ $(document).on("click", ".page", function() {
     let itemIndex = (page - 1) * itemDisplay
     let wrapper = document.querySelector(".medicines")
     for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
-        if (data.split("\n").length - 1 === i) {
+        if (data.split("\n").length-1 === i) {
             break
         } else {
             wrapper.innerHTML += `<ul class="medicine-item">
@@ -772,8 +773,7 @@ $(document).on("click", ".decrease-amount-image", function() {
 
 $(document).on("click", ".increase-amount-image", function() {
     let amount = parseInt($(this).parent("li").find("div").text())
-    console.log($(this).parent().parent().find(".stock").text())
-    if (amount < $(this).parent().parent().find(".stock").text()) {
+    if (amount < $(this).parent().parent().find(".stock").text()){
         $(this).parent("li").find("div").html(amount + 1)
 
     }
@@ -781,11 +781,13 @@ $(document).on("click", ".increase-amount-image", function() {
 
 $(document).on("click", ".checkbox-filter", function() {
     if ($(this).find("img").attr("src") === "./images/icons/checked.png") {
-        if (localStorage.getItem("Group") === "Both") {
+        if (localStorage.getItem("Group") === "Both"){
             if ($(this).parent("li").find("span").text() === "Đông dược") localStorage.setItem("Group", "Tân dược");
             else localStorage.setItem("Group", "Đông dược");
-        } else localStorage.setItem("Group", "none");
-    } else {
+        }
+        else localStorage.setItem("Group", "none");
+    }
+    else {
         if (localStorage.getItem("Group") === "none") localStorage.setItem("Group", $(this).parent("li").find("span").text());
         else localStorage.setItem("Group", "Both");
     }
@@ -858,7 +860,7 @@ async function addItem(item) {
             let itemIndex = (page - 1) * itemDisplay
             let wrapper = document.querySelector(".medicines")
             for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
-                if (data.split("\n").length - 1 === i) {
+                if (data.split("\n").length-1 === i) {
                     break
                 } else {
                     wrapper.innerHTML += `<ul class="medicine-item">

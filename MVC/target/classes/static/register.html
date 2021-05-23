@@ -12,11 +12,12 @@
     <div class="container">
         <div id="header_medicine">Medicine Online</div>
         <div id="block_register">
-            <div id="text_register">Register</div>
+            <div class="text_register">Sign in</div>
         </div>
         <div class="wrapper">
             <div id="wrapper_account">
                 <div id="text_account">Create your account</div>
+                <div id="error-text"></div>
                 <div class="text" id="username_t">Username</div>
                 <input type="text" name="username" id="username">
                 <div class="text" id="email_t">Email</div>
@@ -43,58 +44,12 @@
                 <textarea name="address" id="address" cols="30" rows="4"></textarea>
             </div>
             <div id="button_register" onclick="register()">
-                <div id="text_register">Register</div>
+                <div class="text_register">Register</div>
             </div>
         </div>
     </div>
 </body>
 <link rel="stylesheet" href="register.css">
-<script>
-    function checkConfirm() {
-        let password = document.querySelector("#password").value
-        let confirm = document.querySelector("#confirm").value
-        if (confirm !== password) {
-            document.querySelector("#unmatched").innerHTML = "Confirm password does not match"
-        } else {
-            document.querySelector("#unmatched").innerHTML = ""
-        }
-    }
-
-    function flash(element) {
-        setTimeout(function() {
-            element.classList.add("flash")
-        }, 1)
-        element.classList.remove("flash")
-    }
-
-    function check() {
-        let notOk = false
-        let input_list = document.querySelectorAll("input[type=text], input[type=email], input[type=password]")
-        for (let i = 0; i < input_list.length; i++) {
-            if (input_list[i].value === "") {
-                notOk = true
-                flash(document.querySelector("#" + input_list[i].id + "_t"))
-            }
-        }
-
-        if (document.querySelector("#address").value === "") {
-            notOk = true
-            flash(document.querySelector("#address_t"))
-        }
-        if (document.querySelector("#term").checked == false) {
-            notOk = true
-            flash(document.querySelector("#text_term"))
-        }
-        return notOk
-    }
-
-    function register() {
-        if (!check()) {
-            let username = document.querySelector("#username").value
-            let password = document.querySelector("#password").value
-            alert(username + ":" + password)
-        }
-    }
-</script>
+<script src="register.js"></script>
 
 </html>

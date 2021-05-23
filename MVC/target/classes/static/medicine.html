@@ -176,7 +176,7 @@
         background: #18bff3;
         color: white;
         padding: 8px 37px;
-        font-size: 17px;
+        font-size: 22px;
         border-radius: 19px;
         position: relative;
         top: -22px;
@@ -254,6 +254,9 @@
                 <li class="nav-item nav-item-cart">
                     <a href="cart.html"> Cart</a>
                 </li>
+                <li class="nav-item nav-item-customer">
+                    <a href="customer.html"> Customer</a>
+                </li>
                 <li class="nav-item sign">
                     <a href="login_page.html" id="sign-in">Sign-in</a>
                     <a href="" id="sign-out">Sign-out</a>
@@ -273,7 +276,7 @@
         </div>
         <div class="search-wrapper">
             <div class="search-input">
-                <div style="padding-left:3px;font-size:20px">Search Medicine</div>
+                <div style="padding-left:3px;font-size:20px">Search Medicine Information</div>
                 <div class="autocomplete">
                     <div style="display: flex; align-items: center; gap: 20px;">
                         <input type="text" name="medicine" id="medicine">
@@ -444,10 +447,18 @@
         .company-option {
             background-color: red;
         }
+
+        .name {
+            color: darkblue;
+        }
         
         .name:hover {
             color: blue;
             cursor: pointer;
+        }
+
+        .header-name, .header-name:hover {
+            color: black;
         }
         
         .header-name:hover {
@@ -458,7 +469,7 @@
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
             <div class="information-medicine-header">
-                <span>Infomation of medicine</span>
+                <span><b>List of medicines</b></span>
             </div>
             <div class="medicine-detail-wrapper">
                 <div class="search-wrapper-2">
@@ -557,6 +568,10 @@
                         font-size: 20px;
                         font-weight: bold;
                         cursor: pointer;
+                    }
+
+                    .cart-nav:hover {
+                        background-color: blue;
                     }
                 </style>
                 <div class="cart-wrapper">

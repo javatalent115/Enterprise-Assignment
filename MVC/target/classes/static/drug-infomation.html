@@ -32,7 +32,7 @@
         right: 0;
         z-index: -1;
     }
-    
+
     .nav-bar {
         position: relative;
         z-index: 1;
@@ -40,13 +40,13 @@
         padding-right: 60px;
         padding-top: 10px;
     }
-    
+
     .nav-item {
         list-style: none;
         font-size: 30px;
         font-weight: bold;
     }
-    
+
     .nav-item a {
         text-decoration: none;
         color: white;
@@ -55,11 +55,11 @@
         justify-content: center;
         align-items: center;
     }
-    
+
     .nav-item a:hover {
         color: wheat;
     }
-    
+
     .nav-item a::after {
         content: "";
         background: wheat;
@@ -71,7 +71,7 @@
         transform-origin: left center;
         transform: scaleX(0);
     }
-    
+
     .nav-item a:hover::after {
         opacity: 1;
         transform: scaleX(1);
@@ -86,7 +86,7 @@
         height: 100%;
         gap: 120px;
     }
-    
+
     .header {
         font-weight: bold;
         color: white;
@@ -210,6 +210,9 @@
                 <li class="nav-item nav-item-cart">
                     <a href="cart.html"> Cart</a>
                 </li>
+                <li class="nav-item nav-item-customer">
+                    <a href="customer.html"> Customer</a>
+                </li>
                 <li class="nav-item sign">
                     <a href="login_page.html" id="sign-in">Sign-in</a>
                     <a href="" id="sign-out">Sign-out</a>
@@ -233,10 +236,10 @@
             font-weight: bold;
             font-size: 20px;
         }
-        
-        .drug-image {
+        .drug-image{
             width: 100%;
         }
+
     </style>
     <div class="container my-5">
         <div class="row">
@@ -459,5 +462,4 @@
 <script src="drug-infomation.js"></script>
 <script src="sign-in.js"></script>
 <script src="./on-click-drug-image.js"></script>
-
 </html>

@@ -1,14 +1,21 @@
-function initialize(){
-    let data;
-    if (localStorage.getItem("cart-item")){
-        data =JSON.parse(localStorage.getItem("cart-item"))
+function invalid_user() {
+    if (localStorage["accountType"] === "admin") {
+        window.location.href = "404.html"
     }
-    else{
+}
+
+invalid_user()
+
+function initialize() {
+    let data;
+    if (localStorage.getItem("cart-item")) {
+        data = JSON.parse(localStorage.getItem("cart-item"))
+    } else {
         data = {}
     }
     let wrapper = document.querySelector(".medicines")
-    let totalMedicinePrice =0 ;
-    for (let i = 0; i < data.length ; i++) {
+    let totalMedicinePrice = 0;
+    for (let i = 0; i < data.length; i++) {
         let totalPrice = data[i].price * data[i].amount
         wrapper.innerHTML += `
         <ul class="medicine-item">
@@ -20,10 +27,10 @@ function initialize(){
         </ul>`
         totalMedicinePrice += totalPrice
     }
-    wrapper.innerHTML+=`<ul class="medicine-item">
+    wrapper.innerHTML += `<ul class="medicine-item">
     <li></li>
     <li></li>
-    <li class = "text-nowrap totalMedicinePrice">Total price(${data.length} products)</li>
+    <li class = "text-nowrap totalMedicinePrice">Total price (${data.length} products)</li>
     <li></li>
     <li class = "totalMedicinePrice">${totalMedicinePrice}$</li>
 </ul>`
@@ -31,18 +38,18 @@ function initialize(){
 $(document).ready(initialize())
 $(document).ready(function() {
     $("#confirm-purchase-modal").on("show.bs.modal", function(event) {
-        let data =JSON.parse(localStorage.getItem("cart-item"));
-        let drug ={
+        let data = JSON.parse(localStorage.getItem("cart-item"));
+        let drug = {
             id: "",
-            amount:""
+            amount: ""
         };
-        for (let i = 0; i< data.length; i++){
+        for (let i = 0; i < data.length; i++) {
             drug.id = data[i].id;
             drug.amount = data[i].amount;
             reduceStock(drug);
         }
-        localStorage.setItem("cart-item","")
-        localStorage.setItem("cart",0)
+        localStorage.setItem("cart-item", "")
+        localStorage.setItem("cart", 0)
         setTimeout(() => {
             window.location.href = "http://localhost:8080/home-page.html"
         }, 1000);

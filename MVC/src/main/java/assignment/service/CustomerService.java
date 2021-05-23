@@ -42,6 +42,16 @@ public class CustomerService {
         customerRepo.save(oldCustomer);
     }
 
+    public Customer getCustomerByEmail(String email) {
+        List<Customer> customerList = getAllCustomers();
+        for (Customer customer : customerList) {
+            if (customer.getEmail().equals(email)) {
+                return customer;
+            }
+        }
+        return null;
+    }
+
     public long countCustomer() {
         return customerRepo.count();
     }

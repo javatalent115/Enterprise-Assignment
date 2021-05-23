@@ -272,3 +272,9 @@ top: 145.29px; */
     -webkit-animation-iteration-count: 1;
     -webkit-animation-timing-function: ease-in-out;
 }
+
+#error-text {
+    font-size: 30px;
+    color: red;
+    text-align: center;
+}

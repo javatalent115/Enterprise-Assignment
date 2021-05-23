@@ -1,6 +1,7 @@
 let itemDisplayAtATime = 10
 $(document).on("click", ".name", function() {
     let data = localStorage.getItem("data")
+    if ($(this).text() === "Name") return
     let index;
     for (let i = 0; i < data.split("\n").length - 1; i++) {
         if (data.split("\n")[i].split("&&")[1] === $(this).text()) {
@@ -649,11 +650,11 @@ $(document).on("click", ".search-button-2", function() {
     } else {
         let data = localStorage.getItem("data")
         removeAllItem()
-        let index = 0
+        let index = 0 //TODO change index to list
         let found = false
         let lastItem = data.split("\n").length
         for (let i = 0; i < lastItem; i++) {
-            if (searchName === data.split("\n")[i].split("&&")[1]) {
+            if (searchName === data.split("\n")[i].split("&&")[1]) {//TODO change to include()
                 index = i
                 found = true
                 break
