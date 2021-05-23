@@ -910,7 +910,7 @@ async function addItem(item) {
               <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
               <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
               <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-              <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+              <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
               <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
               <li>
                   <div class="done">Done</div>

@@ -28,7 +28,6 @@ async function getAllOrderDetail(orderId) {
         if (res.ok) {
             let data = await res.json();
             let result = Object.values(data);
-            console.log(result)
             for (let i = 0; i < result.length; i++) {
                 wrapper.innerHTML += `
                 <ul class="order-detail-item">
@@ -86,7 +85,7 @@ async function getAllOrder() {
 }
 
 function info_label() {
-    document.querySelector("#info-label").innerHTML = "Information of " + localStorage["user"] + "'s order"
+    document.querySelector("#info-label").innerHTML = "Information of " + localStorage["user"] + "'s orders"
 }
 
 info_label()
