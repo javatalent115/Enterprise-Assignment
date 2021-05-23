@@ -3,22 +3,12 @@ $(document).on("click", ".name", function() {
     let data = localStorage.getItem("data")
     let index;
     for (let i = 0; i < data.split("\n").length - 1; i++) {
-        if (data.split("\n")[i].split("&&")[1] == $(this).text()) {
+        if (data.split("\n")[i].split("&&")[1] === $(this).text()) {
             index = i
             break
-            }
         }
-        $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
-        $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
-        $("#advanced-stock").val(data.split("\n")[index].split("&&")[9])
-        $("#advanced-price").val(data.split("\n")[index].split("&&")[10])
-        $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
-        $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
-        $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
-        $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
-        $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
-        $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
-        if (data.split("\n")[index].split("&&")[6] !== "Undefined") $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
+    }
+    addForAdvanceEdit(data, index);
 
     let drug = {
         id: data.split("\n")[index].split("&&")[0],
@@ -38,14 +28,28 @@ $(document).on("click", ".name", function() {
     window.location.href = "http://localhost:8080/drug-infomation.html"
 })
 
+function addForAdvanceEdit(data, index) {
+    $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
+    $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
+    $("#advanced-stock").val(data.split("\n")[index].split("&&")[10])
+    $("#advanced-price").val(data.split("\n")[index].split("&&")[9])
+    $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
+    $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
+    $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
+    $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
+    $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
+    $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
+    if (data.split("\n")[index].split("&&")[6] !== "Undefined") $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
+}
+
 function checkAccount() {
-    if (localStorage.getItem("accountType") == "guest") {
+    if (localStorage.getItem("accountType") === "guest") {
         $("li:nth-child(6)").css("display", "none")
         $("li:nth-child(7)").css("display", "none")
         $(".add-image").css("display", "none")
         $(".cart-nav").css("display", "none")
         $(".amount").css("display", "none")
-    } else if (localStorage.getItem("accountType") == "user") {
+    } else if (localStorage.getItem("accountType") === "user") {
         $("li:nth-child(6)").css("display", "none")
         $(".add-image").css("display", "none")
         $(".more-button").css("display", "none")
@@ -62,70 +66,23 @@ $("#medicine2").on('keyup', function(e) {
     }
 });
 
+function setLocalStorage(){
+    if (localStorage.getItem("Group") === null) localStorage.setItem("Group", localStorage.getItem());
+    if (localStorage.getItem("sort-type") === null) localStorage.setItem("sort-type", "ID");
+    if (localStorage.getItem("Type") === null) localStorage.setItem("Type", "Both");
+    $(".type").children("button").text(localStorage.getItem("Type"));
+    if (localStorage.getItem("Group") === "Both") $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png");
+    else if (localStorage.getItem("Group") === "Đông dược") $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png");
+    else if (localStorage.getItem("Group") === "Tân dược" ) $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png");
+    else $(".checkbox-filter").find("img").attr("src", "./images/icons/unchecked.png");
+}
 
 function initializes() {
     document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
     checkAccount();
     $(".spinner").css("display", "block")
-        // checkPagination()
-    if (localStorage.getItem("Tân dược")) {
-        localStorage.setItem("Tân dược", localStorage.getItem("Tân dược"))
-
-    } else {
-        localStorage.setItem("Tân dược", true)
-
-    }
-    if (localStorage.getItem("Đông dược")) {
-        localStorage.setItem("Đông dược", localStorage.getItem("Đông dược"))
-    } else {
-        localStorage.setItem("Đông dược", true)
-    }
-    if (localStorage.getItem("sort-type")) {
-        localStorage.setItem("sort-type", localStorage.getItem("sort-type"))
-    } else {
-        localStorage.setItem("sort-type", "none")
-    }
-    if (localStorage.getItem("Thuốc kê đơn")) {
-        localStorage.setItem("Thuốc kê đơn", localStorage.getItem("Thuốc kê đơn"))
-    } else {
-        localStorage.setItem("Thuốc kê đơn", true)
-    }
-    if (localStorage.getItem("Thuốc không kê đơn")) {
-        localStorage.setItem("Thuốc không kê đơn", localStorage.getItem("Thuốc không kê đơn"))
-    } else {
-        localStorage.setItem("Thuốc không kê đơn", true)
-    }
-    if (localStorage.getItem("Thuốc kê đơn") == "true" && localStorage.getItem("Thuốc không kê đơn") == "true") {
-        $(".type").children("button").text("Both")
-    } else if (localStorage.getItem("Thuốc kê đơn") == "false" && localStorage.getItem("Thuốc không kê đơn") == "true") {
-        $(".type").children("button").text("Thuốc không kê đơn")
-    } else if (localStorage.getItem("Thuốc kê đơn") == "true" && localStorage.getItem("Thuốc không kê đơn") == "false") {
-        $(".type").children("button").text("Thuốc kê đơn")
-    }
-    if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "true") {
-        $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png")
-        $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png")
-    } else if (localStorage.getItem("Tân dược") == "false" && localStorage.getItem("Đông dược") == "true") {
-        $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/icons/checked.png")
-    } else if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "false") {
-        $(".tan-duoc").find("img").attr("src", "./images/icons/checked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png")
-    } else {
-        $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png")
-    }
-    if (localStorage.getItem("sort-type") == "none") {
-        $(".sort").children("button").text("ID")
-    } else if (localStorage.getItem("sort-type") == "name-asc") {
-        $(".sort").children("button").text("Name (A-Z)")
-    } else if (localStorage.getItem("sort-type") == "name-des") {
-        $(".sort").children("button").text("Name (Z-A)")
-    } else if (localStorage.getItem("sort-type") == "money-asc") {
-        $(".sort").children("button").text("Money (low - high)")
-    } else if (localStorage.getItem("sort-type") == "money-des") {
-        $(".sort").children("button").text("Money (high - low)")
-    }
+    setLocalStorage();
+    $(".sort").children("button").text(localStorage.getItem("sort-type"));
     document.addEventListener('DOMContentLoaded', init, false);
     addCompany()
 }
@@ -133,71 +90,13 @@ function initializes() {
 let listItem = localStorage.getItem('cart-item') ?
     JSON.parse(localStorage.getItem('cart-item')) :
     []
+
     //if add to cart btn clicked
 $(document).on("click",".cart-nav",function(){
     window.location.href = "http://localhost:8080/cart.html"
 })
-$(document).on("click", ".cart-btn", function() {
-    let count = localStorage.getItem("cart");
-    document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
-    let cart = $('.cart-nav');
-    // find the img of that card which button is clicked by user
-    let imgtodrag = $(this).parent('li').find("img").eq(0);
-    if (imgtodrag) {
-        // duplicate the img
-        var imgclone = imgtodrag.clone().offset({
-            top: imgtodrag.offset().top,
-            left: imgtodrag.offset().left
-        }).css({
-            'opacity': '0.8',
-            'position': 'absolute',
-            'height': '35px',
-            'width': '35px',
-            'z-index': '100'
-        }).appendTo($('body')).animate({
-            'top': cart.offset().top + 20,
-            'left': cart.offset().left + 30,
-            'width': 35,
-            'height': 35
-        }, 1000, 'easeInOutExpo');
 
-        let id = $(this).parent("li").parent("ul").find(".id").text()
-        let name = $(this).parent("li").parent("ul").find(".name").text()
-        let amount = $(this).parent("li").parent("ul").find(".amount").text()
-        let price = $(this).parent("li").parent("ul").find(".price").text()
-        const drug = {
-            id: id,
-            name: name,
-            amount: amount,
-            price: price
-        };
-        setTimeout(function() {
-            if (count === null) count = "0";
-            count = (parseInt(count) + parseInt(drug.amount));
-            localStorage.setItem("cart", count)
-            $(".cart-nav .item-count").text(localStorage.getItem("cart"));
-
-        }, 1500);
-        let isExist = false;
-        listItem.forEach(function(object) {
-            if (object.id === drug.id) {
-                object.amount = (parseInt(object.amount) + parseInt(drug.amount));
-                isExist = true;
-            }
-        });
-        if (!isExist) listItem.push(drug);
-        const myJSON = JSON.stringify(listItem);
-        localStorage.setItem("cart-item", myJSON)
-        imgclone.animate({
-            'width': 0,
-            'height': 0
-        }, function() {
-            $(this).detach()
-        });
-    }
-});
-
-var length = document.querySelectorAll(".more-button-submenu-wrapper")
+let length = document.querySelectorAll(".more-button-submenu-wrapper");
 for (let i = 0; i < length.length; i++) {
     document.querySelectorAll(".more-button-submenu-wrapper")[i].setAttribute("style", "display:none")
 }
@@ -213,7 +112,7 @@ for (let i = 0; i < length.length; i++) {
 
 $(document).on("click", ".more-button", function() {
     event.preventDefault()
-    if ($(this).parent("li").find(".more-button-submenu-wrapper").css("display") == "block") {
+    if ($(this).parent("li").find(".more-button-submenu-wrapper").css("display") === "block") {
         $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "none")
     } else {
         $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "block")
@@ -237,7 +136,7 @@ $(document).on("click", ".no-add-company", function() {
 })
 
 $(document).on("click", ".confirm-add-company", function() {
-    if (quickChange.parent().parent().find(".id").text() == 0 || quickChange.parent().parent().find(".add-name").text() == 0 || quickChange.parent().parent().find(".stock").text() == 0 || quickChange.parent().parent().find(".price").text() == 0) {
+    if (quickChange.parent().parent().find(".id").text() === 0 || quickChange.parent().parent().find(".add-name").text() === 0 || quickChange.parent().parent().find(".stock").text() === 0 || quickChange.parent().parent().find(".price").text() === 0) {
         alert("This must have a value")
         quickChange.parent("li").parent("ul").find(".changeAble").attr("contenteditable", "true")
         quickChange.parent("li").parent("ul").find(".changeAble").css({
@@ -317,12 +216,8 @@ $(document).on("click", ".quick-change", function() {
 
 $(document).on("click", ".done", function() {
     event.preventDefault()
-    if ($(this).parent().parent().find(".id").text() == 0 || $(this).parent().parent().find(".name").text() == 0 || $(this).parent().parent().find(".stock").text() == 0 || $(this).parent().parent().find(".price").text() == 0) {
-
-    } else {
-        if ($(this).attr("data-bs-target") == "#add-company-modal") {
-
-        } else {
+    if (!($(this).parent().parent().find(".id").text() === 0 || $(this).parent().parent().find(".name").text() === 0 || $(this).parent().parent().find(".stock").text() === 0 || $(this).parent().parent().find(".price").text() === 0)) {
+        if ($(this).attr("data-bs-target") !== "#add-company-modal") {
             $(this).css("display", "none")
             $(this).parent("li").find("img").css("display", "inline-block")
             $(this).parent("li").parent("ul").find(".changeAble").css({
@@ -380,19 +275,7 @@ $(document).ready(function() {
             }
         }
         console.log(data.split("\n")[index])
-        $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
-        $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
-        $("#advanced-stock").val(data.split("\n")[index].split("&&")[10])
-        $("#advanced-price").val(data.split("\n")[index].split("&&")[9])
-        $("#advanced-preparation").val(data.split("\n")[index].split("&&")[2])
-        $("#advanced-packaging").val(data.split("\n")[index].split("&&")[3])
-        $("#advanced-dosage").val(data.split("\n")[index].split("&&")[5])
-        $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
-        $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
-        $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
-        if (data.split("\n")[index].split("&&")[6] == "Undefined") {} else {
-            $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
-        }
+        addForAdvanceEdit(data, index);
     });
 });
 
@@ -671,7 +554,7 @@ function removeAllItem() {
 $(document).on("click", ".search-button-2", function() {
     let searchName = document.getElementById("medicine2").value
     document.getElementById("medicine2").value = ""
-    if (searchName == 0) {
+    if (searchName === 0) {
         removeAllItem()
         addItem(itemDisplayAtATime)
     } else {
@@ -681,7 +564,7 @@ $(document).on("click", ".search-button-2", function() {
         let found = false
         let lastItem = data.split("\n").length
         for (let i = 0; i < lastItem; i++) {
-            if (searchName == data.split("\n")[i].split("&&")[1]) {
+            if (searchName === data.split("\n")[i].split("&&")[1]) {
                 index = i
                 found = true
                 break
@@ -757,7 +640,7 @@ $(document).on("click", ".page", function() {
     let itemIndex = (page - 1) * itemDisplay
     let wrapper = document.querySelector(".medicines")
     for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
-        if (data.split("\n")[i].split("&&")[0] == 0) {
+        if (data.split("\n")[i].split("&&")[0] === 0) {
             break
         } else {
             wrapper.innerHTML += `<ul class="medicine-item">
@@ -804,83 +687,39 @@ $(document).on("click", ".increase-amount-image", function() {
 })
 
 $(document).on("click", ".checkbox-filter", function() {
-    if ($(this).find("img").attr("src") == "./images/icons/checked.png") {
-        localStorage.setItem($(this).parent("li").find("span").text(), false)
-        addItem(itemDisplayAtATime)
-    } else {
-        localStorage.setItem($(this).parent("li").find("span").text(), true)
-        addItem(itemDisplayAtATime)
+    if ($(this).find("img").attr("src") === "./images/icons/checked.png") {
+        if (localStorage.getItem("Group") === "Both"){
+            if ($(this).parent("li").find("span").text() === "Đông dược") localStorage.setItem("Group", "Tân dược");
+            else localStorage.setItem("Group", "Đông dược");
+        }
+        else localStorage.setItem("Group", "none");
     }
-    window.location.reload()
-});
-
-$(document).on("click", ".dropdown-item-type", function() {
-    if ($(this).text() == "Thuốc kê đơn") {
-        localStorage.setItem("Thuốc kê đơn", true)
-        localStorage.setItem("Thuốc không kê đơn", false)
-    } else if ($(this).text() == "Thuốc không kê đơn") {
-        localStorage.setItem($(this).text(), true)
-        localStorage.setItem("Thuốc kê đơn", false)
-    } else {
-        localStorage.setItem("Thuốc kê đơn", true)
-        localStorage.setItem("Thuốc không kê đơn", true)
-    }
-    addItem()
-    window.location.reload()
-});
-
-$(document).on("click", ".dropdown-item-sort", async function() {
-    let menu = $(this).text()
-    if (menu == "Money (low - high)") {
-        localStorage.setItem("sort-type", "money-asc")
-    } else if (menu == "Money (high - low)") {
-        localStorage.setItem("sort-type", "money-des")
-    } else if (menu == "Name (A-Z)") {
-        localStorage.setItem("sort-type", "name-asc")
-    } else if (menu == "Name (Z-A)") {
-        localStorage.setItem("sort-type", "name-des")
-    } else {
-        localStorage.setItem("sort-type", "none")
+    else {
+        if (localStorage.getItem("Group") === "none") localStorage.setItem("Group", $(this).parent("li").find("span").text());
+        else localStorage.setItem("Group", "Both");
     }
     addItem(itemDisplayAtATime)
     window.location.reload()
 });
 
-function getFilter() {
-    let Drug = {
-        type: "",
-        group: "",
-        sortType: ""
-    };
-    if (localStorage.getItem("Thuốc kê đơn") === "true") {
-        if (localStorage.getItem("Thuốc không kê đơn") === "true") {
-            Drug.type = "none"
-        } else {
-            Drug.type = "Thuốc kê đơn"
-        }
-    } else {
-        if (localStorage.getItem("Thuốc không kê đơn") === "true") {
-            Drug.type = "Thuốc không kê đơn"
-        } else {
-            Drug.type = " "
-        }
-    }
+$(document).on("click", ".dropdown-item-type", function() {
+    localStorage.setItem("Type", $(this).text())
+    addItem()
+    window.location.reload()
+});
 
-    if (localStorage.getItem("Đông dược") === "true") {
-        if (localStorage.getItem("Tân dược") === "true") {
-            Drug.group = "none"
-        } else {
-            Drug.group = "Đông dược"
-        }
-    } else {
-        if (localStorage.getItem("Tân dược") === "true") {
-            Drug.group = "Tân dược"
-        } else {
-            Drug.group = " "
-        }
+$(document).on("click", ".dropdown-item-sort", async function() {
+    localStorage.setItem("sort-type", $(this).text())
+    addItem(itemDisplayAtATime)
+    window.location.reload()
+});
+
+function getFilter() {
+    return {
+        type: localStorage.getItem("Type"),
+        group: localStorage.getItem("Group"),
+        sortType: localStorage.getItem("sort-type")
     }
-    Drug.sortType = localStorage.getItem("sort-type");
-    return Drug
 }
 
 async function addCompany() {
@@ -928,7 +767,7 @@ async function addItem(item) {
             let itemIndex = (page - 1) * itemDisplay
             let wrapper = document.querySelector(".medicines")
             for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
-                if (data.split("\n")[i].split("&&")[0] == 0) {
+                if (data.split("\n")[i].split("&&")[0] === 0) {
                     break
                 } else {
                     wrapper.innerHTML += `<ul class="medicine-item">
