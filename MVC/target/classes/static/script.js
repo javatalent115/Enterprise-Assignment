@@ -772,7 +772,6 @@ $(document).on("click", ".decrease-amount-image", function() {
 
 $(document).on("click", ".increase-amount-image", function() {
     let amount = parseInt($(this).parent("li").find("div").text())
-    console.log($(this).parent().parent().find(".stock").text())
     if (amount < $(this).parent().parent().find(".stock").text()){
         $(this).parent("li").find("div").html(amount + 1)
 

@@ -1,5 +1,5 @@
 $(document).on("click",".news-item",function(){
-    if ($(this).find("p").text() == "Covid 19 News?"){
+    if ($(this).find("p").text() == "News discover about vaccine to Covid 19"){
         window.location.href = "http://localhost:8080/news-1.html"
     }
     else if ($(this).find("p").text() == "Cancer can cure?"){

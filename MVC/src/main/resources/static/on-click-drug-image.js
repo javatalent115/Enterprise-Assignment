@@ -1,15 +1,25 @@
 $(document).on("click",".slide-img",function(){
     let img = ($(this).attr("src")).split("/")[3].split(".")[0]
+    let imgFound = false;
     let data = localStorage.getItem("data")
     let index;
-    console.log(img)
-    for (let i = 0; i < data.split("\n").length - 1; i++) {
+    for (let i = 0; i < data.split("\n").length ; i++) {
         // console.log(img.includes(data.split("\n")[i].split("&&")[1]))
         if (data.split("\n")[i].split("&&")[1].includes(img)) {
             index = i
+            imgFound = true
             break
         }
     }
+    // if (!imgFound){
+    //     for (let i = 0; i < data.split("\n").length ; i++) {
+    //         // console.log(img.includes(data.split("\n")[i].split("&&")[1]))
+    //         if (data.split("\n")[i].split("&&")[1] == ) {
+    //             index = i
+    //             break
+    //         }
+    //     }
+    // }
     let drug = {
         id: data.split("\n")[index].split("&&")[0],
         name: data.split("\n")[index].split("&&")[1],
