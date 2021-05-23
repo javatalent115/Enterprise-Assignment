@@ -100,7 +100,7 @@
             sortType: "..."  // ("money-asc" or "money-des" or "name-asc" or "name-des" or "none")
         };
         try {
-            let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {//TODO change this function accordingly. Input param above
+            let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -125,7 +125,7 @@
     async function getNOP(){
         let id = "AMPHARCO";
         try {
-            let res = await fetch('http://localhost:8080/api/getNOP', {//TODO create a get drugList.size() in service
+            let res = await fetch('http://localhost:8080/api/getNOP', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

@@ -254,6 +254,9 @@
                 <li class="nav-item nav-item-cart">
                     <a href="cart.html"> Cart</a>
                 </li>
+                <li class="nav-item nav-item-customer">
+                    <a href="customer.html"> Customer</a>
+                </li>
                 <li class="nav-item sign">
                     <a href="login_page.html" id="sign-in">Sign-in</a>
                     <a href="" id="sign-out">Sign-out</a>
@@ -273,7 +276,7 @@
         </div>
         <div class="search-wrapper">
             <div class="search-input">
-                <div style="padding-left:3px;font-size:20px">Search Medicine</div>
+                <div style="padding-left:3px;font-size:20px">Search Medicine Information</div>
                 <div class="autocomplete">
                     <div style="display: flex; align-items: center; gap: 20px;">
                         <input type="text" name="medicine" id="medicine">
@@ -297,7 +300,7 @@
         }
         
         .search-button-2 {
-            background: white url("./images/icons/search-image.png") no-repeat;
+            background: url("./images/icons/search-image.png") no-repeat;
             background-size: 100% 100%;
             width: 33px;
             height: 30px;
@@ -444,10 +447,18 @@
         .company-option {
             background-color: red;
         }
+
+        .name {
+            color: darkblue;
+        }
         
         .name:hover {
             color: blue;
             cursor: pointer;
+        }
+
+        .header-name, .header-name:hover {
+            color: black;
         }
         
         .header-name:hover {
@@ -557,6 +568,10 @@
                         font-size: 20px;
                         font-weight: bold;
                         cursor: pointer;
+                    }
+
+                    .cart-nav:hover {
+                        background-color: blue;
                     }
                 </style>
                 <div class="cart-wrapper">

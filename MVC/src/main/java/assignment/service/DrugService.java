@@ -19,7 +19,7 @@ public class DrugService {
         this.drugRepo.save(drug);
     }
 
-    public void getAllDrugs(){
+    public List<Drug> getAllDrugs(){
         drugList = this.drugRepo.findAll();
         drugList.sort(new Comparator<Drug>() {
             @Override
@@ -27,6 +27,7 @@ public class DrugService {
                 return drug1.getId().toLowerCase().compareTo(drug2.getId().toLowerCase());
             }
         });
+        return drugList;
     }
 
     public void deleteByDrugId(String id) {
@@ -88,7 +89,7 @@ public class DrugService {
         return result;
     }
 
-    public List<Drug> getRelatedDrugs(String id){
+    public List<Drug> getRelatedDrugs(String id) {
         Drug drug = getDrugById(id);
         List<Drug> list = new ArrayList<>();
         for (Drug d : drugList) {
@@ -98,6 +99,11 @@ public class DrugService {
         }
         return list;
     }
+
+//    public List<Drug> getRelatedDrugs(String id){
+//        Drug drug = getDrugById(id);
+//        return drug.getDrugsOfSameProducer();
+//    }
 
     public List<Drug> getDrugsByFilter(String group, String type, String sortType){
         List<Drug> result;

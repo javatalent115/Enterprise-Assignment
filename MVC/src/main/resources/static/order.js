@@ -1,25 +1,31 @@
-$(document).on("click", ".cart-nav", function() {
-    let new_order = JSON.parse(localStorage.getItem("cart-item"))
+//TODO link to orders' front end
+$(document).on("click", ".purchase-box", function() {
     let date = new Date()
+    let new_order = JSON.parse(localStorage.getItem("cart-item"))
+    let total = 0
+    for (let i = 0; i < new_order.length; i++) {
+        total += parseInt(new_order[i]["amount"]) * parseInt(new_order[i]["price"])
+    }
     let order = {
-        id: date.getTime(),
-        customer: { "username": "user123" },
+        id: localStorage.getItem("user") + "-" + date.getFullYear() + date.getMonth() + date.getDay() +
+                                                "-" + date.getHours() + date.getMinutes() + date.getSeconds(),
+        customer: { "username": localStorage.getItem("user") },
         purchaseTime: "",
         purchaseType: "COD",
-        total: 0
+        total: total
     }
 
     createOrder(order)
-    for (let i = 0; i < new_order.length; i++) {
-        console.log(new_order[i]["id"])
+
+    setTimeout(function() {for (let i = 0; i < new_order.length; i++) {
         let orderDetail = {
-            order: { id: "9999" },
+            order: { id: order["id"] },
             drug: { id: new_order[i]["id"] },
             quantity: parseInt(new_order[i]["amount"]),
             cost: parseInt(new_order[i]["amount"]) * parseInt(new_order[i]["price"])
         }
         createOrderDetail(orderDetail)
-    }
+    }}, 10)
 })
 
 async function createOrder(order) {

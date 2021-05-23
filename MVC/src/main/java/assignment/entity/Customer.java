@@ -1,6 +1,7 @@
 package assignment.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,16 +29,18 @@ public class Customer {
     @Column(length = 1024)
     private String lastLogin;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    private List<Order> orderList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+//    private List<Order> orderList;
 
-    public List<Order> getOrderList() {
-        return orderList;
-    }
+//    public List<Order> getOrderList() {
+//        return orderList;
+//    }
+//
+//    public void setOrderList(List<Order> orderList) {
+//        this.orderList = orderList;
+//    }
 
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
-    }
+    public Customer() { }
 
     public String getUsername() {
         return username;

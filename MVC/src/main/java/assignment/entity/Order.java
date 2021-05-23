@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,15 +30,10 @@ public class Order {
     @Column
     private int total;
 
-//    @Column
-//    private String total;
-    //TODO can be added later
-
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+//    List<OrderDetail> orderDetailList;
 
     public Order() { }
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    List<OrderDetail> orderDetailList;
 
     public String getId() {
         return id;
@@ -47,13 +43,13 @@ public class Order {
         this.id = id;
     }
 
-    public List<OrderDetail> getOrderDetailList() {
-        return orderDetailList;
-    }
-
-    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
-        this.orderDetailList = orderDetailList;
-    }
+//    public List<OrderDetail> getOrderDetailList() {
+//        return orderDetailList;
+//    }
+//
+//    public void setOrderDetailList(List<OrderDetail> orderDetailList) {
+//        this.orderDetailList = orderDetailList;
+//    }
 
     public Customer getCustomer() {
         return customer;
@@ -79,20 +75,16 @@ public class Order {
         this.purchaseType = purchase_type;
     }
 
-    public List<OrderDetail> getOrderList() {
-        return orderDetailList;
-    }
-
-    public void setOrderList(List<OrderDetail> orderDetailList) {
-        this.orderDetailList = orderDetailList;
-    }
-
     public int getTotal() {
         return total;
     }
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public void increaseTotal(int cost) {
+        total += cost;
     }
 
     //    public int getTransactionCost() {

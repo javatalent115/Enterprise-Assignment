@@ -247,8 +247,11 @@
                 <li class="nav-item">
                     <a href="customer.html">Medicine</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item nav-item-cart">
                     <a href="cart.html"> Cart</a>
+                </li>
+                <li class="nav-item nav-item-customer">
+                    <a href=""> Customer</a>
                 </li>
                 <li class="nav-item sign">
                     <a href="login_page.html" id="sign-in">Sign-in</a>
@@ -415,6 +418,22 @@
             align-items: center;
             gap: 5px;
         }
+        
+        .username a {
+            color: darkblue;
+            text-decoration: none;
+        }
+        
+        .username a:hover {
+            color: blue;
+            cursor: pointer;
+        }
+        
+        .header-username,
+        .header-username:hover {
+            cursor: auto;
+            color: black;
+        }
     </style>
     <div class="customer-container">
         <div class="customer-wrapper">
@@ -445,7 +464,7 @@
                 <div class="customers" style="height: 40vh; overflow: scroll">
 
                     <ul class="customer-item" style="position: sticky; top:0">
-                        <li class="username" style="flex: 20%;">Username</li>
+                        <li class="username header-username" style="flex: 20%;">Username</li>
                         <li class="name" style="flex: 20%;">Name</li>
                         <li class="email" style="flex: 30%;">Email</li>
                         <li class="last-login" style="flex: 30%;">Last login</li>
@@ -461,26 +480,21 @@
         </div>
     </div>
 
-
-
-
-
-
-
-    <!-- <script src="./auto-complete.js "></script>
-    <script src="script.js "></script>
-    <script src="page.js "></script> -->
-
-    <!-- Code injected by live-server -->
-
-
 </body>
+<script src="sign-in.js"></script>
 <script>
-    /**
-     * Create these new functions
-     * @param customer
-     * @returns {Promise<void>}
-     */
+    function invalid_user() {
+        if (localStorage["accountType"] !== "admin") {
+            window.location.href = "404.html"
+        }
+    }
+
+    invalid_user()
+
+    function view_customer_history(element) {
+        localStorage.setItem("user", element)
+    }
+
     function removeAllCustomer() {
         let x = document.querySelectorAll(".customer-item").length - 1
         for (let i = x; i > 0; i--) {
@@ -515,7 +529,7 @@
                     else continue
                     wrapper.innerHTML +=
                         `<ul class="customer-item">
-                <li class="username" style="flex: 20%;">${username}</li>
+                <li class="username" style="flex: 20%;"><a href="history.html" id="${result[i]["username"]}" onclick="view_customer_history(this.id)">${username}</a></li>
                 <li class="name" style="flex: 20%;">${result[i]["firstname"] + ", " + result[i]["lastname"]}</li>
                 <li class="email" style="flex: 30%;">${result[i]["email"]}</li>
                 <li class="last-login" style="flex: 30%;">${result[i]["lastLogin"]}</li>`
@@ -543,7 +557,7 @@
                 for (let i = 0; i < result.length; i++) {
                     wrapper.innerHTML +=
                         `<ul class="customer-item">
-                <li class="username" style="flex: 20%;">${result[i]["username"]}</li>
+                <li class="username" style="flex: 20%;"><a href="history.html" id="${result[i]["username"]}" onclick="view_customer_history(this.id)">${result[i]["username"]}</a></li>
                 <li class="name" style="flex: 20%;">${result[i]["firstname"] + ", " + result[i]["lastname"]}</li>
                 <li class="email" style="flex: 30%;">${result[i]["email"]}</li>
                 <li class="last-login" style="flex: 30%;">${result[i]["lastLogin"]}</li>`

@@ -5,6 +5,8 @@ import assignment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -16,12 +18,18 @@ public class OrderController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Order> getAllOrders(){
-        return orderService.getAllOrders();
+        List<Order> orderList = orderService.getAllOrders();
+//        for (Order order : orderList) {
+//            order.setOrderDetailList(new ArrayList<>());
+//        }
+        return orderList;
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void addOrder(@RequestBody Order order){
-//        System.out.println(order);
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss aa");
+        order.setPurchaseTime(dateFormat.format(date));
         orderService.addOrder(order);
     }
 
@@ -30,9 +38,14 @@ public class OrderController {
 //        orderService.deleteAllOrder();
 //    }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void deleteOrderById(@PathVariable String id) {
         orderService.deleteByOrderId(id);
+    }
+
+    @RequestMapping(path = "/{username}", method = RequestMethod.GET)
+    public List<Order> getOrderByCustomerUsername(@PathVariable String username) {
+        return orderService.getOrderByCustomerUsername(username);
     }
 
 //    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
@@ -40,9 +53,9 @@ public class OrderController {
 //        orderService.updateOrderById(id, order);
 //    }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Order getOrderById(@PathVariable String id) {
-        return orderService.getOrderById(id);
-    }
+//    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+//    public Order getOrderById(@PathVariable String id) {
+//        return orderService.getOrderById(id);
+//    }
 }
 

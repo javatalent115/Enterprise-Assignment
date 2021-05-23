@@ -149,10 +149,6 @@ public class Drug implements Comparable {
         this.stock = new Random().nextInt(50)+3;
     }
 
-    public List<Drug> getDrugsOfSameProducer(){
-        return this.producer.getDrugList();
-    }
-
     public String getName() {
         return name;
     }
@@ -245,10 +241,6 @@ public class Drug implements Comparable {
         this.money = money;
     }
 
-    public Producer getProducers() {
-        return producer;
-    }
-
     public int getMoney() {
         return money;
     }
@@ -259,7 +251,7 @@ public class Drug implements Comparable {
     }
 
     @Override
-    public int compareTo(Object drug) {//TODO remove this
+    public int compareTo(Object drug) {
         int compareMoney=((Drug)drug).getMoney();
         return this.money-compareMoney;
     }

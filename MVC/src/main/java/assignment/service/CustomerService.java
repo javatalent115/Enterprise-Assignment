@@ -37,9 +37,19 @@ public class CustomerService {
 
     public void updateCustomerByUsername(String username, Customer newCustomer) {
         Customer oldCustomer = getCustomerByUsername(username);
-        newCustomer.setOrderList(oldCustomer.getOrderList());
+//        newCustomer.setOrderList(oldCustomer.getOrderList());
         oldCustomer = newCustomer;
         customerRepo.save(oldCustomer);
+    }
+
+    public Customer getCustomerByEmail(String email) {
+        List<Customer> customerList = getAllCustomers();
+        for (Customer customer : customerList) {
+            if (customer.getEmail().equals(email)) {
+                return customer;
+            }
+        }
+        return null;
     }
 
     public long countCustomer() {

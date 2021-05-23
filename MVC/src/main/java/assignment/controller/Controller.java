@@ -41,7 +41,7 @@ public class Controller {
             return "invalid";
         } else if (customer.getPassword().equals(user.get("password"))) {
             Date date = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss aa");
             customer.setLastLogin(dateFormat.format(date));
             customerService.save(customer);
             return "user";

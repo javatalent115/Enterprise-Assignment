@@ -820,7 +820,7 @@ false Zulu
 13158||-9223372036854775808|U|G
 13158||10|U|G</Grants>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>7776</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7801</IntrospectionStateNumber>
       <Current>1</Current>
     </database>
     <role id="6" parent="1" name="pg_execute_server_program">
@@ -885,7 +885,7 @@ false Zulu
       <Comment>standard public schema</Comment>
       <StateNumber>287</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>7777</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7802</IntrospectionStateNumber>
       <Current>1</Current>
     </schema>
     <extension id="20" parent="5" name="adminpack">
@@ -1007,9 +1007,8 @@ false Zulu
     </sequence>
     <table id="35" parent="19" name="customers">
       <ObjectId>16856</ObjectId>
-      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
-      <StateNumber>7742</StateNumber>
+      <StateNumber>7780</StateNumber>
     </table>
     <table id="36" parent="19" name="drugs">
       <ObjectId>16746</ObjectId>
@@ -1023,9 +1022,8 @@ false Zulu
     </table>
     <table id="38" parent="19" name="orders">
       <ObjectId>16872</ObjectId>
-      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
-      <StateNumber>7741</StateNumber>
+      <StateNumber>7779</StateNumber>
     </table>
     <table id="39" parent="19" name="producers">
       <ObjectId>16770</ObjectId>
@@ -1063,7 +1061,19 @@ false Zulu
       <StateNumber>7737</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="45" parent="35" name="customers_pkey">
+    <column id="45" parent="35" name="last_login">
+      <Position>6</Position>
+      <DataType>varchar(1024)|0s</DataType>
+      <StateNumber>7778</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="46" parent="35" name="email">
+      <Position>7</Position>
+      <DataType>varchar(1024)|0s</DataType>
+      <StateNumber>7780</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <index id="47" parent="35" name="customers_pkey">
       <ObjectId>16862</ObjectId>
       <StateNumber>7737</StateNumber>
       <ColNames>username</ColNames>
@@ -1074,94 +1084,94 @@ false Zulu
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="46" parent="35" name="customers_pkey">
+    <key id="48" parent="35" name="customers_pkey">
       <ObjectId>16863</ObjectId>
       <StateNumber>7737</StateNumber>
       <ColNames>username</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>customers_pkey</UnderlyingIndexName>
     </key>
-    <column id="47" parent="36" name="id">
+    <column id="49" parent="36" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="48" parent="36" name="country">
+    <column id="50" parent="36" name="country">
       <Position>2</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="49" parent="36" name="dosage">
+    <column id="51" parent="36" name="dosage">
       <Position>3</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="50" parent="36" name="drug_group">
+    <column id="52" parent="36" name="drug_group">
       <Position>4</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="51" parent="36" name="ingredients">
+    <column id="53" parent="36" name="ingredients">
       <Position>5</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="52" parent="36" name="money">
+    <column id="54" parent="36" name="money">
       <Position>6</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="53" parent="36" name="name">
+    <column id="55" parent="36" name="name">
       <Position>7</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="54" parent="36" name="packaging">
+    <column id="56" parent="36" name="packaging">
       <Position>8</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="55" parent="36" name="preparation">
+    <column id="57" parent="36" name="preparation">
       <Position>9</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="56" parent="36" name="stock">
+    <column id="58" parent="36" name="stock">
       <Position>10</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="57" parent="36" name="type">
+    <column id="59" parent="36" name="type">
       <Position>11</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="58" parent="36" name="producer">
+    <column id="60" parent="36" name="producer">
       <Position>12</Position>
       <DataType>varchar(1024)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>5852</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="59" parent="36" name="druggroup">
+    <column id="61" parent="36" name="druggroup">
       <Position>13</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>7708</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="60" parent="36" name="drugs_pkey">
+    <index id="62" parent="36" name="drugs_pkey">
       <ObjectId>16752</ObjectId>
       <StateNumber>5852</StateNumber>
       <ColNames>id</ColNames>
@@ -1172,14 +1182,14 @@ false Zulu
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="61" parent="36" name="drugs_pkey">
+    <key id="63" parent="36" name="drugs_pkey">
       <ObjectId>16753</ObjectId>
       <StateNumber>5852</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>drugs_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="62" parent="36" name="fkihpb5t9gw2m0gmcnjf6dn63xo">
+    <foreign-key id="64" parent="36" name="fkihpb5t9gw2m0gmcnjf6dn63xo">
       <ObjectId>16778</ObjectId>
       <StateNumber>5856</StateNumber>
       <ColNames>producer</ColNames>
@@ -1189,7 +1199,7 @@ false Zulu
       <RefKeyName>producers_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="63" parent="36" name="fkkay0nuyl98iwrvoga11kefm2e">
+    <foreign-key id="65" parent="36" name="fkkay0nuyl98iwrvoga11kefm2e">
       <ObjectId>16805</ObjectId>
       <StateNumber>7709</StateNumber>
       <ColNames>producer</ColNames>
@@ -1199,40 +1209,40 @@ false Zulu
       <RefKeyName>producers_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="64" parent="37" name="id">
+    <column id="66" parent="37" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>7769</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="65" parent="37" name="cost">
+    <column id="67" parent="37" name="cost">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>7769</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="66" parent="37" name="quantity">
+    <column id="68" parent="37" name="quantity">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
       <StateNumber>7769</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="67" parent="37" name="drug_id">
+    <column id="69" parent="37" name="drug_id">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>7769</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="68" parent="37" name="order_id">
+    <column id="70" parent="37" name="order_id">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>7769</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="69" parent="37" name="order_details_pkey">
+    <index id="71" parent="37" name="order_details_pkey">
       <ObjectId>16919</ObjectId>
       <StateNumber>7769</StateNumber>
       <ColNames>id</ColNames>
@@ -1243,14 +1253,14 @@ false Zulu
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="70" parent="37" name="order_details_pkey">
+    <key id="72" parent="37" name="order_details_pkey">
       <ObjectId>16920</ObjectId>
       <StateNumber>7769</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>order_details_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="71" parent="37" name="fkgjk2w49spyu6bpnan4n9stohq">
+    <foreign-key id="73" parent="37" name="fkgjk2w49spyu6bpnan4n9stohq">
       <ObjectId>16921</ObjectId>
       <StateNumber>7770</StateNumber>
       <ColNames>drug_id</ColNames>
@@ -1260,7 +1270,7 @@ false Zulu
       <RefKeyName>drugs_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="72" parent="37" name="fkjyu2qbqt8gnvno9oe9j2s2ldk">
+    <foreign-key id="74" parent="37" name="fkjyu2qbqt8gnvno9oe9j2s2ldk">
       <ObjectId>16926</ObjectId>
       <StateNumber>7771</StateNumber>
       <ColNames>order_id</ColNames>
@@ -1270,33 +1280,39 @@ false Zulu
       <RefKeyName>orders_pkey</RefKeyName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="73" parent="38" name="id">
+    <column id="75" parent="38" name="id">
       <Position>1</Position>
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>7739</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="74" parent="38" name="purchase_time">
+    <column id="76" parent="38" name="purchase_time">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>7739</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="75" parent="38" name="purchase_type">
+    <column id="77" parent="38" name="purchase_type">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <StateNumber>7739</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="76" parent="38" name="customer_username">
+    <column id="78" parent="38" name="customer_username">
       <Position>4</Position>
       <DataType>varchar(1024)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>7739</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="77" parent="38" name="orders_pkey">
+    <column id="79" parent="38" name="total">
+      <Position>5</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>7779</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="80" parent="38" name="orders_pkey">
       <ObjectId>16878</ObjectId>
       <StateNumber>7739</StateNumber>
       <ColNames>id</ColNames>
@@ -1307,14 +1323,14 @@ false Zulu
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="78" parent="38" name="orders_pkey">
+    <key id="81" parent="38" name="orders_pkey">
       <ObjectId>16879</ObjectId>
       <StateNumber>7739</StateNumber>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>orders_pkey</UnderlyingIndexName>
     </key>
-    <foreign-key id="79" parent="38" name="fk6sw8qg71pta6ymh1pwyiiasit">
+    <foreign-key id="82" parent="38" name="fk6sw8qg71pta6ymh1pwyiiasit">
       <ObjectId>16890</ObjectId>
       <StateNumber>7742</StateNumber>
       <ColNames>customer_username</ColNames>
@@ -1324,20 +1340,20 @@ false Zulu
       <RefKeyName>customers_pkey</RefKeyName>
       <RefColNames>username</RefColNames>
     </foreign-key>
-    <column id="80" parent="39" name="id">
+    <column id="83" parent="39" name="id">
       <Position>1</Position>
       <DataType>varchar(1024)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>5855</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="81" parent="39" name="name">
+    <column id="84" parent="39" name="name">
       <Position>2</Position>
       <DataType>varchar(1024)|0s</DataType>
       <StateNumber>5855</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="82" parent="39" name="producers_pkey">
+    <index id="85" parent="39" name="producers_pkey">
       <ObjectId>16776</ObjectId>
       <StateNumber>5855</StateNumber>
       <ColNames>id</ColNames>
@@ -1348,7 +1364,7 @@ false Zulu
       <CollationNames>default</CollationNames>
       <ClassIds>3126</ClassIds>
     </index>
-    <key id="83" parent="39" name="producers_pkey">
+    <key id="86" parent="39" name="producers_pkey">
       <ObjectId>16777</ObjectId>
       <StateNumber>5855</StateNumber>
       <ColNames>id</ColNames>

@@ -20,8 +20,8 @@ public class OrderDetailController {
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public void addOrder(@RequestBody OrderDetail orderDetailDetail){
-        orderDetailService.addOrder(orderDetailDetail);
+    public void addOrderDetail(@RequestBody OrderDetail orderDetail){
+        orderDetailService.addOrder(orderDetail);
     }
 
 //    @RequestMapping(path = "", method = RequestMethod.DELETE)
@@ -29,9 +29,9 @@ public class OrderDetailController {
 //        orderDetailService.deleteAllOrder();
 //    }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public OrderDetail getOrderById(@PathVariable String id) {
-        return orderDetailService.getOrderById(id);
+    @RequestMapping(path = "/{orderId}", method = RequestMethod.GET)
+    public List<OrderDetail> getOrderDetailByOrderId(@PathVariable String orderId) {
+        return orderDetailService.getOrderDetailByOrderId(orderId);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)

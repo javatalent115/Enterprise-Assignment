@@ -5,12 +5,14 @@ import assignment.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/customer")//TODO can be splitted to AdminController
+@RequestMapping(path = "/customer")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
@@ -18,19 +20,26 @@ public class CustomerController {
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Customer> getAllCustomers(){
         List<Customer> customerList = customerService.getAllCustomers();
-        for (Customer c : customerList) {
-            c.setOrderList(new ArrayList<>());
-        }
+//        for (Customer c : customerList) {
+//            c.setOrderList(new ArrayList<>());
+//        }
         return customerList;
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public String addCustomer(@RequestBody Customer customer) {
-        try {
+        Customer existedUsername = customerService.getCustomerByUsername(customer.getUsername());
+        Customer existedEmail = customerService.getCustomerByEmail(customer.getEmail());
+        if (existedUsername != null) {
+            return "username";
+        } else if (existedEmail != null) {
+            return "email";
+        } else {
+            Date date = new Date();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss aa");
+            customer.setLastLogin(dateFormat.format(date));
             customerService.addCustomer(customer);
-            return "succeeded";
-        } catch (Exception e) {
-            return "failed";
+            return "";
         }
     }
 
