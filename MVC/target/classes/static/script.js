@@ -52,7 +52,7 @@ $(document).on("click",".search-button",function(){
     localStorage.setItem("drug-click", JSON.stringify(drug))
     window.location.href = "http://localhost:8080/drug-infomation.html"
 
-}),
+});
 function addForAdvanceEdit(data, index) {
     $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
     $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
@@ -772,7 +772,11 @@ $(document).on("click", ".decrease-amount-image", function() {
 
 $(document).on("click", ".increase-amount-image", function() {
     let amount = parseInt($(this).parent("li").find("div").text())
-    $(this).parent("li").find("div").html(amount + 1)
+    console.log($(this).parent().parent().find(".stock").text())
+    if (amount < $(this).parent().parent().find(".stock").text()){
+        $(this).parent("li").find("div").html(amount + 1)
+
+    }
 })
 
 $(document).on("click", ".checkbox-filter", function() {

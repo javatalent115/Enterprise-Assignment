@@ -31,6 +31,16 @@ function initialize(){
 $(document).ready(initialize())
 $(document).ready(function() {
     $("#confirm-purchase-modal").on("show.bs.modal", function(event) {
+        let data =JSON.parse(localStorage.getItem("cart-item"));
+        let drug ={
+            id: "",
+            amount:""
+        };
+        for (let i = 0; i< data.length; i++){
+            drug.id = data[i].id;
+            drug.amount = data[i].amount;
+            reduceStock(drug);
+        }
         localStorage.setItem("cart-item","")
         localStorage.setItem("cart",0)
         setTimeout(() => {
@@ -38,3 +48,16 @@ $(document).ready(function() {
         }, 1000);
     });
 });
+
+async function reduceStock(drug) {
+    try {
+        await fetch("http://localhost:8080/drug/reduceStock", {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(drug)
+        });
+    } catch (e) {}
+}

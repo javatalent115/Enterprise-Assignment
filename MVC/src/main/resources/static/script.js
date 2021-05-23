@@ -772,7 +772,10 @@ $(document).on("click", ".decrease-amount-image", function() {
 
 $(document).on("click", ".increase-amount-image", function() {
     let amount = parseInt($(this).parent("li").find("div").text())
-    $(this).parent("li").find("div").html(amount + 1)
+    if (amount < $(this).parent().parent().find(".stock").text()){
+        $(this).parent("li").find("div").html(amount + 1)
+
+    }
 })
 
 $(document).on("click", ".checkbox-filter", function() {
