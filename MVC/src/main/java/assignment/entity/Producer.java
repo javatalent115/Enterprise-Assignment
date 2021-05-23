@@ -1,6 +1,7 @@
 package assignment.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,11 +18,11 @@ public class Producer {
 
     @Column(length = 1024)
     private String name;
+//
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producer")
+//    private List<Drug> drugList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producer")
-    private List<Drug> drugList;
-
-    public Producer() {}
+    public Producer() { }
 
     public String getId() {
         return id;
@@ -39,13 +40,13 @@ public class Producer {
         this.name = name;
     }
 
-    public List<Drug> getDrugList() {
-        return drugList;
-    }
-
-    public void setDrugList(List<Drug> drugList) {
-        this.drugList = drugList;
-    }
+//    public List<Drug> getDrugList() {
+//        return drugList;
+//    }
+//
+//    public void setDrugList(List<Drug> drugList) {
+//        this.drugList = drugList;
+//    }
 
     @Override
     public String toString() {

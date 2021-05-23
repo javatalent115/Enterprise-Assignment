@@ -1,10 +1,12 @@
 package assignment.controller;
 
 import assignment.entity.Order;
+import assignment.entity.OrderDetail;
 import assignment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,7 +18,11 @@ public class OrderController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Order> getAllOrders(){
-        return orderService.getAllOrders();
+        List<Order> orderList = orderService.getAllOrders();
+//        for (Order order : orderList) {
+//            order.setOrderDetailList(new ArrayList<>());
+//        }
+        return orderList;
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
@@ -30,9 +36,14 @@ public class OrderController {
 //        orderService.deleteAllOrder();
 //    }
 
-    @RequestMapping(path = "", method = RequestMethod.DELETE)
+    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
     public void deleteOrderById(@PathVariable String id) {
         orderService.deleteByOrderId(id);
+    }
+
+    @RequestMapping(path = "/{username}", method = RequestMethod.GET)
+    public List<Order> getOrderByCustomerUsername(@PathVariable String username) {
+        return orderService.getOrderByCustomerUsername(username);
     }
 
 //    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
@@ -40,9 +51,9 @@ public class OrderController {
 //        orderService.updateOrderById(id, order);
 //    }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public Order getOrderById(@PathVariable String id) {
-        return orderService.getOrderById(id);
-    }
+//    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
+//    public Order getOrderById(@PathVariable String id) {
+//        return orderService.getOrderById(id);
+//    }
 }
 

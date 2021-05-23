@@ -1,3 +1,4 @@
+//TODO link to orders' front end
 $(document).on("click", ".cart-nav", function() {
     let new_order = JSON.parse(localStorage.getItem("cart-item"))
     let date = new Date()
@@ -11,7 +12,6 @@ $(document).on("click", ".cart-nav", function() {
 
     createOrder(order)
     for (let i = 0; i < new_order.length; i++) {
-        console.log(new_order[i]["id"])
         let orderDetail = {
             order: { id: "9999" },
             drug: { id: new_order[i]["id"] },

@@ -81,17 +81,17 @@ function initializes() {
         $(".type").children("button").text("Thuốc kê đơn")
     }
     if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "true") {
-        $(".checkbox-filter").find("img").attr("src", "./images/checked.png")
-        $(".checkbox-filter").find("img").attr("src", "./images/checked.png")
+        $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png")
+        $(".checkbox-filter").find("img").attr("src", "./images/icons/checked.png")
     } else if (localStorage.getItem("Tân dược") == "false" && localStorage.getItem("Đông dược") == "true") {
-        $(".tan-duoc").find("img").attr("src", "./images/unchecked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/checked.png")
+        $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png")
+        $(".dong-duoc").find("img").attr("src", "./images/icons/checked.png")
     } else if (localStorage.getItem("Tân dược") == "true" && localStorage.getItem("Đông dược") == "false") {
-        $(".tan-duoc").find("img").attr("src", "./images/checked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/unchecked.png")
+        $(".tan-duoc").find("img").attr("src", "./images/icons/checked.png")
+        $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png")
     } else {
-        $(".tan-duoc").find("img").attr("src", "./images/unchecked.png")
-        $(".dong-duoc").find("img").attr("src", "./images/unchecked.png")
+        $(".tan-duoc").find("img").attr("src", "./images/icons/unchecked.png")
+        $(".dong-duoc").find("img").attr("src", "./images/icons/unchecked.png")
     }
     if (localStorage.getItem("sort-type") == "none") {
         $(".sort").children("button").text("ID")
@@ -445,7 +445,7 @@ $(document).on("click", ".add-image", function() {
                         <li class="changeAble price" contenteditable="true"></li>
                         <li>
                             <div class="done" data-bs-toggle="modal" data-bs-target="#add-company-modal">Done</div>
-                            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;"">
+                            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;"">
                             <div class="more-button-submenu-wrapper" >
                                 <ul class="more-button-submenu">
                                     <li class="more-button-submenu-item quick-change">
@@ -458,8 +458,8 @@ $(document).on("click", ".add-image", function() {
                             </div>
                         </li>
                         <li>
-                            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                            <img src="./images/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+                            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                            <img src="./images/icons/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
   `)
@@ -598,9 +598,9 @@ var Pagination = {
     Create: function(e) {
 
         var html = [
-            '  <a class = "page"><img src="./images/arrow-left.png" alt=""></a>', // previous button
+            '  <a class = "page"><img src="./images/icons/arrow-left.png" alt=""></a>', // previous button
             '<span ></span>', // pagination container
-            '  <a class = "page"><img src="./images/arrow-right.png" alt=""></a>' // next button
+            '  <a class = "page"><img src="./images/icons/arrow-right.png" alt=""></a>' // next button
         ];
 
         e.innerHTML = html.join('');
@@ -668,11 +668,11 @@ $(document).on("click", ".search-button-2", function() {
         <li class="id">${data.split("\n")[index].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[index].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[index].split("&&")[10]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[index].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
-            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
             <div class="more-button-submenu-wrapper">
                 <ul class="more-button-submenu">
                     <li class="more-button-submenu-item quick-change">
@@ -686,8 +686,8 @@ $(document).on("click", ".search-button-2", function() {
             </div>
         </li>
         <li>
-            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+            <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
             checkAccount()
@@ -739,11 +739,11 @@ $(document).on("click", ".page", function() {
         <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
-            <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
             <div class="more-button-submenu-wrapper">
                 <ul class="more-button-submenu">
                     <li class="more-button-submenu-item quick-change">
@@ -757,8 +757,8 @@ $(document).on("click", ".page", function() {
             </div>
         </li>
         <li>
-            <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+            <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
         }
@@ -779,7 +779,7 @@ $(document).on("click", ".increase-amount-image", function() {
 })
 
 $(document).on("click", ".checkbox-filter", function() {
-    if ($(this).find("img").attr("src") == "./images/checked.png") {
+    if ($(this).find("img").attr("src") == "./images/icons/checked.png") {
         localStorage.setItem($(this).parent("li").find("span").text(), false)
         addItem(itemDisplayAtATime)
     } else {
@@ -910,11 +910,11 @@ async function addItem(item) {
               <li class="id">${data.split("\n")[i].split("&&")[0]}</li>
               <li class="name">${data.split("\n")[i].split("&&")[1]}</li>
               <li class="changeAble stock">${data.split("\n")[i].split("&&")[10]}</li>
-              <li class="changeAble amount"><img class = "decrease-amount-image" src="./images/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+              <li class="changeAble amount"><img class = "decrease-amount-image" src="images/icons/decrease-amount-image.png" alt=""><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
               <li class="changeAble price">${data.split("\n")[i].split("&&")[9]}</li>
               <li>
                   <div class="done">Done</div>
-                  <img src="./images/more.png" class="more-image more-button" style="cursor: pointer;">
+                  <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
                   <div class="more-button-submenu-wrapper">
                       <ul class="more-button-submenu">
                           <li class="more-button-submenu-item quick-change">
@@ -928,8 +928,8 @@ async function addItem(item) {
                   </div>
               </li>
               <li>
-                  <img src="./images/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                  <img src="./images/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+                  <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                  <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
               </li>
           </ul>`
                 }

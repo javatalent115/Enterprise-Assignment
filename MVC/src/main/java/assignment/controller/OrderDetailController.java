@@ -1,7 +1,9 @@
 package assignment.controller;
 
+import assignment.entity.Order;
 import assignment.entity.OrderDetail;
 import assignment.service.OrderDetailService;
+import assignment.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +16,20 @@ public class OrderDetailController {
     @Autowired
     private OrderDetailService orderDetailService;
 
+    @Autowired
+    private OrderService orderService;
+
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<OrderDetail> getAllOrders(){
         return orderDetailService.getAllOrders();
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
-    public void addOrder(@RequestBody OrderDetail orderDetailDetail){
-        orderDetailService.addOrder(orderDetailDetail);
+    public void addOrderDetail(@RequestBody OrderDetail orderDetail){
+        orderDetailService.addOrder(orderDetail);
+        Order order = orderService.getOrderById(orderDetail.getOrder().getId());
+        order.increaseTotal(orderDetail.getCost());
+        orderService.save(order);
     }
 
 //    @RequestMapping(path = "", method = RequestMethod.DELETE)
@@ -29,9 +37,9 @@ public class OrderDetailController {
 //        orderDetailService.deleteAllOrder();
 //    }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public OrderDetail getOrderById(@PathVariable String id) {
-        return orderDetailService.getOrderById(id);
+    @RequestMapping(path = "/{orderId}", method = RequestMethod.GET)
+    public List<OrderDetail> getOrderDetailByOrderId(@PathVariable String orderId) {
+        return orderDetailService.getOrderDetailByOrderId(orderId);
     }
 
     @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)

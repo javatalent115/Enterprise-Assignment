@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping(path = "/customer")//TODO can be splitted to AdminController
+@RequestMapping(path = "/customer")
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
@@ -18,9 +18,9 @@ public class CustomerController {
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Customer> getAllCustomers(){
         List<Customer> customerList = customerService.getAllCustomers();
-        for (Customer c : customerList) {
-            c.setOrderList(new ArrayList<>());
-        }
+//        for (Customer c : customerList) {
+//            c.setOrderList(new ArrayList<>());
+//        }
         return customerList;
     }
 

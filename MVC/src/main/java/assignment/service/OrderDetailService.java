@@ -13,23 +13,29 @@ import java.util.Optional;
 @Service
 public class OrderDetailService {
     @Autowired
-    OrderDetailRepo OrderDetailRepo;
+    OrderDetailRepo orderDetailRepo;
 
     public void addOrder(OrderDetail orderDetail){
-        this.OrderDetailRepo.save(orderDetail);
+        this.orderDetailRepo.save(orderDetail);
     }
 
     public List<OrderDetail> getAllOrders(){
-        return this.OrderDetailRepo.findAll();
+        return this.orderDetailRepo.findAll();
     }
 
     public void deleteByOrderId(String id) {
-        this.OrderDetailRepo.deleteById(id);
+        this.orderDetailRepo.deleteById(id);
     }
 
     public OrderDetail getOrderById(String id) {
-        Optional<OrderDetail> result = this.OrderDetailRepo.findById(id);
+        Optional<OrderDetail> result = this.orderDetailRepo.findById(id);
         return result.orElse(null);
+    }
+
+    public List<OrderDetail> getOrderDetailByOrderId(String orderId) {
+        List<OrderDetail> orderDetailList = orderDetailRepo.findAll();
+        orderDetailList.removeIf(orderDetail -> !orderDetail.getOrder().getId().equals(orderId));
+        return orderDetailList;
     }
 
 //    public void updateOrderById(String id, OrderDetail newOrder) {
@@ -37,10 +43,10 @@ public class OrderDetailService {
 //    }
 
     public long countOrder() {
-        return this.OrderDetailRepo.count();
+        return this.orderDetailRepo.count();
     }
 
     public void deleteAllOrder() {
-        this.OrderDetailRepo.deleteAll();
+        this.orderDetailRepo.deleteAll();
     }
 }

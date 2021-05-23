@@ -34,7 +34,7 @@ public class DrugController {//TODO change Map to List if there is more time
             map.put(Integer.toString(i), list.get(i).toString());
         }
         return map;
-    }
+    } //TODO change this one
 
     @RequestMapping(path = "/deleteDrug", method = RequestMethod.DELETE)
     public void deleteDrugById(@RequestBody String id) {

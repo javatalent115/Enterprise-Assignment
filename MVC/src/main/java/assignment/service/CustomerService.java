@@ -37,7 +37,7 @@ public class CustomerService {
 
     public void updateCustomerByUsername(String username, Customer newCustomer) {
         Customer oldCustomer = getCustomerByUsername(username);
-        newCustomer.setOrderList(oldCustomer.getOrderList());
+//        newCustomer.setOrderList(oldCustomer.getOrderList());
         oldCustomer = newCustomer;
         customerRepo.save(oldCustomer);
     }

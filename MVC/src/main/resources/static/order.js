@@ -1,8 +1,8 @@
+//TODO link to orders' front end
 $(document).on("click", ".cart-nav", function() {
     let new_order = JSON.parse(localStorage.getItem("cart-item"))
-    let date = new Date()
     let order = {
-        id: date.getTime(),
+        id: "", //TODO fill the blank by java
         customer: { "username": "user123" },
         purchaseTime: "",
         purchaseType: "COD",
@@ -11,9 +11,8 @@ $(document).on("click", ".cart-nav", function() {
 
     createOrder(order)
     for (let i = 0; i < new_order.length; i++) {
-        console.log(new_order[i]["id"])
         let orderDetail = {
-            order: { id: "9999" },
+            order: { id: order["id"] },
             drug: { id: new_order[i]["id"] },
             quantity: parseInt(new_order[i]["amount"]),
             cost: parseInt(new_order[i]["amount"]) * parseInt(new_order[i]["price"])
