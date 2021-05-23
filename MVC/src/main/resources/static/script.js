@@ -8,7 +8,6 @@ $(document).on("click", ".name", function() {
             break
         }
     }
-    addForAdvanceEdit(data, index);
 
     let drug = {
         id: data.split("\n")[index].split("&&")[0],
@@ -27,7 +26,34 @@ $(document).on("click", ".name", function() {
     localStorage.setItem("drug-click", JSON.stringify(drug))
     window.location.href = "http://localhost:8080/drug-infomation.html"
 })
+$(document).on("click",".search-button",function(){
+    let name = $("#medicine").val()
+    let data = localStorage.getItem("data")
+    let index;
+    for (let i = 0; i < data.split("\n").length; i++) {
+        if(data.split("\n")[i].split("&&")[1] == name){
+            index = i
+            break
+        }
+    }
+    let drug = {
+        id: data.split("\n")[index].split("&&")[0],
+        name: data.split("\n")[index].split("&&")[1],
+        stock: data.split("\n")[index].split("&&")[10],
+        price: data.split("\n")[index].split("&&")[9],
+        preparation:data.split("\n")[index].split("&&")[2],
+        packaging:data.split("\n")[index].split("&&")[3],
+        dosage:data.split("\n")[index].split("&&")[5],
+        ingredients:data.split("\n")[index].split("&&")[7],
+        country:data.split("\n")[index].split("&&")[8],
+        group:data.split("\n")[index].split("&&")[4],
+        type: data.split("\n")[index].split("&&")[6],
+        producers_id: data.split("\n")[index].split("&&")[11]
+    }
+    localStorage.setItem("drug-click", JSON.stringify(drug))
+    window.location.href = "http://localhost:8080/drug-infomation.html"
 
+}),
 function addForAdvanceEdit(data, index) {
     $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
     $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
@@ -65,9 +91,14 @@ $("#medicine2").on('keyup', function(e) {
         $(".search-button-2").click()
     }
 });
+$("#medicine").on('keyup', function(e) {
+    if (e.key === 'Enter' || e.keyCode === 13) {
+        $(".search-button").click()
+    }
+});
 
 function setLocalStorage(){
-    if (localStorage.getItem("Group") === null) localStorage.setItem("Group", localStorage.getItem());
+    if (localStorage.getItem("Group") === null) localStorage.setItem("Group", "Both");
     if (localStorage.getItem("sort-type") === null) localStorage.setItem("sort-type", "ID");
     if (localStorage.getItem("Type") === null) localStorage.setItem("Type", "Both");
     $(".type").children("button").text(localStorage.getItem("Type"));
@@ -349,8 +380,8 @@ $(document).on("click", ".confirm-modifyMedicine", function() {
         type: $("#advanced-type").val(),
         ingredients: $("#advanced-ingredient").val(),
         country: $("#advanced-country").val(),
-        money: parseInt($("#advanced-stock").val()),
-        stock: parseInt($("#advanced-price").val()),
+        money: parseInt($("#advanced-price").val()),
+        stock: parseInt($("#advanced-stock").val()),
         producer: {
 
         }
