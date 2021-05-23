@@ -23,9 +23,8 @@
     
     .container-fluid::after {
         content: "";
-        background-repeat: no-repeat;
+        background: url("./images/background/home-background.jpg") no-repeat;
         background-size: 100% 100%;
-        background: url("./images/background/home-background.jpg");
         position: absolute;
         top: 0;
         bottom: 0;
@@ -33,35 +32,35 @@
         right: 0;
         z-index: -1;
     }
-    
+
     .nav-bar {
         position: relative;
         z-index: 1;
         margin: 0;
-        padding-right: 30px;
+        padding-right: 60px;
         padding-top: 10px;
     }
-    
+
     .nav-item {
         list-style: none;
-        font-size: 22px;
+        font-size: 30px;
         font-weight: bold;
     }
-    
-    a {
+
+    .nav-item a {
         text-decoration: none;
-        color: mediumorchid;
+        color: white;
         display: flex;
         position: relative;
         justify-content: center;
         align-items: center;
     }
-    
-    a:hover {
+
+    .nav-item a:hover {
         color: wheat;
     }
-    
-    a::after {
+
+    .nav-item a::after {
         content: "";
         background: wheat;
         position: absolute;
@@ -72,8 +71,8 @@
         transform-origin: left center;
         transform: scaleX(0);
     }
-    
-    a:hover::after {
+
+    .nav-item a:hover::after {
         opacity: 1;
         transform: scaleX(1);
         transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
@@ -87,15 +86,14 @@
         height: 100%;
         gap: 120px;
     }
-    
+
     .header {
         font-weight: bold;
         color: white;
         font-family: Arial;
-        font-size: 35px;
+        font-size: 60px;
         padding-left: 20px;
         top: -25px;
-        color: blue;
         position: relative;
     }
     
@@ -184,6 +182,7 @@
     
     .slide-img {
         width: 20%;
+        cursor: pointer;
     }
     
     .carousel-control-next-icon {
@@ -208,7 +207,7 @@
                 <li class="nav-item">
                     <a href="medicine.html">Medicine</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item nav-item-cart">
                     <a href="cart.html"> Cart</a>
                 </li>
                 <li class="nav-item sign">
@@ -229,6 +228,11 @@
             </div>
         </div>
     </div>
+    <div class="text-center spinner">
+        <div class="spinner-border" role="status" style="width: 10rem;height: 10rem;">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
             <div class="information-medicine-header">
@@ -238,24 +242,30 @@
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="slide-wrapper">
-                            <img class="slide-img" src="./images/others/panadol.png" alt="...">
-                            <img class="slide-img" src="./images/others/phosphalugel.png" alt="...">
-                            <img class="slide-img" src="./images/others/salonpas.png" alt="...">
-                        </div>
-
-                    </div>
-                    <div class="carousel-item">
-                        <div class="slide-wrapper">
-                            <img class="slide-img" src="./images/others/diazepam.png" alt="...">
-                            <img class="slide-img" src="./images/others/berberin.png" alt="...">
-                            <img class="slide-img" src="./images/others/vrohto.png" alt="...">
+                            <img class="slide-img" src="./images/others/Berberin.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/Condova.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/Diazepam.png" width="300px" height="300px" alt="...">
                         </div>
                     </div>
                     <div class="carousel-item">
                         <div class="slide-wrapper">
-                            <img class="slide-img" src="./images/others/amoxicillin.png" alt="...">
-                            <img class="slide-img" src="./images/others/duphalac.png" alt="...">
-                            <img class="slide-img" src="./images/others/rowantinex.png" alt="...">
+                            <img class="slide-img" src="./images/others/Dodevifort.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/Fluopas.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/EtonciB1.png" width="300px" height="300px" alt="...">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="slide-wrapper">
+                            <img class="slide-img" src="./images/others/EtonciB1.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/Mifenan.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/Nicpostinew.png" width="300px" height="300px" alt="...">
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="slide-wrapper">
+                            <img class="slide-img" src="./images/others/Panadol.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/Paracetamol.png" width="300px" height="300px" alt="...">
+                            <img class="slide-img" src="./images/others/Prednison.PNG" width="300px" height="300px" alt="...">
                         </div>
                     </div>
                 </div>
@@ -350,20 +360,20 @@
         }
     </style>
     <div class="feature-wrapper">
-        <div class="free-delivery">
+        <div class="free-delivery" style="background: url('./images/background/paint.png'); background-size: 100% 100%;">
             <img src="./images/icons/free-delivery.png" alt="">
             <span>Free delivery</span>
         </div>
-        <div class="best-service-description">
+        <div class="best-service-description" style="background: url('./images/background/paint.png'); background-size: 100% 100%;">
             <img src="./images/icons/best-service.png" alt="">
             <span>Best service description</span>
         </div>
-        <div class="shopping-online-description">
+        <div class="shopping-online-description" style="background: url('./images/background/paint.png'); background-size: 100% 100%;">
             <img src="./images/icons/cart-feature.png" alt="">
             <span>Shopping online description</span>
         </div>
     </div>
-    <div class="picture">
+    <div class="picture" style="background-color: whitesmoke; border: solid 2px black">
         <img src="./images/others/picture.png" alt="" style="background-size: 100% 100%;width: 90%;display:block;
         margin: 0 auto;">
     </div>
@@ -382,7 +392,7 @@
             </div>
             <div class="news-item">
                 <img src="./images/others/news-3.png" alt="">
-                <p>Did you eat enough vegetable</p>
+                <p>Did you eat enough vegetable?</p>
                 <div class="news-item-date">30<br>th4</div>
             </div>
         </div>
@@ -556,7 +566,8 @@
         </div>
     </div>
     <script src="./sign-in.js"></script>
-    <script src="home-page.js"></script>
+    <script src="./home-page.js"></script>
+    <script src="./on-click-drug-image.js"></script>
 </body>
 
 </html>

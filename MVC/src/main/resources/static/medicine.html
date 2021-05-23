@@ -28,9 +28,8 @@
     
     .container-fluid::after {
         content: "";
-        background-repeat: no-repeat;
+        background: url("./images/background/home-background.jpg") no-repeat;
         background-size: 100% 100%;
-        background: url("./images/background/home-background.jpg");
         width: 100%;
         position: absolute;
         top: 0;
@@ -177,7 +176,7 @@
         background: #18bff3;
         color: white;
         padding: 8px 37px;
-        font-size: 17px;
+        font-size: 22px;
         border-radius: 19px;
         position: relative;
         top: -22px;
@@ -240,7 +239,7 @@
 </style>
 
 <body>
-    <div class="container-fluid">
+<div class="container-fluid">
         <nav class="nav-bar">
             <ul>
                 <li class="nav-item">
@@ -252,18 +251,25 @@
                 <li class="nav-item">
                     <a href="medicine.html">Medicine</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item nav-item-cart">
                     <a href="cart.html"> Cart</a>
                 </li>
                 <li class="nav-item sign">
                     <a href="login_page.html" id="sign-in">Sign-in</a>
                     <a href="" id="sign-out">Sign-out</a>
                 </li>
-                <script src="./sign-in.js"></script>
             </ul>
         </nav>
         <div class="header">
-            Welcome to <br> Medicine <br> Online
+            <div style="text-shadow: 2px 2px 4px #000000;">
+                Welcome to <br>
+            </div>
+            <div style="margin-left: 100px; text-shadow: 2px 2px 4px #000000;">
+                Medicine <br>
+            </div>
+            <div style="margin-left: 200px; text-shadow: 2px 2px 4px #000000;">
+                Online
+            </div>
         </div>
         <div class="search-wrapper">
             <div class="search-input">
@@ -272,7 +278,7 @@
                     <div style="display: flex; align-items: center; gap: 20px;">
                         <input type="text" name="medicine" id="medicine">
                         <div>
-                            <button>
+                            <button class="search-button">
                             </button>
                         </div>
                     </div>
@@ -452,7 +458,7 @@
     <div class="information-medicine-container">
         <div class="information-medicine-wrapper">
             <div class="information-medicine-header">
-                <span>Infomation of medicine</span>
+                <span><b>List of medicines</b></span>
             </div>
             <div class="medicine-detail-wrapper">
                 <div class="search-wrapper-2">
@@ -509,9 +515,8 @@
                     </div>
                 </div>
                 <div class="medicines">
-
                     <ul class="medicine-item">
-                        <li class="changeAble id" data-bs-toggle="modal" data-bs-target="#modifyMedicine">ID</li>
+                        <li class="changeAble id">ID</li>
                         <li class="name header-name">Name</li>
                         <li class="stock">Stock</li>
                         <li class="changeAble amount">Amount</li>
@@ -551,6 +556,7 @@
                         width: 130px;
                         font-size: 20px;
                         font-weight: bold;
+                        cursor: pointer;
                     }
                 </style>
                 <div class="cart-wrapper">
@@ -764,6 +770,9 @@
             font-size: 16px;
             padding-left: 4px;
         }
+        .advanced-title{
+            font-weight: bold;
+        }
     </style>
 
     <!-- Modal  -->
@@ -775,7 +784,7 @@
                         <div class="col-6">
                             <div class="row g-3 align-items-center">
                                 <span class="col-3"><label for="advanced-id">ID: </label></span>
-                                <div class="col-9"><input type="text" id="advanced-id" placeholder="ID"></div>
+                                <div class="col-9"><input type="text" id="advanced-id" placeholder="ID" readonly></div>
                             </div>
                         </div>
                     </div>
@@ -783,50 +792,59 @@
                         <div class="col-6">
                             <div class="row align-items-center">
                                 <span class="col-3"><label for="advanced-name">Name: </label></span>
-                                <div class="col-9"><input type="text" id="advanced-name" placeholder="Name"></div>
+                                <div class="col-9"><input type="text" id="advanced-name" placeholder="Name" readonly></div>
                             </div>
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
+                            <span class="advanced-title">Preperpation:</span>
                             <input type="text" id="advanced-preparation" placeholder="Preperation">
                         </div>
                         <div class="col-6">
+                            <span class="advanced-title">Ingredients:</span>
                             <input type="text" id="advanced-ingredient" placeholder="Ingredients">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
+                            <span class="advanced-title">Packaging:</span>
                             <input type="text" id="advanced-packaging" placeholder="Packaging">
                         </div>
                         <div class="col-6">
+                            <span class="advanced-title">Dosage:</span>
                             <input type="text" id="advanced-dosage" placeholder="Dosage">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
+                            <span class="advanced-title">Group:</span>
                             <select id="advanced-group">
                                 <option value="Tân dược">Tân dược</option>
                                 <option value="Đông dược">Đông dược</option>
                             </select>
                         </div>
                         <div class="col-6">
+                            <span class="advanced-title">Stock:</span>
                             <input type="number" id="advanced-stock" placeholder="Stock (must be number)">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-6">
+                            <span class="advanced-title">Type:</span>
                             <select id="advanced-type">
                                 <option value="Thuốc kê đơn">Thuốc kê đơn</option>
                                 <option value="Thuốc không kê đơn">Thuốc không kê đơn</option>
                             </select>
                         </div>
                         <div class="col-6">
+                            <span class="advanced-title">Price:</span>
                             <input type="number" id="advanced-price" placeholder="Price (must be number)">
                         </div>
                     </div>
                     <div class="row mb-3 justify-content-center">
                         <div class="col-6">
+                            <span class="advanced-title">Country:</span>
                             <input type="text" id="advanced-country" placeholder="Country" style="width: 200px;">
                         </div>
                     </div>
@@ -841,31 +859,31 @@
 
 
     <!--Confirm Delete Modal  -->
-    <div class="modal fade " id="delete-confirm-modal " data-bs-backdrop="static " data-bs-keyboard="false " tabindex="-1 " aria-labelledby="staticBackdropLabel " aria-hidden="true ">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content ">
-                <div class="modal-header ">
-                    <h5 class="modal-title " id="staticBackdropLabel ">Modal title</h5>
-                    <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+    <div class="modal fade" id="delete-confirm-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close " data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body ">
                     Are you sure to delete this medicine
                 </div>
                 <div class="modal-footer ">
-                    <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">No</button>
-                    <button type="button " class="btn btn-primary confirm-delete " data-bs-dismiss="modal ">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary confirm-delete" data-bs-dismiss="modal">Yes</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!--Add company Modal  -->
-    <div class="modal fade " id="add-company-modal " data-bs-backdrop="static " data-bs-keyboard="false " tabindex="-1 " aria-labelledby="staticBackdropLabel " aria-hidden="true ">
-        <div class="modal-dialog modal-dialog-centered ">
-            <div class="modal-content ">
-                <div class="modal-header ">
-                    <h5 class="modal-title " id="staticBackdropLabel ">Modal title</h5>
-                    <button type="button " class="btn-close " data-bs-dismiss="modal " aria-label="Close "></button>
+    <div class="modal fade" id="add-company-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel " aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <select id="company-select" onfocus='this.size=5;' onblur="this.size=1;" onchange='this.size=1; this.blur()' ;>
@@ -924,29 +942,30 @@
             overflow: visible;
         }
     </style>
-    <div class="modal fade " id="staticBackdrop " tabindex="-1 " aria-labelledby="staticBackdropLabel " aria-hidden="true ">
-        <div class="modal-dialog modal-dialog-scrollable ">
-            <div class="modal-content ">
-                <div class="modal-header ">
-                    <div class="about-us ">
+    <div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="about-us">
                         About us
                     </div>
                 </div>
-                <div class="modal-body ">
+                <div class="modal-body">
                     Description:
-                    <div class="content ">
+                    <div class="content">
 
                     </div>
                 </div>
-                <div class="modal-footer " style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px; ">
-                    <button class="done-button " data-bs-dismiss="modal " aria-label="Close ">Done</button>
+                <div class="modal-footer" style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px; ">
+                    <button class="done-button" data-bs-dismiss="modal">Done</button>
                 </div>
             </div>
         </div>
     </div>
-    <script src="./auto-complete.js "></script>
-    <script src="script.js "></script>
-    <script src="page.js "></script>
+    <script src="./auto-complete.js"></script>
+    <script src="script.js"></script>
+    <script src="page.js"></script>
+    <script src="sign-in.js"></script>
 
 </body>
 

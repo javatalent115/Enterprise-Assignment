@@ -27,14 +27,16 @@ public class DrugController {//TODO change Map to List if there is more time
     }
 
     @RequestMapping(path = "/getRelatedDrugs", method = RequestMethod.POST)
-    public Map<String, String> getRelatedDrugs(@RequestBody String id){
+    public List<Drug> getRelatedDrugs(@RequestBody String id){
         List<Drug> list = drugService.getRelatedDrugs(id);
-        Map <String, String> map = new HashMap<>();
-        for (int i = 0 ; i< list.size(); i++){
-            map.put(Integer.toString(i), list.get(i).toString());
+        Random random = new Random();
+        int index;
+        while (list.size() > 12){
+            index = random.nextInt(list.size());
+            list.remove(index);
         }
-        return map;
-    } //TODO change this one
+        return list;
+    }
 
     @RequestMapping(path = "/deleteDrug", method = RequestMethod.DELETE)
     public void deleteDrugById(@RequestBody String id) {
@@ -65,6 +67,12 @@ public class DrugController {//TODO change Map to List if there is more time
     @RequestMapping(path = "/advanceUpdateDrug", method = RequestMethod.PUT)
     public void advanceUpdateDrug(@RequestBody Drug drug) {
         drugService.advanceUpdateDrug(drug);
+        drugService.getAllDrugs();
+    }
+
+    @RequestMapping(path = "/reduceStock", method = RequestMethod.PUT)
+    public void reduceStock(@RequestBody Map<String, String> data) {
+        drugService.reduceStock(data.get("id"), Integer.parseInt(data.get("amount")));
         drugService.getAllDrugs();
     }
 }

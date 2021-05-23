@@ -49,6 +49,12 @@ public class DrugService {
         this.drugRepo.save(drug);
     }
 
+    public void reduceStock(String id, int amount){
+        Drug drug = getDrugById(id);
+        drug.setStock((drug.getStock()-amount));
+        this.drugRepo.save(drug);
+    }
+
     public void advanceUpdateDrug(Drug newData){
         Drug drug = getDrugById(newData.getId());
         drug.setStock(newData.getStock());
@@ -85,13 +91,13 @@ public class DrugService {
 
     public List<Drug> getRelatedDrugs(String id) {
         Drug drug = getDrugById(id);
-        if (drug != null) {
-            String producerId = drug.getProducer().getId();
-            List<Drug> drugList = getAllDrugs();
-            drugList.removeIf(drug1 -> !drug1.getProducer().getId().equals(producerId));
-            return drugList;
+        List<Drug> list = new ArrayList<>();
+        for (Drug d : drugList) {
+            if (d.getProducer() == drug.getProducer() && !d.getId().equals(id)) {
+                list.add(d);
+            }
         }
-        return new ArrayList<>();
+        return list;
     }
 
 //    public List<Drug> getRelatedDrugs(String id){
@@ -101,8 +107,8 @@ public class DrugService {
 
     public List<Drug> getDrugsByFilter(String group, String type, String sortType){
         List<Drug> result;
-        if (!group.equals("none")){
-            if (type.equals("none")){
+        if (!group.equals("Both")){
+            if (type.equals("Both")){
                 result = getDrugsByGroup(group);
             }
             else {
@@ -115,7 +121,7 @@ public class DrugService {
             }
         }
         else {
-            if (!type.equals("none")) {
+            if (!type.equals("Both")) {
                 result = getDrugsByType(type);
             }
             else{
@@ -123,21 +129,21 @@ public class DrugService {
             }
         }
         switch (sortType) {
-            case "money-asc":
+            case "Money (low - high)":
                 Collections.sort(result);
                 break;
-            case "money-des":
+            case "Money (high - low)":
                 Collections.sort(result);
                 Collections.reverse(result);
                 break;
-            case "name-asc":
+            case "Name (A-Z)":
                 result.sort(new Comparator<Drug>() {
                     public int compare(Drug drug1, Drug drug2) {
                         return drug1.getName().toLowerCase().compareTo(drug2.getName().toLowerCase());
                     }
                 });
                 break;
-            case "name-des":
+            case "Name (Z-A)":
                 result.sort(new Comparator<Drug>() {
                     @Override
                     public int compare(Drug drug1, Drug drug2) {
