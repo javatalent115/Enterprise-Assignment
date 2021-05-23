@@ -640,7 +640,7 @@ $(document).on("click", ".page", function() {
     let itemIndex = (page - 1) * itemDisplay
     let wrapper = document.querySelector(".medicines")
     for (let i = itemIndex; i < itemIndex + itemDisplay; i++) {
-        if (data.split("\n")[i].split("&&")[0] === 0) {
+        if (data.split("\n").length-1 === i) {
             break
         } else {
             wrapper.innerHTML += `<ul class="medicine-item">
