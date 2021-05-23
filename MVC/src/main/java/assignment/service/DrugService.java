@@ -48,6 +48,12 @@ public class DrugService {
         this.drugRepo.save(drug);
     }
 
+    public void reduceStock(String id, int amount){
+        Drug drug = getDrugById(id);
+        drug.setStock((drug.getStock()-amount));
+        this.drugRepo.save(drug);
+    }
+
     public void advanceUpdateDrug(Drug newData){
         Drug drug = getDrugById(newData.getId());
         drug.setStock(newData.getStock());

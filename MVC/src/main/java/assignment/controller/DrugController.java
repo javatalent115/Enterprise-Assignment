@@ -67,4 +67,10 @@ public class DrugController {//TODO change Map to List if there is more time
         drugService.advanceUpdateDrug(drug);
         drugService.getAllDrugs();
     }
+
+    @RequestMapping(path = "/reduceStock", method = RequestMethod.PUT)
+    public void reduceStock(@RequestBody Map<String, String> data) {
+        drugService.reduceStock(data.get("id"), Integer.parseInt(data.get("amount")));
+        drugService.getAllDrugs();
+    }
 }
