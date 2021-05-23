@@ -18,21 +18,21 @@ $(document).on("click", ".name", function() {
         $("#advanced-ingredient").val(data.split("\n")[index].split("&&")[7])
         $("#advanced-country").val(data.split("\n")[index].split("&&")[8])
         $("#advanced-group").val(data.split("\n")[index].split("&&")[4]);
-        if (data.split("\n")[index].split("&&")[6] == "Undefined") {} else {
-            $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
-        }
+        if (data.split("\n")[index].split("&&")[6] !== "Undefined") $("#advanced-type").val(data.split("\n")[index].split("&&")[6]);
+
     let drug = {
         id: data.split("\n")[index].split("&&")[0],
         name: data.split("\n")[index].split("&&")[1],
         stock: data.split("\n")[index].split("&&")[10],
         price: data.split("\n")[index].split("&&")[9],
-        preperation:data.split("\n")[index].split("&&")[2],
+        preparation:data.split("\n")[index].split("&&")[2],
         packaging:data.split("\n")[index].split("&&")[3],
         dosage:data.split("\n")[index].split("&&")[5],
         ingredients:data.split("\n")[index].split("&&")[7],
         country:data.split("\n")[index].split("&&")[8],
         group:data.split("\n")[index].split("&&")[4],
         type: data.split("\n")[index].split("&&")[6],
+        producers_id: data.split("\n")[index].split("&&")[11]
     }
     localStorage.setItem("drug-click", JSON.stringify(drug))
     window.location.href = "http://localhost:8080/drug-infomation.html"
