@@ -8,7 +8,6 @@ $(document).on("click", ".name", function() {
             break
         }
     }
-
     let drug = {
         id: data.split("\n")[index].split("&&")[0],
         name: data.split("\n")[index].split("&&")[1],
