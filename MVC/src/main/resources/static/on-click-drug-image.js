@@ -1,25 +1,22 @@
 $(document).on("click",".slide-img",function(){
     let img = ($(this).attr("src")).split("/")[3].split(".")[0]
+    let name = $(this).parent().find("div").text()
     let imgFound = false;
     let data = localStorage.getItem("data")
     let index;
-    for (let i = 0; i < data.split("\n").length ; i++) {
+    for (let i = 0; i < data.split("\n").length -1 ; i++) {
         // console.log(img.includes(data.split("\n")[i].split("&&")[1]))
-        if (data.split("\n")[i].split("&&")[1].includes(img)) {
+        // if (data.split("\n")[i].split("&&")[1].includes(img)) {
+        //     index = i
+        //     imgFound = true
+        //     break
+        // }
+        if (data.split("\n")[i].split("&&")[1].includes(name)){
             index = i
-            imgFound = true
-            break
+            imgFound =true
         }
     }
-    // if (!imgFound){
-    //     for (let i = 0; i < data.split("\n").length ; i++) {
-    //         // console.log(img.includes(data.split("\n")[i].split("&&")[1]))
-    //         if (data.split("\n")[i].split("&&")[1] == ) {
-    //             index = i
-    //             break
-    //         }
-    //     }
-    // }
+    console.log(imgFound)
     let drug = {
         id: data.split("\n")[index].split("&&")[0],
         name: data.split("\n")[index].split("&&")[1],

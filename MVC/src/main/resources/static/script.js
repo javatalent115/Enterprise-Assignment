@@ -70,8 +70,6 @@ function addForAdvanceEdit(data, index) {
 
 function checkAccount() {
     if (localStorage.getItem("accountType") === "guest") {
-        $("li:nth-child(6)").css("display", "none")
-        $("li:nth-child(7)").css("display", "none")
         $(".add-image").css("display", "none")
         $(".cart-nav").css("display", "none")
         $(".amount").css("display", "none")
@@ -471,10 +469,10 @@ $(document).on("click", ".add-image", function() {
     checkAccount()
 });
 
-function reset() {
-    window.localStorage.clear();
-    document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
-}
+// function reset() {
+//     window.localStorage.clear();
+//     document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
+// }
 
 var Pagination = {
 

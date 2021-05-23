@@ -31,27 +31,47 @@ async function addRelatedDrug(){
             let result = Object.values(data);
             console.log(result)
             let wrapper = document.querySelector(".carousel-inner")
-            for (let i = 0; i < result.length; i++) {
+            for (let i = 0; i < result.length/3; i+=3) {
                 console.log(i)
                 if (i == 0){
                 console.log("hell")
                 wrapper.innerHTML +=`<div class="carousel-item active">
                 <div class="slide-wrapper">
-                    <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])} width="300px" height="300px" alt="...">
-                    <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])} width="300px" height="300px" alt="...">
-                    <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])}  width="300px" height="300px" alt="...">
+                    <div class="medicine-card">
+                        <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])} height="300px" alt="...">
+                        <div class="medicine-card-name">${result[i].split(" -- ")[1]}</div>
+                    </div>
+                    <div class="medicine-card">
+                        <img class="slide-img" src=${returnImage(result[i+1].split(" -- ")[1])} width="300px" height="300px" alt="...">
+                        <div class="medicine-card-name">${result[i+1].split(" -- ")[1]}</div>
+                    </div>
+                    <div class="medicine-card">
+                        <img class="slide-img" src=${returnImage(result[i+2].split(" -- ")[1])} width="300px" height="300px" alt="...">
+                        <div class="medicine-card-name">${result[i+2].split(" -- ")[1]}</div>
+                    </div>
                 </div>
-            </div>`
+            </div>
+        </div>`
             }
             else{
                 console.log('123')
                 wrapper.innerHTML +=`<div class="carousel-item">
                 <div class="slide-wrapper">
-                    <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])}  width="300px" height="300px" alt="...">
-                    <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])} width="300px" height="300px" alt="...">
-                    <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])}  width="300px" height="300px" alt="...">
+                    <div class="medicine-card">
+                        <img class="slide-img" src=${returnImage(result[i].split(" -- ")[1])} height="300px" alt="...">
+                        <div class="medicine-card-name">${result[i].split(" -- ")[1]}</div>
+                    </div>
+                    <div class="medicine-card">
+                        <img class="slide-img" src=${returnImage(result[i+1].split(" -- ")[1])} width="300px" height="300px" alt="...">
+                        <div class="medicine-card-name">${result[i+1].split(" -- ")[1]}</div>
+                    </div>
+                    <div class="medicine-card">
+                        <img class="slide-img" src=${returnImage(result[i+2].split(" -- ")[1])} width="300px" height="300px" alt="...">
+                        <div class="medicine-card-name">${result[i+2].split(" -- ")[1]}</div>
+                    </div>
                 </div>
-            </div>`
+            </div>
+        </div>`
             }
             }
         }

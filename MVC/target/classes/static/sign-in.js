@@ -12,15 +12,15 @@ if(localStorage.getItem("accountType") == "guest"){
 }
 else{
     if(localStorage.getItem("accountType") == "user"){
-    document.querySelector(".nav-item-cart").setAttribute("style","display:block;")
-    document.querySelector(".nav-item-customer").setAttribute("style","display:block;")
-}
-else{
-    document.querySelector(".nav-item-cart").setAttribute("style","display:none;")
-    document.querySelector(".nav-item-customer").setAttribute("style","display:block;")
-}
-document.getElementById("sign-in").setAttribute("style","display:none;")
-document.getElementById("sign-out").setAttribute("style","display:flex;")
+        document.querySelector(".nav-item-cart").setAttribute("style","display:block;")
+        document.querySelector(".nav-item-customer").setAttribute("style","display:none;")
+    }
+    else{
+        document.querySelector(".nav-item-cart").setAttribute("style","display:none;")
+        document.querySelector(".nav-item-customer").setAttribute("style","display:block;")
+    }
+    document.getElementById("sign-in").setAttribute("style","display:none;")
+    document.getElementById("sign-out").setAttribute("style","display:flex;")
 }
 
 $(".sign").click(function(){
