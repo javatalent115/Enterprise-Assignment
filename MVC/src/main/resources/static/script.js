@@ -53,7 +53,7 @@ $(document).on("click",".search-button",function(){
     localStorage.setItem("drug-click", JSON.stringify(drug))
     window.location.href = "http://localhost:8080/drug-infomation.html"
 
-}),
+});
 function addForAdvanceEdit(data, index) {
     $("#advanced-id").val(data.split("\n")[index].split("&&")[0])
     $("#advanced-name").val(data.split("\n")[index].split("&&")[1])
