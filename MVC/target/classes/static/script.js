@@ -1,8 +1,3 @@
-// localStorage.setItem("Tân dược",true)
-// localStorage.setItem("Đông dược",true)
-// localStorage.setItem("sort-type","none")
-// localStorage.setItem("Thuốc kê đơn",true)
-// localStorage.setItem("Thuốc không kê đơn",true)
 let itemDisplayAtATime = 10
 $(document).on("click", ".name", function() {
     let data = localStorage.getItem("data")
@@ -139,6 +134,9 @@ let listItem = localStorage.getItem('cart-item') ?
     JSON.parse(localStorage.getItem('cart-item')) :
     []
     //if add to cart btn clicked
+$(document).on("click",".cart-nav",function(){
+    window.location.href = "http://localhost:8080/cart.html"
+})
 $(document).on("click", ".cart-btn", function() {
     let count = localStorage.getItem("cart");
     document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))

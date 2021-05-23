@@ -47,6 +47,12 @@ function returnImage(name){
     else if(name.includes("Paracetamol")){
         return "./images/others/Paracetamol.png"
     }
+    else if(name.includes("Prednison")){
+        return "./images/others/Prednison.png"
+    }
+    else if(name.includes("Nicpostinew")){
+        return "./images/others/Nicpostinew.png"
+    }
     else{
         return "./images/blank-image.png"
     }

@@ -134,6 +134,9 @@ let listItem = localStorage.getItem('cart-item') ?
     JSON.parse(localStorage.getItem('cart-item')) :
     []
     //if add to cart btn clicked
+$(document).on("click",".cart-nav",function(){
+    window.location.href = "http://localhost:8080/cart.html"
+})
 $(document).on("click", ".cart-btn", function() {
     let count = localStorage.getItem("cart");
     document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))

@@ -5,12 +5,19 @@ else{
     localStorage.setItem("accountType","guest")
 }
 if(localStorage.getItem("accountType") == "guest"){
+    document.querySelector(".nav-item-cart").setAttribute("style","display:none;")
     document.getElementById("sign-in").setAttribute("style","display:flex;")
     document.getElementById("sign-out").setAttribute("style","display:none;")
 }
 else{
-    document.getElementById("sign-in").setAttribute("style","display:none;")
-    document.getElementById("sign-out").setAttribute("style","display:flex;")
+    if(localStorage.getItem("accountType") == "user"){
+    document.querySelector(".nav-item-cart").setAttribute("style","display:block;")
+}
+else{
+    document.querySelector(".nav-item-cart").setAttribute("style","display:none;")
+}
+document.getElementById("sign-in").setAttribute("style","display:none;")
+document.getElementById("sign-out").setAttribute("style","display:flex;")
 }
 
 $(".sign").click(function(){
