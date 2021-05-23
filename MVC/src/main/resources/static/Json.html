@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Document</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style>
-        #table, td,th,tr{
+        #table,
+        td,
+        th,
+        tr {
             border: 1px solid black;
             border-collapse: collapse;
             padding: 5px;
         }
     </style>
 </head>
+
 <body>
     <h1 id="wait">Please wait!!!</h1>
     <input type="text" id="delete">
@@ -20,56 +25,54 @@
     </div>
 </body>
 <script>
-    async function getDrugs(){
+    async function getDrugs() {
         try {
-                if (localStorage.getItem("changeDrug") !== "no" || localStorage.getItem("changeDrug") == null ) {
-                    let res = await fetch('http://localhost:8080/drug', {
-                        method: 'GET',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        }
-                    });
-                    if (res.ok) {
-                        let data = await res.json();
-                        let drugTable;
-                        document.querySelector('#wait').innerHTML = "";
-                        document.querySelector('#table').innerHTML += "<th colspan=\"11\" style=\"background-color: cornflowerblue\">Drugs Table</th>";
-                        document.querySelector("#table").innerHTML += "<tbody><tr><td>ID</td><td>Name</td><td>Preparation</td><td>Packaging</td><td>drugGroup</td><td>Dosage</td><td>Type</td><td>Ingredients</td><td>Country</td><td>Stock</td><td>ProducerID</td></tr>";
-                        let result = Object.values(data);
-                        for (let i = 0; i < result.length; i++) {
-                            let split = result[i].split(" -- ");
-                            document.querySelector("#table").innerHTML += "<tr><td>" + split[0] + "</td><td>" + split[1] + "</td><td>" + split[2] + "</td><td>" + split[3] + "</td><td>" + split[4]
-                                + "</td><td>" + split[5] + "</td><td>" + split[6] + "</td><td>" + split[7] + "</td><td>" + split[8] + "</td><td>" + split[9] + "</td><td>" + split[10] + "</td></tr></tbody>"
-                        }
-                        drugTable = document.querySelector("#table").innerHTML;
-                        localStorage.setItem("drugTable", drugTable);
-                        localStorage.setItem("changeDrug", "no");
+            if (localStorage.getItem("changeDrug") !== "no" || localStorage.getItem("changeDrug") == null) {
+                let res = await fetch('http://localhost:8080/drug', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     }
-                }
-                else {
-                    console.log(localStorage.getItem("drugTable"));
+                });
+                if (res.ok) {
+                    let data = await res.json();
+                    let drugTable;
                     document.querySelector('#wait').innerHTML = "";
-                    document.querySelector("#table").innerHTML = localStorage.getItem("drugTable");
+                    document.querySelector('#table').innerHTML += "<th colspan=\"11\" style=\"background-color: cornflowerblue\">Drugs Table</th>";
+                    document.querySelector("#table").innerHTML += "<tbody><tr><td>ID</td><td>Name</td><td>Preparation</td><td>Packaging</td><td>drugGroup</td><td>Dosage</td><td>Type</td><td>Ingredients</td><td>Country</td><td>Stock</td><td>ProducerID</td></tr>";
+                    let result = Object.values(data);
+                    for (let i = 0; i < result.length; i++) {
+                        let split = result[i].split(" -- ");
+                        document.querySelector("#table").innerHTML += "<tr><td>" + split[0] + "</td><td>" + split[1] + "</td><td>" + split[2] + "</td><td>" + split[3] + "</td><td>" + split[4] +
+                            "</td><td>" + split[5] + "</td><td>" + split[6] + "</td><td>" + split[7] + "</td><td>" + split[8] + "</td><td>" + split[9] + "</td><td>" + split[10] + "</td></tr></tbody>"
+                    }
+                    drugTable = document.querySelector("#table").innerHTML;
+                    localStorage.setItem("drugTable", drugTable);
+                    localStorage.setItem("changeDrug", "no");
                 }
-            } catch (e) {
+            } else {
+                console.log(localStorage.getItem("drugTable"));
+                document.querySelector('#wait').innerHTML = "";
+                document.querySelector("#table").innerHTML = localStorage.getItem("drugTable");
             }
+        } catch (e) {}
 
     }
 
-    async function addDrug(){
+    async function addDrug() {
         let Drug = {
             id: "asd",
-            name:"aaa",
-            preparation:" ",
-            packaging:" ",
-            drugGroup:" ",
-            dosage:" ",
-            type:" ",
-            ingredients:" ",
-            country:" ",
-            money:"12",
-            stock:"10",
+            name: "aaa",
+            preparation: " ",
+            packaging: " ",
+            drugGroup: " ",
+            dosage: " ",
+            type: " ",
+            ingredients: " ",
+            country: " ",
+            money: "12",
+            stock: "10",
             producers_id: "AMPHARCO",
         };
         try {
@@ -85,19 +88,19 @@
                 let data = await res.json();
                 let result = Object.values(data);
                 console.log(result[0]);
-                if (result[0] !=="failed"){
+                if (result[0] !== "failed") {
                     localStorage.setItem("changeDrug", "yes");
                 }
                 return Drug;
             }
-        }catch (e) {}
+        } catch (e) {}
         return 404;
     }
-    async function updateDrug(){
+    async function updateDrug() {
         let Drug = {
             type: "...", // ("Thuốc kê đơn" or "Thuốc không kê đơn" or "none")
             group: "...", // ("Tân dược" or "Đông dược" or "none")
-            sortType: "..."  // ("money-asc" or "money-des" or "name-asc" or "name-des" or "none")
+            sortType: "..." // ("money-asc" or "money-des" or "name-asc" or "name-des" or "none")
         };
         try {
             let res = await fetch('http://localhost:8080/api/getDrugsByFilter', {
@@ -112,17 +115,17 @@
                 let data = await res.json();
                 let result = Object.values(data);
                 console.log(result[0]);
-                if (result[0] !=="failed"){
+                if (result[0] !== "failed") {
                     localStorage.setItem("changeDrug", "yes");
                 }
                 return Drug;
             }
-        }catch (e) {}
+        } catch (e) {}
         return 404;
     }
 
 
-    async function getNOP(){
+    async function getNOP() {
         let id = "AMPHARCO";
         try {
             let res = await fetch('http://localhost:8080/api/getNOP', {
@@ -137,15 +140,15 @@
                 let data = await res.json();
                 let result = Object.values(data);
                 console.log(result[0]);
-                if (result[0] !=="failed"){
+                if (result[0] !== "failed") {
                     localStorage.setItem("changeDrug", "yes");
                 }
                 return Drug;
             }
-        }catch (e) {}
+        } catch (e) {}
         return 404;
     }
-    async function getNOP(){
+    async function getNOP() {
         let id = "AMPHARCO";
         try {
             let res = await fetch('http://localhost:8080/api/getNOP', {
@@ -160,15 +163,15 @@
                 let data = await res.json();
                 let result = Object.values(data);
                 console.log(result[0]);
-                if (result[0] !=="failed"){
+                if (result[0] !== "failed") {
                     localStorage.setItem("changeDrug", "yes");
                 }
                 return Drug;
             }
-        }catch (e) {}
+        } catch (e) {}
         return 404;
     }
-    async function deleteDrug(){
+    async function deleteDrug() {
         let id = "asd";
         try {
             let res = await fetch('http://localhost:8080/api/deleteDrug', {
@@ -183,14 +186,15 @@
                 let data = await res.json();
                 let result = Object.values(data);
                 console.log(result[0]);
-                if (result[0] !=="failed"){
+                if (result[0] !== "failed") {
                     localStorage.setItem("changeDrug", "yes");
                 }
                 return data;
             }
-        }catch (e) {}
+        } catch (e) {}
         return 404;
     }
     deleteDrug()
 </script>
+
 </html>

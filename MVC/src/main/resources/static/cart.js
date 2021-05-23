@@ -35,7 +35,9 @@ function initialize() {
     <li class = "totalMedicinePrice">${totalMedicinePrice}$</li>
 </ul>`
 }
+
 $(document).ready(initialize())
+
 $(document).ready(function() {
     $("#confirm-purchase-modal").on("show.bs.modal", function(event) {
         let data = JSON.parse(localStorage.getItem("cart-item"));

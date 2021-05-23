@@ -8,7 +8,7 @@ $(document).on("click", ".purchase-box", function() {
     }
     let order = {
         id: localStorage.getItem("user") + "-" + date.getFullYear() + date.getMonth() + date.getDay() +
-                                                "-" + date.getHours() + date.getMinutes() + date.getSeconds(),
+            "-" + date.getHours() + date.getMinutes() + date.getSeconds(),
         customer: { "username": localStorage.getItem("user") },
         purchaseTime: "",
         purchaseType: "COD",
@@ -17,15 +17,17 @@ $(document).on("click", ".purchase-box", function() {
 
     createOrder(order)
 
-    setTimeout(function() {for (let i = 0; i < new_order.length; i++) {
-        let orderDetail = {
-            order: { id: order["id"] },
-            drug: { id: new_order[i]["id"] },
-            quantity: parseInt(new_order[i]["amount"]),
-            cost: parseInt(new_order[i]["amount"]) * parseInt(new_order[i]["price"])
+    setTimeout(function() {
+        for (let i = 0; i < new_order.length; i++) {
+            let orderDetail = {
+                order: { id: order["id"] },
+                drug: { id: new_order[i]["id"] },
+                quantity: parseInt(new_order[i]["amount"]),
+                cost: parseInt(new_order[i]["amount"]) * parseInt(new_order[i]["price"])
+            }
+            createOrderDetail(orderDetail)
         }
-        createOrderDetail(orderDetail)
-    }}, 10)
+    }, 10)
 })
 
 async function createOrder(order) {

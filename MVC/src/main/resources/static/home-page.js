@@ -1,6 +1,6 @@
-async function homeInitialize(){
-    $(".information-medicine-container").css("display","none")
-    $(".spinner").css("display","block")
+async function homeInitialize() {
+    $(".information-medicine-container").css("display", "none")
+    $(".spinner").css("display", "block")
     let all = "";
     let Drug = {
         type: "Both",
@@ -23,22 +23,19 @@ async function homeInitialize(){
                 all += result[i].split(" -- ")[0] + "&&" + result[i].split(" -- ")[1] + "&&" + result[i].split(" -- ")[2] + "&&" + result[i].split(" -- ")[3] + "&&" + result[i].split(" -- ")[4] + "&&" + result[i].split(" -- ")[5] +
                     "&&" + result[i].split(" -- ")[6] + "&&" + result[i].split(" -- ")[7] + "&&" + result[i].split(" -- ")[8] + "&&" + result[i].split(" -- ")[9] + "&&" + result[i].split(" -- ")[10] + "&&" + result[i].split(" -- ")[11] + "\n";
             }
-            localStorage.setItem("data",all)
+            localStorage.setItem("data", all)
         }
-    }
-        catch(e){}
-    $(".spinner").css("display","none")
-    $(".information-medicine-container").css("display","block")
-    
+    } catch (e) {}
+    $(".spinner").css("display", "none")
+    $(".information-medicine-container").css("display", "block")
+
 }
-$(document).on("click",".news-item",function(){
-    if ($(this).find("p").text() == "Covid 19 News?"){
+$(document).on("click", ".news-item", function() {
+    if ($(this).find("p").text() == "Covid 19 News?") {
         window.location.href = "http://localhost:8080/news-1.html"
-    }
-    else if ($(this).find("p").text() == "Cancer can cure?"){
+    } else if ($(this).find("p").text() == "Cancer can cure?") {
         window.location.href = "http://localhost:8080/news-2.html"
-    }    
-    else if ($(this).find("p").text() == "Did you eat enough vegetable?"){
+    } else if ($(this).find("p").text() == "Did you eat enough vegetable?") {
         window.location.href = "http://localhost:8080/news-3.html"
     }
 })
