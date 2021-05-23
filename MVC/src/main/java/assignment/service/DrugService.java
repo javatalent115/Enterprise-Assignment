@@ -90,7 +90,13 @@ public class DrugService {
 
     public List<Drug> getRelatedDrugs(String id){
         Drug drug = getDrugById(id);
-        return drug.getDrugsOfSameProducer();
+        List<Drug> list = new ArrayList<>();
+        for (Drug d : drugList) {
+            if (d.getProducer() == drug.getProducer() && !d.getId().equals(id)) {
+                list.add(d);
+            }
+        }
+        return list;
     }
 
     public List<Drug> getDrugsByFilter(String group, String type, String sortType){
