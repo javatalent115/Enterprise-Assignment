@@ -49,6 +49,17 @@ public class Controller {
         return "invalid";
     }
 
+    @PostMapping(path = "/getProducerData")
+    public Map<String,String> getProducerData(@RequestBody String id){
+        Producer producer = producerService.getProducerById(id);
+        Map<String, String> map = new HashMap<>();
+        map.put("id", id);
+        map.put("name", producer.getName());
+        map.put("list", Arrays.toString(drugService.getDrugListByProducer(id).toArray()));
+        return map;
+    }
+
+
     @RequestMapping(path = "/setDatabase", method = RequestMethod.GET)
     public String setDatabase(){
         ArrayList<Drug> drugs = new ArrayList<>();
