@@ -24,7 +24,7 @@ $(document).on("click", ".name", function() {
         producers_id: data.split("\n")[index].split("&&")[11]
     }
     localStorage.setItem("drug-click", JSON.stringify(drug))
-    window.location.href = "http://localhost:8080/drug-infomation.html"
+    window.location.href = "http://localhost:8080/drug-information.html"
 })
 $(document).on("click", ".search-button", function() {
     let name = $("#medicine").val()
@@ -173,7 +173,7 @@ $(document).on("click", ".cart-btn", function() {
             localStorage.setItem("cart", count)
             $(".cart-nav .item-count").text(localStorage.getItem("cart"));
 
-        }, 600);
+        }, 800);
 
         imgclone.animate({
             'width': 0,
@@ -224,7 +224,7 @@ $(document).on("click", ".no-add-company", function() {
 })
 
 $(document).on("click", ".confirm-add-company", function() {
-    if (quickChange.parent().parent().find(".id").text() === 0 || quickChange.parent().parent().find(".add-name").text() === 0 || quickChange.parent().parent().find(".stock").text() === 0 || quickChange.parent().parent().find(".price").text() === 0) {
+    if (quickChange.parent().parent().find(".id").text() <= 0 || quickChange.parent().parent().find(".add-name").text() <= 0 || quickChange.parent().parent().find(".stock").text() <= 0 || quickChange.parent().parent().find(".price").text() <= 0) {
         alert("This must have a value")
         quickChange.parent("li").parent("ul").find(".changeAble").attr("contenteditable", "true")
         quickChange.parent("li").parent("ul").find(".changeAble").css({
@@ -236,8 +236,8 @@ $(document).on("click", ".confirm-add-company", function() {
         quickChange.attr("data-bs-target", "#add-company-modal")
     } else {
         $(".cart-btn").parent().find("img").removeClass("add-trash-image")
+        quickChange.parent().parent().find(".add-name").addClass("name")
         quickChange.parent().parent().find("li").removeClass("add-name")
-        quickChange.parent().parent().find("li").addClass("name")
         quickChange.attr("data-bs-toggle", "modal")
         quickChange.attr("data-bs-target", "#add-company-modal")
         quickChange.css("display", "none")
@@ -260,8 +260,6 @@ $(document).on("click", ".confirm-add-company", function() {
             }
         };
 
-
-        //FETCH add drug o day, co object drug r do
         addDrug(drug);
 
 

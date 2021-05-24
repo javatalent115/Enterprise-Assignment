@@ -21,6 +21,7 @@ public class DrugService {
 
     public List<Drug> getAllDrugs(){
         drugList = this.drugRepo.findAll();
+        System.out.println(Arrays.toString(drugList.toArray()));
         drugList.sort(new Comparator<Drug>() {
             @Override
             public int compare(Drug drug1, Drug drug2)  {
@@ -53,6 +54,16 @@ public class DrugService {
         Drug drug = getDrugById(id);
         drug.setStock((drug.getStock()-amount));
         this.drugRepo.save(drug);
+    }
+
+    public List<String> getDrugListByProducer(String producer_id){
+        List<String> list = new ArrayList<>();
+        for (Drug drug : drugList) {
+            if (drug.getProducer().getId().equals(producer_id)) {
+                list.add(drug.getId() + "---" + drug.getName());
+            }
+        }
+        return list;
     }
 
     public void advanceUpdateDrug(Drug newData){

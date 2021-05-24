@@ -35,9 +35,6 @@
                 <li class="nav-item nav-item-customer">
                     <a href="customer.html">Customer</a>
                 </li>
-                <li class="nav-item nav-item-customer">
-                    <a href="customer.html"> Customer</a>
-                </li>
                 <li class="nav-item sign">
                     <a href="login-page.html" id="sign-in">Sign-in</a>
                     <a href="" id="sign-out">Sign-out</a>
@@ -120,11 +117,25 @@
                     <div class="col-6">
                         <span class="title">Producer: </span>
                         <span class="detail producer"></span>
+                        <span class="dropdown">
+                            <img src="./images/icons/infor-icon.png" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="dropdown-menu dropdown-menu-wrapper">
+                                <div class="dropdown-menu-id row justify-content-center">
+                                    <span class="col-4">ID: </span>
+                                    <span class="col-3 dropdown-menu-id-content">123</span>
+                                </div>
+                                <div class="dropdown-menu-name row justify-content-center">
+                                    <span class="col-4">Name: </span>
+                                    <span class="col-3 dropdown-menu-name-content">123</span>
+                                </div>
+                                <div class="related-drug">
+                                </div>
+                            </div>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <div class="container mb-5">
         <h3 style="text-align: center;">Related drug (same producer)</h3>
@@ -169,6 +180,7 @@
             </button>
             </div>
         </div>
+    </div>
         <div class="footer">
             <div class="footer-item-1">
                 <h3 style="color:lightblue;">Connect with us</h3>
@@ -212,6 +224,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </body>
 <script src="js/drug-information.js"></script>
 <script src="js/sign-in.js"></script>

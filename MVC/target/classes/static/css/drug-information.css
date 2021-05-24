@@ -156,6 +156,7 @@ ul {
     width: 40%;
 }
 
+
 .slide-wrapper {
     display: flex;
     justify-content: space-evenly;
@@ -164,8 +165,9 @@ ul {
 .carousel-item {}
 
 .slide-img {
-    width: 20%;
+    width: 235px;
     cursor: pointer;
+    height: 250px;
 }
 
 .carousel-control-next-icon {
@@ -174,6 +176,16 @@ ul {
 
 .carousel-control-prev-icon {
     background-image: url("../images/icons/arrow-left.png");
+}
+
+.medicine-card{
+    text-align: center;
+}
+.carousel-inner{
+    padding: 0px 87px;
+}
+.medicine-card-name{
+    font-weight: bold;
 }
 
 .title {
@@ -248,4 +260,24 @@ ul {
     text-decoration: none;
     list-style: none;
     color: white;
+}
+.dropdown-toggle::after{
+    display: none;
+}
+.dropdown img{
+    width: 20px;
+    margin-bottom: 2px;
+}
+
+.dropdown-menu-id,.dropdown-menu-name{
+    text-align: center;
+}
+.related-drug{
+    border: 1px solid black;
+    height: 50px;
+    overflow: scroll;
+    margin: 0 10px;
+}
+.related-drug div{
+    text-align: center;
 }

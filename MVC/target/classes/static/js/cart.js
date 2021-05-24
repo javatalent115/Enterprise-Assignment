@@ -40,21 +40,23 @@ $(document).ready(initialize())
 
 $(document).ready(function() {
     $("#confirm-purchase-modal").on("show.bs.modal", function(event) {
-        let data = JSON.parse(localStorage.getItem("cart-item"));
-        let drug = {
-            id: "",
-            amount: ""
-        };
-        for (let i = 0; i < data.length; i++) {
-            drug.id = data[i].id;
-            drug.amount = data[i].amount;
-            reduceStock(drug);
+        if (parseInt(localStorage.getItem("cart")) > 0) {
+            let data = JSON.parse(localStorage.getItem("cart-item"));
+            let drug = {
+                id: "",
+                amount: ""
+            };
+            for (let i = 0; i < data.length; i++) {
+                drug.id = data[i].id;
+                drug.amount = data[i].amount;
+                reduceStock(drug);
+            }
+            localStorage.setItem("cart-item", "")
+            localStorage.setItem("cart", 0)
+            setTimeout(() => {
+                window.location.href = "http://localhost:8080/home-page.html"
+            }, 1000);
         }
-        localStorage.setItem("cart-item", "")
-        localStorage.setItem("cart", 0)
-        setTimeout(() => {
-            window.location.href = "http://localhost:8080/home-page.html"
-        }, 1000);
     });
 });
 
