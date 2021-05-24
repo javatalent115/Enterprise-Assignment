@@ -324,7 +324,11 @@ $(document).on("click", ".done", function() {
             };
 
             //Fetch update o day, co object drug r do
-            updateExistDrug(drug);
+            if (!(/^\d+$/).test(drug.stock) || !(/^\d+$/).test(drug.money)) {
+                alert("Money and Stock must be a number!");
+                window.location.reload()
+            }
+            else updateExistDrug(drug);
         }
     }
 });
