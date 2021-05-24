@@ -4,7 +4,7 @@ body {
 
 .container-fluid {
     position: relative;
-    height: 350px;
+    height: 330px;
     min-width: 1200px;
 }
 
@@ -12,7 +12,6 @@ body {
     content: "";
     background: url("../images/background/home-background.jpg") no-repeat;
     background-size: 100% 100%;
-    width: 100%;
     position: absolute;
     top: 0;
     bottom: 0;
@@ -45,12 +44,12 @@ body {
 }
 
 .nav-item a:hover {
-    color: white;
+    color: wheat;
 }
 
 .nav-item a::after {
     content: "";
-    background: white;
+    background: wheat;
     position: absolute;
     width: 100%;
     height: 5px;
@@ -84,6 +83,7 @@ body {
     top: -25px;
     position: relative;
 }
+
 
 .search-wrapper {
     border: black 1px solid;
@@ -132,38 +132,10 @@ input:focus {
     border: none;
 }
 
-.information-medicine-container {
-    min-width: 1200px;
-    background: #8ee9fd;
-    height: auto;
-    position: relative;
-    padding: 80px 140px;
-    word-wrap: break-word;
-    top: 35px;
-    z-index: -1;
-    margin: 0 25px;
-    border-radius: 15px;
-    box-shadow: 5px 10px 10px #aaa;
-    margin-bottom: 100px;
-}
-
 .information-medicine-wrapper {
     background: white;
     position: relative;
     border-radius: 15px;
-}
-
-.information-medicine-header {
-    width: fit-content;
-    background: #18bff3;
-    color: white;
-    padding: 8px 37px;
-    font-size: 22px;
-    border-radius: 19px;
-    position: relative;
-    top: -22px;
-    left: 98px;
-    border: 1px solid white;
 }
 
 .autocomplete {
@@ -225,89 +197,6 @@ input[type=submit] {
 
 body {
     height: 1px;
-}
-
-.container-fluid {
-    position: relative;
-    height: 350px;
-    min-width: 1200px;
-}
-
-.container-fluid::after {
-    content: "";
-    background: url("../images/background/home-background.jpg") no-repeat;
-    background-size: 100% 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-}
-
-.nav-bar {
-    position: relative;
-    z-index: 1;
-    margin: 0;
-    padding-right: 60px;
-    padding-top: 10px;
-}
-
-.nav-item {
-    list-style: none;
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.nav-item a {
-    text-decoration: none;
-    color: white;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-}
-
-.nav-item a:hover {
-    color: white;
-}
-
-.nav-item a::after {
-    content: "";
-    background: white;
-    position: absolute;
-    width: 100%;
-    height: 5px;
-    bottom: -5px;
-    opacity: 0;
-    transform-origin: left center;
-    transform: scaleX(0);
-}
-
-.nav-item a:hover::after {
-    opacity: 1;
-    transform: scaleX(1);
-    transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
-}
-
-.nav-bar ul {
-    display: flex;
-    margin: 0;
-    justify-content: flex-end;
-    width: 100%;
-    height: 100%;
-    gap: 120px;
-}
-
-.header {
-    font-weight: bold;
-    color: white;
-    font-family: Arial;
-    font-size: 60px;
-    padding-left: 20px;
-    top: -25px;
-    position: relative;
 }
 
 .search-wrapper {
@@ -633,7 +522,7 @@ input[type=submit] {
 }
 
 .cart-nav {
-    background-color: #8ee9fd;
+    background-color: #fdc346;
     border-radius: 10px;
     width: fit-content;
     display: flex;
@@ -646,7 +535,7 @@ input[type=submit] {
 }
 
 .cart-nav:hover {
-    background-color: blue;
+    background-color: #a8853f;
 }
 
 .footer {
@@ -757,7 +646,7 @@ input[type=submit] {
     border: 1px solid #E9E9E9;
     box-shadow: 0 1px 1px #999;
     background-color: #DFDFDF;
-    background-image: -webkit-linear-gradient(top, #D0D0D0, #EBEBEB);
+    background-image: -webkit-linear-gradient(top, #4d5a46, #EBEBEB);
     background-image: -moz-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image: -ms-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image: -o-linear-gradient(top, #D0D0D0, #EBEBEB);

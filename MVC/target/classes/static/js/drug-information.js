@@ -26,7 +26,7 @@ async function addRelatedCompany(id){
             },
             body: id
         });
-    
+
     if (res.ok) {
         let data = await res.json();
         let result = Object.values(data);
@@ -58,9 +58,8 @@ async function addRelatedCompany(id){
         </div>
         `
     }
-    
-    }
 }
+    }
     catch(e){}
 }
 async function addRelatedDrug() {

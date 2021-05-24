@@ -275,9 +275,9 @@ ul {
 .related-drug{
     border: 1px solid black;
     height: 100px;
-    width: 300px;
     overflow: scroll;
     margin: 0 10px;
+    width: 300px;
 }
 .related-drug div{
     text-align: center;

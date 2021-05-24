@@ -51,8 +51,7 @@ $(document).ready(function() {
                 drug.amount = data[i].amount;
                 reduceStock(drug);
             }
-            localStorage.setItem("cart-item", "")
-            localStorage.setItem("cart", 0)
+            purchase();
             setTimeout(() => {
                 window.location.href = "http://localhost:8080/home-page.html"
             }, 1000);
@@ -84,11 +83,73 @@ $(document).on("click",".trash-image",function(){
 function removeItemInCart(name){
     let cartItem = JSON.parse(localStorage.getItem("cart-item"))
     for (let i = 0; i < cartItem.length; i++) {
-        if(name == cartItem[i].name){
+        if(name === cartItem[i].name){
             localStorage.setItem("cart",localStorage.getItem("cart")- cartItem[i].amount)
             cartItem.splice(i,1)
             break
         }
     }
     localStorage.setItem("cart-item",JSON.stringify(cartItem))
+}
+
+//TODO link to orders' front end
+function purchase() {
+    let date = new Date()
+    let new_order = JSON.parse(localStorage.getItem("cart-item"))
+    let total = 0
+    for (let i = 0; i < new_order.length; i++) {
+        total += parseInt(new_order[i]["amount"]) * parseInt(new_order[i]["price"])
+    }
+    let order = {
+        id: localStorage.getItem("user") + "-" + date.getFullYear() + date.getMonth() + date.getDay() +
+            "-" + date.getHours() + date.getMinutes() + date.getSeconds(),
+        customer: { "username": localStorage.getItem("user") },
+        purchaseTime: "",
+        purchaseType: "COD",
+        total: total
+    }
+
+    createOrder(order)
+
+    setTimeout(function() {
+        for (let i = 0; i < new_order.length; i++) {
+            let orderDetail = {
+                order: { id: order["id"] },
+                drug: { id: new_order[i]["id"] },
+                quantity: parseInt(new_order[i]["amount"]),
+                cost: parseInt(new_order[i]["amount"]) * parseInt(new_order[i]["price"])
+            }
+            createOrderDetail(orderDetail)
+        }
+    }, 10)
+    localStorage.setItem("cart-item", "")
+    localStorage.setItem("cart", 0)
+}
+
+async function createOrder(order) {
+    try {
+        let res = await fetch('http://localhost:8080/order', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(order)
+        });
+    } catch (e) {}
+    return 404;
+}
+
+async function createOrderDetail(orderDetail, orderId) {
+    try {
+        let res = await fetch('http://localhost:8080/orderDetail', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderDetail)
+        });
+    } catch (e) {}
+    return 404;
 }

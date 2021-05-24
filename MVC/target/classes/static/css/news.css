@@ -20,30 +20,30 @@
     position: relative;
     z-index: 1;
     margin: 0;
-    padding-right: 30px;
+    padding-right: 60px;
     padding-top: 10px;
 }
 
 .nav-item {
     list-style: none;
-    font-size: 22px;
+    font-size: 30px;
     font-weight: bold;
 }
 
-a {
+.nav-item a {
     text-decoration: none;
-    color: mediumorchid;
+    color: white;
     display: flex;
     position: relative;
     justify-content: center;
     align-items: center;
 }
 
-a:hover {
+.nav-item a:hover {
     color: wheat;
 }
 
-a::after {
+.nav-item a::after {
     content: "";
     background: wheat;
     position: absolute;
@@ -55,7 +55,7 @@ a::after {
     transform: scaleX(0);
 }
 
-a:hover::after {
+.nav-item a:hover::after {
     opacity: 1;
     transform: scaleX(1);
     transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
@@ -74,10 +74,9 @@ ul {
     font-weight: bold;
     color: white;
     font-family: Arial;
-    font-size: 35px;
+    font-size: 60px;
     padding-left: 20px;
     top: -25px;
-    color: blue;
     position: relative;
 }
 
