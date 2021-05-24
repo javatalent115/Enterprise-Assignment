@@ -28,7 +28,6 @@ async function homeInitialize() {
     } catch (e) {}
     $(".spinner").css("display", "none")
     $(".information-medicine-container").css("display", "block")
-
 }
 $(document).on("click", ".news-item", function() {
     if ($(this).find("p").text() == "Covid 19 News?") {

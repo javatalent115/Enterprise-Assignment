@@ -93,7 +93,7 @@ public class DrugService {
         Drug drug = getDrugById(id);
         List<Drug> list = new ArrayList<>();
         for (Drug d : drugList) {
-            if (d.getProducer() == drug.getProducer() && !d.getId().equals(id)) {
+            if (d.getProducer().getId().equals(drug.getProducer().getId()) && !d.getId().equals(id)) {
                 list.add(d);
             }
         }
