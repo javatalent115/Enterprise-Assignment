@@ -24,20 +24,5 @@ public class ProducerController {
         }
         return map;
     }
-
-    @RequestMapping(path = "/addProducer", method = RequestMethod.POST)
-    public String addProducer(@RequestBody Producer producer){
-        try {
-            producerService.addProducer(producer);
-        }catch (Exception e){
-            return "failed";
-        }
-        return "success";
-    }
-
-    @RequestMapping(path = "/deleteProducer", method = RequestMethod.DELETE)
-    public void deleteProducerById(@RequestBody String id) {
-        producerService.deleteByProducerId(id);
-    }
 }
 

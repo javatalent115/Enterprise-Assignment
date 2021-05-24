@@ -23,24 +23,8 @@ public class ProducerService {
         return this.producerRepo.findAll();
     }
 
-    public void deleteByProducerId(String id) {
-        this.producerRepo.deleteById(id);
-    }
-
     public Producer getProducerById(String id) {
         Optional<Producer> result = this.producerRepo.findById(id);
         return result.orElse(null);
-    }
-
-    public void updateProducerById(String id, Producer newProducer) {
-        getProducerById(id).replace(newProducer);
-    }
-
-    public long countProducer() {
-        return this.producerRepo.count();
-    }
-
-    public void deleteAllProducer() {
-        this.producerRepo.deleteAll();
     }
 }
