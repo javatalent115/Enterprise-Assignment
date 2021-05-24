@@ -33,7 +33,7 @@ async function addRelatedDrug() {
             let wrapper = document.querySelector(".carousel-inner")
             for (let i = 0; i < result.length / 3; i += 3) {
                 console.log(i)
-                if (i == 0) {
+                if (i === 0) {
                     console.log("hell")
                     wrapper.innerHTML += `<div class="carousel-item active">
                 <div class="slide-wrapper">
