@@ -41,13 +41,13 @@ async function addRelatedCompany(id){
             },
             body: id
         });
-    
-    if (res.ok) {
-        let data = await res.json();
-        let result = Object.values(data);
-        console.log(result)
+
+        if (res.ok) {
+            let data = await res.json();
+            let result = Object.values(data);
+            console.log(result)
+        }
     }
-}
     catch(e){}
 }
 async function addRelatedDrug() {

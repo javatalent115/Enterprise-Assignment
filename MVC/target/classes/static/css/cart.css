@@ -1,6 +1,6 @@
 .container-fluid {
     position: relative;
-    height: 350px;
+    height: inherit;
     min-width: 1200px;
 }
 
@@ -253,7 +253,7 @@ input:focus {
 }
 
 .purchase-box {
-    background-color: #18bff3;
+    background-color: #f34941;
     padding: 5px 20px;
     border-radius: 8px;
     color: white;
@@ -262,7 +262,7 @@ input:focus {
 }
 
 .purchase-box:hover {
-    background-color: blue;
+    background-color: #c1281e;
 }
 
 .cart-wrapper {

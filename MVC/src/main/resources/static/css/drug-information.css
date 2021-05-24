@@ -261,3 +261,23 @@ ul {
     list-style: none;
     color: white;
 }
+.dropdown-toggle::after{
+    display: none;
+}
+.dropdown img{
+    width: 20px;
+    margin-bottom: 2px;
+}
+
+.dropdown-menu-id,.dropdown-menu-name{
+    text-align: center;
+}
+.related-drug{
+    border: 1px solid black;
+    height: 50px;
+    overflow: scroll;
+    margin: 0 10px;
+}
+.related-drug div{
+    text-align: center;
+}
