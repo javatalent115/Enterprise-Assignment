@@ -51,7 +51,7 @@ $(document).on("click", ".search-button", function() {
         producers_id: data.split("\n")[index].split("&&")[11]
     }
     localStorage.setItem("drug-click", JSON.stringify(drug))
-    window.location.href = "http://localhost:8080/drug-infomation.html"
+    window.location.href = "http://localhost:8080/drug-information.html"
 
 });
 
