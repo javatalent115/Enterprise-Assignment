@@ -90,7 +90,7 @@ public class Controller {
                 String[] split = data.split("&&");
                 for (assignment.entity.Producer producer : producers) {
                     if (producer.getId().equals(split[9])) {
-                        Drug drug = new Drug(split[0], split[1], split[2], split[3], split[4], split[5], split[6], split[7], producer, split[10]);
+                        Drug drug = new Drug(split[0], split[1], split[2], split[3], split[4], split[5], split[6], split[7], Integer.parseInt(split[11]), Integer.parseInt(split[12]), producer, split[10]);
                         drugs.add(drug);
                         break;
                     }
@@ -107,6 +107,7 @@ public class Controller {
         for (Drug drug: drugs) {
             drugService.addDrug(drug);
         }
+        drugService.getAllDrugs();
         return "Success";
     }
 
