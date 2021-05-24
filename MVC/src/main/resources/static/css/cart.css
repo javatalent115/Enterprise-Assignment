@@ -1,6 +1,6 @@
 .container-fluid {
     position: relative;
-    height: 350px;
+    height: inherit;
     min-width: 1200px;
 }
 
