@@ -522,7 +522,7 @@ input[type=submit] {
 }
 
 .cart-nav {
-    background-color: #8ee9fd;
+    background-color: #fdc346;
     border-radius: 10px;
     width: fit-content;
     display: flex;
@@ -535,7 +535,7 @@ input[type=submit] {
 }
 
 .cart-nav:hover {
-    background-color: blue;
+    background-color: #a8853f;
 }
 
 .footer {
@@ -646,7 +646,7 @@ input[type=submit] {
     border: 1px solid #E9E9E9;
     box-shadow: 0 1px 1px #999;
     background-color: #DFDFDF;
-    background-image: -webkit-linear-gradient(top, #D0D0D0, #EBEBEB);
+    background-image: -webkit-linear-gradient(top, #4d5a46, #EBEBEB);
     background-image: -moz-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image: -ms-linear-gradient(top, #D0D0D0, #EBEBEB);
     background-image: -o-linear-gradient(top, #D0D0D0, #EBEBEB);
