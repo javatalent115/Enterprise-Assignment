@@ -164,13 +164,15 @@ $(document).on("click", ".cart-btn", function() {
                 isExist = true;
             }
         });
+        if (count === null) count = "0";
+        count = (parseInt(count) + parseInt(drug.amount));
+        localStorage.setItem("cart", count)
+        
         if (!isExist) listItem.push(drug);
         const myJSON = JSON.stringify(listItem);
         localStorage.setItem("cart-item", myJSON)
         setTimeout(function() {
-            if (count === null) count = "0";
-            count = (parseInt(count) + parseInt(drug.amount));
-            localStorage.setItem("cart", count)
+
             $(".cart-nav .item-count").text(localStorage.getItem("cart"));
 
         }, 800);
