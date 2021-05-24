@@ -805,7 +805,11 @@ input[type=submit] {
 .advanced-title {
     font-weight: bold;
 }
-
+.keyword-item a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
 
 /* Modal */
 

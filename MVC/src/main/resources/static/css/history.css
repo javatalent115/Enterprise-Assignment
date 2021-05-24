@@ -420,3 +420,8 @@ input[type=submit] {
     align-items: center;
     gap: 5px;
 }
+.keyword-item a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}

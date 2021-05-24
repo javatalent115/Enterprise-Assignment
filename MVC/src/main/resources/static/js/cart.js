@@ -24,15 +24,15 @@ function initialize() {
             <li class="unitPrice">${data[i].price}$</li>
             <li class="amount">${data[i].amount}</li>
             <li class="totalPrice">${totalPrice}$</li>
+            <li><img src="./images/icons/trash.png" class="trash-image" alt=""></li>
         </ul>`
         totalMedicinePrice += totalPrice
     }
     wrapper.innerHTML += `<ul class="medicine-item">
     <li></li>
-    <li></li>
     <li class = "text-nowrap totalMedicinePrice">Total price (${data.length} products)</li>
     <li></li>
-    <li class = "totalMedicinePrice">${totalMedicinePrice}$</li>
+    <li class = "totalMedicinePrice text-start">${totalMedicinePrice}$</li>
 </ul>`
 }
 
@@ -69,4 +69,24 @@ async function reduceStock(drug) {
             body: JSON.stringify(drug)
         });
     } catch (e) {}
+}
+
+$(document).on("click",".trash-image",function(){
+    let item = $(this).parent().parent();
+    item.remove()
+    let name = item.find(".name").text()
+    removeItemInCart(name)
+    window.location.reload()
+});
+
+function removeItemInCart(name){
+    let cartItem = JSON.parse(localStorage.getItem("cart-item"))
+    for (let i = 0; i < cartItem.length; i++) {
+        if(name == cartItem[i].name){
+            localStorage.setItem("cart",localStorage.getItem("cart")- cartItem[i].amount)
+            cartItem.splice(i,1)
+            break
+        }
+    }
+    localStorage.setItem("cart-item",JSON.stringify(cartItem))
 }

@@ -216,7 +216,12 @@ input:focus {
     min-width: 28.66px;
     width: 40%;
 }
-
+.trash-image {
+    max-width: 25px;
+    min-width: 20px;
+    margin: 0 auto;
+    cursor: pointer;
+}
 .cards {
     width: 100%;
 }

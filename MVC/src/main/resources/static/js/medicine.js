@@ -75,7 +75,6 @@ function checkAccount() {
         $(".cart-nav").css("display", "none")
         $(".amount").css("display", "none")
     } else if (localStorage.getItem("accountType") === "user") {
-        $("li:nth-child(6)").css("display", "none")
         $(".add-image").css("display", "none")
         $(".more-button").css("display", "none")
     } else {
@@ -146,7 +145,7 @@ $(document).on("click", ".cart-btn", function() {
             'left': cart.offset().left + 30,
             'width': 35,
             'height': 35
-        }, 1000, 'easeInOutExpo');
+        }, 800, 'easeInOutExpo');
 
         let id = $(this).parent("li").parent("ul").find(".id").text()
         let name = $(this).parent("li").parent("ul").find(".name").text()
@@ -158,13 +157,6 @@ $(document).on("click", ".cart-btn", function() {
             amount: amount,
             price: price
         };
-        setTimeout(function() {
-            if (count === null) count = "0";
-            count = (parseInt(count) + parseInt(drug.amount));
-            localStorage.setItem("cart", count)
-            $(".cart-nav .item-count").text(localStorage.getItem("cart"));
-
-        }, 1500);
         let isExist = false;
         listItem.forEach(function(object) {
             if (object.id === drug.id) {
@@ -175,6 +167,14 @@ $(document).on("click", ".cart-btn", function() {
         if (!isExist) listItem.push(drug);
         const myJSON = JSON.stringify(listItem);
         localStorage.setItem("cart-item", myJSON)
+        setTimeout(function() {
+            if (count === null) count = "0";
+            count = (parseInt(count) + parseInt(drug.amount));
+            localStorage.setItem("cart", count)
+            $(".cart-nav .item-count").text(localStorage.getItem("cart"));
+
+        }, 600);
+
         imgclone.animate({
             'width': 0,
             'height': 0

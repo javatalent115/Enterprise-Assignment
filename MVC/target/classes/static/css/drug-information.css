@@ -244,3 +244,8 @@ ul {
     padding: 0px 10px;
     font-size: 20px;
 }
+.keyword-item a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}

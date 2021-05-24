@@ -7,11 +7,14 @@ if (localStorage.getItem("accountType") === "guest") {
     document.querySelector("#sign-in").setAttribute("style", "display:flex;")
     document.querySelector("#sign-out").setAttribute("style", "display:none;")
     document.querySelector(".nav-item-cart").setAttribute("style", "display:none;")
+    document.querySelector(".nav-item-customer").setAttribute("style", "display:none;")
 } else {
     if (localStorage.getItem("accountType") === "user") {
-        document.querySelector(".nav-item-cart").setAttribute("style", "display:block;")
+    document.querySelector(".nav-item-customer").setAttribute("style", "display:none;")
+    document.querySelector(".nav-item-cart").setAttribute("style", "display:flex;")
     } else {
-        document.querySelector(".nav-item-cart").setAttribute("style", "display:none;")
+    document.querySelector(".nav-item-customer").setAttribute("style", "display:flex;")
+    document.querySelector(".nav-item-cart").setAttribute("style", "display:none;")
     }
     document.querySelector("#sign-in").setAttribute("style", "display:none;")
     document.querySelector("#sign-out").setAttribute("style", "display:flex;")
