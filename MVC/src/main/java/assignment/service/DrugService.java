@@ -1,6 +1,5 @@
 package assignment.service;
 
-import assignment.controller.DrugController;
 import assignment.entity.Drug;
 import assignment.repository.DrugRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +18,14 @@ public class DrugService {
         this.drugRepo.save(drug);
     }
 
-    public List<Drug> getAllDrugs(){
+    public void getAllDrugs(){
         drugList = this.drugRepo.findAll();
-        System.out.println(Arrays.toString(drugList.toArray()));
         drugList.sort(new Comparator<Drug>() {
             @Override
             public int compare(Drug drug1, Drug drug2)  {
                 return drug1.getId().toLowerCase().compareTo(drug2.getId().toLowerCase());
             }
         });
-        return drugList;
     }
 
     public void deleteByDrugId(String id) {
@@ -40,9 +37,6 @@ public class DrugService {
         return result.orElse(null);
     }
 
-//    public void updateDrugById(String id, Drug newDrug) {
-//        getDrugById(id).replace(newDrug);
-//    }
     public void quickUpdateDrug(String id, int money, int stock){
         Drug drug = getDrugById(id);
         drug.setMoney(money);
@@ -110,11 +104,6 @@ public class DrugService {
         }
         return list;
     }
-
-//    public List<Drug> getRelatedDrugs(String id){
-//        Drug drug = getDrugById(id);
-//        return drug.getDrugsOfSameProducer();
-//    }
 
     public List<Drug> getDrugsByFilter(String group, String type, String sortType){
         List<Drug> result;

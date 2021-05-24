@@ -190,15 +190,6 @@ let length = document.querySelectorAll(".more-button-submenu-wrapper");
 for (let i = 0; i < length.length; i++) {
     document.querySelectorAll(".more-button-submenu-wrapper")[i].setAttribute("style", "display:none")
 }
-// $(".more-button").click(function (e) {
-//   console.log(e)
-//   // if ($(this).parent("li").find(".more-button-submenu-wrapper").css("display") == "block") {
-//   //   $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "none")
-//   // }
-//   // else {
-//   //   $(this).parent("li").find(".more-button-submenu-wrapper").css("display", "block")
-//   // }
-// });
 
 $(document).on("click", ".more-button", function() {
     event.preventDefault()
@@ -227,7 +218,7 @@ $(document).on("click", ".no-add-company", function() {
 
 $(document).on("click", ".confirm-add-company", function() {
     if (quickChange.parent().parent().find(".id").text() <= 0 || quickChange.parent().parent().find(".add-name").text() <= 0 || quickChange.parent().parent().find(".stock").text() <= 0 || quickChange.parent().parent().find(".price").text() <= 0) {
-        alert("All fields must have a value")
+        alert("This must have a value")
         quickChange.parent("li").parent("ul").find(".changeAble").attr("contenteditable", "true")
         quickChange.parent("li").parent("ul").find(".changeAble").css({
             "border": "1px solid red"
@@ -236,17 +227,7 @@ $(document).on("click", ".confirm-add-company", function() {
         quickChange.parent("li").find("img").css("display", "none")
         quickChange.attr("data-bs-toggle", "modal")
         quickChange.attr("data-bs-target", "#add-company-modal")
-    }
-    else if((isNaN(parseInt(quickChange.parent().parent().find(".stock").text()))) || (isNaN(parseInt(quickChange.parent().parent().find(".price").text())))){
-        alert("Stock and Price must be a number")
-        quickChange.parent("li").parent("ul").find(".stock").css({
-            "border": "1px solid red"
-        })
-        quickChange.parent("li").parent("ul").find(".price").css({
-            "border": "1px solid red"
-        })
-    } 
-    else {
+    } else {
         $(".cart-btn").parent().find("img").removeClass("add-trash-image")
         quickChange.parent().parent().find(".add-name").addClass("name")
         quickChange.parent().parent().find("li").removeClass("add-name")
@@ -367,7 +348,7 @@ $(document).ready(function() {
         let index;
         let data = localStorage.getItem("data")
         for (let i = 0; i < data.split("\n").length - 1; i++) {
-            if (data.split("\n")[i].split("&&")[1] == advance.parent().parent().parent().parent().find(".name").text()) {
+            if (data.split("\n")[i].split("&&")[1] === advance.parent().parent().parent().parent().find(".name").text()) {
                 index = i
                 break
             }
@@ -421,13 +402,6 @@ $(document).on("click", ".confirm-delete", function() {
     }
 });
 
-$(document).on("click", ".trash-image", function() {
-
-    // event.preventDefault()
-    // $(this).parent("li").parent("ul").remove()
-    // deleteDrug($(this).parent("li").parent("ul").find(".id").text())
-});
-
 async function deleteDrug(id) {
     try {
         let res = await fetch('http://localhost:8080/drug/deleteDrug', {
@@ -447,7 +421,7 @@ $(document).on("click", ".add-image", function() {
                         <li class="changeAble id" contenteditable="true"></li>
                         <li class="changeAble add-name" contenteditable="true"></li>
                         <li class="changeAble stock" contenteditable="true"></li>
-                        <li class="changeAble amount" contenteditable="true"><div>1</div><img class = "increase-amount-image" src="./images/increase-amount-image.png" alt=""></li>
+                        <li class="changeAble amount" contenteditable="true"><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
                         <li class="changeAble price" contenteditable="true"></li>
                         <li>
                             <div class="done" data-bs-toggle="modal" data-bs-target="#add-company-modal">Done</div>
@@ -479,10 +453,6 @@ $(document).on("click", ".add-image", function() {
     checkAccount()
 });
 
-// function reset() {
-//     window.localStorage.clear();
-//     document.querySelector(".item-count").innerHTML = parseInt(0 + localStorage.getItem("cart"))
-// }
 
 var Pagination = {
 
