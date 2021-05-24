@@ -167,7 +167,7 @@ $(document).on("click", ".cart-btn", function() {
         if (count === null) count = "0";
         count = (parseInt(count) + parseInt(drug.amount));
         localStorage.setItem("cart", count)
-        
+
         if (!isExist) listItem.push(drug);
         const myJSON = JSON.stringify(listItem);
         localStorage.setItem("cart-item", myJSON)
@@ -228,7 +228,7 @@ $(document).on("click", ".confirm-add-company", function() {
         quickChange.attr("data-bs-toggle", "modal")
         quickChange.attr("data-bs-target", "#add-company-modal")
     }
-    else if((isNaN(parseInt(quickChange.parent().parent().find(".stock").text()))) || (isNaN(parseInt(quickChange.parent().parent().find(".price").text())))){
+    else if(!(/^\d+$/).test(quickChange.parent().parent().find(".stock").text()) || (!(/^\d+$/).test(quickChange.parent().parent().find(".price").text()))){
         alert("Stock and Price must be a number")
         quickChange.parent("li").parent("ul").find(".stock").css({
             "border": "1px solid red"
@@ -236,7 +236,7 @@ $(document).on("click", ".confirm-add-company", function() {
         quickChange.parent("li").parent("ul").find(".price").css({
             "border": "1px solid red"
         })
-    } 
+    }
     else {
         $(".cart-btn").parent().find("img").removeClass("add-trash-image")
         quickChange.parent().parent().find(".add-name").addClass("name")
