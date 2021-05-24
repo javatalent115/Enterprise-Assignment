@@ -10,7 +10,7 @@ body {
 
 .container-fluid::after {
     content: "";
-    background: url("./images/background/home-background.jpg") no-repeat;
+    background: url("../images/background/home-background.jpg") no-repeat;
     background-size: 100% 100%;
     width: 100%;
     position: absolute;
@@ -125,7 +125,7 @@ input:focus {
 }
 
 .search-wrapper button {
-    background: white url("./images/icons/search-image.png") no-repeat;
+    background: white url("../images/icons/search-image.png") no-repeat;
     background-size: 100% 100%;
     width: 33px;
     height: 30px;
@@ -235,7 +235,7 @@ body {
 
 .container-fluid::after {
     content: "";
-    background: url("./images/background/home-background.jpg") no-repeat;
+    background: url("../images/background/home-background.jpg") no-repeat;
     background-size: 100% 100%;
     width: 100%;
     position: absolute;
@@ -350,7 +350,7 @@ input:focus {
 }
 
 .search-wrapper button {
-    background: white url("./images/icons/search-image.png") no-repeat;
+    background: white url("../images/icons/search-image.png") no-repeat;
     background-size: 100% 100%;
     width: 33px;
     height: 30px;
@@ -458,7 +458,7 @@ input[type=submit] {
 }
 
 .search-button-2 {
-    background: url("./images/icons/search-image.png") no-repeat;
+    background: url("../images/icons/search-image.png") no-repeat;
     background-size: 100% 100%;
     width: 33px;
     height: 30px;
@@ -766,7 +766,7 @@ input[type=submit] {
 }
 
 .a {
-    background-image: url("./images/background/modify-modal-background.png");
+    background-image: url("../images/background/modify-modal-background.png");
     background-size: 100% 100%;
 }
 

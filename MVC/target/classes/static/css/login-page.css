@@ -6,7 +6,7 @@
     
     .container::before {
         content: "";
-        background: url("./images/background/login.png") no-repeat;
+        background: url("../images/background/login.png") no-repeat;
         background-size: 100% 100%;
         position: absolute;
         top: 0;

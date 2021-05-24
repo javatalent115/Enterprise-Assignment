@@ -44,7 +44,7 @@ async function getCustomerByUsername(keyword) {
                 else continue
                 wrapper.innerHTML +=
                     `<ul class="customer-item">
-            <li class="username" style="flex: 20%;"><a href="history.html" id="${result[i]["username"]}" onclick="view_customer_history(this.id)">${username}</a></li>
+            <li class="username" style="flex: 20%;"><a href="../history.html" id="${result[i]["username"]}" onclick="view_customer_history(this.id)">${username}</a></li>
             <li class="name" style="flex: 20%;">${result[i]["firstname"] + ", " + result[i]["lastname"]}</li>
             <li class="email" style="flex: 30%;">${result[i]["email"]}</li>
             <li class="last-login" style="flex: 30%;">${result[i]["lastLogin"]}</li>`

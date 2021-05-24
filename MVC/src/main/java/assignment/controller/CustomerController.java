@@ -19,11 +19,7 @@ public class CustomerController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<Customer> getAllCustomers(){
-        List<Customer> customerList = customerService.getAllCustomers();
-//        for (Customer c : customerList) {
-//            c.setOrderList(new ArrayList<>());
-//        }
-        return customerList;
+        return customerService.getAllCustomers();
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
@@ -42,11 +38,6 @@ public class CustomerController {
             return "";
         }
     }
-
-//    @RequestMapping(path = "", method = RequestMethod.DELETE)
-//    public void deleteAllCustomers(){
-//        customerService.deleteAllCustomer();
-//    }
 
     @RequestMapping(path = "/deleteCustomer", method = RequestMethod.DELETE)
     public void deleteCustomerByUsername(@RequestBody String username) {

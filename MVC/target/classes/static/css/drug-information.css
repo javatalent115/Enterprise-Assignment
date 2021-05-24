@@ -6,7 +6,7 @@
 
 .container-fluid::after {
     content: "";
-    background: url("./images/background/home-background.jpg") no-repeat;
+    background: url("../images/background/home-background.jpg") no-repeat;
     background-size: 100% 100%;
     position: absolute;
     top: 0;
@@ -169,11 +169,11 @@ ul {
 }
 
 .carousel-control-next-icon {
-    background-image: url("images/icons/arrow-right.png");
+    background-image: url("../images/icons/arrow-right.png");
 }
 
 .carousel-control-prev-icon {
-    background-image: url("images/icons/arrow-left.png");
+    background-image: url("../images/icons/arrow-left.png");
 }
 
 .title {

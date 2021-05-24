@@ -443,7 +443,7 @@ $(document).on("click", ".add-image", function() {
                         <li class="changeAble price" contenteditable="true"></li>
                         <li>
                             <div class="done" data-bs-toggle="modal" data-bs-target="#add-company-modal">Done</div>
-                            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;"">
+                            <img src="../images/icons/more.png" class="more-image more-button" style="cursor: pointer;"">
                             <div class="more-button-submenu-wrapper" >
                                 <ul class="more-button-submenu">
                                     <li class="more-button-submenu-item quick-change">
@@ -456,8 +456,8 @@ $(document).on("click", ".add-image", function() {
                             </div>
                         </li>
                         <li>
-                            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-                            <img src="./images/icons/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+                            <img src="../images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+                            <img src="../images/icons/trash.png" class="trash-image add-trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
                         </li>
                     </ul>
   `)
@@ -596,9 +596,9 @@ var Pagination = {
     Create: function(e) {
 
         var html = [
-            '  <a class = "page"><img src="./images/icons/arrow-left.png" alt=""></a>', // previous button
+            '  <a class = "page"><img src="../images/icons/arrow-left.png" alt=""></a>', // previous button
             '<span ></span>', // pagination container
-            '  <a class = "page"><img src="./images/icons/arrow-right.png" alt=""></a>' // next button
+            '  <a class = "page"><img src="../images/icons/arrow-right.png" alt=""></a>' // next button
         ];
 
         e.innerHTML = html.join('');
@@ -666,11 +666,11 @@ $(document).on("click", ".search-button-2", function() {
         <li class="id">${data.split("\n")[index].split("&&")[0]}</li>
         <li class="name">${data.split("\n")[index].split("&&")[1]}</li>
         <li class="changeAble stock">${data.split("\n")[index].split("&&")[10]}</li>
-        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="./images/icons/increase-amount-image.png" alt=""></li>
+        <li class="changeAble amount"><div>1</div><img class = "increase-amount-image" src="../images/icons/increase-amount-image.png" alt=""></li>
         <li class="changeAble price">${data.split("\n")[index].split("&&")[9]}</li>
         <li>
             <div class="done">Done</div>
-            <img src="./images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
+            <img src="../images/icons/more.png" class="more-image more-button" style="cursor: pointer;">
             <div class="more-button-submenu-wrapper">
                 <ul class="more-button-submenu">
                     <li class="more-button-submenu-item quick-change">
@@ -684,8 +684,8 @@ $(document).on("click", ".search-button-2", function() {
             </div>
         </li>
         <li>
-            <img src="./images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
-            <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
+            <img src="../images/icons/cart.png" class="cart-btn cart-images" style="cursor: pointer;">
+            <img src="../images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
         </li>
     </ul>`
             checkAccount()

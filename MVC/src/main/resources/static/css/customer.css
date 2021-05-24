@@ -12,7 +12,7 @@ body {
     content: "";
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background: url("./images/background/home-background.jpg");
+    background: url("../images/background/home-background.jpg");
     width: 100%;
     position: absolute;
     top: 0;
@@ -125,7 +125,7 @@ input:focus {
 }
 
 .search-wrapper button {
-    background: white url("./images/icons/search-image.png") no-repeat;
+    background: white url("../images/icons/search-image.png") no-repeat;
     background-size: 100% 100%;
     width: 33px;
     height: 30px;
@@ -232,7 +232,7 @@ input[type=submit] {
 }
 
 .search-button-2 {
-    background: white url("./images/icons/search-image.png") no-repeat;
+    background: white url("../images/icons/search-image.png") no-repeat;
     background-size: 100% 100%;
     width: 33px;
     height: 30px;

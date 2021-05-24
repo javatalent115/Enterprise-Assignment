@@ -6,7 +6,7 @@
 
 .container-fluid::after {
     content: "";
-    background: url("./images/background/home-background.jpg") no-repeat;
+    background: url("../images/background/home-background.jpg") no-repeat;
     background-size: 100% 100%;
     position: absolute;
     top: 0;
@@ -99,4 +99,64 @@ ul {
     position: absolute;
     top: 15px;
     left: 27px;
+}
+
+.footer {
+    padding-top: 20px;
+    height: inherit;
+    background-color: grey;
+    display: flex;
+    color: white;
+    justify-content: space-around;
+}
+
+.icon-wrapper {
+    display: flex;
+    gap: 20px;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-item-1 h3,
+.footer-item-2 h3,
+.footer-item-3 h3 {
+    position: relative;
+}
+
+.footer-item-1 h3::before,
+.footer-item-2 h3::before,
+.footer-item-3 h3::before {
+    content: "";
+    background: lightblue;
+    position: absolute;
+    width: 100%;
+    height: 4px;
+    bottom: -5px;
+}
+
+.contact {
+    display: flex;
+    gap: 15px;
+    justify-content: left;
+    align-items: center;
+    font-size: 25px;
+}
+
+.keyword {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: left;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.keyword-item {
+    width: fit-content;
+    background-color: #999;
+    border: 2px solid white;
+    padding: 0px 10px;
+    font-size: 20px;
 }
