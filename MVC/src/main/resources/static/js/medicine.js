@@ -173,7 +173,7 @@ $(document).on("click", ".cart-btn", function() {
             localStorage.setItem("cart", count)
             $(".cart-nav .item-count").text(localStorage.getItem("cart"));
 
-        }, 600);
+        }, 800);
 
         imgclone.animate({
             'width': 0,
