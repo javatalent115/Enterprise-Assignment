@@ -218,7 +218,7 @@ $(document).on("click", ".no-add-company", function() {
 
 $(document).on("click", ".confirm-add-company", function() {
     if (quickChange.parent().parent().find(".id").text() <= 0 || quickChange.parent().parent().find(".add-name").text() <= 0 || quickChange.parent().parent().find(".stock").text() <= 0 || quickChange.parent().parent().find(".price").text() <= 0) {
-        alert("This must have a value")
+        alert("All fields must have a value")
         quickChange.parent("li").parent("ul").find(".changeAble").attr("contenteditable", "true")
         quickChange.parent("li").parent("ul").find(".changeAble").css({
             "border": "1px solid red"
@@ -227,7 +227,17 @@ $(document).on("click", ".confirm-add-company", function() {
         quickChange.parent("li").find("img").css("display", "none")
         quickChange.attr("data-bs-toggle", "modal")
         quickChange.attr("data-bs-target", "#add-company-modal")
-    } else {
+    }
+    else if((isNaN(parseInt(quickChange.parent().parent().find(".stock").text()))) || (isNaN(parseInt(quickChange.parent().parent().find(".price").text())))){
+        alert("Stock and Price must be a number")
+        quickChange.parent("li").parent("ul").find(".stock").css({
+            "border": "1px solid red"
+        })
+        quickChange.parent("li").parent("ul").find(".price").css({
+            "border": "1px solid red"
+        })
+    } 
+    else {
         $(".cart-btn").parent().find("img").removeClass("add-trash-image")
         quickChange.parent().parent().find(".add-name").addClass("name")
         quickChange.parent().parent().find("li").removeClass("add-name")
