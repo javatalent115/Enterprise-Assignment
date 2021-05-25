@@ -13,21 +13,6 @@ async function initialize() {
     $(".type").text(drug.type)
     $(".producer").text(drug.producers_id)
     $(".drug-image").attr("src", returnImage(drug.name))
-    document.querySelector(".producer").innerHTML +=`<span class="dropdown">
-    <img src="./images/icons/infor-icon.png" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-    <div class="dropdown-menu dropdown-menu-wrapper">
-        <div class="dropdown-menu-id row justify-content-center">
-            <span class="col-4">ID: </span>
-            <span class="col-3 dropdown-menu-id-content">123</span>
-        </div>
-        <div class="dropdown-menu-name row justify-content-center">
-            <span class="col-4">Name: </span>
-            <span class="col-3 dropdown-menu-name-content">123</span>
-        </div>
-        <div class="related-drug">
-        </div>
-    </div>
-</span>`
     await addRelatedDrug()
     await addRelatedCompany(drug.producers_id)
 }
@@ -46,6 +31,33 @@ async function addRelatedCompany(id){
             let data = await res.json();
             let result = Object.values(data);
             console.log(result)
+            document.querySelector(".producer").innerHTML +=`<span class="dropdown">
+        <img src="./images/icons/infor-icon.png" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        <div class="dropdown-menu dropdown-menu-wrapper">
+            <div class="dropdown-menu-name row justify-content-center">
+                <div class="col fw-bold">${result[0]}</div>
+            </div>
+            <div class="text-center fw-bold text-secondary">Related Drugs</div>
+            <div class="related-drug">
+            </div>
+        </div>
+    </span>`
+            document.querySelector(".related-drug").innerHTML+= `
+    <div class="row justify-content-end">
+        <div class="col-5 fw-bold">ID</div>
+        <div class="col-1">|</div>
+        <div class="col-6 text-center fw-bold">Name</div>
+    </div>
+    `
+            for (let i = 0; i < result[2].split(",").length; i++) {
+                document.querySelector(".related-drug").innerHTML+= `
+        <div class="row">
+            <div class="col-5 ">${result[2].split(",")[i].split("---")[0]}</div>
+            <div class="col-1">-</div>
+            <div class="col-6 text-center">${result[2].split(",")[i].split("---")[1]}</div>
+        </div>
+        `
+            }
         }
     }
     catch(e){}

@@ -285,7 +285,6 @@ async function addDrug(drug) {
             body: JSON.stringify(drug)
         });
         if (res.ok) {
-            console.log(res)
             let data = await res.json();
             let result = Object.values(data);
             if (result[0] !== "failed") {
