@@ -882,10 +882,14 @@ async function addItem(item) {
                   <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
               </li>
           </ul>`
+                    if(data.split("\n")[i].split("&&")[10] == "0"){
+                        document.querySelectorAll(".cart-images")[i+1].setAttribute("style","visibility:hidden;")
+                    }
                 }
             }
         }
     } catch (e) {
+        console.log(e)
 
     }
 
