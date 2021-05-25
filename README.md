@@ -4,7 +4,9 @@
 
 ****** NOTE *******
 
-If your database is empty or  not contain enough entities (drugs, producers, orders, order_details, customers), you should run "http://localhost:8080/setDatabase" first to setup your database and wait until receiving "success" meassage.
+- Change the port number and password following your database.
+
+- If your database is empty or  not contain enough entities (drugs, producers, orders, order_details, customers), you should run "http://localhost:8080/setDatabase" first to setup your database and wait until receiving "success" meassage.
 
 *******************
 
