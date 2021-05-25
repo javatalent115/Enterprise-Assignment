@@ -6,9 +6,15 @@ function invalid_user() {
 
 invalid_user()
 
+$(document).on("click", ".dropdown-item-sort", async function() {
+    await getAllCustomer($(this).text());
+});
+
 function view_customer_history(element) {
     localStorage.setItem("user", element)
 }
+
+
 
 function removeAllCustomer() {
     let x = document.querySelectorAll(".customer-item").length - 1
@@ -28,12 +34,13 @@ async function getCustomerByUsername(keyword) {
     $(".spinner").css("display", "block")
     let wrapper = document.querySelector(".customers")
     try {
-        let res = await fetch('http://localhost:8080/customer', {
-            method: 'GET',
+        let res = await fetch('http://localhost:8080/customer/getAll', {
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+            body: "Name (A-Z)"
         });
         if (res.ok) {
             let data = await res.json();
@@ -54,22 +61,26 @@ async function getCustomerByUsername(keyword) {
     $(".spinner").css("display", "none")
 }
 
-async function getAllCustomer() {
+async function getAllCustomer(sortType) {
+    localStorage.setItem("currentPage", "CustomerPage")
     removeAllCustomer()
     $(".spinner").css("display", "block")
     let wrapper = document.querySelector(".customers")
     try {
-        let res = await fetch('http://localhost:8080/customer', {
-            method: 'GET',
+        let res = await fetch('http://localhost:8080/customer/getAll', {
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
+            body: sortType
         });
         if (res.ok) {
             let data = await res.json();
             let result = Object.values(data);
             for (let i = 0; i < result.length; i++) {
+                autoName.push(result[i]["username"]);
+
                 wrapper.innerHTML +=
                     `<ul class="customer-item">
             <li class="username" style="flex: 20%;"><a href="history.html" id="${result[i]["username"]}" onclick="view_customer_history(this.id)">${result[i]["username"]}</a></li>
@@ -82,4 +93,4 @@ async function getAllCustomer() {
     $(".spinner").css("display", "none")
 }
 
-getAllCustomer()
+getAllCustomer("Name (A-Z)")
