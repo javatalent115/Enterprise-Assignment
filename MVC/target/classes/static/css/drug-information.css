@@ -274,10 +274,50 @@ ul {
 }
 .related-drug{
     border: 1px solid black;
-    height: 50px;
+    height: 100px;
+    width: 300px;
     overflow: scroll;
     margin: 0 10px;
 }
 .related-drug div{
     text-align: center;
+}
+.modal-content {
+    background-color: #8ee9fd;
+}
+
+.modal-header {
+    border: none;
+    padding: 0rem 1rem !important;
+}
+
+.about-us {
+    background-color: #18bff3;
+    font-size: 25px;
+    color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+    position: relative;
+    top: -25px;
+    left: 20px;
+}
+
+.modal-body {
+    margin: 0px 35px;
+    background-color: white;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.done-button {
+    color: white;
+    background-color: #77f58b;
+    padding: 0px 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+.modal-dialog-scrollable .modal-content {
+    overflow: visible;
 }
