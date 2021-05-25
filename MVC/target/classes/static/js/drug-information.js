@@ -27,11 +27,11 @@ async function addRelatedCompany(id){
             body: id
         });
 
-    if (res.ok) {
-        let data = await res.json();
-        let result = Object.values(data);
-        console.log(result)
-        document.querySelector(".producer").innerHTML +=`<span class="dropdown">
+        if (res.ok) {
+            let data = await res.json();
+            let result = Object.values(data);
+            console.log(result)
+            document.querySelector(".producer").innerHTML +=`<span class="dropdown">
         <img src="./images/icons/infor-icon.png" alt="" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
         <div class="dropdown-menu dropdown-menu-wrapper">
             <div class="dropdown-menu-name row justify-content-center">
@@ -42,23 +42,23 @@ async function addRelatedCompany(id){
             </div>
         </div>
     </span>`
-    document.querySelector(".related-drug").innerHTML+= `
+            document.querySelector(".related-drug").innerHTML+= `
     <div class="row justify-content-end">
         <div class="col-5 fw-bold">ID</div>
         <div class="col-1">|</div>
         <div class="col-6 text-center fw-bold">Name</div>
     </div>
     `
-    for (let i = 0; i < result[2].split(",").length; i++) {
-        document.querySelector(".related-drug").innerHTML+= `
+            for (let i = 0; i < result[2].split(",").length; i++) {
+                document.querySelector(".related-drug").innerHTML+= `
         <div class="row">
             <div class="col-5 ">${result[2].split(",")[i].split("---")[0]}</div>
             <div class="col-1">-</div>
             <div class="col-6 text-center">${result[2].split(",")[i].split("---")[1]}</div>
         </div>
         `
-    }
-}
+            }
+        }
     }
     catch(e){}
 }
