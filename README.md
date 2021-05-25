@@ -1,4 +1,6 @@
-# Enterprise-Assignment
+*********************************************** MEDICINE ONLINE *******************************************************
+
+
 
 ****** NOTE *******
 
@@ -15,8 +17,8 @@ If your database is empty or  not contain enough entities (drugs, producers, ord
 
 **** Admin account **** 
 
- - username = "admin123" 
- - password = "admin123" 
+ username = "admin123" 
+ password = "admin123" 
 
 ***********************
 
@@ -64,7 +66,7 @@ If your database is empty or  not contain enough entities (drugs, producers, ord
 			1. Quick change: Change drug's money and stock only
 			2. Advance chaneg: Change all drug's information except its id, name, and producer. 
 		- Then, you can move to the Customer Page by clicking to "Customer" in navigation bar. 
-		- In the Customer Page, you are able to view the list of customers who did registe in your website with following the datas (last-login, email, etc.).
+		- In the Customer Page, you are able to view the list of customers who did register in your website with following the datas (last-login, email, etc.).
 		- Moreover, you can view the purhase history of a specific customer by clicking into its username.
 		- Lastly, you can move to Sign-in Page by clicking "sign-out" to logout your account.
 

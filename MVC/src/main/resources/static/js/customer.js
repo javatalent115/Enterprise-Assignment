@@ -79,8 +79,7 @@ async function getAllCustomer(sortType) {
             let data = await res.json();
             let result = Object.values(data);
             for (let i = 0; i < result.length; i++) {
-                autoName.push(result[i]["username"]);
-
+                if (!autoName.includes(result[i]["username"])) autoName.push(result[i]["username"]);
                 wrapper.innerHTML +=
                     `<ul class="customer-item">
             <li class="username" style="flex: 20%;"><a href="history.html" id="${result[i]["username"]}" onclick="view_customer_history(this.id)">${result[i]["username"]}</a></li>

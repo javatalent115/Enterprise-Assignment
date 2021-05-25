@@ -39,8 +39,9 @@ function initialize() {
 $(document).ready(initialize())
 
 $(document).ready(function() {
-    $("#confirm-purchase-modal").on("show.bs.modal", function(event) {
-        if (parseInt(localStorage.getItem("cart")) > 0) {
+    if (parseInt(localStorage.getItem("cart")) > 0) {
+        console.log(parseInt(localStorage.getItem("cart")))
+        $("#confirm-purchase-modal").on("show.bs.modal", function (event) {
             let data = JSON.parse(localStorage.getItem("cart-item"));
             let drug = {
                 id: "",
@@ -55,8 +56,12 @@ $(document).ready(function() {
             setTimeout(() => {
                 window.location.href = "http://localhost:8080/home-page.html"
             }, 1000);
-        }
-    });
+
+        });
+    }
+    else{
+        $(".content").html("Empty Cart! Please try again!")
+    }
 });
 
 async function reduceStock(drug) {
@@ -128,7 +133,7 @@ function purchase() {
 
 async function createOrder(order) {
     try {
-        let res = await fetch('http://localhost:8080/order', {
+        await fetch('http://localhost:8080/order', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -140,9 +145,9 @@ async function createOrder(order) {
     return 404;
 }
 
-async function createOrderDetail(orderDetail, orderId) {
+async function createOrderDetail(orderDetail) {
     try {
-        let res = await fetch('http://localhost:8080/orderDetail', {
+        await fetch('http://localhost:8080/orderDetail', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
