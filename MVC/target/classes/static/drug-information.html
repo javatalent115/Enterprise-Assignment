@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drug Information Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        localStorage.setItem("currentPage", "homePage")
+    </script>
+    <link rel="stylesheet" href="css/drug-information.css">
+</head>
+
+<body>
+<div class="container-fluid">
+    <nav class="nav-bar">
+        <ul>
+            <li class="nav-item">
+                <a href="home-page.html">Home Page</a>
+            </li>
+            <li class="nav-item">
+                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="medicine.html">Medicine</a>
+            </li>
+            <li class="nav-item nav-item-cart">
+                <a href="cart.html"> Cart</a>
+            </li>
+            <li class="nav-item nav-item-customer">
+                <a href="customer.html">Customer</a>
+            </li>
+            <li class="nav-item sign">
+                <a href="login-page.html" id="sign-in">Sign-in</a>
+                <a href="" id="sign-out">Sign-out</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="header">
+        <div style="text-shadow: 2px 2px 4px #000000;">
+            Welcome to <br>
+        </div>
+        <div style="margin-left: 100px; text-shadow: 2px 2px 4px #000000;">
+            Medicine <br>
+        </div>
+        <div style="margin-left: 200px; text-shadow: 2px 2px 4px #000000;">
+            Online
+        </div>
+    </div>
+</div>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6"><img class="drug-image" src="" alt="Loading"></div>
+        <div class="col-md-6" style="margin: auto;padding-left: 100px;border: solid 1px;padding-top: 50px;padding-bottom: 50px;">
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span class="title">ID: </span>
+                    <span class="detail id"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span class="title">Name: </span>
+                    <span class="detail name"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span class="title">Preperation: </span>
+                    <span class="detail preperation text-break"></span>
+                </div>
+                <div class="col-6">
+                    <span class="title">Ingredients: </span>
+                    <span class="detail ingredients"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span class="title">Packaging: </span>
+                    <span class="detail packaging"></span>
+                </div>
+                <div class="col-6">
+                    <span class="title">Dosage: </span>
+                    <span class="detail dosage"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span class="title">Group: </span>
+                    <span class="detail group"></span>
+                </div>
+                <div class="col-6">
+                    <span class="title">Stock: </span>
+                    <span class="detail stock"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span class="title">Type: </span>
+                    <span class="detail type"></span>
+                </div>
+                <div class="col-6">
+                    <span class="title">Price: </span>
+                    <span class="detail price"></span>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-6">
+                    <span class="title">Country: </span>
+                    <span class="detail country"></span>
+                </div>
+                <div class="col-6">
+                    <span class="title">Producer: </span>
+                    <span class="detail producer"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mb-5">
+    <h3 style="text-align: center;">Related drug (same producer)</h3>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner" style="border: dashed; padding: 40px 20px 20px;">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-item-1">
+        <h3 style="color:lightblue;">Connect with us</h3>
+        <div class="icon-wrapper">
+            <div class="icon">
+                <a href=""><img src="./images/icons/icon-1.png " width="55" height="50" alt=""></a>
+            </div>
+            <div class="icon">
+                <a href=""><img src="./images/icons/icon-2.png" width="55" height="66" alt=""></a>
+            </div>
+            <div class="icon">
+                <a href=""><img src="./images/icons/icon-3.png" width="55" height="55" alt=""></a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-item-2">
+        <h3 style="color:lightblue;">Hotline (7h-22h)</h3>
+        <div class="contact">
+            <img src="./images/icons/phone-call.png" alt="">
+            <p>083-6598249</p>
+        </div>
+    </div>
+    <div class="footer-item-3">
+        <h3 style="color:lightblue;">Keyword</h3>
+        <div class="keyword">
+            <div class="keyword-item">
+                Pharmacy
+            </div>
+            <div class="keyword-item">
+                Drug
+            </div>
+            <div class="keyword-item">
+                Store
+            </div>
+            <div class="keyword-item">
+                Health
+            </div>
+            <div class="keyword-item">
+                Health Care
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="about-us">
+                    About us
+                </div>
+            </div>
+            <div class="modal-body">
+                <STRONG>Description:</STRONG>
+                <div class="content">
+                    Welcome to Medicine Online – Secure and easy shopping for a healthier lifestyle!<br>
+                    <br>
+                    Our mission is: To be the first choice for pharmacy, health, and beauty - caring for people, customers and communities everywhere.<br>
+                    <br>
+                    We're here to make you and your family have a good time, stay healthy, and be engaged.<br>
+                    <br>
+                    Founded in April 2021, thousands of customers count on our pharmacy to obtain high-quality generic and brand drugs from reliable and tested suppliers all over the world. Your better health isn't a fluke; it's the result of a rigorous research analysis conducted by the best health-care experts, and we're here to share the findings with you.<br>
+                    <br>
+                    We have a wide range of medicines from Western medicine to Oriental medicine at Pharmacy Store, as well as items to help you take care of your health and beauty for yourself and your loved ones. The following are the key product categories that we provide:<br>
+                    <br>
+                    <pre>  - Western Medicine</pre>
+                    <pre>  - Oriental Medicine</pre>
+                    <pre>  - Dietary Supplement</pre>
+                    <pre>  - Vitamin</pre>
+                    It's time for you to unwind, and it's time for us to look after your health!<br>
+                    <br>
+                    Free, safe, and enjoyable shopping at Pharmacy Store! Let's get it started!<br>
+                </div>
+            </div>
+            <div class="modal-footer" style="border:none;margin: 0px 35px; background-color: white;margin-bottom: 45px;">
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/drug-information.js"></script>
+<script src="js/sign-in.js"></script>
+<script src="js/on-click-drug-image.js"></script>
+
+</html>

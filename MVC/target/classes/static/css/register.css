@@ -1,0 +1,280 @@
+/* c516ff9163fefeaa5974fc7c8855cd02 1 */
+
+* {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+}
+body {
+    height: 1px;
+}
+.container {
+    position: absolute;
+    background: url("../images/background/register-background.jpg") no-repeat;
+    background-size: 100% 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+
+
+
+/* 
+
+/* Frame 1 */
+
+.wrapper {
+    position: absolute;
+    width: 95%;
+    height: 80%;
+    left: 45px;
+    top: 100px;
+    background: #FFFFFF;
+    border: 3px solid #62BABF;
+    box-sizing: border-box;
+    border-radius: 15px;
+}
+
+
+/* Group 50 */
+
+
+/* position: absolute;
+width: 178px;
+height: 51px;
+left: 578.12px;
+top: 702.86px; */
+
+
+/* Rectangle 5 */
+
+#block_register {
+    position: absolute;
+    background: #0c2147;
+    z-index: 1;
+    height: 45px;
+    width: 150px;
+    left: 20px;
+    top: 80px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Frame 2 */
+
+#wrapper_account {
+    position: absolute;
+    top: 30px;
+    left: 20px;
+    height: 80%;
+    width: 40%;
+}
+
+#wrapper_account input {
+    position: relative;
+    width: 95%;
+    height: 30px;
+    font-size: 20px;
+    margin: auto;
+    background: #D7E9F5;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
+}
+
+#wrapper_account .text {
+    position: relative;
+    font-size: 20px;
+    line-height: 28px;
+    color: #000000;
+    margin: 10px;
+}
+
+
+/* Create your account */
+
+#text_account {
+    position: relative;
+    font-size: 30px;
+    line-height: 47px;
+    /* identical to box height */
+    color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    text-align: center;
+}
+
+
+/* I accept the Terms of Use & Privacy Policy */
+
+#text_term {
+    font-size: 20px;
+    line-height: 20px;
+    color: #000000;
+    text-align: center;
+    width: 100%;
+}
+
+
+/* Line 8 */
+
+#line_vert {
+    position: relative;
+    height: 70%;
+    width: 0px;
+    left: 43%;
+    top: 50px;
+    border: 2px solid #29B6F6;
+}
+
+
+/* Frame 3 */
+
+#wrapper_info {
+    position: absolute;
+    top: 30px;
+    left: 45%;
+    height: 80%;
+    width: 50%;
+}
+
+#wrapper_info .text {
+    position: relative;
+    font-size: 20px;
+    line-height: 28px;
+    color: #000000;
+    margin: 10px;
+}
+
+
+/* Your account info */
+
+#text_info {
+    position: relative;
+    font-size: 30px;
+    line-height: 47px;
+    width: 100%;
+    text-align: center;
+    /* identical to box height */
+    color: rgba(0, 0, 0, 0.5);
+}
+
+#wrapper_info input {
+    position: relative;
+    width: 95%;
+    height: 30px;
+    font-size: 20px;
+    margin: auto;
+    background: #D7E9F5;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
+}
+
+#wrapper_info #address {
+    position: relative;
+    width: 95%;
+    height: 90px;
+    font-size: 20px;
+    margin: auto;
+    background: #D7E9F5;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
+}
+
+
+/* Group 51 */
+
+
+/* position: absolute;
+width: 546.85px;
+height: 78.24px;
+left: 115.27px;
+top: 145.29px; */
+
+
+/* Rectangle 2 */
+
+#button_register {
+    position: relative;
+    background: #29B6F6;
+    width: 150px;
+    height: 45px;
+    top: 100px;
+    left: 45%;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+}
+
+#button_register:hover {
+    background: darkblue;
+}
+
+
+/* Register */
+
+.text_register {
+    position: absolute;
+    font-size: 36px;
+    line-height: 42px;
+    text-align: center;
+    color: white;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Medicine Online */
+
+#header_medicine {
+    position: absolute;
+    font-size: 64px;
+    line-height: 75px;
+    width: 100%;
+    /* identical to box height */
+    text-align: center;
+    color: #2C61EA;
+}
+
+@-webkit-keyframes flash {
+    0% {
+        color: black;
+        opacity: 1;
+    }
+    16% {
+        color: red;
+    }
+    33% {
+        color: black;
+    }
+    50% {
+        color: red;
+    }
+    66% {
+        color: black;
+    }
+    84% {
+        color: red;
+    }
+    100% {
+        color: black
+    }
+}
+
+.flash {
+    -webkit-animation-name: flash;
+    -webkit-animation-duration: 900ms;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+#error-text {
+    font-size: 30px;
+    color: red;
+    text-align: center;
+}
