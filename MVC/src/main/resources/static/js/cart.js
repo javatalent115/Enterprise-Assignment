@@ -59,6 +59,9 @@ $(document).ready(function() {
 
         });
     }
+    else{
+        $(".content").html("Empty Cart! Please try again!")
+    }
 });
 
 async function reduceStock(drug) {
