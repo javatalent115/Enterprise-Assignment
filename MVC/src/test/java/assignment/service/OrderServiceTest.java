@@ -2,9 +2,7 @@ package assignment.service;
 
 import assignment.entity.Customer;
 import assignment.entity.Order;
-import assignment.entity.Producer;
 import assignment.repository.OrderRepo;
-import assignment.repository.ProducerRepo;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +33,10 @@ public class OrderServiceTest {
         Order order1 = new Order("O1", new Customer("a", "a", "a", "a", "a", "a", "a"), "today", "COD", 10);
         Order order2 = new Order("O2", new Customer("b", "b", "b", "b", "b", "b", "b"), "yesterday", "COD", 10);
         Order order3 = new Order("O3", new Customer("a", "a", "a", "a", "a", "a", "a"), "today", "COD", 10);
-        List<Order> orders = Arrays.asList(order1, order2, order3);
+        List<Order> orders = new ArrayList<>();
+        orders.add(order1);
+        orders.add(order2);
+        orders.add(order3);
 
         Mockito.when(orderRepo.save(Mockito.any(Order.class))).thenReturn(new Order());
 
@@ -51,14 +53,16 @@ public class OrderServiceTest {
         Order order2 = new Order("O2", new Customer("b", "b", "b", "b", "b", "b", "b"), "yesterday", "COD", 10);
         Order order3 = new Order("O3", new Customer("a", "a", "a", "a", "a", "a", "a"), "today", "COD", 10);
 
-        List<Order> orders = Arrays.asList(order1, order2, order3);
-        for (int i = 0; i < orders.size(); i++) {
-            Order found =  orderService.getAllOrders().get(i);
-            assertEquals(orders.get(i).getId(), found.getId());
+        List<Order> mock = Arrays.asList(order1, order2, order3);
+        List<Order> orders = orderService.getAllOrders();
 
-            assertEquals(orders.get(i).getPurchaseTime(), found.getPurchaseTime());
-            assertEquals(orders.get(i).getPurchaseType(), found.getPurchaseType());
-            assertEquals(orders.get(i).getTotal(), found.getTotal());
+        assertEquals(mock.size(), orders.size());
+
+        for (int i = 0; i < mock.size(); i++) {
+            assertEquals(mock.get(i).getId(), orders.get(i).getId());
+            assertEquals(mock.get(i).getPurchaseTime(), orders.get(i).getPurchaseTime());
+            assertEquals(mock.get(i).getPurchaseType(), orders.get(i).getPurchaseType());
+            assertEquals(mock.get(i).getTotal(), orders.get(i).getTotal());
         }
     }
 
@@ -66,10 +70,13 @@ public class OrderServiceTest {
     public void getOrderById() {
         Order order1 = new Order("O1", new Customer("a", "a", "a", "a", "a", "a", "a"), "today", "COD", 10);
         Order found =  orderService.getOrderById("01");
+        Order notfound =  orderService.getOrderById("03");
+
         assertNotNull(found);
+        assertNull(notfound);
 
         assertEquals(order1.getId(), found.getId());
-
+        assertEquals(order1.getCustomer().getUsername(), found.getCustomer().getUsername());
         assertEquals(order1.getPurchaseTime(), found.getPurchaseTime());
         assertEquals(order1.getPurchaseType(), found.getPurchaseType());
         assertEquals(order1.getTotal(), found.getTotal());
@@ -80,16 +87,17 @@ public class OrderServiceTest {
         Order order1 = new Order("O1", new Customer("a", "a", "a", "a", "a", "a", "a"), "today", "COD", 10);
         Order order3 = new Order("O3", new Customer("a", "a", "a", "a", "a", "a", "a"), "today", "COD", 10);
 
-        List<Order> orders = Arrays.asList(order1, order3);
-        List<Order> orderList = orderService.getOrderByCustomerUsername("a");
+        List<Order> mock = Arrays.asList(order1, order3);
+        List<Order> orders = orderService.getOrderByCustomerUsername("a");
 
-        for (int i = 0; i < orders.size(); i++) {
-            Order found =  orderList.get(i);
-            assertEquals(orders.get(i).getId(), found.getId());
+        assertEquals(mock.size(), orders.size());
 
-            assertEquals(orders.get(i).getPurchaseTime(), found.getPurchaseTime());
-            assertEquals(orders.get(i).getPurchaseType(), found.getPurchaseType());
-            assertEquals(orders.get(i).getTotal(), found.getTotal());
+        for (int i = 0; i < mock.size(); i++) {
+            assertEquals(mock.get(i).getId(), orders.get(i).getId());
+            assertEquals(mock.get(i).getCustomer().getUsername(), orders.get(i).getCustomer().getUsername());
+            assertEquals(mock.get(i).getPurchaseTime(), orders.get(i).getPurchaseTime());
+            assertEquals(mock.get(i).getPurchaseType(), orders.get(i).getPurchaseType());
+            assertEquals(mock.get(i).getTotal(), orders.get(i).getTotal());
         }
     }
 
