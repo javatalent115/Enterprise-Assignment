@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -17,9 +18,25 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<Customer> getAllCustomers(){
-        return customerService.getAllCustomers();
+    @RequestMapping(path = "/getAll", method = RequestMethod.POST)
+    public List<Customer> getAllCustomers(@RequestBody String sortType){
+        if (sortType.equals("Name (A-Z)")) return customerService.getAllCustomers();
+        else if (sortType.equals("Last Login (newest)")) return customerService.sortByLastLogin();
+        else if (sortType.equals("Last Login (oldest)")) return sortByLastLoginDes();
+        else return sortByIdDes();
+    }
+
+    private List<Customer> sortByIdDes(){
+        List<Customer> list = customerService.getAllCustomers();
+        Collections.reverse(list);
+        return list;
+    }
+
+
+    private List<Customer> sortByLastLoginDes(){
+        List<Customer> list = customerService.sortByLastLogin();
+        Collections.reverse(list);
+        return list;
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
@@ -37,16 +54,6 @@ public class CustomerController {
             customerService.addCustomer(customer);
             return "";
         }
-    }
-
-    @RequestMapping(path = "/deleteCustomer", method = RequestMethod.DELETE)
-    public void deleteCustomerByUsername(@RequestBody String username) {
-        customerService.deleteByCustomerUsername(username.trim());
-    }
-
-    @RequestMapping(path = "/updateCustomer", method = RequestMethod.PUT)
-    public void updateCustomerByUsername(@RequestBody Customer customer) {
-        customerService.updateCustomerByUsername(customer.getUsername(), customer);
     }
 
     @RequestMapping(path = "/{username}", method = RequestMethod.GET)

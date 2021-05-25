@@ -103,5 +103,8 @@ function autocomplete(inp, arr) {
 
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("medicine"), autoName);
-autocomplete(document.getElementById("medicine2"), autoName);
+if (localStorage.getItem("currentPage") === "medicinePage") {
+    autocomplete(document.getElementById("medicine"), autoName);
+    autocomplete(document.getElementById("medicine2"), autoName);
+}
+else autocomplete(document.getElementById("customer2"),autoName);
