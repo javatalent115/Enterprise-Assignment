@@ -17,13 +17,16 @@ public class DrugController {//TODO change Map to List if there is more time
 
     @RequestMapping(path = "/addDrug", method = RequestMethod.POST)
     public String addDrug(@RequestBody Drug drug){
-        try {
-            drugService.addDrug(drug);
-        }catch (Exception e){
-            return "failed";
-        }
-        drugService.getAllDrugs();
-        return "success";
+//        try {
+//            drugService.addDrug(drug);
+//        }catch (Exception e){
+//            return "failed";
+//        }
+//        drugService.getAllDrugs();
+//        return "success";
+        System.out.println(drug);
+        drugService.addDrug(drug);
+        return "sucess";
     }
 
  @RequestMapping(path = "/getRelatedDrugs", method = RequestMethod.POST)

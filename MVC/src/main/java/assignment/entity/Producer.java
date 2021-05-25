@@ -9,7 +9,7 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "Producers")
+@Table(name = "Producer")
 public class Producer {
 
     @Id
@@ -23,6 +23,11 @@ public class Producer {
 //    private List<Drug> drugList;
 
     public Producer() { }
+
+    public Producer(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public String getId() {
         return id;

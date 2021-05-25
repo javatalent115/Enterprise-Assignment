@@ -274,17 +274,10 @@ ul {
 }
 .related-drug{
     border: 1px solid black;
-    height: 100px;
+    height: 50px;
     overflow: scroll;
     margin: 0 10px;
-    width: 300px;
 }
 .related-drug div{
     text-align: center;
-}
-.dropdown img:hover{
-    width: 20px;
-    margin-bottom: 2px;
-    background-color: lightgray;
-    border-radius: 13px;
 }

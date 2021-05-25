@@ -37,6 +37,13 @@ public class OrderDetail {
 
     public OrderDetail() { }
 
+    public OrderDetail(Order order, Drug drug, int quantity, int cost) {
+        this.order = order;
+        this.drug = drug;
+        this.quantity = quantity;
+        this.cost = cost;
+    }
+
     public String getId() {
         return id;
     }

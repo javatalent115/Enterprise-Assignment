@@ -1012,6 +1012,7 @@ false Zulu
     </table>
     <table id="36" parent="19" name="drugs">
       <ObjectId>16746</ObjectId>
+      <Outdated>1</Outdated>
       <Owner>postgres</Owner>
       <StateNumber>7708</StateNumber>
     </table>
