@@ -31,7 +31,7 @@ $(document).on("click", ".search-button", function() {
     let data = localStorage.getItem("data")
     let index;
     for (let i = 0; i < data.split("\n").length; i++) {
-        if (data.split("\n")[i].split("&&")[1] == name) {
+        if (data.split("\n")[i].split("&&")[1] === name) {
             index = i
             break
         }
@@ -175,9 +175,7 @@ $(document).on("click", ".cart-btn", function() {
         const myJSON = JSON.stringify(listItem);
         localStorage.setItem("cart-item", myJSON)
         setTimeout(function() {
-
             $(".cart-nav .item-count").text(localStorage.getItem("cart"));
-
         }, 800);
 
         imgclone.animate({
@@ -186,6 +184,18 @@ $(document).on("click", ".cart-btn", function() {
         }, function() {
             $(this).detach()
         });
+        let stock = $(this).parent().parent().find(".stock")
+        listItem = localStorage.getItem('cart-item') ? JSON.parse(localStorage.getItem('cart-item')) : []
+        let asd = $(this)
+        listItem.forEach(function(object) {
+            if (object.id === drug.id) {
+                if ((1+ parseInt(object.amount)) > parseInt(stock.text())){
+                    asd.css("visibility","hidden")
+                }
+            }
+        });
+        $(this).parent().parent().find(".amount").find("div").text("1")
+        // addItem()
     }
 });
 
@@ -761,16 +771,49 @@ $(document).on("click", ".page", function() {
 
 $(document).on("click", ".decrease-amount-image", function() {
     let amount = parseInt($(this).parent("li").find("div").text())
-    if (amount > 1) {
-        $(this).parent("li").find("div").html(amount - 1)
-    }
+    listItem = localStorage.getItem('cart-item') ? JSON.parse(localStorage.getItem('cart-item')) : []
+    let id = ($(this).parent("li").parent("ul").find(".id").text())
+    let stock = $(this).parent("li").parent("ul").find(".stock").text()
+    let cart = $(this).parent("li").parent("ul").find(".cart-images")
+    let quantity = $(this).parent("li").find("div")
+    listItem.forEach(function(object) {
+        if (object.id === id) {
+            if ((parseInt(object.amount) + amount - 1) <= parseInt(stock)) {
+                cart.css("visibility", "visible")
+            }
+            else cart.css("visibility", "hidden")
+        }
+    });
+    if (amount > 1) quantity.html(amount - 1)
+
 })
 
+///////////////////////////////////
 $(document).on("click", ".increase-amount-image", function() {
     let amount = parseInt($(this).parent("li").find("div").text())
-    if (amount < $(this).parent().parent().find(".stock").text()) {
+    let isExist = false
+    listItem = localStorage.getItem('cart-item') ? JSON.parse(localStorage.getItem('cart-item')) : []
+    let id = ($(this).parent("li").parent("ul").find(".id").text())
+    let stock = $(this).parent("li").parent("ul").find(".stock").text()
+    let cart = $(this).parent("li").parent("ul").find(".cart-images")
+    let quantity = $(this).parent("li").find("div")
+    listItem.forEach(function(object) {
+        if (object.id === id) {
+            if ((parseInt(object.amount) + amount + 1) <= parseInt(stock)) {
+                quantity.html(amount + 1)
+                cart.css("visibility", "visible")
+            }
+            else {
+                if (parseInt(object.amount) + amount + 1 === parseInt(stock) + 1){
+                    quantity.html(amount + 1)
+                }
+                cart.css("visibility", "hidden")
+            }
+            isExist = true
+        }
+    });
+    if (!isExist && amount < parseInt(stock)){
         $(this).parent("li").find("div").html(amount + 1)
-
     }
 })
 
@@ -882,8 +925,16 @@ async function addItem(item) {
                   <img src="./images/icons/trash.png" class="trash-image" alt="" data-bs-toggle="modal" data-bs-target="#delete-confirm-modal">
               </li>
           </ul>`
-                    if(data.split("\n")[i].split("&&")[10] == "0"){
+                    if(data.split("\n")[i].split("&&")[10] === "0" ){
                         document.querySelectorAll(".cart-images")[i+1].setAttribute("style","visibility:hidden;")
+                    }else {
+                        listItem.forEach(function(object) {
+                            if (object.id === data.split("\n")[i].split("&&")[0]) {
+                                if (1+ parseInt(object.amount) > parseInt(data.split("\n")[i].split("&&")[10])){
+                                    document.querySelectorAll(".cart-images")[i+1].setAttribute("style","visibility:hidden;");
+                                }
+                            }
+                        });
                     }
                 }
             }
