@@ -74,6 +74,9 @@ function checkAccount() {
         $(".add-image").css("display", "none")
         $(".cart-nav").css("display", "none")
         $(".amount").css("display", "none")
+        $(".more-button").closest('li').css("display", "none")
+        $(".cart-images").closest('li').css("display", "none")
+
     } else if (localStorage.getItem("accountType") === "user") {
         $(".add-image").css("display", "none")
         $(".more-button").css("display", "none")
