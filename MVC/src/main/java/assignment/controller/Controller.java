@@ -26,11 +26,6 @@ public class Controller {
     @Autowired
     private CustomerService customerService;
 
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public String hello(){
-        return "Hello";
-    }
-
     @RequestMapping(path = "/auth", method = RequestMethod.POST)
     public String authenticate(@RequestBody Map<String, String> user) {
         if (user.get("username").equals("admin123") && user.get("password").equals("admin123")) {
@@ -100,6 +95,7 @@ public class Controller {
         } catch (FileNotFoundException ignored) {
             return "Cannot find file";
         }
+        setCustomer();
 
         for (Producer producer: producers) {
             producerService.addProducer(producer);
@@ -109,6 +105,15 @@ public class Controller {
         }
         drugService.getAllDrugs();
         return "Success";
+    }
+
+    private void setCustomer() {
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-M-yyyy hh:mm:ss aa");
+        Customer customer1 = new Customer("user123", "user123", "Hoang", "Doan", "a@gmail.com", "", dateFormat.format(date));
+        Customer customer2 = new Customer("user456", "user456", "Bao", "Tran", "a@gmail.com", "", dateFormat.format(date));
+        customerService.addCustomer(customer1);
+        customerService.addCustomer(customer2);
     }
 
 }

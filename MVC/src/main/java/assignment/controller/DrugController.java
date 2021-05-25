@@ -17,6 +17,7 @@ public class DrugController {//TODO change Map to List if there is more time
 
     @RequestMapping(path = "/addDrug", method = RequestMethod.POST)
     public String addDrug(@RequestBody Drug drug){
+        System.out.println(drug);
         try {
             drugService.addDrug(drug);
         }catch (Exception e){

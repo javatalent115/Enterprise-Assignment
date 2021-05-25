@@ -37,6 +37,14 @@ public class OrderDetail {
 
     public OrderDetail() { }
 
+    public OrderDetail(String id, Order order, Drug drug, int quantity, int cost) {
+        this.id = id;
+        this.order = order;
+        this.drug = drug;
+        this.quantity = quantity;
+        this.cost = cost;
+    }
+
     public String getId() {
         return id;
     }
@@ -69,9 +77,9 @@ public class OrderDetail {
         this.cost = cost;
     }
 
-    public int getOrderCost() {
-        return quantity * drug.getMoney();
-    }
+//    public int getOrderCost() {
+//        return quantity * drug.getMoney();
+//    }
 
     public Order getOrder() {
         return order;
@@ -83,7 +91,7 @@ public class OrderDetail {
 
     @Override
     public String toString() {
-        return id + " -- " + order.getPurchaseTime() + " -- " + drug.getId() + " -- " + getOrderCost();
+        return id + " -- " + order.getId() + " -- " + drug.getId() + " -- " + quantity + " -- " + cost;
     }
 }
 

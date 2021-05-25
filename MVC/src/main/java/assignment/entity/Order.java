@@ -35,6 +35,14 @@ public class Order {
 
     public Order() { }
 
+    public Order(String id, Customer customer, String purchaseTime, String purchaseType, int total) {
+        this.id = id;
+        this.customer = customer;
+        this.purchaseTime = purchaseTime;
+        this.purchaseType = purchaseType;
+        this.total = total;
+    }
+
     public String getId() {
         return id;
     }

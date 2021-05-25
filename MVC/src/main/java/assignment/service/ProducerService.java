@@ -15,8 +15,11 @@ public class ProducerService {
     @Autowired
     ProducerRepo producerRepo;
 
-    public void addProducer(Producer producer){
-        this.producerRepo.save(producer);
+    public String addProducer(Producer producer) {
+        if (getProducerById(producer.getId()) != null || producer.getId() != null) {
+            this.producerRepo.save(producer);
+            return "succeeded";
+        } else return "failed";
     }
 
     public List<Producer> getAllProducers(){

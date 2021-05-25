@@ -16,12 +16,12 @@ public class OrderDetailController {
 
     @RequestMapping(path = "", method = RequestMethod.GET)
     public List<OrderDetail> getAllOrders(){
-        return orderDetailService.getAllOrders();
+        return orderDetailService.getAllOrderDetails();
     }
 
     @RequestMapping(path = "", method = RequestMethod.POST)
     public void addOrderDetail(@RequestBody OrderDetail orderDetail){
-        orderDetailService.addOrder(orderDetail);
+        orderDetailService.addOrderDetail(orderDetail);
     }
 
 //    @RequestMapping(path = "", method = RequestMethod.DELETE)

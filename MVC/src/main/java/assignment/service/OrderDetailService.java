@@ -15,11 +15,11 @@ public class OrderDetailService {
     @Autowired
     OrderDetailRepo orderDetailRepo;
 
-    public void addOrder(OrderDetail orderDetail){
+    public void addOrderDetail(OrderDetail orderDetail){
         this.orderDetailRepo.save(orderDetail);
     }
 
-    public List<OrderDetail> getAllOrders(){
+    public List<OrderDetail> getAllOrderDetails(){
         return this.orderDetailRepo.findAll();
     }
 
@@ -27,7 +27,7 @@ public class OrderDetailService {
         this.orderDetailRepo.deleteById(id);
     }
 
-    public OrderDetail getOrderById(String id) {
+    public OrderDetail getOrderDetailById(String id) {
         Optional<OrderDetail> result = this.orderDetailRepo.findById(id);
         return result.orElse(null);
     }
@@ -38,15 +38,11 @@ public class OrderDetailService {
         return orderDetailList;
     }
 
-//    public void updateOrderById(String id, OrderDetail newOrder) {
-//        getOrderById(id).replace(newOrder);
-//    }
-
-    public long countOrder() {
+    public long countOrderDetail() {
         return this.orderDetailRepo.count();
     }
 
-    public void deleteAllOrder() {
+    public void deleteAllOrderDetail() {
         this.orderDetailRepo.deleteAll();
     }
 }

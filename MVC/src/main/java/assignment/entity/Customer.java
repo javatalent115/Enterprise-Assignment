@@ -29,18 +29,17 @@ public class Customer {
     @Column(length = 1024)
     private String lastLogin;
 
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-//    private List<Order> orderList;
-
-//    public List<Order> getOrderList() {
-//        return orderList;
-//    }
-//
-//    public void setOrderList(List<Order> orderList) {
-//        this.orderList = orderList;
-//    }
-
     public Customer() { }
+
+    public Customer(String username, String password, String firstname, String lastname, String email, String address, String lastLogin) {
+        this.username = username;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.address = address;
+        this.lastLogin = lastLogin;
+    }
 
     public String getUsername() {
         return username;

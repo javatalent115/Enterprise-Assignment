@@ -32,10 +32,6 @@ public class OrderService {
         return result.orElse(null);
     }
 
-//    public void updateOrderById(String id, Order newOrder) {
-//        getOrderById(id).replace(newOrder);
-//    }
-
     public List<Order> getOrderByCustomerUsername(String username) {
         List<Order> orderList = orderRepo.findAll();
         orderList.removeIf(order -> !order.getCustomer().getUsername().equals(username));
@@ -48,9 +44,5 @@ public class OrderService {
 
     public void deleteAllOrder() {
         orderRepo.deleteAll();
-    }
-
-    public void save(Order order) {
-        orderRepo.save(order);
     }
 }
