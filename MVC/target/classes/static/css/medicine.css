@@ -728,7 +728,6 @@ input[type=submit] {
     border: none;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    font-weight: bold;
 }
 
 #staticBackdrop .done-button {
