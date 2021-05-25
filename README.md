@@ -12,8 +12,8 @@
 
 ***** DEFAULT *****
 
-1.Our website have the navigation bar to switch between pages
-2.Our website have the footer which contains our contacts (social medias, phone) and key words).
+- Our website have the navigation bar to switch between pages
+- Our website have the footer which contains our contacts (social medias, phone) and key words).
 
 *******************
 
